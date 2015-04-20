@@ -14,20 +14,20 @@
 
 'use strict';
 
-angular.module('osaan.tekstit', ['pascalprecht.translate'])
-  .constant('tekstit', {
-    fi: {
-      'etusivu.otsikko': 'Osaamisen tunnistaminen'
-    },
-    sv: {
-      'etusivu.otsikko': 'Osaamisen tunnistaminen (sv)'
-    }
-  })
+describe('tekstit', function() {
+  var tekstit;
 
-  .config(['$translateProvider', 'tekstit', function($translateProvider, tekstit) {
-    $translateProvider.translations('fi', tekstit.fi);
-    $translateProvider.translations('sv', tekstit.sv);
+  beforeEach(module('osaan.tekstit'));
 
-    $translateProvider.preferredLanguage('fi');
-  }])
-;
+  beforeEach(inject(function(_tekstit_) {
+    tekstit = _tekstit_;
+  }));
+
+  it('Samat lokalisaatioavaimet molemmille kielille', function() {
+    var avaimetFi = _.keys(tekstit.fi);
+    var avaimetSv = _.keys(tekstit.sv);
+    var erot = _.xor(avaimetFi, avaimetSv);
+
+    expect(erot).toEqual([]);
+  });
+});
