@@ -1,0 +1,14 @@
+/bin/
+/checkouts/
+/classes/
+/.classpath
+.DS_Store
+/.lein-*
+/.nrepl-port
+/osaan.properties
+/pom.xml
+/pom.xml.asc
+/.project
+/resources/public/app/
+/.settings/
+/target/
