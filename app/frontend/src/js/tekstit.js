@@ -14,11 +14,15 @@
 
 'use strict';
 
-angular.module('osaan.fi', [
-  'ng-breadcrumbs',
-  'ngRoute',
-  'taiPlaceholder',
-  'ui.bootstrap',
+angular.module('osaan.tekstit', ['pascalprecht.translate'])
+  .config(['$translateProvider', function($translateProvider) {
+    $translateProvider.translations('fi', {
+      'etusivu.otsikko': 'Osaamisen tunnistaminen'
+    });
+    $translateProvider.translations('sv', {
+      'etusivu.otsikko': 'Osaamisen tunnistaminen (sv)'
+    });
 
-  'osaan.tekstit'])
+    $translateProvider.preferredLanguage('fi');
+  }])
 ;
