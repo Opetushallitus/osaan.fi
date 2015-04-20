@@ -1,0 +1,98 @@
+html {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  height: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+html, body, #page-container {
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body > #page-container {
+  height: auto;
+  min-height: 100%;
+}
+
+header {
+  height: 120px;
+  background-color: #e1e1e1;
+  .app-wrapper {
+    background: transparent url("../img/aitu-bg.png") 0 -30px no-repeat;
+    height: 100%;
+    a, h1 {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    a {
+      border: 0;
+      text-decoration: none;
+      &:hover {
+        color: $primary-color;
+      }
+    }
+    h1 {
+      white-space: nowrap;
+    }
+  }
+}
+
+a{
+  cursor: pointer;
+}
+
+section.main-content {
+  margin-top: 30px;
+  padding-bottom: $footer-height + $marginM + 60;
+}
+
+footer {
+  clear: both;
+  position: relative;
+  z-index: 10;
+  margin-top: -$footer-height;
+}
+
+.app-wrapper {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 $marginM;
+}
+
+#turre-logo {
+  width: 60px;
+  height: 100%;
+  margin-right: 10px;
+  margin-left: 20px;
+  background: transparent url("../img/turre.svg") 0 center no-repeat;
+  .no-svg & {
+    background-image: url("../img/turre.png");
+  }
+}
+
+#oph-logo {
+  float: right;
+  width: 271px;
+  height: 100%;
+  background: transparent url("../img/opetushallitus.svg") 0 center no-repeat;
+  .no-svg & {
+    background-image: url("../img/opetushallitus.gif");
+  }
+  background-size: contain;
+}
+
+.top-alert {
+  font-weight: bold;
+  text-align: center;
+  padding: 1em;
+  color: #FFF;
+  background-color: #E34045;
+}

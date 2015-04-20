@@ -1,0 +1,20 @@
+button {
+  background-color: $primary-color;
+  color: white;
+  border-radius: 0;
+  border: none;
+  height: $baseline*1.5;
+  box-shadow: none;
+  margin: $marginS $marginL $marginS 0;
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1em;
+  font-family: $font-body;
+  &:hover {background-color: $darker-primary;}
+}
+
+button:disabled {
+  opacity: 0.5;
+  background-color: $primary-color;
+}

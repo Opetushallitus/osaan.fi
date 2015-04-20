@@ -1,0 +1,41 @@
+$footer-info-section-height: 230px;
+$footer-copyright-section-height: 80px;
+$footer-height: $footer-copyright-section-height + $footer-info-section-height;
+
+footer {
+  $info-section-bgcolor: #333333;
+  &  > section {
+    color: #ffffff;
+    & > section {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    a {
+      color: $lighter-primary;
+    }
+    a:hover{
+      color: $lightest-primary;
+    }
+  }
+  .info {
+    @include  border-box;
+    padding: 1px 0;
+    background-color: $info-section-bgcolor;
+    height: auto;
+    min-height: $footer-info-section-height;
+  }
+  .copyright {
+    background-color: $darkest-gray;
+    .vertical-wrapper {
+      height: $footer-copyright-section-height;
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .app-wrapper {
+      background: url("../img/oph_logo_footer.svg") right 15px center no-repeat;
+      .no-svg & {background-image: url("../img/oph_logo_footer.png")}
+
+    }
+  }
+}

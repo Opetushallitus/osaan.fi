@@ -27,14 +27,43 @@
     </div>
   </noscript>
 
-  <h1>osaan.fi</h1>
+  <section id="page-container">
+    <header>
+      <section class="app-wrapper">
+        <img src="img/opetushallitus.svg" class="print logo" />
+        <a id="oph-logo" href="http://www.oph.fi"></a>
+        <a id="turre-logo" href="."></a>
+        <h1><a href="." translate="etusivu.otsikko"></a></h1>
+      </section>
+    </header>
+    <section class="app-wrapper">
+      <!-- <kielen-vaihto></kielen-vaihto> -->
+    </section>
+    <section class="app-wrapper main-content" ng-view></section>
+  </section>
 
-  <div translate="etusivu.otsikko"></div>
+  <footer>
+    <section class="info">
+      <div class="app-wrapper">
+        <h3 translate="yleiset.footer_info_otsikko"></h3>
+        <p translate="yleiset.footer_info_ohje"></p>
+        <p><span translate="yleiset.footer_info_teksti_2"></span> <a target="_blank" href="{{'yleiset.neuvontapalvelu_linkki' | translate}}" translate="yleiset.rekisteriseloste"></a></p>
+        <p class="footer-contact"><span translate="yleiset.ota_yhteytta"></span>: <a ng-href="mailto:{{'i18n.yleiset.ota_yhteytta_email' | translate}}" translate="yleiset.ota_yhteytta_email"></a></p>
+      </div>
+    </section>
+    <section class="copyright">
+      <div class="app-wrapper">
+        <div class="vertical-wrapper">
+          <span copyright></span>
+        </div>
+      </div>
+    </section>
+  </footer>
+
   <!--<![endif]-->
 
   <!-- build:js js/libs.js -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-animate/angular-animate.min.js"></script>
   <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
