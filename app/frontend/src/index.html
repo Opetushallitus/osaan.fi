@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]> <html> <![endif]-->
+<!--[if gte IE 9]><!--> <html ng-app="osaan.fi"> <!--<![endif]-->
+<head>
+  <title>osaan.fi</title>
+
+  <!-- build:css css/libs.css -->
+  <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css">
+  <!-- endbuild -->
+  <link rel="stylesheet" href="compiled_css/main.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=.7, maximum-scale=.7"/>
+</head>
+<!--[if lt IE 9]>
+<body>
+<div style="text-align: center;">
+  <p><strong>Sovellus ei tue käyttämääsi selainta. Ole hyvä ja käytä Internet Explorerin versiota 9 tai uudempaa.</strong></p>
+</div>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+<body>
+  <noscript>
+    <div class="top-alert">
+      <p>Sivusto vaatii toimiakseen selaimen javascript-tuen päälle. Ole hyvä ja salli javascriptien/komentosarjojen ajo selaimessasi.</p>
+      <p>Aktivera Javaskript i webbläsaren så att du kan använda webbplatsen för sökexamen.fi</p>
+    </div>
+  </noscript>
+
+  <h1>osaan.fi</h1>
+  <!--<![endif]-->
+
+  <!-- build:js js/libs.js -->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="bower_components/angular-placeholder-tai/lib/tai-placeholder.js"></script>
+  <script src="bower_components/lodash/dist/lodash.min.js"></script>
+  <script src="bower_components/stacktrace/stacktrace.js"></script>
+  <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+  <script src="bower_components/ng-breadcrumbs/dist/ng-breadcrumbs.min.js"></script>
+  <!-- endbuild -->
+  <!-- build:js js/app.js -->
+  <script src="js/osaan.js"></script>
+  <!-- endbuild -->
+  <!--dev--><script src="//localhost:35729/livereload.js"></script><!--enddev-->
+</body>
+</html>
