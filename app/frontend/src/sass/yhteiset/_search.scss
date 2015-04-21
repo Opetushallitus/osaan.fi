@@ -87,3 +87,76 @@
 }
 
 button.luo-uusi {float:right;}
+
+.loader {
+  top: 250px;
+}
+
+form.search-form {
+  margin-bottom: 0;
+}
+
+fieldset, .search-field {
+  width: 50%;
+}
+
+input[type="text"] {padding: 8px 20px 8px 5px !important;}
+
+input[type="text"], a.select2-choice {
+  @include border-box;
+  height: 36px !important;
+  font-size: 1em !important;
+  background-image: none !important;
+  border-radius: 5px;
+}
+
+a.select2-choice {padding-top: 4px !important;}
+
+div.select2-container {
+  width: 100%;
+}
+
+div.select2-container.select2-allowclear .select2-choice abbr {
+  @include delete-icon;
+  right: 45px !important;
+  top : 10px !important;
+}
+
+div.select2-container.select2-dropdown-open .select2-choice abbr {
+  display: none;
+}
+
+.select2-fieldset .select2-container .select2-choice .select2-arrow {
+  width: 36px !important;
+  b {
+    margin-left: 14px;
+    margin-top: 15px;
+  }
+}
+
+.table.hakutulokset div div:nth-child(1){
+  width: 10%;
+  min-width: 100px;
+}
+
+.table.hakutulokset div div:nth-child(2){
+  width: 50%;
+  min-width: 200px;
+}
+
+.table.hakutulokset div div:nth-child(3){
+  width: 40%;
+  min-width: 200px;
+}
+
+.table.hakutulokset .table-row:hover{
+  background-color: #D8D8D8 !important;
+}
+
+.table.hakutulokset .table-row .table-cell{
+  cursor: pointer;
+}
+
+.table.hakutulokset.print {
+  margin-top: 30px;
+}
