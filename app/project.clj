@@ -29,7 +29,6 @@
                  [http-kit "2.1.19"]
                  [korma "0.4.0"]
                  [metosin/compojure-api "0.19.3"]
-                 [metosin/ring-swagger-ui "2.0.24"]
                  [org.slf4j/slf4j-api "1.7.12"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [peridot "0.3.1"]
