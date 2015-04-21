@@ -17,7 +17,10 @@
 angular.module('osaan.tekstit', ['pascalprecht.translate'])
   .constant('tekstit', {
     fi: {
+      'etusivu.opintoala': 'Opintoala',
       'etusivu.teksti': 'Tällä työkalulla voit arvioida osaamistasi sinua kiinnostavassa ammatissa (Näyttötutkinnossa). Voit valita joko osaamisvaatimusten selaamisen tai osaamisen arvioinnin. Selaustoiminnossa voit selailla eri tutkintojen osaamisvaatimuksia. Arvioin osaamistani -toiminnossa voit vastata valitsemasi tutkinnon osaamisvaatimuksiin ja lopuksi saat tuloksena listan vastauksistasi ja graafiset kuvaajat osaamisvaatimusten keskiarvoista. Voit myös lähettää raportin pdf-tiedostona haluamiisi sähköpostiosoitteisiin.',
+      'etusivu.tutkinnon_nimi': 'Tutkinnon nimi',
+      'etusivu.tutkinnon_nimi_placeholder': 'Kirjoita tutkinnon nimi tai nimen osa',
       'etusivu.otsikko': 'Osaamisen tunnistaminen',
       'footer.ota_yhteytta': 'osaan.fi käyttöä koskevan palautteen voi lähettää sähköpostilla osoitteeseen',
       'footer.ota_yhteytta_email': 'aitu-tuki@oph.fi',
@@ -26,7 +29,10 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf'
     },
     sv: {
+      'etusivu.opintoala': 'Opintoala (sv)',
       'etusivu.teksti': 'Tällä työkalulla voit arvioida osaamistasi sinua kiinnostavassa ammatissa (Näyttötutkinnossa). Voit valita joko osaamisvaatimusten selaamisen tai osaamisen arvioinnin. Selaustoiminnossa voit selailla eri tutkintojen osaamisvaatimuksia. Arvioin osaamistani -toiminnossa voit vastata valitsemasi tutkinnon osaamisvaatimuksiin ja lopuksi saat tuloksena listan vastauksistasi ja graafiset kuvaajat osaamisvaatimusten keskiarvoista. Voit myös lähettää raportin pdf-tiedostona haluamiisi sähköpostiosoitteisiin. (sv)',
+      'etusivu.tutkinnon_nimi': 'Tutkinnon nimi (sv)',
+      'etusivu.tutkinnon_nimi_placeholder': 'Kirjoita tutkinnon nimi tai nimen osa (sv)',
       'etusivu.otsikko': 'Osaamisen tunnistaminen (sv)',
       'footer.ota_yhteytta': 'osaan.fi käyttöä koskevan palautteen voi lähettää sähköpostilla osoitteeseen (sv)',
       'footer.ota_yhteytta_email': 'aitu-tuki@oph.fi',
