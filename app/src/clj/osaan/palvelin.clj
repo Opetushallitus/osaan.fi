@@ -75,7 +75,7 @@
 
 (defn ^:integration-api kaynnista! [alkuasetukset]
   (try
-    (log/info "Käynnistetään osaan.fi, versio " "@build-id") ;; TODO
+    (log/info "Käynnistetään osaan.fi, versio " @build-id)
     (let [asetukset (hae-asetukset alkuasetukset)
           _ (deliver asetukset-promise asetukset)
           _ (konfiguroi-lokitus asetukset)
