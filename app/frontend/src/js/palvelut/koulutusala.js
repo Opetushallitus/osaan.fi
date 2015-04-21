@@ -14,12 +14,12 @@
 
 'use strict';
 
-angular.module('osaan.palvelut.opintoala', [])
+angular.module('osaan.palvelut.koulutusala', [])
 
-  .factory('Opintoala', ['$http', function($http) {
+  .factory('Koulutusala', ['$http', function($http) {
     return {
       hae: function() {
-        return $http.get('api/opintoala').then(function(response) {
+        return $http.get('api/koulutusala').then(function(response) {
           return response.data;
         });
       }

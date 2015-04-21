@@ -23,7 +23,7 @@ angular.module('osaan.fi', [
   'yhteiset.palvelut.lokalisointi',
 
   'osaan.etusivu.etusivuui',
-  'osaan.palvelut.opintoala',
+  'osaan.palvelut.koulutusala',
   'osaan.palvelut.tutkinto',
   'osaan.tekstit'])
 
