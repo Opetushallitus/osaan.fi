@@ -29,7 +29,7 @@
             [ring.util.response :as resp]
             schema.core
 
-            [osaan.asetukset :refer [asetukset oletusasetukset hae-asetukset] :rename {asetukset asetukset-promise}]
+            [osaan.asetukset :refer [asetukset oletusasetukset hae-asetukset konfiguroi-lokitus] :rename {asetukset asetukset-promise}]
             [osaan.infra.status :refer [build-id]]))
 
 (schema.core/set-fn-validation! true)
@@ -74,6 +74,7 @@
     (log/info "Käynnistetään osaan.fi, versio " "@build-id") ;; TODO
     (let [asetukset (hae-asetukset alkuasetukset)
           _ (deliver asetukset-promise asetukset)
+          _ (konfiguroi-lokitus asetukset)
           sammuta (hs/run-server (app asetukset)
                                  {:port (get-in asetukset [:server :port])})]
       (when (or (not (:development-mode asetukset))

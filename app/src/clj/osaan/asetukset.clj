@@ -13,7 +13,11 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.asetukset
-  (:require [schema.core :as s]))
+  (:require [clojure.java.io :refer [file]]
+            [clojure.tools.logging :as log]
+            [schema.core :as s])
+  (:import [ch.qos.logback.classic.joran JoranConfigurator]
+         [org.slf4j LoggerFactory]))
 
 (def asetukset (promise))
 
@@ -52,3 +56,16 @@
 (defn service-path [base-url]
   (let [path (drop 3 (clojure.string/split base-url #"/"))]
     (str "/" (clojure.string/join "/" path))))
+
+(defn konfiguroi-lokitus
+  "Konfiguroidaan logback asetukset tiedostosta."
+  [asetukset]
+  (let [filepath (-> asetukset :logback :properties-file)
+        config-file (file filepath)
+        config-file-path (.getAbsolutePath config-file)
+        configurator (JoranConfigurator.)
+        context (LoggerFactory/getILoggerFactory)]
+    (log/info "logback configuration reset: " config-file-path)
+    (.setContext configurator context)
+    (.reset context)
+    (.doConfigure configurator config-file-path)))
