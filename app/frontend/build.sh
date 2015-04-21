@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Kääntää ja paketoi osaan.fi version.
+# Kääntää ja paketoi osaan.fi frontin.
 #
 # Käyttö:
 #
@@ -20,17 +20,12 @@ while getopts 't' o; do
     esac
 done
 
-repo_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 set -x
 
-cd "$repo_path/frontend"
-./build.sh "$@"
-
-cd "$repo_path"
+npm install
+rm -rf src/bower_components
+bower install
+grunt build
 if [ "$run_tests" = yes ]; then
-    lein do test, clean, uberjar
-else
-    lein do clean, uberjar
+    grunt test_ff  --no-color
 fi
-
