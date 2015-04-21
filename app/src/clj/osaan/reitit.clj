@@ -14,15 +14,19 @@
 
 (ns osaan.reitit
   (:require [clojure.java.io :as io]
+            [clojure.pprint :refer [pprint]]
             [compojure.core :as c]
             [compojure.route :as r]
-            [stencil.core :as s]))
-
-(def build-id (delay (if-let [resource (io/resource "build-id.txt")]
-                       (.trim (slurp resource))
-                       "dev")))
+            [stencil.core :as s]
+            [osaan.infra.status :refer [status piilota-salasanat]]))
 
 (defn reitit [asetukset]
   (c/routes
-    (c/GET "/status" [] (s/render-string "OK" {}))
+    (if (:development-mode asetukset)
+      (c/GET "/status" [] (s/render-file "status" (assoc (status)
+                                                         :asetukset (with-out-str
+                                                                      (-> asetukset
+                                                                        piilota-salasanat
+                                                                        pprint)))))
+     (c/GET "/status" [] (s/render-string "OK" {})))
     (r/not-found "Not found")))

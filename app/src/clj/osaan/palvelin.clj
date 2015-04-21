@@ -29,7 +29,8 @@
             [ring.util.response :as resp]
             schema.core
 
-            [osaan.asetukset :refer [asetukset oletusasetukset hae-asetukset] :rename {asetukset asetukset-promise}]))
+            [osaan.asetukset :refer [asetukset oletusasetukset hae-asetukset] :rename {asetukset asetukset-promise}]
+            [osaan.infra.status :refer [build-id]]))
 
 (schema.core/set-fn-validation! true)
 
