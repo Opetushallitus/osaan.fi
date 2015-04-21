@@ -14,13 +14,15 @@
 
 'use strict';
 
-angular.module('osaan.fi', [
-  'ng-breadcrumbs',
-  'ngRoute',
-  'taiPlaceholder',
-  'ui.bootstrap',
+angular.module('osaan.palvelut.opintoala', [])
 
-  'osaan.etusivu.etusivuui',
-  'osaan.palvelut.opintoala',
-  'osaan.tekstit'])
+  .factory('Opintoala', ['$http', function($http) {
+    return {
+      hae: function() {
+        return $http.get('api/opintoala').then(function(response) {
+          return response.data;
+        });
+      }
+    }
+  }])
 ;
