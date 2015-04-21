@@ -14,12 +14,16 @@
 
 'use strict';
 
-angular.module('osaan.fi', [
-  'ng-breadcrumbs',
-  'ngRoute',
-  'taiPlaceholder',
-  'ui.bootstrap',
+angular.module('osaan.etusivu.etusivuui', ['ngRoute'])
 
-  'osaan.etusivu.etusivuui',
-  'osaan.tekstit'])
+  .config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+      .when('/', {
+        controller: 'EtusivuController',
+        templateUrl: 'template/etusivu/etusivu.html'
+      });
+  }])
+
+  .controller('EtusivuController', [function() {
+  }])
 ;
