@@ -12,7 +12,7 @@
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; European Union Public Licence for more details.
 
-(ns osaan.rest-api.opintoala
+(ns osaan.rest-api.koulutusala
   (:require [compojure.core :as c]))
 
 (c/defroutes reitit
