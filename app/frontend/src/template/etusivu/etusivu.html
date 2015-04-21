@@ -7,5 +7,9 @@
 
 <fieldset>
     <label translate="etusivu.opintoala"></label>
-    <select></select>
+    <select>
+        <optgroup ng-repeat="koulutusala in koulutusalat" label="{{ koulutusala | lokalisoiKentta:'koulutusala_nimi' }}">
+            <option ng-repeat="opintoala in koulutusala.opintoalat" value="{{ opintoala.opintoala_tkkoodi }}">{{ opintoala | lokalisoiKentta:'opintoala_nimi' }}</option>
+        </optgroup>
+    </select>
 </fieldset>
