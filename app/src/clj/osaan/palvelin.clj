@@ -30,9 +30,10 @@
             schema.core
 
             [oph.common.infra.print-wrapper :refer [log-request-wrapper]]
-            [oph.common.util.poikkeus :refer [wrap-poikkeusten-logitus]]            
+            [oph.common.util.poikkeus :refer [wrap-poikkeusten-logitus]]
             [osaan.asetukset :refer [asetukset oletusasetukset hae-asetukset konfiguroi-lokitus] :rename {asetukset asetukset-promise}]
-            [osaan.infra.status :refer [build-id]]))
+            [osaan.infra.status :refer [build-id]]
+            [osaan.reitit :refer [reitit]]))
 
 (schema.core/set-fn-validation! true)
 
@@ -54,12 +55,10 @@
 (defn app
   "Ring-wrapperit ja compojure-reitit ilman HTTP-palvelinta"
   [asetukset]
-  (require 'osaan.reitit)
-  (let [reitit ((eval 'osaan.reitit/reitit) asetukset)
-          _ (json-gen/add-encoder org.joda.time.LocalDate
-              (fn [c json-generator]
-                (.writeString json-generator (.toString c "yyyy-MM-dd"))))]
-    (-> reitit
+  (let [_ (json-gen/add-encoder org.joda.time.LocalDate
+                                (fn [c json-generator]
+                                  (.writeString json-generator (.toString c "yyyy-MM-dd"))))]
+    (-> (reitit asetukset)
       wrap-keyword-params
       wrap-json-params
       (wrap-resource "public/app")
