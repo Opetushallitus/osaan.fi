@@ -20,8 +20,14 @@ angular.module('osaan.fi', [
   'taiPlaceholder',
   'ui.bootstrap',
 
+  'yhteiset.palvelut.lokalisointi',
+
   'osaan.etusivu.etusivuui',
   'osaan.palvelut.opintoala',
   'osaan.palvelut.tutkinto',
   'osaan.tekstit'])
+
+  .factory('kieli', [function() {
+    return 'fi'; // TODO kielen vaihto
+  }])
 ;
