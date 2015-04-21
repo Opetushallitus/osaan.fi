@@ -15,9 +15,11 @@
 (ns osaan.asetukset
   (:require [clojure.java.io :refer [file]]
             [clojure.tools.logging :as log]
-            [schema.core :as s])
+            [schema.core :as s]
+
+            [oph.common.infra.asetukset :refer [lue-asetukset]])
   (:import [ch.qos.logback.classic.joran JoranConfigurator]
-         [org.slf4j LoggerFactory]))
+           [org.slf4j LoggerFactory]))
 
 (def Asetukset
   {:server {:port s/Int
@@ -48,7 +50,7 @@
    :logback {:properties-file "resources/logback.xml"}})
 
 (defn hae-asetukset
-  ([alkuasetukset] alkuasetukset) ;; TODO: (lue-asetukset alkuasetukset Asetukset "osaan.properties")
+  ([alkuasetukset] (lue-asetukset alkuasetukset Asetukset "osaan.properties"))
   ([] (hae-asetukset oletusasetukset)))
 
 (defn service-path [base-url]
