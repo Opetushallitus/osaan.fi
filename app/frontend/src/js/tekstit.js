@@ -17,6 +17,7 @@
 angular.module('osaan.tekstit', ['pascalprecht.translate'])
   .constant('tekstit', {
     fi: {
+      'etusivu.teksti': 'Tällä työkalulla voit arvioida osaamistasi sinua kiinnostavassa ammatissa (Näyttötutkinnossa). Voit valita joko osaamisvaatimusten selaamisen tai osaamisen arvioinnin. Selaustoiminnossa voit selailla eri tutkintojen osaamisvaatimuksia. Arvioin osaamistani -toiminnossa voit vastata valitsemasi tutkinnon osaamisvaatimuksiin ja lopuksi saat tuloksena listan vastauksistasi ja graafiset kuvaajat osaamisvaatimusten keskiarvoista. Voit myös lähettää raportin pdf-tiedostona haluamiisi sähköpostiosoitteisiin.',
       'etusivu.otsikko': 'Osaamisen tunnistaminen',
       'footer.ota_yhteytta': 'osaan.fi käyttöä koskevan palautteen voi lähettää sähköpostilla osoitteeseen',
       'footer.ota_yhteytta_email': 'aitu-tuki@oph.fi',
@@ -25,6 +26,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf'
     },
     sv: {
+      'etusivu.teksti': 'Tällä työkalulla voit arvioida osaamistasi sinua kiinnostavassa ammatissa (Näyttötutkinnossa). Voit valita joko osaamisvaatimusten selaamisen tai osaamisen arvioinnin. Selaustoiminnossa voit selailla eri tutkintojen osaamisvaatimuksia. Arvioin osaamistani -toiminnossa voit vastata valitsemasi tutkinnon osaamisvaatimuksiin ja lopuksi saat tuloksena listan vastauksistasi ja graafiset kuvaajat osaamisvaatimusten keskiarvoista. Voit myös lähettää raportin pdf-tiedostona haluamiisi sähköpostiosoitteisiin. (sv)',
       'etusivu.otsikko': 'Osaamisen tunnistaminen (sv)',
       'footer.ota_yhteytta': 'osaan.fi käyttöä koskevan palautteen voi lähettää sähköpostilla osoitteeseen (sv)',
       'footer.ota_yhteytta_email': 'aitu-tuki@oph.fi',
