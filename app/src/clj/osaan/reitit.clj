@@ -15,7 +15,8 @@
 (ns osaan.reitit
   (:require [clojure.java.io :as io]
             [compojure.core :as c]
-            [compojure.route :as r]))
+            [compojure.route :as r]
+            [stencil.core :as s]))
 
 (def build-id (delay (if-let [resource (io/resource "build-id.txt")]
                        (.trim (slurp resource))
@@ -23,4 +24,5 @@
 
 (defn reitit [asetukset]
   (c/routes
+    (c/GET "/status" [] (s/render-string "OK" {}))
     (r/not-found "Not found")))

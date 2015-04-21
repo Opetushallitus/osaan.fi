@@ -33,6 +33,7 @@
                  [org.slf4j/slf4j-api "1.7.12"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [peridot "0.3.1"]
+                 [stencil "0.3.5"]
                  [prismatic/schema "0.4.0"]
                  [ring/ring-core "1.3.2"]
                  [ring/ring-headers "0.1.2"]
