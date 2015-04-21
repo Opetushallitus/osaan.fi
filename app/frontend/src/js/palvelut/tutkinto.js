@@ -14,14 +14,15 @@
 
 'use strict';
 
-angular.module('osaan.fi', [
-  'ng-breadcrumbs',
-  'ngRoute',
-  'taiPlaceholder',
-  'ui.bootstrap',
+angular.module('osaan.palvelut.tutkinto', [])
 
-  'osaan.etusivu.etusivuui',
-  'osaan.palvelut.opintoala',
-  'osaan.palvelut.tutkinto',
-  'osaan.tekstit'])
+  .factory('Tutkinto', ['$http', function($http) {
+    return {
+      hae: function(opintoala, nimi) {
+        return $http.get('api/tutkinto', {params: {opintoala: opintoala, nimi: nimi}}).then(function(response) {
+          return response.data;
+        });
+      }
+    }
+  }])
 ;
