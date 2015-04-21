@@ -13,7 +13,8 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.infra.status
-  (:require [clojure.java.io :as io]))
+  (:require [clojure.java.io :as io]
+            [clojure.walk]))
 
 ;; Postwalk käsittelee yksittäisen avain-arvo-parin vektorina, ei MapEntryna.
 (defn piilota-salasanat [status]
