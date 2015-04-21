@@ -23,6 +23,6 @@ angular.module('osaan.palvelut.koulutusala', [])
           return response.data;
         });
       }
-    }
+    };
   }])
 ;

@@ -23,6 +23,6 @@ angular.module('osaan.palvelut.tutkinto', [])
           return response.data;
         });
       }
-    }
+    };
   }])
 ;

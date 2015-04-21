@@ -28,6 +28,6 @@ angular.module('osaan.direktiivit.kielen-vaihto', [])
           $window.location.reload();
         };
       }]
-    }
+    };
   }])
 ;
