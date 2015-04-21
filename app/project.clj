@@ -51,7 +51,7 @@
              :uberjar {:main osaan.palvelin
                        :aot :all}
              :test {:resource-paths ["test-resources"]}}
-  :source-paths ["src/clj"]
+  :source-paths ["src/clj" "../../clojure-utils/src/clj"]
   :java-source-paths ["src/java"]
   :javac-options ["-target" "1.7" "-source" "1.7"]
   :test-paths ["test/clj"]

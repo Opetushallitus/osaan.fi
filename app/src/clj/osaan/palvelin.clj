@@ -29,6 +29,8 @@
             [ring.util.response :as resp]
             schema.core
 
+            [oph.common.infra.print-wrapper :refer [log-request-wrapper]]
+            [oph.common.util.poikkeus :refer [wrap-poikkeusten-logitus]]            
             [osaan.asetukset :refer [asetukset oletusasetukset hae-asetukset konfiguroi-lokitus] :rename {asetukset asetukset-promise}]
             [osaan.infra.status :refer [build-id]]))
 
@@ -65,7 +67,9 @@
       wrap-content-type
       wrap-not-modified
       wrap-expires
-      (wrap-frame-options :deny))))
+      (wrap-frame-options :deny)
+      log-request-wrapper
+      wrap-poikkeusten-logitus)))
 
 (defn ^:integration-api kaynnista-eraajon-ajastimet! [asetukset])
 
