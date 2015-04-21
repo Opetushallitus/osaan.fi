@@ -17,10 +17,20 @@
 angular.module('osaan.tekstit', ['pascalprecht.translate'])
   .constant('tekstit', {
     fi: {
-      'etusivu.otsikko': 'Osaamisen tunnistaminen'
+      'etusivu.otsikko': 'Osaamisen tunnistaminen',
+      'footer.ota_yhteytta': 'osaan.fi käyttöä koskevan palautteen voi lähettää sähköpostilla osoitteeseen',
+      'footer.ota_yhteytta_email': 'aitu-tuki@oph.fi',
+      'footer.otsikko': 'Palvelun tarjoaa Opetushallitus',
+      'footer.rekisteriseloste': 'osaan.fi rekisteriselosteen voit lukea osoitteesta:',
+      'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf'
     },
     sv: {
-      'etusivu.otsikko': 'Osaamisen tunnistaminen (sv)'
+      'etusivu.otsikko': 'Osaamisen tunnistaminen (sv)',
+      'footer.ota_yhteytta': 'osaan.fi käyttöä koskevan palautteen voi lähettää sähköpostilla osoitteeseen (sv)',
+      'footer.ota_yhteytta_email': 'aitu-tuki@oph.fi',
+      'footer.otsikko': 'Palvelun tarjoaa Opetushallitus (sv)',
+      'footer.rekisteriseloste': 'osaan.fi rekisteriselosteen voit lukea osoitteesta:',
+      'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf'
     }
   })
 
