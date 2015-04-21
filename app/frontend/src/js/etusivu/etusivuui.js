@@ -24,11 +24,19 @@ angular.module('osaan.etusivu.etusivuui', ['ngRoute'])
       });
   }])
 
-  .controller('EtusivuController', ['$scope', 'Koulutusala', function($scope, Koulutusala) {
+  .controller('EtusivuController', ['$scope', 'Koulutusala', 'Tutkinto', function($scope, Koulutusala, Tutkinto) {
+    $scope.haku = {};
     $scope.koulutusalat = [];
+    $scope.tutkinnot = [];
 
     Koulutusala.hae().then(function(koulutusalat) {
       $scope.koulutusalat = koulutusalat;
     });
+
+    $scope.$watch('haku', function() {
+      Tutkinto.hae($scope.haku.opintoala, $scope.haku.tutkinto).then(function(tutkinnot) {
+        $scope.tutkinnot = tutkinnot;
+      });
+    }, true);
   }])
 ;
