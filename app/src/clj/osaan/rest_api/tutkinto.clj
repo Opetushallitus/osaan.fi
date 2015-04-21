@@ -13,12 +13,12 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.rest-api.tutkinto
-  (:require [cheshire.core :as cheshire]
-            [compojure.core :as c]))
+  (:require [compojure.core :as c]
+            [oph.common.util.http-util :refer [json-response]]
+            [osaan.skeema :as skeema]))
 
 (def tutkinnot '({:opintoala_tkkoodi "509", :nimi_sv "Billackerare (grundexamen)", :opintoala_nimi_fi "Ajoneuvo- ja kuljetustekniikka", :nimi_fi "Automaalari (perustutkinto)", :opintoala_nimi_sv "Fordons- och transportteknik", :tutkintotaso "perustutkinto", :tutkintotunnus "351304"} {:opintoala_tkkoodi "509", :nimi_sv "Specialyrkesexamen för billackerarmästare", :opintoala_nimi_fi "Ajoneuvo- ja kuljetustekniikka", :nimi_fi "Automaalarimestarin erikoisammattitutkinto", :opintoala_nimi_sv "Fordons- och transportteknik", :tutkintotaso "erikoisammattitutkinto", :tutkintotunnus "357302"} {:opintoala_tkkoodi "509", :nimi_sv "Yrkesexamen för billackerare", :opintoala_nimi_fi "Ajoneuvo- ja kuljetustekniikka", :nimi_fi "Automaalarin ammattitutkinto", :opintoala_nimi_sv "Fordons- och transportteknik", :tutkintotaso "ammattitutkinto", :tutkintotunnus "354307"}))
 
 (c/defroutes reitit
-  (c/GET "/" [nimi opintoala] {:status 200
-                               :headers {"Content-Type" "application/json"}
-                               :body (cheshire/generate-string tutkinnot)}))
+  (c/GET "/" [nimi opintoala]
+    (json-response tutkinnot [skeema/Tutkinto])))
