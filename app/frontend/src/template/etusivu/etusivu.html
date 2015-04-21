@@ -14,3 +14,17 @@
     </optgroup>
   </select>
 </fieldset>
+
+<table>
+  <thead>
+    <tr>
+      <th translate="etusivu.tutkinnon_nimi"></th>
+      <th translate="etusivu.opintoala"></th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="tutkinto in tutkinnot">
+      <td>{{ tutkinto | lokalisoiKentta:'nimi' }}</td>
+      <td>{{ tutkinto | lokalisoiKentta:'opintoala_nimi' }}</td>
+    </tr>
+  </tbody>
+</table>
