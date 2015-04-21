@@ -46,6 +46,10 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
     $translateProvider.translations('fi', tekstit.fi);
     $translateProvider.translations('sv', tekstit.sv);
 
-    $translateProvider.preferredLanguage('fi');
+    $translateProvider.use(localStorage.getItem('kieli') || 'fi');
+  }])
+
+  .factory('kieli', [function() {
+    return localStorage.getItem('kieli') || 'fi';
   }])
 ;

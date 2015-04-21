@@ -14,17 +14,20 @@
 
 'use strict';
 
-angular.module('osaan.fi', [
-  'ng-breadcrumbs',
-  'ngRoute',
-  'taiPlaceholder',
-  'ui.bootstrap',
+angular.module('osaan.direktiivit.kielen-vaihto', [])
 
-  'yhteiset.palvelut.lokalisointi',
+  .directive('kielenVaihto', [function() {
+    return {
+      restrict: 'E',
+      template: '<a ng-click="asetaKieli(\'fi\')" ng-if="kieli !== \'fi\'">Suomeksi</a> <a ng-click="asetaKieli(\'sv\')" ng-if="kieli !== \'sv\'">På svenska</a>',
+      controller: ['$scope', '$window', 'kieli', function($scope, $window, kieli) {
+        $scope.kieli = kieli;
 
-  'osaan.etusivu.etusivuui',
-  'osaan.direktiivit.kielen-vaihto',
-  'osaan.palvelut.koulutusala',
-  'osaan.palvelut.tutkinto',
-  'osaan.tekstit'])
+        $scope.asetaKieli = function(kieli) {
+          localStorage.setItem('kieli', kieli);
+          $window.location.reload();
+        };
+      }]
+    }
+  }])
 ;
