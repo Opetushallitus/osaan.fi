@@ -19,8 +19,6 @@
   (:import [ch.qos.logback.classic.joran JoranConfigurator]
          [org.slf4j LoggerFactory]))
 
-(def asetukset (promise))
-
 (def Asetukset
   {:server {:port s/Int
             :base-url s/Str}

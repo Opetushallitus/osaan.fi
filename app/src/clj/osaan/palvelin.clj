@@ -31,7 +31,7 @@
 
             [oph.common.infra.print-wrapper :refer [log-request-wrapper]]
             [oph.common.util.poikkeus :refer [wrap-poikkeusten-logitus]]
-            [osaan.asetukset :refer [asetukset oletusasetukset hae-asetukset konfiguroi-lokitus] :rename {asetukset asetukset-promise}]
+            [osaan.asetukset :refer [oletusasetukset hae-asetukset konfiguroi-lokitus]]
             [osaan.infra.status :refer [build-id]]
             [osaan.reitit :refer [reitit]]))
 
@@ -72,11 +72,10 @@
 
 (defn ^:integration-api kaynnista-eraajon-ajastimet! [asetukset])
 
-(defn ^:integration-api kaynnista! [alkuasetukset]
+(defn ^:integration-api kaynnista! [oletusasetukset]
   (try
     (log/info "Käynnistetään osaan.fi, versio " @build-id)
-    (let [asetukset (hae-asetukset alkuasetukset)
-          _ (deliver asetukset-promise asetukset)
+    (let [asetukset (hae-asetukset oletusasetukset)
           _ (konfiguroi-lokitus asetukset)
           sammuta (hs/run-server (app asetukset)
                                  {:port (get-in asetukset [:server :port])})]
