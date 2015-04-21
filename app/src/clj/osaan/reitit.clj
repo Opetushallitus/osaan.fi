@@ -18,7 +18,9 @@
             [compojure.core :as c]
             [compojure.route :as r]
             [stencil.core :as s]
-            [osaan.infra.status :refer [status piilota-salasanat]]))
+            [osaan.infra.status :refer [status piilota-salasanat]]
+            [osaan.rest-api.opintoala]
+            [osaan.rest-api.tutkinto]))
 
 (defn reitit [asetukset]
   (c/routes
@@ -29,4 +31,6 @@
                                                                         piilota-salasanat
                                                                         pprint)))))
      (c/GET "/status" [] (s/render-string "OK" {})))
+    (c/context "/api/opintoala" [] osaan.rest-api.opintoala/reitit)
+    (c/context "/api/tutkinto" [] osaan.rest-api.tutkinto/reitit)
     (r/not-found "Not found")))
