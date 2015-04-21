@@ -41,13 +41,6 @@
       (.endsWith base-url "/") base-url
       :else (str base-url "/"))))
 
-(defn service-path [base-url]
-  (let [path (drop 3 (clojure.string/split base-url #"/"))]
-    (str "/" (clojure.string/join "/" path))))
-
-(defn ajax-request? [request]
-  (get-in request [:headers "angular-ajax-request"]))
-
 (defn sammuta [palvelin]
   ((:sammuta palvelin)))
 
