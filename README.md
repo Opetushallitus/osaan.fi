@@ -3,6 +3,9 @@ Osaan.fi
 
 Osaan.fi palvelun uudistettu versio. 
 
+# Clojure-utils
+
+Tämän repositoryn rinnalle on tarkoitus pudottaa [clojure-utils](https://github.com/Opetushallitus/clojure-utils). Muiden Opetushallituksen Clojure-projektien kanssa yhteistä koodia käytetään tällä hetkellä suhteellisella hakemistoviitteellä.
 
 
 # Paikallinen kehitysympäristö
