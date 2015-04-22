@@ -17,6 +17,7 @@
             [clojure.pprint :refer [pprint]]
             [compojure.core :as c]
             [compojure.route :as r]
+            [ring.util.response :as resp]
             [stencil.core :as s]
             [osaan.infra.status :refer [status piilota-salasanat]]
             [osaan.rest-api.koulutusala]
@@ -24,6 +25,8 @@
 
 (defn reitit [asetukset]
   (c/routes
+    (c/GET "/" [] (-> (resp/resource-response "index.html" {:root "public/app"})
+                      (assoc :headers {"Content-type" "text/html; charset=utf-8"})))
     (if (:development-mode asetukset)
       (c/GET "/status" [] (s/render-file "status" (assoc (status)
                                                          :asetukset (with-out-str
