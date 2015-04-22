@@ -24,7 +24,7 @@ angular.module('osaan.direktiivit.ohje', ['osaan.palvelut.ohje'])
       },
       templateUrl: 'template/direktiivit/ohje.html',
       replace: true,
-      controller: ['$scope', 'Ohje', function($scope, Ohje) {
+      controller: ['$filter', '$scope', 'Ohje', function($filter, $scope, Ohje) {
         $scope.ohje = [];
 
         $scope.naytaOhje = function() {
