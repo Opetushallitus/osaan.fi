@@ -14,19 +14,16 @@
 
 'use strict';
 
-angular.module('osaan.fi', [
-  'ng-breadcrumbs',
-  'ngRoute',
-  'taiPlaceholder',
-  'ui.bootstrap',
+angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
 
-  'yhteiset.palvelut.lokalisointi',
+  .config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+      .when('/osien-valinta', {
+        controller: 'OsienValintaController',
+        templateUrl: 'template/osien-valinta/osien-valinta.html'
+      });
+  }])
 
-  'osaan.etusivu.etusivuui',
-  'osaan.direktiivit.kielen-vaihto',
-  'osaan.direktiivit.ohje',
-  'osaan.osien-valinta.osien-valintaui',
-  'osaan.palvelut.koulutusala',
-  'osaan.palvelut.tutkinto',
-  'osaan.tekstit'])
+  .controller('OsienValintaController', [function() {
+  }])
 ;

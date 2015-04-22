@@ -23,7 +23,7 @@
   </thead>
   <tbody>
     <tr ng-repeat="tutkinto in tutkinnot">
-      <td>{{ tutkinto | lokalisoiKentta:'nimi' }}</td>
+      <td><a href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}">{{ tutkinto | lokalisoiKentta:'nimi' }}</a></td>
       <td>{{ tutkinto | lokalisoiKentta:'opintoala_nimi' }}</td>
     </tr>
   </tbody>

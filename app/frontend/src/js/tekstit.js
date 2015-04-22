@@ -26,7 +26,9 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'footer.ota_yhteytta_email': 'aitu-tuki@oph.fi',
       'footer.otsikko': 'Palvelun tarjoaa Opetushallitus',
       'footer.rekisteriseloste': 'osaan.fi rekisteriselosteen voit lukea osoitteesta:',
-      'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf'
+      'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf',
+      'osien-valinta.pakolliset_osat': 'Pakolliset osat',
+      'osien-valinta.valinnaiset_osat': 'Valinnaiset osat'
     },
     sv: {
       'etusivu.opintoala': 'Opintoala (sv)',
@@ -38,7 +40,9 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'footer.ota_yhteytta_email': 'aitu-tuki@oph.fi',
       'footer.otsikko': 'Palvelun tarjoaa Opetushallitus (sv)',
       'footer.rekisteriseloste': 'osaan.fi rekisteriselosteen voit lukea osoitteesta:',
-      'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf'
+      'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf',
+      'osien-valinta.pakolliset_osat': 'Pakolliset osat (sv)',
+      'osien-valinta.valinnaiset_osat': 'Valinnaiset osat (sv)'
     }
   })
 
