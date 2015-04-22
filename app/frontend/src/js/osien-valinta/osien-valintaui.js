@@ -29,6 +29,16 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
 
     $scope.valinnat = {};
 
+    $scope.eteenpain = function() {
+      var valinnat = _($scope.valinnat)
+        .map(function(valittu, tutkinnonosatunnus) { return [tutkinnonosatunnus, valittu]; })
+        .filter(function(x) { return x[1]; })
+        .map(function(x) { return x[0]; })
+        .value();
+
+      sessionStorage.setItem('tutkinnonosat', JSON.stringify(valinnat));
+    };
+
     Tutkinnonosa.hae(tutkintotunnus).then(function(tutkinnonosat) {
       $scope.tutkinnonosat = tutkinnonosat;
     });
