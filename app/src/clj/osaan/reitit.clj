@@ -21,6 +21,7 @@
             [stencil.core :as s]
             [osaan.infra.status :refer [status piilota-salasanat]]
             [osaan.rest-api.koulutusala]
+            [osaan.rest-api.ohje]
             [osaan.rest-api.tutkinto]))
 
 (defn reitit [asetukset]
