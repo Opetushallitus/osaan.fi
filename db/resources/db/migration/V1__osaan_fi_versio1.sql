@@ -281,4 +281,41 @@ create trigger kohdearvio_mu_update before update on kohdearvio for each row exe
 create trigger kohdearvio_cu_insert before insert on kohdearvio for each row execute procedure update_creator() ;
 create trigger kohdearvio_mu_insert before insert on kohdearvio for each row execute procedure update_modifier() ;
 
+-- dokumentaatiota
+
+COMMENT ON TABLE peruste IS 'Tutkinnon peruste. Peruste määrää tutkinnonosat ja suorituskriteerit tutkinnolle.';
+COMMENT ON TABLE tutkinnonosa_ja_peruste IS 'Liitostaulu. Tutkinnon osa voi olla vapaaehtoinen toisessa tutkinnossa ja pakollinen toisessa.';
+COMMENT ON TABLE arvio IS 'Osaamisarvio. Arviolle annetaan tunniste, jota käytetään tarvittaessa myös tiedon lataamiseen.';
+COMMENT ON TABLE arvioinnin_kohdealue IS 'Arvioitavat asiat jakautuvat eri kohdealueille. Kohdealue lähinnä otsikoi arvioinnin kohteet.';
+COMMENT ON TABLE arvioinnin_kohde IS 'Yksittäinen arvioitava osaamisen osa-alue.';
+COMMENT ON COLUMN kohdearvio.arvio IS 'Arvio numeerisena arvosanana (0-5). Eri tasojen kriteerit määritelty perusteissa.';
+COMMENT ON COLUMN arvio.tunniste IS 'Osaamisarvion yksilöivä tunnistekoodi.';
+COMMENT ON COLUMN arvioinnin_kohde.jarjestys IS '>= 0. Järjestysnumero on päätelty integraatiossa ePerusteet järjestelmän rajapinnan kautta.';
+COMMENT ON COLUMN arvioinnin_kohdealue.jarjestys IS '>= 0. Järjestysnumero on päätelty integraatiossa ePerusteet järjestelmän rajapinnan kautta.';
+
+-- dataa
+
+insert into tutkintotaso(nimi, kuvaus) values
+  ('erikoisammattitutkinto', 'erikoisammattitutkinto'),
+  ('ammattitutkinto', 'ammattitutkinto'),
+  ('perustutkinto', 'perustutkinto');
+
+insert into tutkintotyyppi (tyyppi, selite_fi, selite_sv) values
+  ('01','Yleissivistävä koulutus','Allmänbildande utbildning'),
+  ('02','Ammatilliset perustutkinnot','Yrkesinriktade grundexamina'),
+  ('03','Tutkintoon johtava ammatillinen lisäkoulutus','Yrkesinriktad tilläggsutbildning som leder till examen'),
+  ('04','Ei tutkintoon johtava ammatillinen lisäkoulutus', 'Yrkesinriktad tilläggsutbildning som inte leder till examen'),
+  ('06','Ammattikorkeakoulutus','Yrkeshögskoleutbildning'),
+  ('07','Ammattikorkeakoulujen erikoistumisopinnot','Yrkeshögskolornas specialiseringsstudier'),
+  ('08','Vapaan sivistystyön koulutus','Utbildning inom fritt bildningsarbete'),
+  ('09','Muu ammatillinen koulutus','Övrig yrkesinriktad utbildning'),
+  ('10','Muu koulutus','Övrig utbildning'),
+  ('11','Kokeilu','Försök'),
+  ('12','Ylempi ammattikorkeakoulututkinto','Högre yrkeshögskoleexaman'),
+  ('13','Yliopistotutkinto','Universitetsexamen');
+
+
+
+
+
 
