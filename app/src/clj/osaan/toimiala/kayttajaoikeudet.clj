@@ -12,14 +12,14 @@
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; European Union Public Licence for more details.
 
-(ns osaan.rest-api.ohje
-  (:require [compojure.core :as c]
-            [oph.common.util.http-util :refer [json-response]]
-            [osaan.arkisto.ohje :as arkisto]
-            [osaan.compojure-util :as cu]))
+(ns osaan.toimiala.kayttajaoikeudet)
 
-(c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/:ohjetunniste" [ohjetunniste]
-    (if-let [ohje (arkisto/hae ohjetunniste)]
-      (json-response ohje)
-      {:status 200})))
+(defn osaan-kayttaja?
+  ([x] (osaan-kayttaja?))
+  ([]
+    true))
+
+(def kayttajatoiminnot
+  `{:julkinen osaan-kayttaja?})
+
+(def toiminnot kayttajatoiminnot)

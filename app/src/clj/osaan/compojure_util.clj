@@ -12,14 +12,12 @@
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; European Union Public Licence for more details.
 
-(ns osaan.rest-api.ohje
-  (:require [compojure.core :as c]
-            [oph.common.util.http-util :refer [json-response]]
-            [osaan.arkisto.ohje :as arkisto]
-            [osaan.compojure-util :as cu]))
+(ns osaan.compojure-util
+  (:require [oph.compojure-util :as oph-cjure]
+            [osaan.toimiala.kayttajaoikeudet :as ko]))
 
-(c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/:ohjetunniste" [ohjetunniste]
-    (if-let [ohje (arkisto/hae ohjetunniste)]
-      (json-response ohje)
-      {:status 200})))
+(defmacro defapi
+  "Esittelee rajapinta-funktion sisältäen käyttöoikeuksien tarkastamisen ja tietokanta-transaktion hallinnan."
+  [toiminto konteksti-arg http-method path args & body]
+  (let [auth-map ko/toiminnot]
+    `(oph-cjure/defapi  ~auth-map ~toiminto ~konteksti-arg ~http-method ~path ~args ~@body)))
