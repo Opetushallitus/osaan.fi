@@ -17,7 +17,7 @@
             [osaan.toimiala.kayttajaoikeudet :as ko]))
 
 (defmacro defapi
-  "Esittelee rajapinta-funktion sisältäen käyttöoikeuksien tarkastamisen ja tietokanta-transaktion hallinnan."
+  "Esittelee rajapinta-funktion sisältäen käyttöoikeuksien tarkastamisen. Olettaa, että ollaan transaktion sisällä."
   [toiminto konteksti-arg http-method path args & body]
   (let [auth-map ko/toiminnot]
-    `(oph-cjure/defapi  ~auth-map ~toiminto ~konteksti-arg ~http-method ~path ~args ~@body)))
+    `(oph-cjure/defapi-within-transaction ~auth-map ~toiminto ~konteksti-arg ~http-method ~path ~args ~@body)))
