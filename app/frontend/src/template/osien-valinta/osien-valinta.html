@@ -1,4 +1,17 @@
 <h2 translate="osien-valinta.pakolliset_osat"></h2>
 
+<div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: true}">
+  <label>
+    <input type="checkbox" ng-model="valinnat[osa.tutkinnonosatunnus]">
+    {{ osa | lokalisoiKentta:'nimi' }}
+  </label>
+</div>
+
 <h2 translate="osien-valinta.valinnaiset_osat"></h2>
 
+<div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: false}">
+  <label>
+    <input type="checkbox" ng-model="valinnat[osa.tutkinnonosatunnus]">
+    {{ osa | lokalisoiKentta:'nimi' }}
+  </label>
+</div>
