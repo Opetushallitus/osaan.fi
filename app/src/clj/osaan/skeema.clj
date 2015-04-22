@@ -31,3 +31,8 @@
                :opintoala_nimi_fi s/Str
                :opintoala_nimi_sv s/Str
                :opintoala_tkkoodi s/Str})
+
+(def Tutkinnonosa {:nimi_fi s/Str
+                   :nimi_sv s/Str
+                   :tutkinnonosatunnus s/Str
+                   :pakollinen s/Bool})

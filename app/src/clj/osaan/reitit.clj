@@ -22,6 +22,7 @@
             [osaan.infra.status :refer [status piilota-salasanat]]
             [osaan.rest-api.koulutusala]
             [osaan.rest-api.ohje]
+            [osaan.rest-api.tutkinnonosa]
             [osaan.rest-api.tutkinto]))
 
 (defn reitit [asetukset]
@@ -37,5 +38,6 @@
      (c/GET "/status" [] (s/render-string "OK" {})))
     (c/context "/api/koulutusala" [] osaan.rest-api.koulutusala/reitit)
     (c/context "/api/ohje" [] osaan.rest-api.ohje/reitit)
+    (c/context "/api/tutkinnonosa" [] osaan.rest-api.tutkinnonosa/reitit)
     (c/context "/api/tutkinto" [] osaan.rest-api.tutkinto/reitit)
     (r/not-found "Not found")))
