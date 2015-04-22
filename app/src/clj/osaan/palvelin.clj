@@ -33,6 +33,7 @@
             [oph.common.util.poikkeus :refer [wrap-poikkeusten-logitus]]
             [oph.korma.common]
             [osaan.asetukset :refer [oletusasetukset hae-asetukset konfiguroi-lokitus]]
+            [osaan.infra.kayttaja.middleware :refer [wrap-kayttaja]]
             [osaan.infra.status :refer [build-id]]
             [osaan.reitit :refer [reitit]]))
 
@@ -67,6 +68,7 @@
       wrap-content-type
       wrap-not-modified
       wrap-expires
+      (wrap-kayttaja "JARJESTELMA")
       (wrap-frame-options :deny)
       log-request-wrapper
       wrap-poikkeusten-logitus)))
