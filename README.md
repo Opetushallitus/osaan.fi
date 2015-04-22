@@ -17,8 +17,16 @@ vagrant up osaan-db
 ```
 
 2. Tietokannan pystyttäminen paikallisesti
+
+Tietokanta tyhjennetään --clear vivun avulla.
+
 ```
 cd db
 lein uberjar
 java -jar target/osaan-db-standalone.jar --clear postgresql://osaan_adm:osaan-adm@127.0.0.1:4567/osaan
+```
+
+Tai ilman jar-generointia. 
+```
+lein run --clear postgresql://osaan_adm:osaan-adm@127.0.0.1:4567/osaan
 ```
