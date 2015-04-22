@@ -41,6 +41,6 @@ angular.module('osaan.direktiivit.ohje', ['osaan.palvelut.ohje'])
           $scope.ohje = pilkottu;
         });
       }]
-    }
+    };
   }])
 ;
