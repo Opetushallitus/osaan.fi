@@ -1,2 +1,12 @@
-.idea/
 *.iml
+.classpath
+.DS_Store
+.idea/
+.lein-*
+.nrepl-port
+.project
+.settings/
+bin/
+checkouts/
+classes/
+target/
