@@ -14,20 +14,15 @@
 
 'use strict';
 
-angular.module('osaan.fi', [
-  'ng-breadcrumbs',
-  'ngRoute',
-  'taiPlaceholder',
-  'ui.bootstrap',
+angular.module('osaan.rest.tutkinnonosa', [])
 
-  'yhteiset.palvelut.lokalisointi',
-
-  'osaan.etusivu.etusivuui',
-  'osaan.direktiivit.kielen-vaihto',
-  'osaan.direktiivit.ohje',
-  'osaan.osien-valinta.osien-valintaui',
-  'osaan.rest.koulutusala',
-  'osaan.rest.tutkinnonosa',
-  'osaan.rest.tutkinto',
-  'osaan.tekstit'])
+  .factory('Tutkinnonosa', ['$http', function($http) {
+    return {
+      hae: function(tutkintotunnus) {
+        return $http.get('api/tutkinnonosa/hae', {params: {tutkintotunnus: tutkintotunnus}}).then(function(response) {
+          return response.data;
+        });
+      }
+    };
+  }])
 ;
