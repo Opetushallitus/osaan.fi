@@ -14,18 +14,15 @@
 
 'use strict';
 
-angular.module('osaan.fi', [
-  'ng-breadcrumbs',
-  'ngRoute',
-  'taiPlaceholder',
-  'ui.bootstrap',
+angular.module('osaan.palvelut.ohje', [])
 
-  'yhteiset.palvelut.lokalisointi',
-
-  'osaan.etusivu.etusivuui',
-  'osaan.direktiivit.kielen-vaihto',
-  'osaan.direktiivit.ohje',
-  'osaan.palvelut.koulutusala',
-  'osaan.palvelut.tutkinto',
-  'osaan.tekstit'])
+  .factory('Ohje', ['$http', function($http) {
+    return {
+      hae: function(ohjetunniste) {
+        return $http.get('api/ohje/' + ohjetunniste).then(function(response) {
+          return response.data;
+        });
+      }
+    };
+  }])
 ;
