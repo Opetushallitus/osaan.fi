@@ -42,14 +42,14 @@
   (sql-tiedostosta (io/resource nimi)))
 
 (defn run-sql [sql]
-  (doseq [stmt sql]
-    (try
-      (jdbc-do "set session osaan.kayttaja='JARJESTELMA'")
-      (jdbc-do stmt)
-      (catch java.sql.SQLException e
-        (throw (.getNextException e)))
-      (finally
-        (jdbc-do "set osaan.kayttaja to default")))))
+  (try
+    (jdbc-do "set session osaan.kayttaja='JARJESTELMA'")
+    (doseq [stmt sql]
+      (jdbc-do stmt))
+    (catch java.sql.SQLException e
+      (throw (.getNextException e)))
+    (finally
+      (jdbc-do "set osaan.kayttaja to default"))))
 
 (defn prefix [s n]
   (.substring s 0 (min (.length s) n)))
@@ -59,6 +59,10 @@
   (jdbc-do
     (str "GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO " username )
     (str "GRANT SELECT, USAGE ON ALL SEQUENCES IN SCHEMA public TO " username )))
+
+(defn luo-testidata!
+  []
+  (run-sql (sql-resurssista "sql/testidata.sql") ))
 
 (defn parse-uri
   "Parsitaan mappiin Postgren JDBC-URL.
@@ -103,6 +107,8 @@
   [[nil "--clear" "Tyhjennetään kanta ja luodaan skeema ja pohjadata uusiksi"
     :default false]
    [nil "--target-version VERSION" "Tehdään migrate annettuun versioon saakka"]
+   ["-t" nil "Testidatan luonti"
+    :id :testidata]
    ["-s" "--sql SQL" "Tiedosto, jonka sisältämät SQL-lauseet suoritetaan migraation päätteeksi"
     :assoc-fn #(update-in %1 [%2] (fnil conj []) %3)]
    ["-u" "--username USER" "Tietokantakäyttäjä"
@@ -164,6 +170,9 @@
         (jdbc/with-connection db-spec
           (println "Annetaan käyttöoikeudet sovelluskäyttäjälle, vaikka osa migraatioista epäonnistuisi.")
           (aseta-oikeudet-sovelluskayttajalle (:username options))
+          (when (:testidata options)
+            (println "luodaan testidata")
+            (luo-testidata!))
           (doseq [s (:sql options)]
             (run-sql (sql-tiedostosta s))))
         (finally
