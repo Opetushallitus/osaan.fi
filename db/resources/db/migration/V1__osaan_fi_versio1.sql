@@ -22,9 +22,9 @@ values ('INTEGRAATIO', 'Integraatio', '', true, current_timestamp, current_times
 
 create table koulutusala (
     koulutusala_tkkoodi varchar(3) not null primary key,
-    selite_fi text not null,
-    selite_sv text,
-    selite_en text,
+    nimi_fi text not null,
+    nimi_sv text,
+    nimi_en text,
     voimassa_alkupvm date NOT NULL,
     voimassa_loppupvm date NOT NULL DEFAULT to_date('21990101', 'YYYYMMDD'),
     muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
@@ -37,9 +37,9 @@ create table koulutusala (
 create table opintoala (
     opintoala_tkkoodi varchar(3) not null primary key,
     koulutusala_tkkoodi varchar(3) not null references koulutusala(koulutusala_tkkoodi),
-    selite_fi text not null,
-    selite_sv text,
-    selite_en text,
+    nimi_fi text not null,
+    nimi_sv text,
+    nimi_en text,
     voimassa_alkupvm date NOT NULL,
     voimassa_loppupvm date NOT NULL DEFAULT to_date('21990101', 'YYYYMMDD'),
     muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
@@ -163,6 +163,24 @@ create table tutkinnonosa_ja_peruste (
   luotuaika timestamp NOT NULL,
   PRIMARY KEY (osa, peruste)
 );
+
+create table tutkinto_ja_tutkinnonosa(
+  tutkinto varchar(6) references tutkinto(tutkintotunnus), 
+  tutkinnonosa varchar(6) references tutkinnonosa(osatunnus),
+  jarjestysnumero int not null,
+  muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+  luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+  muutettuaika timestamp NOT NULL,
+  luotuaika timestamp NOT NULL,
+  PRIMARY KEY(tutkinto, tutkinnonosa)
+);
+
+create trigger tutkinto_ja_tutkinnonosa_update before update on tutkinto_ja_tutkinnonosa for each row execute procedure update_stamp() ;
+create trigger tutkinto_ja_tutkinnonosal_insert before insert on tutkinto_ja_tutkinnonosa for each row execute procedure update_created() ;
+create trigger tutkinto_ja_tutkinnonosam_insert before insert on tutkinto_ja_tutkinnonosa for each row execute procedure update_stamp() ;
+create trigger tutkinto_ja_tutkinnonosa_mu_update before update on tutkinto_ja_tutkinnonosa for each row execute procedure update_modifier() ;
+create trigger tutkinto_ja_tutkinnonosa_mu_insert before insert on tutkinto_ja_tutkinnonosa for each row execute procedure update_modifier() ;
+create trigger tutkinto_ja_tutkinnonosa_cu_insert before insert on tutkinto_ja_tutkinnonosa for each row execute procedure update_creator() ;
 
 create trigger tutkinnonosa_update before update on tutkinnonosa for each row execute procedure update_stamp() ;
 create trigger tutkinnonosal_insert before insert on tutkinnonosa for each row execute procedure update_created() ;
