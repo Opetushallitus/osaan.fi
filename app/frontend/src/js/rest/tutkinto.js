@@ -14,12 +14,12 @@
 
 'use strict';
 
-angular.module('osaan.palvelut.ohje', [])
+angular.module('osaan.rest.tutkinto', [])
 
-  .factory('Ohje', ['$http', function($http) {
+  .factory('Tutkinto', ['$http', function($http) {
     return {
-      hae: function(ohjetunniste) {
-        return $http.get('api/ohje/' + ohjetunniste).then(function(response) {
+      hae: function(opintoala, nimi) {
+        return $http.get('api/tutkinto', {params: {opintoala: opintoala, nimi: nimi}}).then(function(response) {
           return response.data;
         });
       }

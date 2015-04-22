@@ -14,7 +14,7 @@
 
 'use strict';
 
-angular.module('osaan.palvelut.koulutusala', [])
+angular.module('osaan.rest.koulutusala', [])
 
   .factory('Koulutusala', ['$http', function($http) {
     return {

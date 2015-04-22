@@ -26,7 +26,7 @@ angular.module('osaan.fi', [
   'osaan.direktiivit.kielen-vaihto',
   'osaan.direktiivit.ohje',
   'osaan.osien-valinta.osien-valintaui',
-  'osaan.palvelut.koulutusala',
-  'osaan.palvelut.tutkinto',
+  'osaan.rest.koulutusala',
+  'osaan.rest.tutkinto',
   'osaan.tekstit'])
 ;

@@ -14,7 +14,7 @@
 
 'use strict';
 
-angular.module('osaan.direktiivit.ohje', ['osaan.palvelut.ohje'])
+angular.module('osaan.direktiivit.ohje', ['osaan.rest.ohje'])
 
   .directive('ohje', [function() {
     return {
