@@ -35,5 +35,6 @@
                                                                         pprint)))))
      (c/GET "/status" [] (s/render-string "OK" {})))
     (c/context "/api/koulutusala" [] osaan.rest-api.koulutusala/reitit)
+    (c/context "/api/ohje" [] osaan.rest-api.ohje/reitit)
     (c/context "/api/tutkinto" [] osaan.rest-api.tutkinto/reitit)
     (r/not-found "Not found")))
