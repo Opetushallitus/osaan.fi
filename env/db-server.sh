@@ -39,7 +39,7 @@ iptables -I INPUT 1 -p tcp -s $app_host --dport 5432 -j ACCEPT
 
 service iptables save
 
-# alustetaan aipal tietokanta ilman tauluja
+# alustetaan osaan.fi tietokanta ilman tauluja
 
 until service postgresql-9.4 status > /dev/null; do
   echo "Waiting for postgresql...\n"
