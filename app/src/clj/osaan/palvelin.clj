@@ -31,6 +31,7 @@
 
             [oph.common.infra.print-wrapper :refer [log-request-wrapper]]
             [oph.common.util.poikkeus :refer [wrap-poikkeusten-logitus]]
+            [oph.korma.common]
             [osaan.asetukset :refer [oletusasetukset hae-asetukset konfiguroi-lokitus]]
             [osaan.infra.status :refer [build-id]]
             [osaan.reitit :refer [reitit]]))
@@ -77,6 +78,7 @@
     (log/info "Käynnistetään osaan.fi, versio " @build-id)
     (let [asetukset (hae-asetukset oletusasetukset)
           _ (konfiguroi-lokitus asetukset)
+          _ (oph.korma.common/luo-db (:db asetukset))
           sammuta (hs/run-server (app asetukset)
                                  {:port (get-in asetukset [:server :port])})]
       (when (or (not (:development-mode asetukset))
