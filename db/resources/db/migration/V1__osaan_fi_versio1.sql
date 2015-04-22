@@ -1,5 +1,8 @@
 set session osaan.kayttaja='JARJESTELMA';
 
+CREATE SEQUENCE arvioinninkohde_id_seq;
+CREATE SEQUENCE arvioinninkohdealue_id_seq;
+
 create table kayttaja(
     oid varchar(80) NOT NULL primary key,
     etunimi varchar(100) not null,
@@ -142,7 +145,8 @@ create table tutkinnonosa (
    osatunnus varchar(6) not null PRIMARY KEY,
    tutkinto varchar(6) not null references tutkinto(tutkintotunnus),
    
-   nimi text not null,
+   nimi_fi text not null,
+   nimi_sv text ,
    muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
    luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
    muutettuaika timestamptz NOT NULL,
@@ -201,4 +205,80 @@ create trigger tutkinnonosa_ja_perustem_insert before insert on tutkinnonosa_ja_
 create trigger tutkinnonosa_ja_peruste_mu_update before update on tutkinnonosa_ja_peruste for each row execute procedure update_modifier() ;
 create trigger tutkinnonosa_ja_peruste_cu_insert before insert on tutkinnonosa_ja_peruste for each row execute procedure update_creator() ;
 create trigger tutkinnonosa_ja_peruste_mu_insert before insert on tutkinnonosa_ja_peruste for each row execute procedure update_modifier() ;
+
+-- arviointiin liittyvät taulut
+
+create table arvioinnin_kohdealue (
+   arvioinninkohdealue_id integer NOT NULL primary key DEFAULT nextval('arvioinninkohdealue_id_seq'),
+   osa varchar(6) not null references tutkinnonosa(osatunnus),
+   nimi_fi text not null,
+   nimi_sv text,
+   jarjestys integer NOT NULL,
+   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+   muutettuaika timestamptz NOT NULL,
+   luotuaika timestamptz NOT NULL
+);
+
+create table arvioinnin_kohde (
+   arvioinninkohde_id integer NOT NULL primary key DEFAULT nextval('arvioinninkohde_id_seq'),
+   arvioinninkohdealue integer NOT NULL references arvioinnin_kohdealue(arvioinninkohdealue_id),
+   nimi_fi text not null,
+   nimi_sv text,
+   jarjestys integer NOT NULL,
+   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+   muutettuaika timestamptz NOT NULL,
+   luotuaika timestamptz NOT NULL
+);
+
+create table arvio (
+  tunniste varchar(16) NOT NULL primary key,
+  muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+  luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+  muutettuaika timestamptz NOT NULL,
+  luotuaika timestamptz NOT NULL  
+);
+
+create table kohdearvio (
+  arviotunnus varchar(16) NOT NULL references arvio(tunniste),
+  arviokohde integer NOT NULL references arvioinnin_kohde(arvioinninkohde_id),
+  arvio integer NOT NULL,
+  muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+  luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+  muutettuaika timestamptz NOT NULL,
+  luotuaika timestamptz NOT NULL,
+  PRIMARY KEY (arviotunnus, arviokohde)
+);
+
+create trigger arvioinnin_kohdealue_update before update on arvioinnin_kohdealue for each row execute procedure update_stamp() ;
+create trigger arvioinnin_kohdealuel_insert before insert on arvioinnin_kohdealue for each row execute procedure update_created() ;
+create trigger arvioinnin_kohdealuem_insert before insert on arvioinnin_kohdealue for each row execute procedure update_stamp() ;
+create trigger arvioinnin_kohdealue_mu_update before update on arvioinnin_kohdealue for each row execute procedure update_modifier() ;
+create trigger arvioinnin_kohdealue_cu_insert before insert on arvioinnin_kohdealue for each row execute procedure update_creator() ;
+create trigger arvioinnin_kohdealue_mu_insert before insert on arvioinnin_kohdealue for each row execute procedure update_modifier() ;
+
+create trigger arvioinnin_kohde_update before update on arvioinnin_kohde for each row execute procedure update_stamp() ;
+create trigger arvioinnin_kohdel_insert before insert on arvioinnin_kohde for each row execute procedure update_created() ;
+create trigger arvioinnin_kohdem_insert before insert on arvioinnin_kohde for each row execute procedure update_stamp() ;
+create trigger arvioinnin_kohde_mu_update before update on arvioinnin_kohde for each row execute procedure update_modifier() ;
+create trigger arvioinnin_kohde_cu_insert before insert on arvioinnin_kohde for each row execute procedure update_creator() ;
+create trigger arvioinnin_kohde_mu_insert before insert on arvioinnin_kohde for each row execute procedure update_modifier() ;
+
+
+create trigger arvio_update before update on arvio for each row execute procedure update_stamp() ;
+create trigger arviol_insert before insert on arvio for each row execute procedure update_created() ;
+create trigger arviom_insert before insert on arvio for each row execute procedure update_stamp() ;
+create trigger arvio_mu_update before update on arvio for each row execute procedure update_modifier() ;
+create trigger arvio_cu_insert before insert on arvio for each row execute procedure update_creator() ;
+create trigger arvio_mu_insert before insert on arvio for each row execute procedure update_modifier() ;
+
+
+create trigger kohdearvio_update before update on kohdearvio for each row execute procedure update_stamp() ;
+create trigger kohdearviol_insert before insert on kohdearvio for each row execute procedure update_created() ;
+create trigger kohdearviom_insert before insert on kohdearvio for each row execute procedure update_stamp() ;
+create trigger kohdearvio_mu_update before update on kohdearvio for each row execute procedure update_modifier() ;
+create trigger kohdearvio_cu_insert before insert on kohdearvio for each row execute procedure update_creator() ;
+create trigger kohdearvio_mu_insert before insert on kohdearvio for each row execute procedure update_modifier() ;
+
 
