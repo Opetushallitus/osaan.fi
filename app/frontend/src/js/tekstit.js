@@ -27,6 +27,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'footer.otsikko': 'Palvelun tarjoaa Opetushallitus',
       'footer.rekisteriseloste': 'osaan.fi rekisteriselosteen voit lukea osoitteesta:',
       'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf',
+      'osien-valinta.eteenpain': 'Eteenpäin',
       'osien-valinta.pakolliset_osat': 'Pakolliset osat',
       'osien-valinta.valinnaiset_osat': 'Valinnaiset osat'
     },
@@ -41,6 +42,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'footer.otsikko': 'Palvelun tarjoaa Opetushallitus (sv)',
       'footer.rekisteriseloste': 'osaan.fi rekisteriselosteen voit lukea osoitteesta:',
       'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf',
+      'osien-valinta.eteenpain': 'Eteenpäin (sv)',
       'osien-valinta.pakolliset_osat': 'Pakolliset osat (sv)',
       'osien-valinta.valinnaiset_osat': 'Valinnaiset osat (sv)'
     }
