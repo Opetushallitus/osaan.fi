@@ -167,7 +167,7 @@ create table tutkinnonosa_ja_peruste (
 create table tutkinto_ja_tutkinnonosa(
   tutkinto varchar(6) references tutkinto(tutkintotunnus), 
   tutkinnonosa varchar(6) references tutkinnonosa(osatunnus),
-  jarjestysnumero int not null,
+  jarjestys int not null,
   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   muutettuaika timestamp NOT NULL,
@@ -331,6 +331,14 @@ insert into tutkintotyyppi (tyyppi, selite_fi, selite_sv) values
   ('11','Kokeilu','Försök'),
   ('12','Ylempi ammattikorkeakoulututkinto','Högre yrkeshögskoleexaman'),
   ('13','Yliopistotutkinto','Universitetsexamen');
+
+-- eheysrajoitteita, tutkinnon arviointiin liittyen 
+
+create unique index aka_yksikasitteinen_jarjestys on arvioinnin_kohdealue(osa, jarjestys);
+create unique index ak_yksikasitteinen_jarjestys on arvioinnin_kohde(arvioinninkohdealue, jarjestys);
+
+-- eheysrajoitteita tutkintoihin liittyen
+create unique index t_osa_yksikasitteinen_jarjestys on tutkinto_ja_tutkinnonosa(tutkinto, tutkinnonosa,jarjestys);
 
 
 
