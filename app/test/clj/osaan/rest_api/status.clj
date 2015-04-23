@@ -13,8 +13,11 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.rest-api.status
-  (:require [osaan.rest-api.session-util :refer :all]
-            [clojure.test :refer :all]))
+  (:require [clojure.test :refer :all]
+            [osaan.rest-api.session-util :refer :all]
+            [osaan.sql.test-util :refer [tietokanta-fixture]]))
+
+(use-fixtures :each tietokanta-fixture)
 
 (deftest ^:integraatio status-responds []
   (let [crout (init-peridot!)]
