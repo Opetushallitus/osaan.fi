@@ -13,11 +13,11 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.arkisto.ohje
-  (:require [korma.core :as sql]))
+  (:require [korma.core :as sql]
+            [oph.korma.common :as sql-util]))
 
 (defn hae
   "Hakee ohjeen id:n perusteella."
   [ohjetunniste]
-  (first
-    (sql/select :ohje
-      (sql/where {:ohjetunniste ohjetunniste}))))
+  (sql-util/select-unique :ohje
+      (sql/where {:ohjetunniste ohjetunniste})))
