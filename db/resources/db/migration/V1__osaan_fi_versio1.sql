@@ -145,6 +145,16 @@ create table peruste (
     luotuaika timestamp NOT NULL
 );
 
+create table tutkintonimike(
+  nimiketunnus varchar(6) not null primary key,
+  nimi_fi text not null,
+  nimi_sv text,
+  tutkinto varchar(6) not null references tutkinto(tutkintotunnus),
+  muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+  luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+  muutettuaika timestamptz NOT NULL,
+  luotuaika timestamptz NOT NULL  
+);
 
 create table tutkinnonosa (
    osatunnus varchar(6) not null PRIMARY KEY,
@@ -207,6 +217,13 @@ create trigger tutkintom_insert before insert on tutkinto for each row execute p
 create trigger tutkinto_mu_update before update on tutkinto for each row execute procedure update_modifier() ;
 create trigger tutkinto_cu_insert before insert on tutkinto for each row execute procedure update_creator() ;
 create trigger tutkinto_mu_insert before insert on tutkinto for each row execute procedure update_modifier() ;
+
+create trigger tutkintonimike_update before update on tutkintonimike for each row execute procedure update_stamp() ;
+create trigger tutkintonimikel_insert before insert on tutkintonimike for each row execute procedure update_created() ;
+create trigger tutkintonimikem_insert before insert on tutkintonimike for each row execute procedure update_stamp() ;
+create trigger tutkintonimike_mu_update before update on tutkintonimike for each row execute procedure update_modifier() ;
+create trigger tutkintonimike_cu_insert before insert on tutkintonimike for each row execute procedure update_creator() ;
+create trigger tutkintonimike_mu_insert before insert on tutkintonimike for each row execute procedure update_modifier() ;
 
 create trigger tutkintotaso_update before update on tutkintotaso for each row execute procedure update_stamp() ;
 create trigger tutkintotasol_insert before insert on tutkintotaso for each row execute procedure update_created() ;

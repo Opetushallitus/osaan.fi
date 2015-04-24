@@ -13,6 +13,9 @@ insert into opintoala (opintoala_tkkoodi, koulutusala_tkkoodi, nimi_fi, nimi_sv,
    values ('324601', '202', 'Audiovisuaalisen viestinnän ammattitutkinto',
    to_date('1997-01-01', 'YYYY-MM-DD'),
    'ammattitutkinto');
+   
+ insert into tutkintonimike(nimiketunnus, nimi_fi, nimi_sv, tutkinto)
+   values ('10092', 'Media-assistentti', 'Medieassistent', '324601');
 
 insert into tutkinnonosa(osatunnus, nimi_fi,tutkinto) values
   ('100001','Audiovisuaalinen tuotanto', '324601'),
