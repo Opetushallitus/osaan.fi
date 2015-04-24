@@ -47,3 +47,6 @@ insert into arvioinnin_kohde(arvioinninkohdealue, nimi_fi, nimi_sv, jarjestys)
     (-1, 'Jälkituotanto', 'Efterproduktion', 3),
     (-2, 'Oman työn suunnittelu', 'Planering av det egna arbetet', 1),
     (-2, 'Aineiston tuottaminen', 'Produktion av material', 2);
+
+insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_alkupvm, voimassa_loppupvm, versio, koodistoversio) values ('2002', '324601', 'Kuvauksen ja valaisun osaamisala', '', '2014-01-01', '2199-01-01', 1, 1);
+insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_alkupvm, voimassa_loppupvm, versio, koodistoversio) values ('2003', '324601', 'Mediatyön osaamisala', '', '2014-01-01', '2199-01-01', 1, 1);

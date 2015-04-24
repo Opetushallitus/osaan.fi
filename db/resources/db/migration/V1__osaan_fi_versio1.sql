@@ -168,6 +168,22 @@ create table tutkinnonosa (
    luotuaika timestamptz NOT NULL
 );
 
+create table osaamisala(
+   osaamisalatunnus	varchar(5) not null,
+   versio integer not null,
+   koodistoversio integer not null,
+   tutkinto varchar(6) not null references tutkinto(tutkintotunnus),
+   nimi_fi text not null,
+   nimi_sv text,
+   voimassa_alkupvm date NOT NULL,
+   voimassa_loppupvm date NOT NULL DEFAULT to_date('21990101', 'YYYYMMDD'),
+   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+   muutettuaika timestamp NOT NULL,
+   luotuaika timestamp NOT NULL,
+   PRIMARY KEY(osaamisalatunnus, versio, koodistoversio)
+); 
+
 create table tutkinnonosa_ja_peruste (
   osa varchar(6) not null references tutkinnonosa(osatunnus),
   peruste varchar(20) not null references peruste(diaarinumero),
@@ -253,6 +269,13 @@ create trigger perustetyyppim_insert before insert on perustetyyppi for each row
 create trigger perustetyyppi_mu_update before update on perustetyyppi for each row execute procedure update_modifier() ;
 create trigger perustetyyppi_cu_insert before insert on perustetyyppi for each row execute procedure update_creator() ;
 create trigger perustetyyppi_mu_insert before insert on perustetyyppi for each row execute procedure update_modifier() ;
+
+create trigger osaamisala_update before update on osaamisala for each row execute procedure update_stamp() ;
+create trigger osaamisalal_insert before insert on osaamisala for each row execute procedure update_created() ;
+create trigger osaamisalam_insert before insert on osaamisala for each row execute procedure update_stamp() ;
+create trigger osaamisala_mu_update before update on osaamisala for each row execute procedure update_modifier() ;
+create trigger osaamisala_cu_insert before insert on osaamisala for each row execute procedure update_creator() ;
+create trigger osaamisala_mu_insert before insert on osaamisala for each row execute procedure update_modifier() ;
 
 
 -- arviointiin liittyvät taulut
