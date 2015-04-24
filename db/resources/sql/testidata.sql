@@ -24,8 +24,8 @@ insert into tutkinto_ja_tutkinnonosa (tutkinto, tutkinnonosa, jarjestys) values
   ('324601','100002',2),
   ('324601','100003',3);
 
-insert into peruste (diaarinumero, alkupvm, tutkinto)
- values ('41/011/2005', to_date('2005-01-01', 'YYYY-MM-DD'), '324601');
+insert into peruste (diaarinumero, alkupvm, tutkinto, tyyppi)
+ values ('41/011/2005', to_date('2005-01-01', 'YYYY-MM-DD'), '324601', 'naytto');
 
 insert into tutkinnonosa_ja_peruste(osa, peruste, pakollinen)
 values ('100001', '41/011/2005', true),

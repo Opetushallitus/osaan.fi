@@ -86,11 +86,6 @@ create trigger ohje_mu_update before update on ohje for each row execute procedu
 create trigger ohje_mu_insert before insert on ohje for each row execute procedure update_modifier();
 create trigger ohje_cu_insert before insert on ohje for each row execute procedure update_creator();
 
-
-COMMENT ON TABLE koulutusala      IS 'Tilastokeskuksen luokittelun mukainen koulutusala';
-COMMENT ON TABLE ohje  IS 'Käyttöohjeet, jotka näkyvät käyttöliittymässä';
-COMMENT ON TABLE opintoala  IS 'Tilastokeskuksen luokittelun mukainen opintoala.';
-
 -- tutkintorakenne ja perusteet
 
 create table tutkintotaso(
@@ -122,7 +117,6 @@ create table tutkinto (
     voimassa_loppupvm date NOT NULL DEFAULT to_date('21990101', 'YYYYMMDD'),
     siirtymaajan_loppupvm date NOT NULL DEFAULT to_date('21990101', 'YYYYMMDD'),
     tyyppi varchar(2) references tutkintotyyppi(tyyppi),
---    voimassaoleva_peruste varchar(20) references peruste(diaarinumero),
     tutkintotaso varchar(25) references tutkintotaso(nimi),
     muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
     luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
@@ -130,16 +124,27 @@ create table tutkinto (
     luotuaika timestamptz NOT NULL
 );
 
+create table perustetyyppi (
+    tunnus varchar(6) NOT NULL primary key,
+    kuvaus varchar(200),
+    muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+    luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+    muutettuaika timestamp NOT NULL,
+    luotuaika timestamp NOT NULL
+);
+
 create table peruste (
     diaarinumero varchar(20) not null primary key,
     alkupvm date not null,
     siirtymaajan_loppupvm date NOT NULL DEFAULT to_date('21990101', 'YYYYMMDD'),
+    tyyppi varchar(6) NOT NULL references perustetyyppi(tunnus),
     tutkinto varchar(6) NOT NULL references tutkinto(tutkintotunnus),
     muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
     luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
     muutettuaika timestamp NOT NULL,
     luotuaika timestamp NOT NULL
 );
+
 
 create table tutkinnonosa (
    osatunnus varchar(6) not null PRIMARY KEY,
@@ -224,6 +229,15 @@ create trigger tutkinnonosa_ja_peruste_mu_update before update on tutkinnonosa_j
 create trigger tutkinnonosa_ja_peruste_cu_insert before insert on tutkinnonosa_ja_peruste for each row execute procedure update_creator() ;
 create trigger tutkinnonosa_ja_peruste_mu_insert before insert on tutkinnonosa_ja_peruste for each row execute procedure update_modifier() ;
 
+
+create trigger perustetyyppi_update before update on perustetyyppi for each row execute procedure update_stamp() ;
+create trigger perustetyyppil_insert before insert on perustetyyppi for each row execute procedure update_created() ;
+create trigger perustetyyppim_insert before insert on perustetyyppi for each row execute procedure update_stamp() ;
+create trigger perustetyyppi_mu_update before update on perustetyyppi for each row execute procedure update_modifier() ;
+create trigger perustetyyppi_cu_insert before insert on perustetyyppi for each row execute procedure update_creator() ;
+create trigger perustetyyppi_mu_insert before insert on perustetyyppi for each row execute procedure update_modifier() ;
+
+
 -- arviointiin liittyvät taulut
 
 create table arvioinnin_kohdealue (
@@ -266,7 +280,8 @@ create table kohdearvio (
   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   muutettuaika timestamptz NOT NULL,
   luotuaika timestamptz NOT NULL,
-  PRIMARY KEY (arviotunnus, arviokohde)
+  PRIMARY KEY (arviotunnus, arviokohde),
+  CONSTRAINT arvosana_rajat CHECK ((arvio < 6) and (arvio > 0))
 );
 
 create trigger arvioinnin_kohdealue_update before update on arvioinnin_kohdealue for each row execute procedure update_stamp() ;
@@ -301,7 +316,13 @@ create trigger kohdearvio_mu_insert before insert on kohdearvio for each row exe
 
 -- dokumentaatiota
 
+
+COMMENT ON TABLE koulutusala      IS 'Tilastokeskuksen luokittelun mukainen koulutusala';
+COMMENT ON TABLE ohje  IS 'Käyttöohjeet, jotka näkyvät käyttöliittymässä';
+COMMENT ON TABLE opintoala  IS 'Tilastokeskuksen luokittelun mukainen opintoala.';
+
 COMMENT ON TABLE peruste IS 'Tutkinnon peruste. Peruste määrää tutkinnonosat ja suorituskriteerit tutkinnolle.';
+COMMENT ON COLUMN peruste.diaarinumero IS 'Perustemääräyksen diaarinumero. Yksilöi perusteen sisällön.';
 COMMENT ON TABLE tutkinnonosa_ja_peruste IS 'Liitostaulu. Tutkinnon osa voi olla vapaaehtoinen toisessa tutkinnossa ja pakollinen toisessa.';
 COMMENT ON TABLE arvio IS 'Osaamisarvio. Arviolle annetaan tunniste, jota käytetään tarvittaessa myös tiedon lataamiseen.';
 COMMENT ON TABLE arvioinnin_kohdealue IS 'Arvioitavat asiat jakautuvat eri kohdealueille. Kohdealue lähinnä otsikoi arvioinnin kohteet.';
@@ -312,6 +333,11 @@ COMMENT ON COLUMN arvioinnin_kohde.jarjestys IS '>= 0. Järjestysnumero on pää
 COMMENT ON COLUMN arvioinnin_kohdealue.jarjestys IS '>= 0. Järjestysnumero on päätelty integraatiossa ePerusteet järjestelmän rajapinnan kautta.';
 
 -- dataa
+
+insert into perustetyyppi(tunnus, kuvaus) values
+  ('ops', 'Ammatillisena peruskoulutuksena järjestettävä ammatillinen perustutkinto (ent. opintosuunnitelmaperusteinen)'),
+  ('naytto', 'Näyttötutkintona suoritettavan tutkinnon peruste');
+
 
 insert into tutkintotaso(nimi, kuvaus) values
   ('erikoisammattitutkinto', 'erikoisammattitutkinto'),
@@ -339,9 +365,5 @@ create unique index ak_yksikasitteinen_jarjestys on arvioinnin_kohde(arvioinnink
 
 -- eheysrajoitteita tutkintoihin liittyen
 create unique index t_osa_yksikasitteinen_jarjestys on tutkinto_ja_tutkinnonosa(tutkinto, tutkinnonosa,jarjestys);
-
-
-
-
 
 
