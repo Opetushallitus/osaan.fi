@@ -19,7 +19,7 @@ angular.module('osaan.direktiivit.kielen-vaihto', [])
   .directive('kielenVaihto', [function() {
     return {
       restrict: 'E',
-      template: '<a ng-click="asetaKieli(\'fi\')" ng-if="kieli !== \'fi\'">Suomeksi</a> <a ng-click="asetaKieli(\'sv\')" ng-if="kieli !== \'sv\'">På svenska</a>',
+      template: '<div class="kielen-vaihto"><a ng-click="asetaKieli(\'fi\')" ng-if="kieli !== \'fi\'">Suomeksi</a> <a ng-click="asetaKieli(\'sv\')" ng-if="kieli !== \'sv\'">På svenska</a></div>',
       controller: ['$scope', '$window', 'kieli', function($scope, $window, kieli) {
         $scope.kieli = kieli;
 

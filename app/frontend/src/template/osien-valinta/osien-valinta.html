@@ -1,19 +1,40 @@
-<h2 translate="osien-valinta.pakolliset_osat"></h2>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Valitse tutkinnon osat jotka haluat arvioida</h3>
+  </div>
+  <div class="panel-body">
 
-<div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: true}">
-  <label>
-    <input type="checkbox" ng-model="valinnat[osa.tutkinnonosatunnus]">
-    {{ osa | lokalisoiKentta:'nimi' }}
-  </label>
+    <h2>Automaalarimestarin erikoisammattitutkinto</h2>
+
+    <h3 translate="osien-valinta.pakolliset_osat"></h3>
+    <div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: true}">
+      <label>
+        <input type="checkbox" ng-model="valinnat[osa.tutkinnonosatunnus]" ng-click="isValinnatempty()">
+        {{ osa | lokalisoiKentta:'nimi' }}
+      </label>
+    </div>
+
+    <h3 translate="osien-valinta.valinnaiset_osat"></h3>
+    <div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: false}">
+      <label>
+        <input type="checkbox" ng-model="valinnat[osa.tutkinnonosatunnus]" ng-click="isValinnatempty()">
+        {{ osa | lokalisoiKentta:'nimi' }}
+      </label>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-primary pull-right" href="#" ng-click="eteenpain()" role="button">
+          Arvioi osaaminen &nbsp;
+          <span class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true"></span>
+        </button>
+
+        <a class="btn btn-primary pull-left" href="#/" role="button">
+          <span class="glyphicon glyphicon-arrow-left pull-left" aria-hidden="true"></span>&nbsp;
+          Valitse tutkinto
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
-
-<h2 translate="osien-valinta.valinnaiset_osat"></h2>
-
-<div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: false}">
-  <label>
-    <input type="checkbox" ng-model="valinnat[osa.tutkinnonosatunnus]">
-    {{ osa | lokalisoiKentta:'nimi' }}
-  </label>
-</div>
-
-<button ng-click="eteenpain()" translate="osien-valinta.eteenpain"></button>
