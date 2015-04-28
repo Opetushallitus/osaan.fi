@@ -20,11 +20,12 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
     $routeProvider
       .when('/osien-valinta', {
         controller: 'OsienValintaController',
-        templateUrl: 'template/osien-valinta/osien-valinta.html'
+        templateUrl: 'template/osien-valinta/osien-valinta.html',
+        label: "Valitse tutkinnon osat"
       });
   }])
 
-  .controller('OsienValintaController', ['$routeParams', '$scope', 'Tutkinnonosa', function($routeParams, $scope, Tutkinnonosa) {
+  .controller('OsienValintaController', ['$routeParams', '$scope', 'Tutkinnonosa', '$location', function($routeParams, $scope, Tutkinnonosa, $location) {
     var tutkintotunnus = $routeParams.tutkinto;
 
     $scope.valinnat = {};
@@ -37,6 +38,7 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
         .value();
 
       sessionStorage.setItem('tutkinnonosat', JSON.stringify(valinnat));
+      $location.url('/osien-valinta/arviointi');
     };
 
     Tutkinnonosa.hae(tutkintotunnus).then(function(tutkinnonosat) {

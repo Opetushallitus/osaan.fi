@@ -20,7 +20,7 @@
 </div>
 <![endif]-->
 <!--[if gte IE 9]><!-->
-<body>
+<body ng-controller="OsaanController">
   <noscript>
     <div class="top-alert">
       <p>Sivusto vaatii toimiakseen selaimen javascript-tuen päälle. Ole hyvä ja salli javascriptien/komentosarjojen ajo selaimessasi.</p>
@@ -32,11 +32,17 @@
     <header>
       <section class="app-wrapper">
         <a id="oph-logo" href="http://www.oph.fi"></a>
-        <a id="turre-logo" href="."></a>
-        <h1><a href="." translate="etusivu.otsikko"></a></h1>
+        <a id="turre-logo" href="#/"></a>
+        <h1><a href="#/" translate="etusivu.otsikko"></a></h1>
       </section>
     </header>
-    <section class="app-wrapper">
+    <section class="app-wrapper clearfix">
+      <ol class="ab-nav breadcrumb">
+        <li ng-repeat="breadcrumb in breadcrumbs.get() track by breadcrumb.path" ng-class="{ active: $last }">
+          <a ng-if="!$last" ng-href="#{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+          <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+        </li>
+      </ol>
       <kielen-vaihto></kielen-vaihto>
     </section>
     <section class="app-wrapper main-content" ng-view></section>
@@ -106,6 +112,7 @@
   <script src="js/direktiivit/ohje.js"></script>
   <script src="js/etusivu/etusivuui.js"></script>
   <script src="js/osien-valinta/osien-valintaui.js"></script>
+  <script src="js/arviointi/arviointiui.js"></script>
   <script src="js/rest/koulutusala.js"></script>
   <script src="js/rest/ohje.js"></script>
   <script src="js/rest/tutkinnonosa.js"></script>

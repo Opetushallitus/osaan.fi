@@ -14,25 +14,18 @@
 
 'use strict';
 
-angular.module('osaan.fi', [
-  'ng-breadcrumbs',
-  'ngRoute',
-  'taiPlaceholder',
-  'ui.bootstrap',
+angular.module('osaan.arviointi.arviointiui', ['ngRoute'])
 
-  'yhteiset.palvelut.lokalisointi',
+  .config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+      .when('/osien-valinta/arviointi', {
+        controller: 'ArviointiController',
+        templateUrl: 'template/arviointi/arviointi.html',
+        label: 'Arvioi osaaminen'
+      });
+  }])
 
-  'osaan.etusivu.etusivuui',
-  'osaan.direktiivit.kielen-vaihto',
-  'osaan.direktiivit.ohje',
-  'osaan.osien-valinta.osien-valintaui',
-  'osaan.arviointi.arviointiui',
-  'osaan.rest.koulutusala',
-  'osaan.rest.tutkinnonosa',
-  'osaan.rest.tutkinto',
-  'osaan.tekstit']).
-
-  controller('OsaanController', ['$scope', 'breadcrumbs', function($scope, breadcrumbs){
-    $scope.breadcrumbs = breadcrumbs;
+  .controller('ArviointiController', ['$routeParams', '$scope', 'Tutkinnonosa', function($routeParams, $scope, Tutkinnonosa) {
+    var tutkintotunnus = $routeParams.tutkinto;
   }])
 ;
