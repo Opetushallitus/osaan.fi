@@ -21,7 +21,7 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
       .when('/osien-valinta', {
         controller: 'OsienValintaController',
         templateUrl: 'template/osien-valinta/osien-valinta.html',
-        label: "Valitse tutkinnon osat"
+        label: 'Valitse tutkinnon osat'
       });
   }])
 

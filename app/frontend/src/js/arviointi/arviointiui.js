@@ -25,7 +25,5 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute'])
       });
   }])
 
-  .controller('ArviointiController', ['$routeParams', '$scope', 'Tutkinnonosa', function($routeParams, $scope, Tutkinnonosa) {
-    var tutkintotunnus = $routeParams.tutkinto;
-  }])
+  .controller('ArviointiController', [function() {}])
 ;
