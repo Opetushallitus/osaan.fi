@@ -19,7 +19,9 @@
             [clojure.repl :refer :all]
             [clojure.tools.namespace.repl :as nsr]
             [clj-http.client :as hc]
-            schema.core))
+            schema.core
+
+            [osaan.infra.kayttaja.sql :refer [with-sql-kayttaja]]))
 
 (schema.core/set-fn-validation! true)
 
@@ -61,3 +63,7 @@
   (when @palvelin
     (sammuta!))
   (nsr/refresh :after 'user/kaynnista!))
+
+(defmacro with-testikayttaja [& body]
+  `(with-sql-kayttaja "JARJESTELMA"
+     ~@body))
