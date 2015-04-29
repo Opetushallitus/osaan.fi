@@ -15,3 +15,6 @@
 (ns osaan.infra.sql.korma
   (:require [korma.core :as sql]
             [oph.korma.common :refer [defentity]]))
+
+(defentity tutkinto
+  (sql/pk :tutkintotunnus))
