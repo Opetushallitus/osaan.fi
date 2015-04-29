@@ -21,7 +21,7 @@ values ('INTEGRAATIO', 'Integraatio', '', true, current_timestamp, current_times
 
 
 create table koulutusala (
-    koulutusala_tkkoodi varchar(3) not null primary key,
+    koulutusalatunnus varchar(3) not null primary key,
     nimi_fi text not null,
     nimi_sv text,
     nimi_en text,
@@ -35,8 +35,8 @@ create table koulutusala (
 
 
 create table opintoala (
-    opintoala_tkkoodi varchar(3) not null primary key,
-    koulutusala_tkkoodi varchar(3) not null references koulutusala(koulutusala_tkkoodi),
+    opintoalatunnus varchar(3) not null primary key,
+    koulutusala varchar(3) not null references koulutusala(koulutusalatunnus),
     nimi_fi text not null,
     nimi_sv text,
     nimi_en text,
@@ -110,7 +110,7 @@ create table tutkintotyyppi (
 
 create table tutkinto (
     tutkintotunnus varchar(6) NOT NULL primary key,
-    opintoala varchar(3) not null references opintoala(opintoala_tkkoodi),
+    opintoala varchar(3) not null references opintoala(opintoalatunnus),
     nimi_fi text not null,
     nimi_sv text,
     voimassa_alkupvm date NOT NULL,

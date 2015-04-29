@@ -3,8 +3,8 @@ set session osaan.kayttaja='JARJESTELMA';
 insert into kayttaja(oid, etunimi, sukunimi, voimassa, muutettuaika, luotuaika, luotu_kayttaja, muutettu_kayttaja)
 values ('SAMPO', 'Seppo', 'Ilmarinen', true, current_timestamp, current_timestamp, 'JARJESTELMA', 'JARJESTELMA');
 
-insert into koulutusala(koulutusala_tkkoodi, nimi_fi,nimi_sv, voimassa_alkupvm) values ('6', 'Kulttuuriala', 'Kultur', to_date('1997-01-01', 'YYYY-MM-DD'));
-insert into opintoala (opintoala_tkkoodi, koulutusala_tkkoodi, nimi_fi, nimi_sv, voimassa_alkupvm)
+insert into koulutusala(koulutusalatunnus, nimi_fi,nimi_sv, voimassa_alkupvm) values ('6', 'Kulttuuriala', 'Kultur', to_date('1997-01-01', 'YYYY-MM-DD'));
+insert into opintoala (opintoalatunnus, koulutusala, nimi_fi, nimi_sv, voimassa_alkupvm)
  values ('202', '6', 'Viestintä ja informaatiotieteet', 
  'Mediekultur och informationsvetenskaper',
  to_date('1997-01-01', 'YYYY-MM-DD'));

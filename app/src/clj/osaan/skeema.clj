@@ -17,9 +17,9 @@
 
 (def Opintoala {:opintoala_nimi_fi s/Str
                 :opintoala_nimi_sv s/Str
-                :opintoala_tkkoodi s/Str})
+                :opintoalatunnus s/Str})
 
-(def Koulutusala {:koulutusala_tkkoodi s/Str
+(def Koulutusala {:koulutusalatunnus s/Str
                   :koulutusala_nimi_fi s/Str
                   :koulutusala_nimi_sv s/Str
                   :opintoalat [Opintoala]})
@@ -30,7 +30,7 @@
                :tutkintotaso s/Str
                :opintoala_nimi_fi s/Str
                :opintoala_nimi_sv s/Str
-               :opintoala_tkkoodi s/Str})
+               :opintoalatunnus s/Str})
 
 (def Tutkinnonosa {:nimi_fi s/Str
                    :nimi_sv s/Str
