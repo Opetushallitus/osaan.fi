@@ -12,16 +12,28 @@
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; European Union Public Licence for more details.
 
-(ns osaan.infra.sql.korma
+(ns osaan.arkisto.opintoala
   (:require [korma.core :as sql]
-            [oph.korma.common :refer [defentity]]))
+            [osaan.infra.sql.korma :as taulut]))
 
-(declare tutkinto opintoala)
+(defn ^:integration-api lisaa!
+  [tiedot]
+  (sql/insert taulut/opintoala
+    (sql/values tiedot)))
 
-(defentity tutkinto
-  (sql/pk :tutkintotunnus)
-  (sql/belongs-to opintoala {:fk :opintoala}))
+(defn ^:integration-api paivita!
+  [opintoalatunnus tiedot]
+  (sql/update taulut/opintoala
+    (sql/set-fields tiedot)
+    (sql/where {:opintoalatunnus opintoalatunnus})))
 
-(defentity opintoala
-  (sql/pk :opintoalatunnus)
-  (sql/has-many tutkinto {:fk :opintoala}))
+(defn hae-kaikki
+  []
+  (sql/select taulut/opintoala
+    (sql/order :opintoalatunnus)))
+
+(defn hae
+  [opintoalatunnus]
+  (first
+    (sql/select taulut/opintoala
+      (sql/where {:opintoalatunnus opintoalatunnus}))))
