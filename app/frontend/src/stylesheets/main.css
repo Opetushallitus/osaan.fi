@@ -1,0 +1,1544 @@
+@charset "UTF-8";
+/* YHTEISET
+----------------------------------------------------------------------------- */
+/* YHTEISET TYYLIT (AITU, AITUHAKU JA AIPAL)
+----------------------------------------------------------------------------- */
+/* line 7, ../sass/yhteiset/_typography.scss */
+body {
+  font-family: "Open Sans", "Arial", sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  color: #4d4d4d;
+}
+
+/* line 14, ../sass/yhteiset/_typography.scss */
+p {
+  margin-bottom: 12px;
+  line-height: 24px;
+}
+
+/* line 19, ../sass/yhteiset/_typography.scss */
+h1 {
+  font-family: "Open Sans Condensed", "Arial", sans-serif;
+  font-weight: 700;
+  font-size: 2.14em;
+  line-height: 48px;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+/* line 28, ../sass/yhteiset/_typography.scss */
+h2 {
+  font-family: "Open Sans Condensed", "Arial", sans-serif;
+  margin-bottom: 12px;
+  font-weight: 300;
+  font-size: 1.7em;
+  text-transform: uppercase;
+  color: gray;
+}
+
+/* line 37, ../sass/yhteiset/_typography.scss */
+h3 {
+  font-family: "Open Sans Condensed", "Arial", sans-serif;
+  margin-bottom: 6px;
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+/* line 44, ../sass/yhteiset/_typography.scss */
+label {
+  font-size: 1em;
+  font-family: "Open Sans", "Arial", sans-serif;
+  font-weight: 300;
+}
+/* line 48, ../sass/yhteiset/_typography.scss */
+label input {
+  font-weight: normal;
+}
+
+/* line 53, ../sass/yhteiset/_typography.scss */
+a {
+  color: #107ea2;
+  text-decoration: none;
+}
+/* line 54, ../sass/yhteiset/_typography.scss */
+a:not(.ajax-link)[href=""] {
+  color: #4d4d4d;
+  cursor: default;
+}
+/* line 58, ../sass/yhteiset/_typography.scss */
+a.show-more:before {
+  content: "[";
+}
+/* line 59, ../sass/yhteiset/_typography.scss */
+a.show-more:after {
+  content: "]";
+}
+/* line 61, ../sass/yhteiset/_typography.scss */
+a:hover {
+  color: #083f51;
+  text-decoration: underline;
+}
+/* line 64, ../sass/yhteiset/_typography.scss */
+.pagination a:hover, .tutkintovalitsin a:hover {
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"), url("../font/opensans.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Open Sans Bold"), local("OpenSans-Bold"), url("../font/opensans-bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Open Sans Condensed';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Open Sans Cond Light"), local("OpenSans-CondensedLight"), url("../font/opensans-condensed-light.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Open Sans Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Open Sans Condensed Bold"), local("OpenSans-CondensedBold"), url("../font/opensans-condensed-bold.woff") format("woff");
+}
+
+/* Override bootstrap icons default font-path. fonts -> font */
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url("../font/glyphicons-halflings-regular.eot");
+  src: url("../font/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../font/glyphicons-halflings-regular.woff") format("woff"), url("../font/glyphicons-halflings-regular.ttf") format("truetype"), url("../font/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+}
+
+/* Voidaan käyttää elementissä, jonka perään hakutaan ikoni. Ei tarvitse erillistä dom elementtiä ikonille.
+Esim: @include icon-after(11px, 11px){@include user-icon;}; */
+/* Ikonimääritykset */
+/* Näitä luokkia voidaan käyttää kun halutaan ikoni erilliseen dom-elementtiinsä.
+Esim: <div class="icon user-icon"></div> */
+/* line 199, ../sass/yhteiset/_icons.scss */
+.icon.user-icon {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 17px;
+  height: 16px;
+  background-position: 0 -200px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .icon.user-icon {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 202, ../sass/yhteiset/_icons.scss */
+.icon.edit-icon {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 22px;
+  height: 22px;
+  background-position: 0 -750px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .icon.edit-icon {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 13, ../sass/yhteiset/_icons.scss */
+.icon.edit-icon:hover {
+  background-position: 0 -800px;
+}
+/* line 205, ../sass/yhteiset/_icons.scss */
+.icon.add-icon {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 18px;
+  height: 18px;
+  background-position: 0 -1150px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .icon.add-icon {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 13, ../sass/yhteiset/_icons.scss */
+.icon.add-icon:hover {
+  background-position: 0 -1200px;
+}
+/* line 208, ../sass/yhteiset/_icons.scss */
+.icon.delete-icon {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 16px;
+  height: 16px;
+  background-position: 0 -1250px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .icon.delete-icon {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 13, ../sass/yhteiset/_icons.scss */
+.icon.delete-icon:hover {
+  background-position: 0 -1300px;
+}
+/* line 211, ../sass/yhteiset/_icons.scss */
+.icon.calendar-icon {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 18px;
+  height: 18px;
+  background-position: 0 -1050px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .icon.calendar-icon {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 13, ../sass/yhteiset/_icons.scss */
+.icon.calendar-icon:hover {
+  background-position: 0 -1100px;
+}
+/* line 214, ../sass/yhteiset/_icons.scss */
+.icon.remove-icon-small {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 12px;
+  height: 12px;
+  background-position: 0 -1500px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .icon.remove-icon-small {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 217, ../sass/yhteiset/_icons.scss */
+.icon.expand-icon-small {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 8px;
+  height: 5px;
+  background-position: 0 -650px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .icon.expand-icon-small {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 220, ../sass/yhteiset/_icons.scss */
+.icon.expand-icon-small-white {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 8px;
+  height: 5px;
+  background-position: 0 -650px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .icon.expand-icon-small-white {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 223, ../sass/yhteiset/_icons.scss */
+.icon.collapse-icon-small {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 8px;
+  height: 5px;
+  background-position: 0 -600px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .icon.collapse-icon-small {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+
+/* Nappi jossa ikoni oikeassa reunassa */
+/* line 229, ../sass/yhteiset/_icons.scss */
+button.button-with-icon {
+  padding-right: 50px;
+}
+/* line 21, ../sass/yhteiset/_icons.scss */
+button.button-with-icon.add-user-icon:after {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 26px;
+  height: 16px;
+  background-position: 0 -250px;
+  content: "";
+  position: absolute;
+  margin-top: 2px;
+  margin-left: 10px;
+  z-index: 1;
+  background-repeat: no-repeat;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg button.button-with-icon.add-user-icon:after {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+
+/* line 1, ../sass/yhteiset/_buttons.scss */
+button {
+  background-color: #107ea2;
+  color: white;
+  border-radius: 0;
+  border: none;
+  height: 36px;
+  box-shadow: none;
+  /* margin: $marginS $marginL $marginS 0; */
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1em;
+  font-family: "Open Sans", "Arial", sans-serif;
+}
+/* line 14, ../sass/yhteiset/_buttons.scss */
+button:hover {
+  background-color: #083f51;
+}
+
+/* line 17, ../sass/yhteiset/_buttons.scss */
+button:disabled {
+  opacity: 0.5;
+  background-color: #107ea2;
+}
+
+/* line 1, ../sass/yhteiset/_forms.scss */
+select {
+  height: 28px;
+}
+
+/* line 5, ../sass/yhteiset/_forms.scss */
+form {
+  margin-bottom: 24px;
+}
+
+/* line 9, ../sass/yhteiset/_forms.scss */
+label {
+  margin-bottom: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+/* line 14, ../sass/yhteiset/_forms.scss */
+label ~ p, label ~ input, label ~ a {
+  display: block;
+}
+
+/* line 17, ../sass/yhteiset/_forms.scss */
+input[type="text"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 2px 5px;
+  vertical-align: top;
+}
+/* line 20, ../sass/yhteiset/_forms.scss */
+input[type="text"]:focus {
+  border-color: #042029;
+}
+
+/* line 24, ../sass/yhteiset/_forms.scss */
+.placeholder {
+  color: #aaa;
+}
+
+/* line 26, ../sass/yhteiset/_forms.scss */
+fieldset {
+  border: 0;
+  padding: 0;
+  position: relative;
+  display: inline-block;
+  width: 30%;
+  margin: 0 6px 12px 0;
+  vertical-align: top;
+}
+/* line 34, ../sass/yhteiset/_forms.scss */
+fieldset.select2-fieldset {
+  vertical-align: bottom;
+}
+/* line 38, ../sass/yhteiset/_forms.scss */
+fieldset input, fieldset p, fieldset select {
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  display: inline-block;
+  padding: 2px 0;
+}
+/* line 45, ../sass/yhteiset/_forms.scss */
+fieldset input.icon, fieldset p.icon, fieldset select.icon {
+  padding: 0;
+  background-color: transparent;
+  vertical-align: middle;
+}
+/* line 50, ../sass/yhteiset/_forms.scss */
+fieldset input[type=checkbox], fieldset input[type=radio], fieldset p[type=checkbox], fieldset p[type=radio], fieldset select[type=checkbox], fieldset select[type=radio] {
+  width: 18px;
+  background: white;
+  margin: 0 6px 0 0;
+  border: 0;
+  vertical-align: middle;
+}
+/* line 59, ../sass/yhteiset/_forms.scss */
+fieldset textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100px;
+  padding: 5px;
+}
+/* line 66, ../sass/yhteiset/_forms.scss */
+fieldset input {
+  padding-left: 2px;
+}
+/* line 68, ../sass/yhteiset/_forms.scss */
+fieldset input, fieldset select {
+  border: 1px solid #107ea2;
+}
+/* line 71, ../sass/yhteiset/_forms.scss */
+fieldset select {
+  height: 36px;
+  font-size: 1em;
+}
+/* line 77, ../sass/yhteiset/_forms.scss */
+fieldset.lisatiedot p {
+  padding: 0;
+}
+
+/* line 83, ../sass/yhteiset/_forms.scss */
+.select2-container .select2-container-multi .select2-results {
+  width: 50%;
+  display: block;
+}
+/* line 87, ../sass/yhteiset/_forms.scss */
+.select2-container .select2-container-multi .select2-results a, .select2-container .select2-container-multi .select2-results ul {
+  border: 1px solid #107ea2;
+  background-color: white;
+  border-radius: 0;
+}
+
+/* line 94, ../sass/yhteiset/_forms.scss */
+.checkbox-pair {
+  display: block;
+}
+/* line 96, ../sass/yhteiset/_forms.scss */
+.checkbox-pair label {
+  display: inline;
+  width: 30%;
+}
+/* line 100, ../sass/yhteiset/_forms.scss */
+.checkbox-pair input[type=checkbox] {
+  display: inline;
+  margin: 12px 6px 0 0;
+  width: 18px;
+}
+
+/* line 107, ../sass/yhteiset/_forms.scss */
+.search-field {
+  width: 30%;
+  display: block;
+}
+/* line 110, ../sass/yhteiset/_forms.scss */
+.search-field input {
+  width: 100%;
+}
+
+/* line 113, ../sass/yhteiset/_forms.scss */
+.datepicker-dropdown {
+  position: absolute;
+  border: 1px solid #b3b3b3;
+  background-color: #ffffff;
+}
+/* line 118, ../sass/yhteiset/_forms.scss */
+.datepicker-dropdown:before {
+  border-bottom-color: #b3b3b3 !important;
+}
+/* line 124, ../sass/yhteiset/_forms.scss */
+.datepicker-dropdown td.day.active,
+.datepicker-dropdown td.day.active:hover,
+.datepicker-dropdown span.month.active,
+.datepicker-dropdown span.month.active:hover {
+  background-image: none !important;
+  background-color: #107ea2 !important;
+}
+/* line 125, ../sass/yhteiset/_forms.scss */
+.datepicker-dropdown td, .datepicker-dropdown th {
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+/* line 126, ../sass/yhteiset/_forms.scss */
+.datepicker-dropdown table tr td span {
+  width: 30% !important;
+  height: 25px !important;
+  line-height: 25px !important;
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+/* line 127, ../sass/yhteiset/_forms.scss */
+.datepicker-dropdown .datepicker-months th.switch {
+  cursor: default !important;
+}
+/* line 128, ../sass/yhteiset/_forms.scss */
+.datepicker-dropdown .datepicker-months th.switch:hover {
+  background: none !important;
+}
+/* line 130, ../sass/yhteiset/_forms.scss */
+.datepicker-dropdown th.prev:hover, .datepicker-dropdown th.next:hover {
+  background: none !important;
+}
+/* line 131, ../sass/yhteiset/_forms.scss */
+.datepicker-dropdown th.prev:before {
+  content: "<";
+}
+/* line 132, ../sass/yhteiset/_forms.scss */
+.datepicker-dropdown th.next:before {
+  content: ">";
+}
+
+/* line 137, ../sass/yhteiset/_forms.scss */
+fieldset.datepicker-field input {
+  width: 92%;
+  display: inline;
+}
+/* line 138, ../sass/yhteiset/_forms.scss */
+fieldset.datepicker-field .open-datepicker {
+  margin-top: -28px;
+  margin-left: 92%;
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  background-color: #107ea2;
+  width: 29px;
+  height: 28px;
+  background-position: 5px -1046px;
+}
+/* line 149, ../sass/yhteiset/_forms.scss */
+fieldset.datepicker-field .open-datepicker:hover {
+  background-color: #083f51;
+  background-position: 5px -1046px;
+}
+
+/* line 156, ../sass/yhteiset/_forms.scss */
+.fieldset-table {
+  display: table;
+  width: 100%;
+}
+/* line 157, ../sass/yhteiset/_forms.scss */
+.fieldset-table fieldset {
+  width: 90%;
+}
+
+/* line 160, ../sass/yhteiset/_forms.scss */
+.select2-fieldset .select2-container .select2-choice .select2-arrow {
+  filter: none;
+  background-image: none;
+  background-color: #107ea2;
+  width: 25px;
+  border: 0;
+}
+/* line 166, ../sass/yhteiset/_forms.scss */
+.select2-fieldset .select2-container .select2-choice .select2-arrow b {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 8px;
+  height: 5px;
+  background-position: 0 -1550px;
+  margin-top: 10px;
+  margin-left: 9px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .select2-fieldset .select2-container .select2-choice .select2-arrow b {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+
+/* line 173, ../sass/yhteiset/_forms.scss */
+.select2-fieldset .select2-container.select2-dropdown-open .select2-choice .select2-arrow {
+  background-color: transparent;
+}
+/* line 175, ../sass/yhteiset/_forms.scss */
+.select2-fieldset .select2-container.select2-dropdown-open .select2-choice .select2-arrow b {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 8px;
+  height: 5px;
+  background-position: 0 -600px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .select2-fieldset .select2-container.select2-dropdown-open .select2-choice .select2-arrow b {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+
+/* line 179, ../sass/yhteiset/_forms.scss */
+.select2-container a.select2-choice, .select2-container-active a.select2-choice, .select2-container-multi ul.select2-choices {
+  background-image: none;
+  filter: none;
+  background-color: transparent;
+  border: 1px solid #107ea2;
+  color: #000000;
+}
+
+/* line 186, ../sass/yhteiset/_forms.scss */
+.select2-container a.select2-choice, .select2-container-active a.select2-choice, .select2-drop, .select2-arrow {
+  -webkit-border-radius: 0 0 0 0 !important;
+  -moz-border-radius: 0 0 0 0 !important;
+  border-radius: 0 0 0 0 !important;
+}
+
+/* line 189, ../sass/yhteiset/_forms.scss */
+.select2-drop.select2-drop-multi {
+  border-top: 1px solid;
+}
+
+/* line 193, ../sass/yhteiset/_forms.scss */
+.select2-container-active a.select2-choice, .select2-drop {
+  border-color: #083f51 !important;
+}
+/* line 195, ../sass/yhteiset/_forms.scss */
+.select2-container-active a.select2-choice li.select2-no-results, .select2-container-active a.select2-choice li.select2-searching, .select2-drop li.select2-no-results, .select2-drop li.select2-searching {
+  background-color: transparent !important;
+}
+
+/* line 199, ../sass/yhteiset/_forms.scss */
+.select2-result:nth-child(2n) {
+  background-color: #f2f2f2;
+}
+/* line 200, ../sass/yhteiset/_forms.scss */
+.select2-result.select2-highlighted {
+  background-color: #107ea2 !important;
+}
+
+/* line 206, ../sass/yhteiset/_forms.scss */
+.tyhja-:empty:after {
+  /*
+    Oikeasti haluttiin sis��ll��ksi vain {content: "-";}, mutta tietyiss�� tilanteissa IE9 kaatui em. ratkaisuun,
+    joten kierettiin ongelma ao. tyylill��.
+  */
+  width: 4px;
+  height: 1px;
+  background-color: #4d4d4d;
+  display: inline-block;
+  vertical-align: middle;
+  content: "";
+}
+
+/* line 1, ../sass/yhteiset/_tables.scss */
+table:not(.table-condensed), .table {
+  border-collapse: collapse;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+/* line 9, ../sass/yhteiset/_tables.scss */
+table:not(.table-condensed).full-width, .table.full-width {
+  width: 100%;
+}
+/* line 13, ../sass/yhteiset/_tables.scss */
+table:not(.table-condensed) thead tr, table:not(.table-condensed) .table-header, .table thead tr, .table .table-header {
+  border-bottom: 1px solid #999999;
+  border-top: 1px solid #999999;
+  background: #b3b3b3;
+}
+/* line 18, ../sass/yhteiset/_tables.scss */
+table:not(.table-condensed) thead tr th, table:not(.table-condensed) thead tr .table-cell, table:not(.table-condensed) .table-header th, table:not(.table-condensed) .table-header .table-cell, .table thead tr th, .table thead tr .table-cell, .table .table-header th, .table .table-header .table-cell {
+  padding: 6px 12px;
+  font-weight: bold;
+  max-width: 20%;
+  text-align: left;
+  vertical-align: bottom;
+}
+/* line 25, ../sass/yhteiset/_tables.scss */
+table:not(.table-condensed) thead tr th:last-child, table:not(.table-condensed) thead tr .table-cell:last-child, table:not(.table-condensed) .table-header th:last-child, table:not(.table-condensed) .table-header .table-cell:last-child, .table thead tr th:last-child, .table thead tr .table-cell:last-child, .table .table-header th:last-child, .table .table-header .table-cell:last-child {
+  max-width: 80%;
+}
+/* line 28, ../sass/yhteiset/_tables.scss */
+table:not(.table-condensed) thead tr th.sortable, table:not(.table-condensed) thead tr .table-cell.sortable, table:not(.table-condensed) .table-header th.sortable, table:not(.table-condensed) .table-header .table-cell.sortable, .table thead tr th.sortable, .table thead tr .table-cell.sortable, .table .table-header th.sortable, .table .table-header .table-cell.sortable {
+  cursor: pointer;
+  padding-right: 25px;
+}
+/* line 31, ../sass/yhteiset/_tables.scss */
+table:not(.table-condensed) thead tr th.sortable .sort-icon, table:not(.table-condensed) thead tr .table-cell.sortable .sort-icon, table:not(.table-condensed) .table-header th.sortable .sort-icon, table:not(.table-condensed) .table-header .table-cell.sortable .sort-icon, .table thead tr th.sortable .sort-icon, .table thead tr .table-cell.sortable .sort-icon, .table .table-header th.sortable .sort-icon, .table .table-header .table-cell.sortable .sort-icon {
+  display: inline-block;
+  position: absolute;
+  margin-left: 10px;
+  margin-top: 6px;
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 8px;
+  height: 12px;
+  background-position: 0 -700px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg table:not(.table-condensed) thead tr th.sortable .sort-icon, .no-svg table:not(.table-condensed) thead tr .table-cell.sortable .sort-icon, .no-svg table:not(.table-condensed) .table-header th.sortable .sort-icon, .no-svg table:not(.table-condensed) .table-header .table-cell.sortable .sort-icon, .no-svg .table thead tr th.sortable .sort-icon, .no-svg .table thead tr .table-cell.sortable .sort-icon, .no-svg .table .table-header th.sortable .sort-icon, .no-svg .table .table-header .table-cell.sortable .sort-icon {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 37, ../sass/yhteiset/_tables.scss */
+table:not(.table-condensed) thead tr th.sortable .sort-icon.sortby, table:not(.table-condensed) thead tr .table-cell.sortable .sort-icon.sortby, table:not(.table-condensed) .table-header th.sortable .sort-icon.sortby, table:not(.table-condensed) .table-header .table-cell.sortable .sort-icon.sortby, .table thead tr th.sortable .sort-icon.sortby, .table thead tr .table-cell.sortable .sort-icon.sortby, .table .table-header th.sortable .sort-icon.sortby, .table .table-header .table-cell.sortable .sort-icon.sortby {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 8px;
+  height: 5px;
+  background-position: 0 -650px;
+  margin-top: 10px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg table:not(.table-condensed) thead tr th.sortable .sort-icon.sortby, .no-svg table:not(.table-condensed) thead tr .table-cell.sortable .sort-icon.sortby, .no-svg table:not(.table-condensed) .table-header th.sortable .sort-icon.sortby, .no-svg table:not(.table-condensed) .table-header .table-cell.sortable .sort-icon.sortby, .no-svg .table thead tr th.sortable .sort-icon.sortby, .no-svg .table thead tr .table-cell.sortable .sort-icon.sortby, .no-svg .table .table-header th.sortable .sort-icon.sortby, .no-svg .table .table-header .table-cell.sortable .sort-icon.sortby {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 38, ../sass/yhteiset/_tables.scss */
+table:not(.table-condensed) thead tr th.sortable .sort-icon.sortby-reverse, table:not(.table-condensed) thead tr .table-cell.sortable .sort-icon.sortby-reverse, table:not(.table-condensed) .table-header th.sortable .sort-icon.sortby-reverse, table:not(.table-condensed) .table-header .table-cell.sortable .sort-icon.sortby-reverse, .table thead tr th.sortable .sort-icon.sortby-reverse, .table thead tr .table-cell.sortable .sort-icon.sortby-reverse, .table .table-header th.sortable .sort-icon.sortby-reverse, .table .table-header .table-cell.sortable .sort-icon.sortby-reverse {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 8px;
+  height: 5px;
+  background-position: 0 -600px;
+  margin-top: 10px;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg table:not(.table-condensed) thead tr th.sortable .sort-icon.sortby-reverse, .no-svg table:not(.table-condensed) thead tr .table-cell.sortable .sort-icon.sortby-reverse, .no-svg table:not(.table-condensed) .table-header th.sortable .sort-icon.sortby-reverse, .no-svg table:not(.table-condensed) .table-header .table-cell.sortable .sort-icon.sortby-reverse, .no-svg .table thead tr th.sortable .sort-icon.sortby-reverse, .no-svg .table thead tr .table-cell.sortable .sort-icon.sortby-reverse, .no-svg .table .table-header th.sortable .sort-icon.sortby-reverse, .no-svg .table .table-header .table-cell.sortable .sort-icon.sortby-reverse {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 43, ../sass/yhteiset/_tables.scss */
+table:not(.table-condensed) tbody tr, table:not(.table-condensed) .table-row, .table tbody tr, .table .table-row {
+  border-bottom: 1px solid #999999;
+  background: #e6e6e6;
+}
+/* line 47, ../sass/yhteiset/_tables.scss */
+table:not(.table-condensed) tbody tr:nth-child(odd), table:not(.table-condensed) .table-row:nth-child(odd), .table tbody tr:nth-child(odd), .table .table-row:nth-child(odd) {
+  background: white;
+}
+/* line 51, ../sass/yhteiset/_tables.scss */
+table:not(.table-condensed) tbody tr td, table:not(.table-condensed) tbody tr .table-cell, table:not(.table-condensed) .table-row td, table:not(.table-condensed) .table-row .table-cell, .table tbody tr td, .table tbody tr .table-cell, .table .table-row td, .table .table-row .table-cell {
+  padding: 6px 12px;
+  max-width: 20% !important;
+}
+
+/* line 58, ../sass/yhteiset/_tables.scss */
+.table {
+  display: table;
+}
+
+/* line 62, ../sass/yhteiset/_tables.scss */
+.table-row, .table-header {
+  display: table-row;
+}
+
+/* line 66, ../sass/yhteiset/_tables.scss */
+.table-cell {
+  display: table-cell;
+}
+/* line 69, ../sass/yhteiset/_tables.scss */
+.table-cell.align-center {
+  text-align: center;
+}
+/* line 73, ../sass/yhteiset/_tables.scss */
+.table-cell.align-right {
+  text-align: right;
+}
+
+/* line 79, ../sass/yhteiset/_tables.scss */
+table.few-columns th {
+  width: 22%;
+}
+/* line 81, ../sass/yhteiset/_tables.scss */
+table.few-columns th:last-child {
+  width: 80%;
+}
+
+/* line 87, ../sass/yhteiset/_tables.scss */
+.table-add {
+  margin-top: 12px;
+}
+
+/* line 2, ../sass/yhteiset/_search.scss */
+.autocomplete {
+  position: absolute;
+  top: 30px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-left: 22%;
+  z-index: 10;
+  box-shadow: 2px 2px 0px gray;
+}
+/* line 11, ../sass/yhteiset/_search.scss */
+.autocomplete .ac-item {
+  padding: 6px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  display: block;
+}
+/* line 15, ../sass/yhteiset/_search.scss */
+.autocomplete .ac-item:hover {
+  background: #72c4e0;
+}
+/* line 18, ../sass/yhteiset/_search.scss */
+.autocomplete .ac-item:last-child {
+  border-bottom: none;
+}
+
+/* line 24, ../sass/yhteiset/_search.scss */
+.actions-container {
+  width: 10%;
+  float: right;
+  margin-right: 24px;
+}
+
+/* line 30, ../sass/yhteiset/_search.scss */
+.pagination {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 10px 0;
+  *zoom: 1;
+}
+/* line 21, ../sass/yhteiset/_mixins.scss */
+.pagination:before, .pagination:after {
+  content: "";
+  display: table;
+}
+/* line 25, ../sass/yhteiset/_mixins.scss */
+.pagination:after {
+  clear: both;
+}
+/* line 31, ../sass/yhteiset/_search.scss */
+.pagination li {
+  float: left;
+}
+/* line 32, ../sass/yhteiset/_search.scss */
+.pagination li:not(.disabled) a {
+  cursor: pointer !important;
+}
+/* line 34, ../sass/yhteiset/_search.scss */
+.pagination li:not(.disabled) a:hover {
+  background-color: #083f51;
+}
+/* line 36, ../sass/yhteiset/_search.scss */
+.pagination li a {
+  color: white !important;
+  background-color: #107ea2;
+  margin-right: 24px;
+  display: block;
+  padding: 3px 10px 3px 10px;
+}
+/* line 43, ../sass/yhteiset/_search.scss */
+.pagination li.disabled {
+  cursor: auto;
+}
+/* line 44, ../sass/yhteiset/_search.scss */
+.pagination li.disabled a {
+  background-color: #a1d8ea;
+}
+/* line 47, ../sass/yhteiset/_search.scss */
+.pagination li:first-child a {
+  padding-left: 50px;
+}
+/* line 28, ../sass/yhteiset/_icons.scss */
+.pagination li:first-child a:before {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 14px;
+  height: 15px;
+  background-position: 0 -150px;
+  content: "";
+  position: absolute;
+  margin-top: 5px;
+  margin-left: -35px;
+  z-index: 1;
+  background-repeat: no-repeat;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .pagination li:first-child a:before {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 52, ../sass/yhteiset/_search.scss */
+.pagination li:first-child + li a {
+  padding-left: 41px;
+}
+/* line 28, ../sass/yhteiset/_icons.scss */
+.pagination li:first-child + li a:before {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 10px;
+  height: 14px;
+  background-position: 0 -50px;
+  content: "";
+  position: absolute;
+  margin-top: 5px;
+  margin-left: -26px;
+  z-index: 1;
+  background-repeat: no-repeat;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .pagination li:first-child + li a:before {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 57, ../sass/yhteiset/_search.scss */
+.pagination li:first-child + li + li a {
+  padding-right: 41px;
+}
+/* line 21, ../sass/yhteiset/_icons.scss */
+.pagination li:first-child + li + li a:after {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 10px;
+  height: 14px;
+  background-position: 0 0px;
+  content: "";
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 20px;
+  z-index: 1;
+  background-repeat: no-repeat;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .pagination li:first-child + li + li a:after {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 62, ../sass/yhteiset/_search.scss */
+.pagination li:first-child + li + li + li a {
+  padding-right: 50px;
+}
+/* line 21, ../sass/yhteiset/_icons.scss */
+.pagination li:first-child + li + li + li a:after {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 14px;
+  height: 15px;
+  background-position: 0 -100px;
+  content: "";
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 20px;
+  z-index: 1;
+  background-repeat: no-repeat;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .pagination li:first-child + li + li + li a:after {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+
+/* line 68, ../sass/yhteiset/_search.scss */
+.search-results {
+  min-height: 550px;
+}
+
+/* line 72, ../sass/yhteiset/_search.scss */
+.list-controls {
+  float: right;
+  *zoom: 1;
+  margin-top: 24px;
+}
+/* line 21, ../sass/yhteiset/_mixins.scss */
+.list-controls:before, .list-controls:after {
+  content: "";
+  display: table;
+}
+/* line 25, ../sass/yhteiset/_mixins.scss */
+.list-controls:after {
+  clear: both;
+}
+/* line 73, ../sass/yhteiset/_search.scss */
+.list-controls button {
+  float: left;
+  vertical-align: middle;
+}
+
+/* line 76, ../sass/yhteiset/_search.scss */
+.loader {
+  background: white url("../img/ajax-loader.gif") center top no-repeat;
+  margin-left: auto;
+  margin-right: auto;
+  height: 66px;
+  text-align: center;
+  padding-top: 80px;
+  position: relative;
+  top: 150px;
+}
+
+/* line 83, ../sass/yhteiset/_search.scss */
+.loader-error {
+  text-align: center;
+  position: relative;
+  top: 150px;
+}
+
+/* line 89, ../sass/yhteiset/_search.scss */
+button.luo-uusi {
+  float: right;
+}
+
+/* line 91, ../sass/yhteiset/_search.scss */
+.loader {
+  top: 250px;
+}
+
+/* line 95, ../sass/yhteiset/_search.scss */
+form.search-form {
+  margin-bottom: 0;
+}
+
+/* line 99, ../sass/yhteiset/_search.scss */
+fieldset, .search-field {
+  width: 50%;
+}
+
+/* line 103, ../sass/yhteiset/_search.scss */
+input[type="text"] {
+  padding: 8px 20px 8px 5px !important;
+}
+
+/* line 105, ../sass/yhteiset/_search.scss */
+input[type="text"], a.select2-choice {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 36px !important;
+  font-size: 1em !important;
+  background-image: none !important;
+  border-radius: 5px;
+}
+
+/* line 113, ../sass/yhteiset/_search.scss */
+a.select2-choice {
+  padding-top: 4px !important;
+}
+
+/* line 115, ../sass/yhteiset/_search.scss */
+div.select2-container {
+  width: 100%;
+}
+
+/* line 119, ../sass/yhteiset/_search.scss */
+div.select2-container.select2-allowclear .select2-choice abbr {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 16px;
+  height: 16px;
+  background-position: 0 -1250px;
+  right: 45px !important;
+  top: 10px !important;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg div.select2-container.select2-allowclear .select2-choice abbr {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 13, ../sass/yhteiset/_icons.scss */
+div.select2-container.select2-allowclear .select2-choice abbr:hover {
+  background-position: 0 -1300px;
+}
+
+/* line 125, ../sass/yhteiset/_search.scss */
+div.select2-container.select2-dropdown-open .select2-choice abbr {
+  display: none;
+}
+
+/* line 129, ../sass/yhteiset/_search.scss */
+.select2-fieldset .select2-container .select2-choice .select2-arrow {
+  width: 36px !important;
+}
+/* line 131, ../sass/yhteiset/_search.scss */
+.select2-fieldset .select2-container .select2-choice .select2-arrow b {
+  margin-left: 14px;
+  margin-top: 15px;
+}
+
+/* line 137, ../sass/yhteiset/_search.scss */
+.table.hakutulokset div div:nth-child(1) {
+  width: 10%;
+  min-width: 100px;
+}
+
+/* line 142, ../sass/yhteiset/_search.scss */
+.table.hakutulokset div div:nth-child(2) {
+  width: 50%;
+  min-width: 200px;
+}
+
+/* line 147, ../sass/yhteiset/_search.scss */
+.table.hakutulokset div div:nth-child(3) {
+  width: 40%;
+  min-width: 200px;
+}
+
+/* line 152, ../sass/yhteiset/_search.scss */
+.table.hakutulokset .table-row:hover {
+  background-color: #D8D8D8 !important;
+}
+
+/* line 156, ../sass/yhteiset/_search.scss */
+.table.hakutulokset .table-row .table-cell {
+  cursor: pointer;
+}
+
+/* line 160, ../sass/yhteiset/_search.scss */
+.table.hakutulokset.print {
+  margin-top: 30px;
+}
+
+/* Bootstrap overrides */
+/* line 2, ../sass/yhteiset/_bootstrap.scss */
+.breadcrumb {
+  background-color: white;
+  margin: 0;
+  float: left;
+  padding-left: 0;
+}
+
+/* line 1, ../sass/yhteiset/_ohje.scss */
+.ohje {
+  position: relative;
+  display: inline-block;
+  font-family: "Open Sans", "Arial", sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  text-transform: none;
+  font-weight: normal;
+  float: right;
+  /* Ohjeen positiointi eri paikoissa */
+}
+/* line 15, ../sass/yhteiset/_ohje.scss */
+.ohje .avaa {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #107ea2;
+  width: 22px;
+  height: 22px;
+  margin: 0 10px;
+}
+/* line 21, ../sass/yhteiset/_icons.scss */
+.ohje .avaa:after {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 11px;
+  height: 14px;
+  background-position: 0 -300px;
+  content: "";
+  position: absolute;
+  margin-top: 4px;
+  margin-left: 5px;
+  z-index: 1;
+  background-repeat: no-repeat;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .ohje .avaa:after {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+/* line 26, ../sass/yhteiset/_ohje.scss */
+.ohje button.sulje {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}
+/* line 32, ../sass/yhteiset/_ohje.scss */
+.ohje .ohje-popup {
+  -moz-box-shadow: 2px 2px 8px -1px gray;
+  -webkit-box-shadow: 2px 2px 8px -1px gray;
+  box-shadow: 2px 2px 8px -1px gray;
+  z-index: 9999;
+  position: absolute;
+  border: 1px solid #b3b3b3;
+  background-color: white;
+  min-height: 100px;
+  padding: 22px 10px 20px 10px;
+  right: 37px;
+  top: 10px;
+  width: 400px;
+}
+/* line 43, ../sass/yhteiset/_ohje.scss */
+.ohje .ohje-popup.muokkaus {
+  width: 500px;
+  padding-bottom: 5px;
+}
+/* line 48, ../sass/yhteiset/_ohje.scss */
+.ohje .ohje-popup a {
+  position: absolute;
+  right: 3px;
+  bottom: 0;
+}
+/* line 53, ../sass/yhteiset/_ohje.scss */
+.ohje .ohje-popup fieldset {
+  display: block;
+  width: auto;
+  margin: 0;
+}
+/* line 58, ../sass/yhteiset/_ohje.scss */
+.ohje .ohje-popup textarea {
+  height: 150px;
+  margin-bottom: 10px;
+}
+/* line 63, ../sass/yhteiset/_ohje.scss */
+.ohje .ohje-popup button {
+  margin: 0;
+}
+/* line 68, ../sass/yhteiset/_ohje.scss */
+.ohje.right .ohje-popup {
+  left: 37px;
+  top: 6px;
+}
+/* line 74, ../sass/yhteiset/_ohje.scss */
+h1 .ohje {
+  float: right;
+  position: relative;
+  top: 13px;
+}
+/* line 80, ../sass/yhteiset/_ohje.scss */
+fieldset .ohje {
+  vertical-align: middle;
+  margin-bottom: 6px;
+}
+
+/* AITUHAUN PERUSTYYLIT
+----------------------------------------------------------------------------- */
+/* line 7, ../sass/partials/_footer.scss */
+footer > section {
+  color: #ffffff;
+}
+/* line 9, ../sass/partials/_footer.scss */
+footer > section > section {
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 13, ../sass/partials/_footer.scss */
+footer > section a {
+  color: #43b1d5;
+}
+/* line 16, ../sass/partials/_footer.scss */
+footer > section a:hover {
+  color: #72c4e0;
+}
+/* line 20, ../sass/partials/_footer.scss */
+footer .info {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 1px 0;
+  background-color: #333333;
+  height: auto;
+  min-height: 230px;
+}
+/* line 27, ../sass/partials/_footer.scss */
+footer .copyright {
+  background-color: #1a1a1a;
+}
+/* line 29, ../sass/partials/_footer.scss */
+footer .copyright .vertical-wrapper {
+  height: 80px;
+  display: table-cell;
+  vertical-align: middle;
+}
+/* line 35, ../sass/partials/_footer.scss */
+footer .copyright .app-wrapper {
+  background: url("../img/oph_logo_footer.svg") right 15px center no-repeat;
+}
+/* line 37, ../sass/partials/_footer.scss */
+.no-svg footer .copyright .app-wrapper {
+  background-image: url("../img/oph_logo_footer.png");
+}
+
+/* line 1, ../sass/partials/_base.scss */
+html {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  height: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+/* line 9, ../sass/partials/_base.scss */
+html, body, #page-container {
+  height: 100%;
+}
+
+/* line 13, ../sass/partials/_base.scss */
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 19, ../sass/partials/_base.scss */
+body > #page-container {
+  height: auto;
+  min-height: 100%;
+}
+
+/* line 24, ../sass/partials/_base.scss */
+header {
+  height: 120px;
+  background-color: #e1e1e1;
+}
+/* line 27, ../sass/partials/_base.scss */
+header .app-wrapper {
+  background: transparent url("../img/aitu-bg.png") 0 -30px no-repeat;
+  height: 100%;
+}
+/* line 30, ../sass/partials/_base.scss */
+header .app-wrapper a, header .app-wrapper h1 {
+  display: inline-block;
+  vertical-align: middle;
+}
+/* line 34, ../sass/partials/_base.scss */
+header .app-wrapper a {
+  border: 0;
+  text-decoration: none;
+}
+/* line 37, ../sass/partials/_base.scss */
+header .app-wrapper a:hover {
+  color: #107ea2;
+}
+/* line 41, ../sass/partials/_base.scss */
+header .app-wrapper h1 {
+  white-space: nowrap;
+}
+
+/* line 47, ../sass/partials/_base.scss */
+a {
+  cursor: pointer;
+}
+
+/* line 51, ../sass/partials/_base.scss */
+section.main-content {
+  padding-bottom: 382px;
+}
+
+/* line 55, ../sass/partials/_base.scss */
+footer {
+  clear: both;
+  position: relative;
+  z-index: 10;
+  margin-top: -310px;
+}
+
+/* line 62, ../sass/partials/_base.scss */
+.app-wrapper {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 12px;
+}
+
+/* line 69, ../sass/partials/_base.scss */
+#turre-logo {
+  width: 60px;
+  height: 100%;
+  margin-right: 10px;
+  margin-left: 20px;
+  background: transparent url("../img/turre.svg") 0 center no-repeat;
+}
+/* line 75, ../sass/partials/_base.scss */
+.no-svg #turre-logo {
+  background-image: url("../img/turre.png");
+}
+
+/* line 80, ../sass/partials/_base.scss */
+#oph-logo {
+  float: right;
+  width: 271px;
+  height: 100%;
+  background: transparent url("../img/opetushallitus.svg") 0 center no-repeat;
+  background-size: contain;
+}
+/* line 85, ../sass/partials/_base.scss */
+.no-svg #oph-logo {
+  background-image: url("../img/opetushallitus.gif");
+}
+
+/* line 91, ../sass/partials/_base.scss */
+.top-alert {
+  font-weight: bold;
+  text-align: center;
+  padding: 1em;
+  color: #FFF;
+  background-color: #E34045;
+}
+
+/* line 1, ../sass/partials/_typography.scss */
+h1 {
+  font-weight: 300;
+  font-size: 2.70em;
+  color: #107ea2;
+  margin: 0;
+}
+
+/* line 8, ../sass/partials/_typography.scss */
+.small-type {
+  font-size: 0.8em;
+}
+
+/* line 2, ../sass/partials/_components.scss */
+.kielen-vaihto,
+.print-link {
+  float: right;
+  margin-top: 5px;
+}
+
+/* line 7, ../sass/partials/_components.scss */
+.print-link {
+  margin-right: 10px;
+}
+
+/* line 11, ../sass/partials/_components.scss */
+.palaa-hakuun {
+  font-size: 1em;
+  padding-left: 35px;
+}
+/* line 28, ../sass/yhteiset/_icons.scss */
+.palaa-hakuun:before {
+  background-image: url("../img/oph-icon-sprite.svg") !important;
+  background-size: inherit !important;
+  width: 10px;
+  height: 14px;
+  background-position: 0 -50px;
+  content: "";
+  position: absolute;
+  margin-top: 2px;
+  margin-left: -22px;
+  z-index: 1;
+  background-repeat: no-repeat;
+}
+/* line 7, ../sass/yhteiset/_icons.scss */
+.no-svg .palaa-hakuun:before {
+  background-image: url("../img/oph-icon-sprite.png") !important;
+}
+
+/* NÄKYMÄT
+------------------------------------------------------------------------------*/
+/* line 2, ../sass/views/_arviointi.scss */
+.kohdealue .vastaus_valinnat {
+  padding-left: 0;
+}
+/* line 4, ../sass/views/_arviointi.scss */
+.kohdealue .vastaus_valinnat label {
+  padding: .1em .5em;
+  margin: 0;
+}
+/* line 7, ../sass/views/_arviointi.scss */
+.kohdealue .vastaus_valinnat label:hover {
+  background-color: #e6e6e6;
+  cursor: pointer;
+}
+/* line 11, ../sass/views/_arviointi.scss */
+.kohdealue .vastaus_valinnat label.vapaateksti-toggle {
+  margin-left: 1.3em;
+  border-radius: 8px;
+}
+/* line 17, ../sass/views/_arviointi.scss */
+.kohdealue .vastaus_valinnat.arvosana {
+  overflow: auto;
+  margin-top: 1em;
+}
+/* line 20, ../sass/views/_arviointi.scss */
+.kohdealue .vastaus_valinnat.arvosana label {
+  font-size: 1.65em;
+  line-height: 100%;
+  background-color: #e6e6e6;
+  float: left;
+  border-radius: 50%;
+  height: 2em;
+  width: 2em;
+  vertical-align: top;
+  text-align: center;
+  padding: .5em 0px 0px 0px !important;
+  margin-right: .3em;
+  color: gray;
+  position: relative;
+}
+/* line 34, ../sass/views/_arviointi.scss */
+.kohdealue .vastaus_valinnat.arvosana label.checked {
+  background-color: #107ea2;
+  color: white;
+}
+/* line 37, ../sass/views/_arviointi.scss */
+.kohdealue .vastaus_valinnat.arvosana label.checked:hover {
+  background-color: #107ea2 !important;
+  color: #ffffff;
+}
+/* line 43, ../sass/views/_arviointi.scss */
+.kohdealue .vastaus_valinnat.arvosana label:active {
+  background-color: #107ea2 !important;
+}
+/* line 47, ../sass/views/_arviointi.scss */
+.kohdealue .vastaus_valinnat.arvosana label:hover {
+  background-color: #b3b3b3 !important;
+  color: #4d4d4d;
+}
+/* line 52, ../sass/views/_arviointi.scss */
+.kohdealue .vastaus_valinnat.arvosana label input {
+  visibility: hidden;
+  position: absolute;
+  z-index: -100;
+  top: 0;
+  left: 0;
+}
+
+/* MQ
+------------------------------------------------------------------------------*/
+@media only screen and (max-width: 690px) {
+  /* line 2, ../sass/partials/_mediaquery.scss */
+  #oph-logo {
+    width: 30%;
+  }
+
+  /* line 5, ../sass/partials/_mediaquery.scss */
+  header h1 {
+    font-size: 2.1em;
+  }
+
+  /* line 8, ../sass/partials/_mediaquery.scss */
+  footer .copyright .app-wrapper {
+    background-size: 30% 30%;
+  }
+
+  /* line 11, ../sass/partials/_mediaquery.scss */
+  fieldset, .search-field {
+    width: 70%;
+  }
+
+  /* line 14, ../sass/partials/_mediaquery.scss */
+  div.table-cell {
+    padding: 3px 5px;
+    min-width: 30px;
+  }
+
+  /* Pagination styles for small screen */
+  /* line 20, ../sass/partials/_mediaquery.scss */
+  .pagination li a {
+    margin-right: 2px;
+  }
+
+  /* line 23, ../sass/partials/_mediaquery.scss */
+  .pagination li:first-child + li + li + li a {
+    padding-right: 27px;
+  }
+
+  /* line 26, ../sass/partials/_mediaquery.scss */
+  .pagination li:first-child + li + li + li a:after {
+    margin-left: 5px;
+  }
+
+  /* line 29, ../sass/partials/_mediaquery.scss */
+  .pagination li:first-child a:before {
+    margin-left: -21px;
+  }
+
+  /* line 32, ../sass/partials/_mediaquery.scss */
+  .pagination li:first-child a {
+    padding-left: 33px;
+  }
+}
+@media only screen and (max-width: 480px) {
+  /* line 38, ../sass/partials/_mediaquery.scss */
+  header h1 {
+    font-size: 1.8em;
+  }
+
+  /* line 41, ../sass/partials/_mediaquery.scss */
+  #oph-logo {
+    width: 50%;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    height: 30px;
+  }
+
+  /* line 48, ../sass/partials/_mediaquery.scss */
+  fieldset, .search-field {
+    width: 100%;
+  }
+}
