@@ -18,8 +18,8 @@
             [clj-webdriver.driver :refer [init-driver]]
             [clj-webdriver.taxi :as w])
   (:import java.util.concurrent.TimeUnit
-           com.paulhammant.ngwebdriver.ByAngular
-           com.paulhammant.ngwebdriver.WaitForAngularRequestsToFinish
+           (com.paulhammant.ngwebdriver ByAngular
+                                        WaitForAngularRequestsToFinish)
            (org.openqa.selenium NoAlertPresentException
                                 TimeoutException
                                 UnexpectedAlertBehaviour
