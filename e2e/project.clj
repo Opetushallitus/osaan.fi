@@ -14,10 +14,16 @@
 
 (defproject aipal-e2e "0.1.0-SNAPSHOT"
   :dependencies [[org.clojure/clojure "1.6.0"]
+                 [clj-time "0.9.0"]
+                 [clj-webdriver "0.6.1" :exclusions [org.seleniumhq.selenium/selenium-java
+                                                     org.seleniumhq.selenium/selenium-server
+                                                     org.seleniumhq.selenium/selenium-remote-driver]]
+                 [com.paulhammant/ngwebdriver "0.9.1" :exclusions [org.seleniumhq.selenium/selenium-java]]
                  [korma "0.4.0"]
                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
-                 [solita/opetushallitus-aitu-e2e "0.21.0"]
-                 [clj-time "0.9.0"]]
+                 [org.seleniumhq.selenium/selenium-java "2.45.0"]
+                 [org.seleniumhq.selenium/selenium-remote-driver "2.45.0"]
+                 [org.seleniumhq.selenium/selenium-server "2.45.0"]]
   :plugins [[test2junit "1.0.1"]]
 
   :source-paths ["src/clj" "../app/src/clj" "../../clojure-utils/src/clj"]
