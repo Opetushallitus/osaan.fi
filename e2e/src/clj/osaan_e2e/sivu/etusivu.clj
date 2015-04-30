@@ -1,4 +1,4 @@
-;; Copyright (c) 2014 The Finnish National Board of Education - Opetushallitus
+;; Copyright (c) 2015 The Finnish National Board of Education - Opetushallitus
 ;;
 ;; This program is free software:  Licensed under the EUPL, Version 1.1 or - as
 ;; soon as they will be approved by the European Commission - subsequent versions
@@ -12,17 +12,15 @@
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; European Union Public Licence for more details.
 
-(ns osaan-e2e.etusivu-test
-  (:require [clojure.test :refer [deftest is testing use-fixtures]]
-            [clj-webdriver.taxi :as w]
-            [osaan-e2e.sivu.etusivu :as etusivu]
+(ns osaan-e2e.sivu.etusivu
+  (:require [clj-webdriver.taxi :as w]
+            [osaan-e2e.avaus :as avaus]
             [osaan-e2e.util :refer :all]))
 
-(deftest etusivu-test
-  (with-webdriver
-    (testing
-      "etusivu"
-      (etusivu/avaa-sivu)
-      (testing
-        "sisältää järjestelmän nimen"
-        (is (.contains (etusivu/sivun-sisalto) "OSAAMISEN TUNNISTAMINEN"))))))
+(def etusivu "/#/")
+
+(defn avaa-sivu []
+  (avaus/avaa etusivu))
+
+(defn sivun-sisalto []
+  (w/text (w/find-element {:css "body"})))
