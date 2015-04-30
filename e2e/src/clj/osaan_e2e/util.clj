@@ -29,30 +29,7 @@
                                        DesiredCapabilities
                                        RemoteWebDriver)))
 
-(defn osaan-url [polku]
-  (str (or (System/getenv "OSAAN_URL")
-           "http://192.168.50.1:8084")
-       polku))
-
 (def ^:dynamic *ng*)
-
-(defmacro odota-kunnes [& body]
-  `(w/wait-until (fn [] ~@body) 20000))
-
-(defn odota-sivun-latautumista []
-  (let [ready-state (atom nil)]
-    (try
-      (odota-kunnes (= (reset! ready-state
-                               (w/execute-script "return document.readyState"))
-                       "complete"))
-      (catch TimeoutException e
-        (println (str "document.readyState == '" @ready-state "'"))
-        (throw e)))))
-
-(defn odota-angular-pyyntoa []
-  (odota-sivun-latautumista)
-  (WaitForAngularRequestsToFinish/waitForAngularRequestsToFinish
-    (:webdriver w/*driver*)))
 
 (defn luo-webdriver! []
   (let [remote_url (System/getenv "REMOTE_URL")
@@ -109,6 +86,23 @@
 (defmacro with-webdriver [& body]
   `(with-webdriver* (fn [] ~@body)))
 
+(defmacro odota-kunnes [& body]
+  `(w/wait-until (fn [] ~@body) 20000))
+
+(defn ^:private odota-sivun-latautumista []
+  (let [ready-state (atom nil)]
+    (try
+      (odota-kunnes (= (reset! ready-state
+                               (w/execute-script "return document.readyState"))
+                       "complete"))
+      (catch TimeoutException e
+        (println (str "document.readyState == '" @ready-state "'"))
+        (throw e)))))
+
+(defn odota-angular-pyyntoa []
+  (WaitForAngularRequestsToFinish/waitForAngularRequestsToFinish
+    (:webdriver w/*driver*)))
+
 (defn avaa-url
   [url]
     (w/to url)
@@ -118,9 +112,4 @@
         (println (str "Odotettiin selaimen siirtyvän URLiin '" url "'"
                       ", mutta sen URL oli '" (w/current-url) "'"))
         (throw e)))
-    (odota-angular-pyyntoa))
-
-(defn avaa [polku]
-  (avaa-url (osaan-url polku))
-  (w/execute-script "angular.element(document.documentElement).data('$injector').get('$animate').enabled(false);")
-  (w/execute-script "$('body').addClass('disable-all-animations');"))
+    (odota-sivun-latautumista))

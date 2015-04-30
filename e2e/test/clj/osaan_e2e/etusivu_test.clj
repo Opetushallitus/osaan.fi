@@ -15,7 +15,8 @@
 (ns osaan-e2e.etusivu-test
   (:require [clojure.test :refer [deftest is testing use-fixtures]]
             [clj-webdriver.taxi :as w]
-            [osaan-e2e.util :refer :all]))
+            [osaan-e2e.util :refer :all]
+            [osaan-e2e.avaus :refer [avaa]]))
 
 (def etusivu "/#/")
 
