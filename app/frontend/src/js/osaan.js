@@ -15,6 +15,7 @@
 'use strict';
 
 angular.module('osaan.fi', [
+  'ngAnimate',
   'ng-breadcrumbs',
   'ngRoute',
   'taiPlaceholder',

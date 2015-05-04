@@ -8,21 +8,44 @@
 
     <section class="kohdealue">
       <h4>Arvioinnin kohdealue (otsikko)</h4>
+
       <section class="kysymys">
         <p>Arvioinnin kohde 1 (kysymys)</p>
-
-        <div class="vastaus_valinnat arvosana">
-          <label ng-repeat="vaihtoehto in [1,2,3,4,5]" style="display: block" ng-class="{checked: kysymys.vastaus == vaihtoehto}">
-            <input type="radio" ng-model="kysymys.vastaus" ng-value="vaihtoehto" name="kysymys" ng-required="kysymys.pakollinen">
+        <div class="vastaus_valinnat arvosana" ng-model="kysymys">
+          <label ng-repeat="vaihtoehto in [1,2,3,4,5]" style="display: block;" ng-class="{checked: kysymys.vastaus1 == vaihtoehto}">
+            <input type="radio" ng-model="kysymys.vastaus1" ng-value="vaihtoehto" name="kysymys1">
             {{ vaihtoehto }}
           </label>
 
-          <label style="display: block" class="vapaateksti-toggle" tooltip="Anna vapaatekstivastaus klikkaamalla" tooltip-placement="top">
+          <label style="display: block" class="vapaateksti-toggle" tooltip="Anna vapaatekstivastaus klikkaamalla" tooltip-placement="top" ng-class="{checked: vapaateksti1}">
+            <input type="checkbox" ng-model="vapaateksti1" ng-value="false" name="vapaateksti">
             <span class="glyphicon glyphicon-align-left"></span>
           </label>
-
+        </div>
+        <div class="reveal-animation row col-md-5 vapaatekstivastaus" ng-if="vapaateksti1">
+          <textarea placeholder="Kirjoita vastauksesi tähän" rows="4" class="form-control"></textarea>
         </div>
       </section>
+
+      <section class="kysymys">
+        <p>Arvioinnin kohde 2 (kysymys)</p>
+
+        <div class="vastaus_valinnat arvosana" ng-model="kysymys">
+          <label ng-repeat="vaihtoehto in [1,2,3,4,5]" style="display: block;" ng-class="{checked: kysymys.vastaus2 == vaihtoehto}">
+            <input type="radio" ng-model="kysymys.vastaus2" ng-value="vaihtoehto" name="kysymys2">
+            {{ vaihtoehto }}
+          </label>
+
+          <label style="display: block" class="vapaateksti-toggle" tooltip="Anna vapaatekstivastaus klikkaamalla" tooltip-placement="top" ng-class="{checked: vapaateksti2}">
+            <input type="checkbox" ng-model="vapaateksti2" ng-value="false" name="vapaateksti">
+            <span class="glyphicon glyphicon-align-left"></span>
+          </label>
+        </div>
+        <div class="reveal-animation row col-md-5 vapaatekstivastaus" ng-if="vapaateksti2">
+          <textarea placeholder="Kirjoita vastauksesi tähän" rows="4" class="form-control"></textarea>
+        </div>
+      </section>
+
     </section>
 
   </div>

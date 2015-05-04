@@ -1079,6 +1079,37 @@ div.select2-container.select2-dropdown-open .select2-choice abbr {
   padding-left: 0;
 }
 
+/* Angular animate */
+/* line 3, ../sass/yhteiset/_animate.scss */
+.reveal-animation.ng-enter,
+.reveal-animation.ng-leave {
+  -webkit-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 300ms cubic-bezier(0.42, 0, 0.58, 1);
+  /* ease-in-out */
+}
+
+/* line 10, ../sass/yhteiset/_animate.scss */
+.reveal-animation.ng-leave {
+  height: 110px;
+}
+
+/* line 13, ../sass/yhteiset/_animate.scss */
+.reveal-animation.ng-enter.ng-enter-active {
+  height: 110px;
+}
+
+/* line 17, ../sass/yhteiset/_animate.scss */
+.reveal-animation.ng-enter {
+  height: 0px;
+}
+
+/* line 20, ../sass/yhteiset/_animate.scss */
+.reveal-animation.ng-leave.ng-leave-active {
+  height: 0px;
+}
+
 /* line 1, ../sass/yhteiset/_ohje.scss */
 .ohje {
   position: relative;
@@ -1400,30 +1431,55 @@ h1 {
 /* NÄKYMÄT
 ------------------------------------------------------------------------------*/
 /* line 2, ../sass/views/_arviointi.scss */
+.kohdealue .vapaatekstivastaus {
+  overflow: hidden;
+  display: block;
+}
+/* line 6, ../sass/views/_arviointi.scss */
+.kohdealue .vapaatekstivastaus textarea {
+  border-width: 1px;
+  margin-top: 1em;
+  position: relative;
+  bottom: 0;
+}
+/* line 14, ../sass/views/_arviointi.scss */
+.kohdealue .kysymys {
+  clear: both;
+  display: block;
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+  border-bottom: 1px solid #107ea2;
+  overflow: auto;
+}
+/* line 22, ../sass/views/_arviointi.scss */
+.kohdealue .kysymys:last-child {
+  border: 0;
+}
+/* line 26, ../sass/views/_arviointi.scss */
 .kohdealue .vastaus_valinnat {
   padding-left: 0;
 }
-/* line 4, ../sass/views/_arviointi.scss */
+/* line 28, ../sass/views/_arviointi.scss */
 .kohdealue .vastaus_valinnat label {
   padding: .1em .5em;
   margin: 0;
 }
-/* line 7, ../sass/views/_arviointi.scss */
+/* line 31, ../sass/views/_arviointi.scss */
 .kohdealue .vastaus_valinnat label:hover {
   background-color: #e6e6e6;
   cursor: pointer;
 }
-/* line 11, ../sass/views/_arviointi.scss */
+/* line 35, ../sass/views/_arviointi.scss */
 .kohdealue .vastaus_valinnat label.vapaateksti-toggle {
   margin-left: 1.3em;
   border-radius: 8px;
 }
-/* line 17, ../sass/views/_arviointi.scss */
+/* line 41, ../sass/views/_arviointi.scss */
 .kohdealue .vastaus_valinnat.arvosana {
   overflow: auto;
   margin-top: 1em;
 }
-/* line 20, ../sass/views/_arviointi.scss */
+/* line 44, ../sass/views/_arviointi.scss */
 .kohdealue .vastaus_valinnat.arvosana label {
   font-size: 1.65em;
   line-height: 100%;
@@ -1439,26 +1495,26 @@ h1 {
   color: gray;
   position: relative;
 }
-/* line 34, ../sass/views/_arviointi.scss */
+/* line 58, ../sass/views/_arviointi.scss */
 .kohdealue .vastaus_valinnat.arvosana label.checked {
   background-color: #107ea2;
   color: white;
 }
-/* line 37, ../sass/views/_arviointi.scss */
+/* line 61, ../sass/views/_arviointi.scss */
 .kohdealue .vastaus_valinnat.arvosana label.checked:hover {
   background-color: #107ea2 !important;
   color: #ffffff;
 }
-/* line 43, ../sass/views/_arviointi.scss */
+/* line 67, ../sass/views/_arviointi.scss */
 .kohdealue .vastaus_valinnat.arvosana label:active {
   background-color: #107ea2 !important;
 }
-/* line 47, ../sass/views/_arviointi.scss */
+/* line 71, ../sass/views/_arviointi.scss */
 .kohdealue .vastaus_valinnat.arvosana label:hover {
   background-color: #b3b3b3 !important;
   color: #4d4d4d;
 }
-/* line 52, ../sass/views/_arviointi.scss */
+/* line 76, ../sass/views/_arviointi.scss */
 .kohdealue .vastaus_valinnat.arvosana label input {
   visibility: hidden;
   position: absolute;

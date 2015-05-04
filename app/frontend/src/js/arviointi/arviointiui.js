@@ -14,7 +14,7 @@
 
 'use strict';
 
-angular.module('osaan.arviointi.arviointiui', ['ngRoute'])
+angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
 
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
@@ -25,5 +25,7 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute'])
       });
   }])
 
-  .controller('ArviointiController', [function() {}])
+  .controller('ArviointiController', ['$scope', function($scope) {
+    $scope.kysymys = {vastaus1: null, vastaus2: null};
+  }])
 ;

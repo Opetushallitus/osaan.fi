@@ -1,4 +1,28 @@
 .kohdealue {
+  .vapaatekstivastaus {
+    overflow: hidden;
+    display: block;
+
+    textarea {
+      border-width: 1px;
+      margin-top: 1em;
+      position: relative;
+      bottom: 0;
+    }
+  }
+
+  .kysymys {
+    clear: both;
+    display: block;
+    margin-bottom: 2em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid $primary-color;
+    overflow: auto;
+  }
+  .kysymys:last-child {
+    border: 0;
+  }
+
   .vastaus_valinnat {
     padding-left: 0;
     label {
