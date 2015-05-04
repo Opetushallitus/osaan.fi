@@ -406,4 +406,8 @@ create unique index ak_yksikasitteinen_jarjestys on arvioinnin_kohde(arvioinnink
 -- eheysrajoitteita tutkintoihin liittyen
 create unique index t_osa_yksikasitteinen_jarjestys on tutkinto_ja_tutkinnonosa(tutkinto, tutkinnonosa,jarjestys);
 
-
+-- Ohjeteksti
+insert into ohje (ohjetunniste, teksti_fi, teksti_sv)  values
+  ('etusivu', E'Quis confluxus hodie Academicorum? \n E longinquo convenerunt \n Protinusque successerunt \n In commune forum.', 
+  E'Också på svenska. \n Haaluviippan ja haluviluvei. \n Vaapulavissun viipulavassun. \n Gaudeamus igitur. \n Ölökytä mäläkytä, ölökytä mäkkää.');
+  
