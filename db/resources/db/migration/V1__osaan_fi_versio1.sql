@@ -153,13 +153,11 @@ create table tutkintonimike(
   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   muutettuaika timestamptz NOT NULL,
-  luotuaika timestamptz NOT NULL  
+  luotuaika timestamptz NOT NULL
 );
 
 create table tutkinnonosa (
    osatunnus varchar(6) not null PRIMARY KEY,
-   tutkinto varchar(6) not null references tutkinto(tutkintotunnus),
-   
    nimi_fi text not null,
    nimi_sv text ,
    muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
@@ -182,11 +180,12 @@ create table osaamisala(
    muutettuaika timestamp NOT NULL,
    luotuaika timestamp NOT NULL,
    PRIMARY KEY(osaamisalatunnus, versio, koodistoversio)
-); 
+);
 
 create table tutkinnonosa_ja_peruste (
   osa varchar(6) not null references tutkinnonosa(osatunnus),
   peruste varchar(20) not null references peruste(diaarinumero),
+  jarjestys int not null,
   pakollinen boolean not null,
   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
@@ -194,24 +193,6 @@ create table tutkinnonosa_ja_peruste (
   luotuaika timestamp NOT NULL,
   PRIMARY KEY (osa, peruste)
 );
-
-create table tutkinto_ja_tutkinnonosa(
-  tutkinto varchar(6) references tutkinto(tutkintotunnus), 
-  tutkinnonosa varchar(6) references tutkinnonosa(osatunnus),
-  jarjestys int not null,
-  muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
-  luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
-  muutettuaika timestamp NOT NULL,
-  luotuaika timestamp NOT NULL,
-  PRIMARY KEY(tutkinto, tutkinnonosa)
-);
-
-create trigger tutkinto_ja_tutkinnonosa_update before update on tutkinto_ja_tutkinnonosa for each row execute procedure update_stamp() ;
-create trigger tutkinto_ja_tutkinnonosal_insert before insert on tutkinto_ja_tutkinnonosa for each row execute procedure update_created() ;
-create trigger tutkinto_ja_tutkinnonosam_insert before insert on tutkinto_ja_tutkinnonosa for each row execute procedure update_stamp() ;
-create trigger tutkinto_ja_tutkinnonosa_mu_update before update on tutkinto_ja_tutkinnonosa for each row execute procedure update_modifier() ;
-create trigger tutkinto_ja_tutkinnonosa_mu_insert before insert on tutkinto_ja_tutkinnonosa for each row execute procedure update_modifier() ;
-create trigger tutkinto_ja_tutkinnonosa_cu_insert before insert on tutkinto_ja_tutkinnonosa for each row execute procedure update_creator() ;
 
 create trigger tutkinnonosa_update before update on tutkinnonosa for each row execute procedure update_stamp() ;
 create trigger tutkinnonosal_insert before insert on tutkinnonosa for each row execute procedure update_created() ;
@@ -309,7 +290,7 @@ create table arvio (
   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   muutettuaika timestamptz NOT NULL,
-  luotuaika timestamptz NOT NULL  
+  luotuaika timestamptz NOT NULL
 );
 
 create table kohdearvio (
@@ -398,16 +379,16 @@ insert into tutkintotyyppi (tyyppi, selite_fi, selite_sv) values
   ('12','Ylempi ammattikorkeakoulututkinto','Högre yrkeshögskoleexaman'),
   ('13','Yliopistotutkinto','Universitetsexamen');
 
--- eheysrajoitteita, tutkinnon arviointiin liittyen 
+-- eheysrajoitteita, tutkinnon arviointiin liittyen
 
 create unique index aka_yksikasitteinen_jarjestys on arvioinnin_kohdealue(osa, jarjestys);
 create unique index ak_yksikasitteinen_jarjestys on arvioinnin_kohde(arvioinninkohdealue, jarjestys);
 
 -- eheysrajoitteita tutkintoihin liittyen
-create unique index t_osa_yksikasitteinen_jarjestys on tutkinto_ja_tutkinnonosa(tutkinto, tutkinnonosa,jarjestys);
+create unique index t_osa_yksikasitteinen_jarjestys on tutkinnonosa_ja_peruste(osa, peruste, jarjestys, pakollinen);
 
 -- Ohjeteksti
 insert into ohje (ohjetunniste, teksti_fi, teksti_sv)  values
-  ('etusivu', E'Quis confluxus hodie Academicorum? \n E longinquo convenerunt \n Protinusque successerunt \n In commune forum.', 
+  ('etusivu', E'Quis confluxus hodie Academicorum? \n E longinquo convenerunt \n Protinusque successerunt \n In commune forum.',
   E'Också på svenska. \n Haaluviippan ja haluviluvei. \n Vaapulavissun viipulavassun. \n Gaudeamus igitur. \n Ölökytä mäläkytä, ölökytä mäkkää.');
-  
+
