@@ -20,9 +20,9 @@ angular.module('osaan.rest.tutkinnonosa', [])
     return {
       hae: function(perusteenDiaarinumero, tutkintotunnus) {
         return $http.get('api/tutkinnonosa', {params: {peruste: perusteenDiaarinumero, tutkintotunnus: tutkintotunnus}})
-        .then(function(response) {
-          return response.data;
-        });
+          .then(function(response) {
+            return response.data;
+          });
       }
     };
   }])
