@@ -29,5 +29,8 @@
 
 (deftest ^:integraatio api-smoke
   (doseq [polku ["/api/koulutusala"
-                 "/api/tutkinto"]]
+                 "/api/ohje/etusivu"
+                 "/api/tutkinnonosa?peruste=41%2F011%2F2005&tutkintotunnus=324601"
+                 "/api/tutkinto"
+                 "/api/tutkinto/324601"]]
     (testaa-api polku)))
