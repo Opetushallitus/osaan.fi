@@ -15,11 +15,12 @@
 (ns osaan.rest-api.tutkinnonosa
   (:require [compojure.core :as c]
             [oph.common.util.http-util :refer [json-response]]
+            [osaan.compojure-util :as cu]
             [osaan.skeema :as skeema]))
 
 (def tutkinnonosat [{:osatunnus "1" :nimi_fi "Tutkinnonosa pakollinen" :nimi_sv "Tutkinnonosa pakollinen (sv)" :pakollinen true},
                     {:osatunnus "2" :nimi_fi "Tutkinnonosa valinnainen" :nimi_sv "Tutkinnonosa valinnainen (sv)" :pakollinen false}])
 
 (c/defroutes reitit
-  (c/GET "/hae" [tutkintotunnus]
+  (cu/defapi :julkinen nil :get "/" [peruste tutkintotunnus]
     (json-response tutkinnonosat [skeema/Tutkinnonosa])))
