@@ -18,8 +18,8 @@
       <label translate="etusivu.opintoala"></label>
       <select ng-model="haku.opintoala">
         <option></option>
-        <optgroup ng-repeat="koulutusala in koulutusalat" label="{{ koulutusala | lokalisoiKentta:'koulutusala_nimi' }}">
-          <option ng-repeat="opintoala in koulutusala.opintoalat" value="{{ opintoala.opintoalatunnus }}">{{ opintoala | lokalisoiKentta:'opintoala_nimi' }}</option>
+        <optgroup ng-repeat="koulutusala in koulutusalat" label="{{ koulutusala | lokalisoiKentta:'nimi' }}">
+          <option ng-repeat="opintoala in koulutusala.opintoalat" value="{{ opintoala.opintoalatunnus }}">{{ opintoala | lokalisoiKentta:'nimi' }}</option>
         </optgroup>
       </select>
     </fieldset>

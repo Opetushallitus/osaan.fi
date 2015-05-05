@@ -15,13 +15,13 @@
 (ns osaan.skeema
   (:require [schema.core :as s]))
 
-(def Opintoala {:opintoala_nimi_fi s/Str
-                :opintoala_nimi_sv s/Str
+(def Opintoala {:nimi_fi s/Str
+                :nimi_sv s/Str
                 :opintoalatunnus s/Str})
 
 (def Koulutusala {:koulutusalatunnus s/Str
-                  :koulutusala_nimi_fi s/Str
-                  :koulutusala_nimi_sv s/Str
+                  :nimi_fi s/Str
+                  :nimi_sv s/Str
                   :opintoalat [Opintoala]})
 
 (def Tutkinto {:nimi_fi s/Str

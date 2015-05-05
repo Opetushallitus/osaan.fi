@@ -37,3 +37,24 @@
   (first
     (sql/select taulut/koulutusala
       (sql/where {:koulutusalatunnus koulutusalatunnus}))))
+
+(defn ^:private hae-koulutusalat
+  []
+  (sql/select :koulutusala
+    (sql/fields :koulutusalatunnus :nimi_fi :nimi_sv)))
+
+(defn ^:private hae-opintoalat
+  []
+  (sql/select :opintoala
+    (sql/fields :opintoalatunnus :koulutusala :nimi_fi :nimi_sv)))
+
+(defn hae-koulutusalat-opintoaloilla
+  []
+  (let [koulutusalat (hae-koulutusalat)
+        opintoalat (hae-opintoalat)
+        opintoalat-by-koulutusalatunnus (group-by :koulutusala opintoalat)]
+    (for [koulutusala koulutusalat
+          :let [koulutusalatunnus (:koulutusalatunnus koulutusala)
+                koulutusalan-opintoalat (get opintoalat-by-koulutusalatunnus koulutusalatunnus)
+                koulutusalan-opintoalat (map #(dissoc % :koulutusala) koulutusalan-opintoalat)]]
+      (assoc koulutusala :opintoalat koulutusalan-opintoalat))))
