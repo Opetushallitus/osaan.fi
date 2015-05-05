@@ -14,7 +14,7 @@
 
 (ns osaan.arkisto.tutkinto
   (:require [korma.core :as sql]
-            [oph.korma.common :refer [select-unique-or-nil update-unique]]
+            [oph.korma.common :as sql-util]
             [osaan.infra.sql.korma :as taulut]
             [oph.common.util.util :refer [pvm-mennyt-tai-tanaan? pvm-tuleva-tai-tanaan?]]))
 
@@ -25,7 +25,7 @@
 
 (defn ^:integration-api paivita!
   [tutkintotunnus tiedot]
-  (update-unique taulut/tutkinto
+  (sql-util/update-unique taulut/tutkinto
     (sql/set-fields tiedot)
     (sql/where {:tutkintotunnus tutkintotunnus})))
 
@@ -35,6 +35,14 @@
     (sql/order :tutkintotunnus)))
 
 (defn hae
-  [tutkintotunnus]
-  (select-unique-or-nil taulut/tutkinto
-    (sql/where {:tutkintotunnus tutkintotunnus})))
+  [nimi opintoala]
+  (let [nimi (str "%" nimi "%")]
+    (->
+      (sql/select* :tutkinto)
+      (sql/join :opintoala (= :opintoala.opintoala_tkkoodi :opintoala))
+      (sql/fields :tutkintotunnus :nimi_fi :nimi_sv [:opintoala.nimi_fi :opintoala_nimi_fi] [:opintoala.nimi_sv :opintoala_nimi_sv])
+      (sql/where (or {:nimi_fi [sql-util/ilike nimi]}
+                     {:nimi_sv [sql-util/ilike nimi]}))
+      (cond->
+        opintoala (sql/where {:opintoala opintoala}))
+      sql/exec)))

@@ -15,11 +15,10 @@
 (ns osaan.rest-api.tutkinto
   (:require [compojure.core :as c]
             [oph.common.util.http-util :refer [json-response]]
+            [osaan.arkisto.tutkinto :as arkisto]
             [osaan.compojure-util :as cu]
             [osaan.skeema :as skeema]))
 
-(def tutkinnot '({:opintoalatunnus "509", :nimi_sv "Billackerare (grundexamen)", :opintoala_nimi_fi "Ajoneuvo- ja kuljetustekniikka", :nimi_fi "Automaalari (perustutkinto)", :opintoala_nimi_sv "Fordons- och transportteknik", :tutkintotaso "perustutkinto", :tutkintotunnus "351304"} {:opintoalatunnus "509", :nimi_sv "Specialyrkesexamen för billackerarmästare", :opintoala_nimi_fi "Ajoneuvo- ja kuljetustekniikka", :nimi_fi "Automaalarimestarin erikoisammattitutkinto", :opintoala_nimi_sv "Fordons- och transportteknik", :tutkintotaso "erikoisammattitutkinto", :tutkintotunnus "357302"} {:opintoalatunnus "509", :nimi_sv "Yrkesexamen för billackerare", :opintoala_nimi_fi "Ajoneuvo- ja kuljetustekniikka", :nimi_fi "Automaalarin ammattitutkinto", :opintoala_nimi_sv "Fordons- och transportteknik", :tutkintotaso "ammattitutkinto", :tutkintotunnus "354307"}))
-
 (c/defroutes reitit
   (cu/defapi :julkinen nil :get "/" [nimi opintoala]
-    (json-response tutkinnot [skeema/Tutkinto])))
+    (json-response (arkisto/hae nimi opintoala) [skeema/Tutkinto])))

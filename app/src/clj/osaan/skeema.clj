@@ -25,12 +25,10 @@
                   :opintoalat [Opintoala]})
 
 (def Tutkinto {:nimi_fi s/Str
-               :nimi_sv s/Str
+               :nimi_sv (s/maybe s/Str)
                :tutkintotunnus s/Str
-               :tutkintotaso s/Str
                :opintoala_nimi_fi s/Str
-               :opintoala_nimi_sv s/Str
-               :opintoalatunnus s/Str})
+               :opintoala_nimi_sv s/Str})
 
 (def Tutkinnonosa {:nimi_fi s/Str
                    :nimi_sv s/Str
