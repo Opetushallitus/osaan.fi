@@ -32,6 +32,6 @@
                :opintoala_nimi_sv s/Str})
 
 (def Tutkinnonosa {:nimi_fi s/Str
-                   :nimi_sv s/Str
+                   :nimi_sv (s/maybe s/Str)
                    :osatunnus s/Str
                    :pakollinen s/Bool})

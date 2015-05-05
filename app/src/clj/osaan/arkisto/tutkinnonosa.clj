@@ -12,13 +12,19 @@
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; European Union Public Licence for more details.
 
-(ns osaan.rest-api.tutkinnonosa
-  (:require [compojure.core :as c]
-            [oph.common.util.http-util :refer [json-response]]
-            [osaan.compojure-util :as cu]
-            [osaan.skeema :as skeema]
-            [osaan.arkisto.tutkinnonosa :as arkisto]))
+(ns osaan.arkisto.tutkinnonosa
+  (:require [korma.core :as sql]))
 
-(c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/" [peruste tutkintotunnus]
-    (json-response (arkisto/hae-perusteen-tutkinnon-osat peruste) [skeema/Tutkinnonosa])))
+(defn hae-perusteen-tutkinnon-osat
+  "Hae perusteeseen liittyvät tutkinnon osat."
+  [perusteen-diaarinumero]
+  (sql/select
+    :peruste
+    (sql/join :inner :tutkinnonosa_ja_peruste (= :peruste.diaarinumero :tutkinnonosa_ja_peruste.peruste))
+    (sql/join :inner :tutkinnonosa (= :tutkinnonosa_ja_peruste.osa :tutkinnonosa.osatunnus))
+    (sql/fields :tutkinnonosa.nimi_fi
+                :tutkinnonosa.nimi_sv
+                :tutkinnonosa.osatunnus
+                :tutkinnonosa_ja_peruste.pakollinen)
+    (sql/where {:peruste.diaarinumero perusteen-diaarinumero})))
+
