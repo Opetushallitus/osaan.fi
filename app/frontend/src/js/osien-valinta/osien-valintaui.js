@@ -25,7 +25,7 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
       });
   }])
 
-  .controller('OsienValintaController', ['$routeParams', '$scope', 'Tutkinnonosa', '$location', function($routeParams, $scope, Tutkinnonosa, $location) {
+  .controller('OsienValintaController', ['$location', '$routeParams', '$scope', 'Tutkinnonosa', function($location, $routeParams, $scope, Tutkinnonosa) {
     var peruste = $routeParams.peruste;
     var tutkintotunnus = $routeParams.tutkinto;
 
