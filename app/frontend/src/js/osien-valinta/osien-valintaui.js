@@ -26,6 +26,7 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
   }])
 
   .controller('OsienValintaController', ['$routeParams', '$scope', 'Tutkinnonosa', '$location', function($routeParams, $scope, Tutkinnonosa, $location) {
+    var peruste = $routeParams.peruste;
     var tutkintotunnus = $routeParams.tutkinto;
 
     $scope.valinnat = {};
@@ -41,7 +42,7 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
       $location.url('/osien-valinta/arviointi');
     };
 
-    Tutkinnonosa.hae(tutkintotunnus).then(function(tutkinnonosat) {
+    Tutkinnonosa.hae(peruste, tutkintotunnus).then(function(tutkinnonosat) {
       $scope.tutkinnonosat = tutkinnonosat;
     });
   }])

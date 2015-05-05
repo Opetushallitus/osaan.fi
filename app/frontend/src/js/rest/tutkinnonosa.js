@@ -18,8 +18,9 @@ angular.module('osaan.rest.tutkinnonosa', [])
 
   .factory('Tutkinnonosa', ['$http', function($http) {
     return {
-      hae: function(tutkintotunnus) {
-        return $http.get('api/tutkinnonosa/hae', {params: {tutkintotunnus: tutkintotunnus}}).then(function(response) {
+      hae: function(perusteenDiaarinumero, tutkintotunnus) {
+        return $http.get('api/tutkinnonosa/hae', {params: {peruste_diaarinumero: perusteenDiaarinumero, tutkintotunnus: tutkintotunnus}})
+        .then(function(response) {
           return response.data;
         });
       }
