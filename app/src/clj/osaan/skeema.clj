@@ -33,5 +33,5 @@
 
 (def Tutkinnonosa {:nimi_fi s/Str
                    :nimi_sv s/Str
-                   :tutkinnonosatunnus s/Str
+                   :osatunnus s/Str
                    :pakollinen s/Bool})

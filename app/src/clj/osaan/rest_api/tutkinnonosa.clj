@@ -17,8 +17,8 @@
             [oph.common.util.http-util :refer [json-response]]
             [osaan.skeema :as skeema]))
 
-(def tutkinnonosat [{:tutkinnonosatunnus "1" :nimi_fi "Tutkinnonosa pakollinen" :nimi_sv "Tutkinnonosa pakollinen (sv)" :pakollinen true},
-                    {:tutkinnonosatunnus "2" :nimi_fi "Tutkinnonosa valinnainen" :nimi_sv "Tutkinnonosa valinnainen (sv)" :pakollinen false}])
+(def tutkinnonosat [{:osatunnus "1" :nimi_fi "Tutkinnonosa pakollinen" :nimi_sv "Tutkinnonosa pakollinen (sv)" :pakollinen true},
+                    {:osatunnus "2" :nimi_fi "Tutkinnonosa valinnainen" :nimi_sv "Tutkinnonosa valinnainen (sv)" :pakollinen false}])
 
 (c/defroutes reitit
   (c/GET "/hae" [tutkintotunnus]

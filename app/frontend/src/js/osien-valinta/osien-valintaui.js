@@ -33,7 +33,7 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
 
     $scope.eteenpain = function() {
       var valinnat = _($scope.valinnat)
-        .map(function(valittu, tutkinnonosatunnus) { return [tutkinnonosatunnus, valittu]; })
+        .map(function(valittu, osatunnus) { return [osatunnus, valittu]; })
         .filter(function(x) { return x[1]; })
         .map(function(x) { return x[0]; })
         .value();
