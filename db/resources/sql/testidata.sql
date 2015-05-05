@@ -35,13 +35,23 @@ insert into arvioinnin_kohdealue(arvioinninkohdealue_id, osa, nimi_fi, nimi_sv, 
    (-1, '100001', '1. Työprosessin hallinta', 'Behärskande av arbetsprocessen', 1),
    (-2, '100001', '2. Työmenetelmien, -välineiden ja materiaalin hallinta', 'Behärskande av arbetsmetoder, -redskap och material', 2);
 
-insert into arvioinnin_kohde(arvioinninkohdealue, nimi_fi, nimi_sv, jarjestys)
+insert into arvioinnin_kohde(arvioinninkohde_id, arvioinninkohdealue, nimi_fi, nimi_sv, jarjestys)
   values
-    (-1, 'Esituotanto','Förproduktion', 1),
-    (-1, 'Tuotanto', 'Produktion', 2),
-    (-1, 'Jälkituotanto', 'Efterproduktion', 3),
-    (-2, 'Oman työn suunnittelu', 'Planering av det egna arbetet', 1),
-    (-2, 'Aineiston tuottaminen', 'Produktion av material', 2);
+    (-1, -1, 'Esituotanto','Förproduktion', 1),
+    (-2, -1, 'Tuotanto', 'Produktion', 2), 
+    (-3, -1, 'Jälkituotanto', 'Efterproduktion', 3),
+    (-4, -2, 'Oman työn suunnittelu', 'Planering av det egna arbetet', 1),
+    (-5, -2, 'Aineiston tuottaminen', 'Produktion av material', 2);
 
 insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_alkupvm, voimassa_loppupvm, versio, koodistoversio) values ('2002', '324601', 'Kuvauksen ja valaisun osaamisala', '', '2014-01-01', '2199-01-01', 1, 1);
 insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_alkupvm, voimassa_loppupvm, versio, koodistoversio) values ('2003', '324601', 'Mediatyön osaamisala', '', '2014-01-01', '2199-01-01', 1, 1);
+
+insert into arvio (tunniste) values ('testiarvio');
+
+insert into kohdearvio (arviotunnus, arviokohde, arvio)
+  values
+    ('testiarvio', -1, 1),
+    ('testiarvio', -2, 3),
+    ('testiarvio', -3, 3),
+    ('testiarvio', -4, 4),
+    ('testiarvio', -5, 4);
