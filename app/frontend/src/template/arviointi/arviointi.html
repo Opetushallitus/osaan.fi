@@ -23,7 +23,7 @@
           </label>
         </div>
         <div class="reveal-animation row col-md-5 vapaatekstivastaus" ng-if="vapaateksti1">
-          <textarea placeholder="Kirjoita vastauksesi tähän" rows="4" class="form-control"></textarea>
+          <textarea ng-model="vapaatekstikentta1" placeholder="Kirjoita vastauksesi tähän" rows="4" class="form-control"></textarea>
         </div>
       </section>
 
@@ -42,7 +42,7 @@
           </label>
         </div>
         <div class="reveal-animation row col-md-5 vapaatekstivastaus" ng-if="vapaateksti2">
-          <textarea placeholder="Kirjoita vastauksesi tähän" rows="4" class="form-control"></textarea>
+          <textarea ng-model="vapaatekstikentta2" placeholder="Kirjoita vastauksesi tähän" rows="4" class="form-control"></textarea>
         </div>
       </section>
 
@@ -54,11 +54,11 @@
       <div class="col-md-12">
         <button class="btn btn-primary pull-right" role="button">
           Näytä raportti&nbsp;
-          <span class="glyphicon glyphicon-stats pull-right" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
         </button>
 
         <a class="btn btn-primary pull-left" href="#/osien-valinta" role="button">
-          <span class="glyphicon glyphicon-arrow-left pull-left" aria-hidden="true"></span>&nbsp;
+          <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
           Valitse tutkinnon osat
         </a>
       </div>
