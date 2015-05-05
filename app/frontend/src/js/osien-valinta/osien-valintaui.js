@@ -25,11 +25,15 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
       });
   }])
 
-  .controller('OsienValintaController', ['$location', '$routeParams', '$scope', 'Tutkinnonosa', function($location, $routeParams, $scope, Tutkinnonosa) {
+  .controller('OsienValintaController', ['$location', '$routeParams', '$scope', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, Tutkinnonosa, Tutkinto) {
     var peruste = $routeParams.peruste;
     var tutkintotunnus = $routeParams.tutkinto;
 
     $scope.valinnat = {};
+
+    Tutkinto.hae(tutkintotunnus).then(function(tutkinto) {
+      $scope.tutkinto = tutkinto;
+    });
 
     $scope.eteenpain = function() {
       var valinnat = _($scope.valinnat)

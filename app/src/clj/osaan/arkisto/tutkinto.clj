@@ -29,12 +29,20 @@
     (sql/set-fields tiedot)
     (sql/where {:tutkintotunnus tutkintotunnus})))
 
+(defn hae
+  "Hae tutkinto tutkintotunnuksella."
+  [tutkintotunnus]
+  (sql-util/select-unique-or-nil
+    :tutkinto
+    (sql/fields :tutkintotunnus :nimi_fi :nimi_sv)
+    (sql/where {:tutkintotunnus tutkintotunnus})))
+
 (defn hae-kaikki
   []
   (sql/select taulut/tutkinto
     (sql/order :tutkintotunnus)))
 
-(defn hae
+(defn hae-ehdoilla
   [nimi opintoala]
   (let [nimi (str "%" nimi "%")]
     (->

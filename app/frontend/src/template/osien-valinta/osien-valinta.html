@@ -4,7 +4,7 @@
   </div>
   <div class="panel-body">
 
-    <h2>Automaalarimestarin erikoisammattitutkinto</h2>
+    <h2>{{ tutkinto | lokalisoiKentta:'nimi' }}</h2>
 
     <h3 translate="osien-valinta.pakolliset_osat"></h3>
     <div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: true}">

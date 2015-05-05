@@ -20,5 +20,8 @@
             [osaan.skeema :as skeema]))
 
 (c/defroutes reitit
+  (cu/defapi :julkinen nil :get "/:tutkintotunnus" [tutkintotunnus]
+    (json-response (arkisto/hae tutkintotunnus) skeema/Tutkinto))
+
   (cu/defapi :julkinen nil :get "/" [nimi opintoala]
-    (json-response (arkisto/hae nimi opintoala) [skeema/Tutkinto])))
+    (json-response (arkisto/hae-ehdoilla nimi opintoala) [skeema/TutkintoHakutulos])))

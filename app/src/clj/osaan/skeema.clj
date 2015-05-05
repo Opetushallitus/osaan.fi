@@ -26,10 +26,12 @@
 
 (def Tutkinto {:nimi_fi s/Str
                :nimi_sv (s/maybe s/Str)
-               :tutkintotunnus s/Str
-               :peruste_diaarinumero s/Str
-               :opintoala_nimi_fi s/Str
-               :opintoala_nimi_sv s/Str})
+               :tutkintotunnus s/Str})
+
+(def TutkintoHakutulos (merge Tutkinto
+                              {:peruste_diaarinumero s/Str
+                              :opintoala_nimi_fi s/Str
+                              :opintoala_nimi_sv s/Str}))
 
 (def Tutkinnonosa {:nimi_fi s/Str
                    :nimi_sv (s/maybe s/Str)
