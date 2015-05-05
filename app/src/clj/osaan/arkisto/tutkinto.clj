@@ -39,7 +39,7 @@
   (let [nimi (str "%" nimi "%")]
     (->
       (sql/select* :tutkinto)
-      (sql/join :opintoala (= :opintoala.opintoala_tkkoodi :opintoala))
+      (sql/join :opintoala (= :opintoala.opintoalatunnus :opintoala))
       (sql/fields :tutkintotunnus :nimi_fi :nimi_sv [:opintoala.nimi_fi :opintoala_nimi_fi] [:opintoala.nimi_sv :opintoala_nimi_sv])
       (sql/where (or {:nimi_fi [sql-util/ilike nimi]}
                      {:nimi_sv [sql-util/ilike nimi]}))
