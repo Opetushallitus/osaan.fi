@@ -15,6 +15,15 @@
 (ns osaan.skeema
   (:require [schema.core :as s]))
 
+(def ArvioinninKohde {:arvioinninkohde_id s/Int
+                      :nimi_fi s/Str
+                      :nimi_sv s/Str})
+
+(def ArvioinninKohdealue {:arvioinninkohdealue_id s/Int
+                          :nimi_fi s/Str
+                          :nimi_sv s/Str
+                          :kohteet [ArvioinninKohde]})
+
 (def Opintoala {:nimi_fi s/Str
                 :nimi_sv s/Str
                 :opintoalatunnus s/Str})

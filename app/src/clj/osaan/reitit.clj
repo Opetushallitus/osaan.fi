@@ -20,6 +20,7 @@
             [ring.util.response :as resp]
             [stencil.core :as s]
             [osaan.infra.status :refer [status piilota-salasanat]]
+            [osaan.rest-api.arviointi]
             [osaan.rest-api.koulutusala]
             [osaan.rest-api.ohje]
             [osaan.rest-api.tutkinnonosa]
@@ -37,6 +38,7 @@
                                                                         piilota-salasanat
                                                                         pprint)))))
      (c/GET "/status" [] (s/render-string "OK" {})))
+    (c/context "/api/arviointi" [] osaan.rest-api.arviointi/reitit)
     (c/context "/api/koulutusala" [] osaan.rest-api.koulutusala/reitit)
     (c/context "/api/ohje" [] osaan.rest-api.ohje/reitit)
     (c/context "/api/tutkinnonosa" [] osaan.rest-api.tutkinnonosa/reitit)
