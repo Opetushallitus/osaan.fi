@@ -33,32 +33,6 @@
           </div>
         </div>
       </section>
-
-      <section class="kysymys">
-        <p>Arvioinnin kohde 2 (kysymys)</p>
-        <div class="vastaus_valinnat" ng-model="kysymys">
-          <label ng-repeat="vaihtoehto in [1,2,3,4]" style="display: block;" ng-class="{checked: kysymys.vastaus2 == vaihtoehto}" tooltip="{{ 'arvointi.asteikko'+vaihtoehto | translate }}" tooltip-placement="top">
-            <input type="radio" ng-model="kysymys.vastaus2" ng-value="vaihtoehto" name="kysymys2">
-            {{ vaihtoehto }}
-          </label>
-
-          <label style="display: block" class="eos" ng-class="{checked: kysymys.vastaus2 == 'eos'}">
-            <input type="radio" ng-model="kysymys.vastaus2" ng-value="'eos'" name="kysymys2">
-            En osaa sanoa
-          </label>
-
-          <label style="display: block" class="vapaateksti-toggle" tooltip="Anna vapaatekstivastaus" tooltip-placement="top" ng-class="{checked: vapaateksti2}">
-            <input type="checkbox" ng-model="vapaateksti2" ng-value="false" name="vapaateksti">
-            <span class="glyphicon glyphicon-pencil"></span>
-          </label>
-        </div>
-        <div class="row">
-          <div class="reveal-animation col-md-5 vapaatekstivastaus" ng-if="vapaateksti2">
-            <textarea ng-model="vapaatekstikentta2" placeholder="Kirjoita vastauksesi tähän" rows="4" class="form-control"></textarea>
-          </div>
-        </div>
-      </section>
-
     </section>
 
   </div>
