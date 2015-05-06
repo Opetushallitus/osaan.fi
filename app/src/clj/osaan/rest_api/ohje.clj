@@ -20,6 +20,4 @@
 
 (c/defroutes reitit
   (cu/defapi :julkinen nil :get "/:ohjetunniste" [ohjetunniste]
-    (if-let [ohje (arkisto/hae ohjetunniste)]
-      (json-response ohje)
-      {:status 200})))
+    (json-response (arkisto/hae ohjetunniste))))
