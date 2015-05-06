@@ -21,13 +21,14 @@
 
 (deftest ^:integraatio raportti-virheilmoitus []
   (let [crout (init-peridot!)]
-    (let [response (mock-request! crout "/api/arvioraportti/txt/eiole" :get {})]
+    (let [response (mock-request! crout "/api/arvioraportti/txt/fi/eiole" :get {})]
       (is (= (:status (:response response)) 200))
       (is (= (:body (:response response))  "Tarkista tunnus. Arviota ei löytynyt.")))))
 
 (deftest ^:integraatio raportti-normaali []
   (let [crout (init-peridot!)]
-    (let [response (mock-request! crout "/api/arvioraportti/txt/testiarvio" :get {})]
+    (let [response (mock-request! crout "/api/arvioraportti/txt/fi/testiarvio" :get {})]
+      (clojure.pprint/pprint response)
       (is (= (:status (:response response)) 200))
-      (print (.indexOf (:body (:response response)) "en osaa sanoa")))))
+      (is (< 0 (.indexOf (:body (:response response)) "En osaa sanoa"))))))
 

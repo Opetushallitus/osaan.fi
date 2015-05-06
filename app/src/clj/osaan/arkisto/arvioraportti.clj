@@ -18,12 +18,23 @@
 (defn eos-tulkinta [v]
   (or v "en osaa sanoa"))
 
+(def arvosanat 
+  {:fi {1 "En osaa"
+        2 "Osaan hiukan"
+        3 "Osaan melko hyvin"
+        4 "Osaan hyvin"
+        nil "En osaa sanoa"}})
+
+(defn arvosanatulkinta [v kieli]
+  {:post [(not (nil? %))]}
+  (get (kieli arvosanat) v))
+
 (defn hae
   [arviotunnus]
   (let [tulos (sql/select :kohdearvio
                 (sql/join :inner :arvioinnin_kohde (= :arvioinnin_kohde.arvioinninkohde_id :kohdearvio.arviokohde))
                 (sql/join :inner :arvioinnin_kohdealue (= :arvioinnin_kohdealue.arvioinninkohdealue_id :arvioinnin_kohde.arvioinninkohdealue))
-                (sql/fields :arvio
+                (sql/fields :arvio :kommentti
                             :arvioinnin_kohde.arvioinninkohdealue :arvioinnin_kohdealue.osa :arvioinnin_kohde.nimi_fi :arvioinnin_kohde.nimi_sv :arvioinnin_kohde.jarjestys
                             [:arvioinnin_kohdealue.nimi_fi :aka_nimi_fi] [:arvioinnin_kohdealue.nimi_sv :aka_nimi_sv]
                             [:arvioinnin_kohdealue.jarjestys :aka_jarjestys])
@@ -33,4 +44,7 @@
                 (sql/order :arvioinnin_kohde.jarjestys :ASC))]
     (if (empty? tulos)
       nil
-      (map #(update-in % [:arvio] eos-tulkinta) tulos))))
+      tulos)))
+
+(defn tulkitse-arvosanat [arvio kieli]
+  (map #(update-in % [:arvio] arvosanatulkinta kieli) arvio))

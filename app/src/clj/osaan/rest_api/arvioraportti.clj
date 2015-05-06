@@ -5,10 +5,23 @@
             [osaan.compojure-util :as cu]
             [cheshire.core :as cheshire]))
 
+(defn group-and-destroy [k s]
+  (let [grouped (group-by k s)
+        cleaned (clojure.walk/postwalk #(if (map? %) (dissoc % k) %) grouped)]
+    cleaned))
+
+(defn suodata-fi [tulos]
+  (let [suodatettu (map #(select-keys % [ :nimi_fi :osa :aka_nimi_fi :arvio :kommentti]) tulos)
+        nimet (map #(clojure.set/rename-keys % {:nimi_fi :nimi 
+                                                :aka_nimi_fi :arvioinnin_kohdealue
+                                                :osa :tutkinnon_osa}) suodatettu )
+        groupattu (group-and-destroy :tutkinnon_osa nimet)]
+    groupattu))
+    
 (c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/txt/:arviotunnus" [arviotunnus]
-    (if-let [tulos (arkisto/hae arviotunnus)]
-      (let [suodatettu (map #(select-keys % [:nimi_fi :nimi_sv :osa :aka_nimi_fi :aka_nimi_sv :arvio]) tulos)
+  (cu/defapi :julkinen nil :get "/txt/:kieli/:arviotunnus" [kieli arviotunnus]
+    (if-let [tulos (arkisto/tulkitse-arvosanat (arkisto/hae arviotunnus) (keyword kieli))]
+      (let [suodatettu (suodata-fi tulos)
             muotoiltu (with-out-str (clojure.pprint/pprint suodatettu))]
          {:body muotoiltu
           :headers {"Content-Type" "text/plain; charset=utf-8"}
