@@ -14,28 +14,15 @@
 
 'use strict';
 
-angular.module('osaan.fi', [
-  'ngAnimate',
-  'ng-breadcrumbs',
-  'ngRoute',
-  'taiPlaceholder',
-  'ui.bootstrap',
+angular.module('osaan.rest.arvioinninkohde', [])
 
-  'yhteiset.palvelut.lokalisointi',
-
-  'osaan.etusivu.etusivuui',
-  'osaan.direktiivit.kielen-vaihto',
-  'osaan.direktiivit.ohje',
-  'osaan.osien-valinta.osien-valintaui',
-  'osaan.arviointi.arviointiui',
-  'osaan.palvelut.arviointi',
-  'osaan.rest.arvioinninkohde',
-  'osaan.rest.koulutusala',
-  'osaan.rest.tutkinnonosa',
-  'osaan.rest.tutkinto',
-  'osaan.tekstit']).
-
-  controller('OsaanController', ['$scope', 'breadcrumbs', function($scope, breadcrumbs){
-    $scope.breadcrumbs = breadcrumbs;
+  .factory('ArvioinninKohteet', ['$http', function($http) {
+    return {
+      haeKohdealueet: function(tutkinnonosatunnus) {
+        return $http.get('api/arviointi/kohdealueet?tutkinnonosatunnus=' + tutkinnonosatunnus).then(function(response) {
+          return response.data;
+        });
+      }
+    };
   }])
 ;
