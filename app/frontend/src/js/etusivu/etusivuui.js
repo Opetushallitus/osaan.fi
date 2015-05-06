@@ -25,7 +25,7 @@ angular.module('osaan.etusivu.etusivuui', ['ngRoute'])
       });
   }])
 
-  .controller('EtusivuController', ['$scope', 'Koulutusala', 'Tutkinto', function($scope, Koulutusala, Tutkinto) {
+  .controller('EtusivuController', ['$scope', 'Arviointi', 'Koulutusala', 'Tutkinto', function($scope, Arviointi, Koulutusala, Tutkinto) {
     $scope.haku = {};
     $scope.koulutusalat = [];
     $scope.tutkinnot = [];
@@ -39,5 +39,9 @@ angular.module('osaan.etusivu.etusivuui', ['ngRoute'])
         $scope.tutkinnot = tutkinnot;
       });
     }, true);
+
+    $scope.tyhjennaValitutOsatunnukset = function() {
+      Arviointi.asetaOsatunnukset([]);
+    };
   }])
 ;
