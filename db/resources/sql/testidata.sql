@@ -48,10 +48,10 @@ insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_a
 
 insert into arvio (tunniste) values ('testiarvio');
 
-insert into kohdearvio (arviotunnus, arviokohde, arvio)
+insert into kohdearvio (arviotunnus, arviokohde, arvio, kommentti)
   values
     ('testiarvio', -1, 1),
     ('testiarvio', -2, 3),
     ('testiarvio', -3, 3),
     ('testiarvio', -4, 4),
-    ('testiarvio', -5, null);
+    ('testiarvio', -5, null, 'En täysin ymmärtänyt miten eri osaamistasot tässä osa-alueessa tulisi arvioida.');
