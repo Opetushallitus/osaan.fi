@@ -28,6 +28,7 @@ angular.module('osaan.fi', [
   'osaan.direktiivit.ohje',
   'osaan.osien-valinta.osien-valintaui',
   'osaan.arviointi.arviointiui',
+  'osaan.palvelut.arviointi',
   'osaan.rest.koulutusala',
   'osaan.rest.tutkinnonosa',
   'osaan.rest.tutkinto',
