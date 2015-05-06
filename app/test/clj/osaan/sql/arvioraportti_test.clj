@@ -8,5 +8,9 @@
 (use-fixtures :each tietokanta-fixture)
 
 (deftest ^:integraatio testaahaku
-  (let [tulos (arvio-db/hae-arvio "testiarvio")]
+  (let [tulos (arvio-db/hae "testiarvio")]
     (is (= 5 (count tulos)))))
+
+(deftest ^:integraatio testaahaku-eiloydy
+  (let [tulos (arvio-db/hae "eiole")]
+    (is (nil? tulos))))

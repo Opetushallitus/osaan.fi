@@ -54,4 +54,4 @@ insert into kohdearvio (arviotunnus, arviokohde, arvio)
     ('testiarvio', -2, 3),
     ('testiarvio', -3, 3),
     ('testiarvio', -4, 4),
-    ('testiarvio', -5, 4);
+    ('testiarvio', -5, null);

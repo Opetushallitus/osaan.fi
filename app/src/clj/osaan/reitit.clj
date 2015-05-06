@@ -23,7 +23,8 @@
             [osaan.rest-api.koulutusala]
             [osaan.rest-api.ohje]
             [osaan.rest-api.tutkinnonosa]
-            [osaan.rest-api.tutkinto]))
+            [osaan.rest-api.tutkinto]
+            [osaan.rest-api.arvioraportti]))
 
 (defn reitit [asetukset]
   (c/routes
@@ -40,4 +41,5 @@
     (c/context "/api/ohje" [] osaan.rest-api.ohje/reitit)
     (c/context "/api/tutkinnonosa" [] osaan.rest-api.tutkinnonosa/reitit)
     (c/context "/api/tutkinto" [] osaan.rest-api.tutkinto/reitit)
+    (c/context "/api/arvioraportti" [] osaan.rest-api.arvioraportti/reitit)
     (r/not-found "Not found")))
