@@ -296,13 +296,13 @@ create table arvio (
 create table kohdearvio (
   arviotunnus varchar(16) NOT NULL references arvio(tunniste),
   arviokohde integer NOT NULL references arvioinnin_kohde(arvioinninkohde_id),
-  arvio integer NOT NULL,
+  arvio integer, 
   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   muutettuaika timestamptz NOT NULL,
   luotuaika timestamptz NOT NULL,
   PRIMARY KEY (arviotunnus, arviokohde),
-  CONSTRAINT arvosana_rajat CHECK ((arvio < 6) and (arvio > 0))
+  CONSTRAINT arvosana_rajat CHECK ((arvio < 5) and (arvio > 0))
 );
 
 create trigger arvioinnin_kohdealue_update before update on arvioinnin_kohdealue for each row execute procedure update_stamp() ;
@@ -348,7 +348,7 @@ COMMENT ON TABLE tutkinnonosa_ja_peruste IS 'Liitostaulu. Tutkinnon osa voi olla
 COMMENT ON TABLE arvio IS 'Osaamisarvio. Arviolle annetaan tunniste, jota käytetään tarvittaessa myös tiedon lataamiseen.';
 COMMENT ON TABLE arvioinnin_kohdealue IS 'Arvioitavat asiat jakautuvat eri kohdealueille. Kohdealue lähinnä otsikoi arvioinnin kohteet.';
 COMMENT ON TABLE arvioinnin_kohde IS 'Yksittäinen arvioitava osaamisen osa-alue.';
-COMMENT ON COLUMN kohdearvio.arvio IS 'Arvio numeerisena arvosanana (0-5). Eri tasojen kriteerit määritelty perusteissa.';
+COMMENT ON COLUMN kohdearvio.arvio IS 'Arvio numeerisena arvosanana [1-4]. Eri tasojen kriteerit määritelty perusteissa. Null tulkitaan tarkoittavan "en osaa sanoa"';
 COMMENT ON COLUMN arvio.tunniste IS 'Osaamisarvion yksilöivä tunnistekoodi.';
 COMMENT ON COLUMN arvioinnin_kohde.jarjestys IS '>= 0. Järjestysnumero on päätelty integraatiossa ePerusteet järjestelmän rajapinnan kautta.';
 COMMENT ON COLUMN arvioinnin_kohdealue.jarjestys IS '>= 0. Järjestysnumero on päätelty integraatiossa ePerusteet järjestelmän rajapinnan kautta.';
