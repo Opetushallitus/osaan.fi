@@ -25,8 +25,12 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
       });
   }])
 
-  .controller('ArviointiController', ['$location', '$routeParams', '$scope', 'Arviointi', function($location, $routeParams, $scope, Arviointi) {
+  .controller('ArviointiController', ['$location', '$routeParams', '$scope', 'ArvioinninKohteet', 'Arviointi', function($location, $routeParams, $scope, ArvioinninKohteet, Arviointi) {
     var tutkinnonosa = $routeParams.osa;
+
+    ArvioinninKohteet.haeKohdealueet(tutkinnonosa).then(function(kohdealueet) {
+      $scope.kohdealueet = kohdealueet;
+    });
 
     $scope.kysymys = {vastaus1: null, vastaus2: null};
 

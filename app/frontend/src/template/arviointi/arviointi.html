@@ -6,11 +6,11 @@
     <h2>Tutkinnon osa 1</h2>
     <h3>Automaalarimestarin erikoisammattitutkinto</h3>
 
-    <section class="kohdealue">
-      <h4>Arvioinnin kohdealue (otsikko)</h4>
+    <section class="kohdealue" ng-repeat="kohdealue in kohdealueet">
+      <h4>{{ kohdealue | lokalisoiKentta:'nimi' }}</h4>
 
-      <section class="kysymys">
-        <p>Arvioinnin kohde 1 (kysymys)</p>
+      <section class="kysymys" ng-repeat="kohde in kohdealue.kohteet">
+        <p>{{ kohde | lokalisoiKentta:'nimi' }}</p>
         <div class="vastaus_valinnat" ng-model="kysymys">
           <label ng-repeat="vaihtoehto in [1,2,3,4]" style="display: block;" ng-class="{checked: kysymys.vastaus1 == vaihtoehto}" tooltip="{{ 'arvointi.asteikko'+vaihtoehto | translate }}" tooltip-placement="top">
             <input type="radio" ng-model="kysymys.vastaus1" ng-value="vaihtoehto" name="kysymys1">
