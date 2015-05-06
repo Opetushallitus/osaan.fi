@@ -1,13 +1,12 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Arvioi osaamisesi</h3>
+    <h3 class="panel-title">Arvioi osaamisesi - Automaalarimestarin erikoisammattitutkinto</h3>
   </div>
   <div class="panel-body">
     <h2>Tutkinnon osa 1</h2>
-    <h3>Automaalarimestarin erikoisammattitutkinto</h3>
 
     <section class="kohdealue" ng-repeat="kohdealue in kohdealueet">
-      <h4>{{ kohdealue | lokalisoiKentta:'nimi' }}</h4>
+      <h3>{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
 
       <section class="kysymys" ng-repeat="kohde in kohdealue.kohteet">
         <p>{{ kohde | lokalisoiKentta:'nimi' }}</p>

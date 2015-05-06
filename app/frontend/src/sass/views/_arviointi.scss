@@ -1,4 +1,18 @@
 .kohdealue {
+  border-top: 5px solid $lighter-primary;
+
+  p {
+    font-size: 16px;
+  }
+  
+  h3 {
+    padding: .5em;
+    background-color: $lightest-primary;
+    color: $darker-gray;
+    margin-top: 0;
+    margin-bottom: 2em;
+  }
+  
   .vapaatekstivastaus {
     overflow: hidden;
     display: block;
@@ -12,11 +26,12 @@
   }
 
   .kysymys {
+    padding-left: 1em;
     clear: both;
     display: block;
     margin-bottom: 2em;
-    padding-bottom: 2em;
-    border-bottom: 1px solid $primary-color;
+    padding-bottom: 1em;
+    border-bottom: 1px solid $lightest-gray;
   }
   .kysymys:last-child {
     border: 0;
@@ -30,6 +45,7 @@
     label {
       margin: 0;
       font-size: 1.71428571428571em; /* 24px */
+      font-weight: normal;
       line-height: 100%;
       background-color: $lightest-gray;
       float: left;

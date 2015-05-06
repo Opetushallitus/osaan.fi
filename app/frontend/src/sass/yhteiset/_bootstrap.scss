@@ -5,3 +5,11 @@
   float: left;
   padding-left: 0;
 }
+
+.form-control {
+  border-color: $primary-color;
+  border-radius: 4px;
+}
+input[type="radio"], input[type="checkbox"] {
+  margin: 6px 0 0;
+}

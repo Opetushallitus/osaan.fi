@@ -7,7 +7,7 @@
     <h2>{{ tutkinto | lokalisoiKentta:'nimi' }}</h2>
 
     <h3 translate="osien-valinta.pakolliset_osat"></h3>
-    <div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: true}">
+    <div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: true}" class="checkbox">
       <label>
         <input type="checkbox" ng-model="valinnat[osa.osatunnus]" ng-click="isValinnatempty()">
         {{ osa | lokalisoiKentta:'nimi' }}

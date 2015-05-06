@@ -41,15 +41,6 @@ h3 {
   font-weight: 700;
 }
 
-label {
-  font-size: 1em;
-  font-family: $font-body;
-  font-weight: 300;
-  & input {
-    font-weight: normal;
-  }
-}
-
 a {color : $primary-color; text-decoration: none;
   &:not(.ajax-link)[href=""] {
     color: $darker-gray; cursor: default;
