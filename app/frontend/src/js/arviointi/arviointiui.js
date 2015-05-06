@@ -32,7 +32,7 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
       $scope.kohdealueet = kohdealueet;
     });
 
-    $scope.kysymys = {vastaus1: null, vastaus2: null};
+    $scope.arviot = {}; // arvioinninkohde_id -> {arvio, vapaateksti}
 
     $scope.palaaOsienValintaan = function() {
       $location.url('/osien-valinta?tutkinto=' + Arviointi.valittuTutkintotunnus() + '&peruste=' + Arviointi.valittuPeruste());
