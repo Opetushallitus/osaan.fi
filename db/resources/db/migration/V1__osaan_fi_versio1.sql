@@ -287,6 +287,16 @@ create table arvioinnin_kohde (
 
 create table arvio (
   tunniste varchar(16) NOT NULL primary key,
+  peruste varchar(20) NOT NULL references peruste(diaarinumero),
+  muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+  luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+  muutettuaika timestamptz NOT NULL,
+  luotuaika timestamptz NOT NULL
+);
+
+create table arvio_tutkinnonosa (
+  arviotunnus varchar(16) NOT NULL references arvio(tunniste),
+  osa varchar(6) not null references tutkinnonosa(osatunnus),
   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   muutettuaika timestamptz NOT NULL,
@@ -320,6 +330,12 @@ create trigger arvioinnin_kohde_mu_update before update on arvioinnin_kohde for 
 create trigger arvioinnin_kohde_cu_insert before insert on arvioinnin_kohde for each row execute procedure update_creator() ;
 create trigger arvioinnin_kohde_mu_insert before insert on arvioinnin_kohde for each row execute procedure update_modifier() ;
 
+create trigger arvio_tutkinnonosa_update before update on arvio_tutkinnonosa for each row execute procedure update_stamp() ;
+create trigger arvio_tutkinnonosal_insert before insert on arvio_tutkinnonosa for each row execute procedure update_created() ;
+create trigger arvio_tutkinnonosam_insert before insert on arvio_tutkinnonosa for each row execute procedure update_stamp() ;
+create trigger arvio_tutkinnonosa_mu_update before update on arvio_tutkinnonosa for each row execute procedure update_modifier() ;
+create trigger arvio_tutkinnonosa_cu_insert before insert on arvio_tutkinnonosa for each row execute procedure update_creator() ;
+create trigger arvio_tutkinnonosa_mu_insert before insert on arvio_tutkinnonosa for each row execute procedure update_modifier() ;
 
 create trigger arvio_update before update on arvio for each row execute procedure update_stamp() ;
 create trigger arviol_insert before insert on arvio for each row execute procedure update_created() ;
@@ -354,6 +370,8 @@ COMMENT ON COLUMN kohdearvio.kommentti IS 'Vapaamuotoinen kommentti arvioitavaan
 COMMENT ON COLUMN arvio.tunniste IS 'Osaamisarvion yksilöivä tunnistekoodi.';
 COMMENT ON COLUMN arvioinnin_kohde.jarjestys IS '>= 0. Järjestysnumero on päätelty integraatiossa ePerusteet järjestelmän rajapinnan kautta.';
 COMMENT ON COLUMN arvioinnin_kohdealue.jarjestys IS '>= 0. Järjestysnumero on päätelty integraatiossa ePerusteet järjestelmän rajapinnan kautta.';
+COMMENT ON TABLE arvio_tutkinnonosa IS 'Arvioon voi liittyä tutkinnonosia keskeneräisen arvioinnin tapauksessa siten että yhtään arviointia ei ole vielä annettu.';
+COMMENT ON COLUMN arvio.peruste IS 'Tutkinnon perustetta ei voi päätellä suoraan tutkinnonosien kautta yksikäsitteisesti.';
 
 -- dataa
 

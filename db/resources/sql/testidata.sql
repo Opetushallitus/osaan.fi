@@ -46,8 +46,8 @@ insert into arvioinnin_kohde(arvioinninkohde_id, arvioinninkohdealue, nimi_fi, n
 insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_alkupvm, voimassa_loppupvm, versio, koodistoversio) values ('2002', '324601', 'Kuvauksen ja valaisun osaamisala', '', '2014-01-01', '2199-01-01', 1, 1);
 insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_alkupvm, voimassa_loppupvm, versio, koodistoversio) values ('2003', '324601', 'Mediatyön osaamisala', '', '2014-01-01', '2199-01-01', 1, 1);
 
-insert into arvio (tunniste) values ('testiarvio');
-
+insert into arvio (tunniste, peruste) values ('testiarvio', '41/011/2005');
+insert into arvio_tutkinnonosa (arviotunnus, osa)  values ('testiarvio', '100001');
 insert into kohdearvio (arviotunnus, arviokohde, arvio, kommentti)
   values
     ('testiarvio', -1, 1, null),

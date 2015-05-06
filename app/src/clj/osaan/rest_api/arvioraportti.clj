@@ -21,7 +21,7 @@
 (c/defroutes reitit
   (cu/defapi :julkinen nil :get "/txt/:kieli/:arviotunnus" [kieli arviotunnus]
     (if-let [tulo (arkisto/hae arviotunnus)]
-      (let [tulos (arkisto/tulkitse-arvosanat (keyword kieli))
+      (let [tulos (arkisto/tulkitse-arvosanat tulo (keyword kieli))
             suodatettu (suodata-fi tulos)
             muotoiltu (with-out-str (clojure.pprint/pprint suodatettu))]
          {:body muotoiltu
