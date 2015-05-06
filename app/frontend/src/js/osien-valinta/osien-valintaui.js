@@ -25,25 +25,40 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
       });
   }])
 
-  .controller('OsienValintaController', ['$location', '$routeParams', '$scope', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, Tutkinnonosa, Tutkinto) {
+  .controller('OsienValintaController', ['$location', '$routeParams', '$scope', 'Arviointi', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, Arviointi, Tutkinnonosa, Tutkinto) {
     var peruste = $routeParams.peruste;
     var tutkintotunnus = $routeParams.tutkinto;
 
+    Arviointi.asetaTutkintoJaPeruste(tutkintotunnus, peruste);
+
+    var valitutOsatunnukset = function() {
+      return _($scope.valinnat)
+        .map(function(valittu, osatunnus) { return [osatunnus, valittu]; })
+        .filter(function(x) { return x[1]; })
+        .map(function(x) { return x[0]; })
+        .value();
+    };
+
     $scope.valinnat = {};
+    $scope.$watch('valinnat', function() {
+      Arviointi.asetaOsatunnukset(valitutOsatunnukset());
+    }, true);
+
+    // Kun sivulle palataan uudestaan, palauta valinnat
+    _.forEach(Arviointi.valitutOsatunnukset(), function(osatunnus) {
+      $scope.valinnat[osatunnus] = true;
+    });
 
     Tutkinto.hae(tutkintotunnus).then(function(tutkinto) {
       $scope.tutkinto = tutkinto;
     });
 
-    $scope.eteenpain = function() {
-      var valinnat = _($scope.valinnat)
-        .map(function(valittu, osatunnus) { return [osatunnus, valittu]; })
-        .filter(function(x) { return x[1]; })
-        .map(function(x) { return x[0]; })
-        .value();
+    $scope.seuraavaTutkinnonosa = function() {
+      return Arviointi.seuraavaOsatunnus();
+    };
 
-      sessionStorage.setItem('tutkinnonosat', JSON.stringify(valinnat));
-      $location.url('/osien-valinta/arviointi');
+    $scope.eteenpain = function() {
+      $location.url('/osien-valinta/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
     };
 
     Tutkinnonosa.hae(peruste, tutkintotunnus).then(function(tutkinnonosat) {
