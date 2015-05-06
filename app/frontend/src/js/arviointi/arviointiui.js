@@ -25,7 +25,30 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
       });
   }])
 
-  .controller('ArviointiController', ['$scope', function($scope) {
+  .controller('ArviointiController', ['$location', '$routeParams', '$scope', 'Arviointi', function($location, $routeParams, $scope, Arviointi) {
+    var tutkinnonosa = $routeParams.osa;
+
     $scope.kysymys = {vastaus1: null, vastaus2: null};
+
+    $scope.palaaOsienValintaan = function() {
+      $location.url('/osien-valinta?tutkinto=' + Arviointi.valittuTutkintotunnus() + '&peruste=' + Arviointi.valittuPeruste());
+    };
+
+    $scope.edellinenOsa = function() {
+      $location.url('/osien-valinta/arviointi?osa=' + Arviointi.edellinenOsatunnus(tutkinnonosa));
+    };
+
+    $scope.seuraavaOsa = function() {
+      $location.url('/osien-valinta/arviointi?osa=' + Arviointi.seuraavaOsatunnus(tutkinnonosa));
+
+    };
+
+    $scope.edellinenTutkinnonosa = function() {
+      return Arviointi.edellinenOsatunnus(tutkinnonosa);
+    };
+
+    $scope.seuraavaTutkinnonosa = function() {
+      return Arviointi.seuraavaOsatunnus(tutkinnonosa);
+    };
   }])
 ;
