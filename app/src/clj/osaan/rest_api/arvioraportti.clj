@@ -17,7 +17,12 @@
                                                 :osa :tutkinnon_osa}) suodatettu )
         groupattu (group-and-destroy :tutkinnon_osa nimet)]
     groupattu))
-    
+
+(def not-found-response
+  {:body  "Tarkista tunnus. Arviota ei löytynyt."
+   :headers {"Content-Type" "text/plain; charset=utf-8"}
+   :status 200})
+
 (c/defroutes reitit
   (cu/defapi :julkinen nil :get "/txt/:kieli/:arviotunnus" [kieli arviotunnus]
     (if-let [tulo (arkisto/hae arviotunnus)]
@@ -27,6 +32,10 @@
          {:body muotoiltu
           :headers {"Content-Type" "text/plain; charset=utf-8"}
           :status 200})
-      {:body  "Tarkista tunnus. Arviota ei löytynyt."
-       :headers {"Content-Type" "text/plain; charset=utf-8"}
-       :status 200})))
+      not-found-response
+      ))
+  
+  (cu/defapi :julkinen nil :get "/json/:arviotunnus" [kieli arviotunnus]
+    (if-let [tulos (arkisto/hae arviotunnus)]
+        (json-response tulos)
+      not-found-response)))

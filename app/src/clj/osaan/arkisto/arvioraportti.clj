@@ -34,7 +34,7 @@
   (let [tulos (sql/select :kohdearvio
                 (sql/join :inner :arvioinnin_kohde (= :arvioinnin_kohde.arvioinninkohde_id :kohdearvio.arviokohde))
                 (sql/join :inner :arvioinnin_kohdealue (= :arvioinnin_kohdealue.arvioinninkohdealue_id :arvioinnin_kohde.arvioinninkohdealue))
-                (sql/fields :arvio :kommentti
+                (sql/fields :arvio :kommentti :arvioinnin_kohde.arvioinninkohde_id :arvioinnin_kohdealue.arvioinninkohdealue_id
                             :arvioinnin_kohde.arvioinninkohdealue :arvioinnin_kohdealue.osa :arvioinnin_kohde.nimi_fi :arvioinnin_kohde.nimi_sv :arvioinnin_kohde.jarjestys
                             [:arvioinnin_kohdealue.nimi_fi :aka_nimi_fi] [:arvioinnin_kohdealue.nimi_sv :aka_nimi_sv]
                             [:arvioinnin_kohdealue.jarjestys :aka_jarjestys])
