@@ -1,9 +1,9 @@
-@media only screen and (max-width: 690px) {
+@media only screen and (max-width: 750px) {
   #oph-logo {
     width: 30%;
   }
   header h1 {
-    font-size: 2.1em;
+    font-size: 1.5em;
   }
   footer .copyright .app-wrapper {
     background-size: 30% 30%;
@@ -35,11 +35,8 @@
 }
 
 @media only screen and (max-width: 480px) {
-  header h1 {
-    font-size: 1.8em;
-  }
   #oph-logo {
-    width: 50%;
+    /* width: 60%; */
     position: absolute;
     top: 5px;
     right: 0px;

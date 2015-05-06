@@ -17,68 +17,65 @@
     margin-bottom: 2em;
     padding-bottom: 2em;
     border-bottom: 1px solid $primary-color;
-    overflow: auto;
   }
   .kysymys:last-child {
     border: 0;
   }
 
   .vastaus_valinnat {
+    overflow: auto;
+    margin-top: 1em;
     padding-left: 0;
+
     label {
-      padding: .1em .5em;
       margin: 0;
+      font-size: 1.71428571428571em; /* 24px */
+      line-height: 100%;
+      background-color: $lightest-gray;
+      float: left;
+      border-radius: 50%;
+      height: 2em;
+      width: 2em;
+      vertical-align: top;
+      text-align: center;
+      padding: .5em 0px 0px 0px;
+      margin-right: .3em;
+      color: $gray-color;
+      position: relative;
+      input {
+        visibility: hidden;
+        position: absolute;
+        z-index: -100;
+        top: 0;
+        left: 0;
+      }
       &:hover {
         background-color: $lightest-gray;
         cursor: pointer;
+        color: $darker-gray;
       }
-      &.vapaateksti-toggle{
-        margin-left: 1.3em;
-        border-radius: 8px;
+      &:active{
+        background-color: $primary-color !important;
+        color: white;
       }
-    }
+      &.vapaateksti-toggle {
+      }
+      &.eos {
+        margin-left: 1.9em;
+        width: auto;
+        border-radius: 2.66666666666667em;
+        padding: 0 1em 0 1em;
+        font-size: 1.28571428571429em; /* 18px */
+        height: 2.66666666666667em; /* 46px */
+        line-height: 2.66666666666667em;
+      }
 
-    &.arvosana{
-      overflow: auto;
-      margin-top: 1em;
-      label {
-        font-size: 1.65em;
-        line-height: 100%;
-        background-color: $lightest-gray;
-        float: left;
-        border-radius: 50%;
-        height: 2em;
-        width: 2em;
-        vertical-align: top;
-        text-align: center;
-        padding: .5em 0px 0px 0px !important;
-        margin-right: .3em;
-        color: $gray-color;
-        position: relative;
-        &.checked{
-          background-color: $primary-color;
-          color: white;
-          &:hover{
-            background-color: $primary-color !important;
-            color: #ffffff;
-          }
-        }
-
-        &:active{
+      &.checked{
+        background-color: $primary-color;
+        color: white;
+        &:hover{
           background-color: $primary-color !important;
-        }
-
-        &:hover {
-          background-color: $lighter-gray !important;
-          color: $darker-gray;
-        }
-
-        input {
-          visibility: hidden;
-          position: absolute;
-          z-index: -100;
-          top: 0;
-          left: 0;
+          color: #ffffff;
         }
       }
     }

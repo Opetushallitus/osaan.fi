@@ -17,6 +17,10 @@
 angular.module('osaan.tekstit', ['pascalprecht.translate'])
   .constant('tekstit', {
     fi: {
+      'arvointi.asteikko1' : 'En osaa',
+      'arvointi.asteikko2' : 'Osaan hiukan',
+      'arvointi.asteikko3' : 'Osaan melko hyvin',
+      'arvointi.asteikko4' : 'Osaan hyvin',
       'etusivu.opintoala': 'Opintoala',
       'etusivu.teksti': 'Tällä työkalulla voit arvioida osaamistasi sinua kiinnostavassa ammatissa (Näyttötutkinnossa). Voit valita joko osaamisvaatimusten selaamisen tai osaamisen arvioinnin. Selaustoiminnossa voit selailla eri tutkintojen osaamisvaatimuksia. Arvioin osaamistani -toiminnossa voit vastata valitsemasi tutkinnon osaamisvaatimuksiin ja lopuksi saat tuloksena listan vastauksistasi ja graafiset kuvaajat osaamisvaatimusten keskiarvoista. Voit myös lähettää raportin pdf-tiedostona haluamiisi sähköpostiosoitteisiin.',
       'etusivu.tutkinnon_nimi': 'Tutkinnon nimi',
@@ -32,6 +36,10 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'osien-valinta.valinnaiset_osat': 'Valinnaiset osat'
     },
     sv: {
+      'arvointi.asteikko1' : 'En osaa (sv)',
+      'arvointi.asteikko2' : 'Osaan hiukan (sv)',
+      'arvointi.asteikko3' : 'Osaan melko hyvin (sv)',
+      'arvointi.asteikko4' : 'Osaan hyvin (sv)',
       'etusivu.opintoala': 'Opintoala (sv)',
       'etusivu.teksti': 'Tällä työkalulla voit arvioida osaamistasi sinua kiinnostavassa ammatissa (Näyttötutkinnossa). Voit valita joko osaamisvaatimusten selaamisen tai osaamisen arvioinnin. Selaustoiminnossa voit selailla eri tutkintojen osaamisvaatimuksia. Arvioin osaamistani -toiminnossa voit vastata valitsemasi tutkinnon osaamisvaatimuksiin ja lopuksi saat tuloksena listan vastauksistasi ja graafiset kuvaajat osaamisvaatimusten keskiarvoista. Voit myös lähettää raportin pdf-tiedostona haluamiisi sähköpostiosoitteisiin. (sv)',
       'etusivu.tutkinnon_nimi': 'Tutkinnon nimi (sv)',

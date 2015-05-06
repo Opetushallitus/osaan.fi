@@ -11,10 +11,15 @@
 
       <section class="kysymys">
         <p>Arvioinnin kohde 1 (kysymys)</p>
-        <div class="vastaus_valinnat arvosana" ng-model="kysymys">
-          <label ng-repeat="vaihtoehto in [1,2,3,4,5]" style="display: block;" ng-class="{checked: kysymys.vastaus1 == vaihtoehto}">
+        <div class="vastaus_valinnat" ng-model="kysymys">
+          <label ng-repeat="vaihtoehto in [1,2,3,4]" style="display: block;" ng-class="{checked: kysymys.vastaus1 == vaihtoehto}" tooltip="{{ 'arvointi.asteikko'+vaihtoehto | translate }}" tooltip-placement="top">
             <input type="radio" ng-model="kysymys.vastaus1" ng-value="vaihtoehto" name="kysymys1">
             {{ vaihtoehto }}
+          </label>
+
+          <label style="display: block" class="eos" ng-class="{checked: kysymys.vastaus1 == 'eos'}">
+            <input type="radio" ng-model="kysymys.vastaus1" ng-value="'eos'" name="kysymys1">
+            En osaa sanoa
           </label>
 
           <label style="display: block" class="vapaateksti-toggle" tooltip="Anna vapaatekstivastaus klikkaamalla" tooltip-placement="top" ng-class="{checked: vapaateksti1}">
@@ -22,18 +27,24 @@
             <span class="glyphicon glyphicon-align-left"></span>
           </label>
         </div>
-        <div class="reveal-animation row col-md-5 vapaatekstivastaus" ng-if="vapaateksti1">
-          <textarea ng-model="vapaatekstikentta1" placeholder="Kirjoita vastauksesi tähän" rows="4" class="form-control"></textarea>
+        <div class="row">
+          <div class="reveal-animation col-md-5 vapaatekstivastaus" ng-if="vapaateksti1">
+            <textarea ng-model="vapaatekstikentta1" placeholder="Kirjoita vastauksesi tähän" rows="4" class="form-control"></textarea>
+          </div>
         </div>
       </section>
 
       <section class="kysymys">
         <p>Arvioinnin kohde 2 (kysymys)</p>
-
-        <div class="vastaus_valinnat arvosana" ng-model="kysymys">
-          <label ng-repeat="vaihtoehto in [1,2,3,4,5]" style="display: block;" ng-class="{checked: kysymys.vastaus2 == vaihtoehto}">
+        <div class="vastaus_valinnat" ng-model="kysymys">
+          <label ng-repeat="vaihtoehto in [1,2,3,4]" style="display: block;" ng-class="{checked: kysymys.vastaus2 == vaihtoehto}" tooltip="{{ 'arvointi.asteikko'+vaihtoehto | translate }}" tooltip-placement="top">
             <input type="radio" ng-model="kysymys.vastaus2" ng-value="vaihtoehto" name="kysymys2">
             {{ vaihtoehto }}
+          </label>
+
+          <label style="display: block" class="eos" ng-class="{checked: kysymys.vastaus2 == 'eos'}">
+            <input type="radio" ng-model="kysymys.vastaus2" ng-value="'eos'" name="kysymys2">
+            En osaa sanoa
           </label>
 
           <label style="display: block" class="vapaateksti-toggle" tooltip="Anna vapaatekstivastaus klikkaamalla" tooltip-placement="top" ng-class="{checked: vapaateksti2}">
@@ -41,8 +52,10 @@
             <span class="glyphicon glyphicon-align-left"></span>
           </label>
         </div>
-        <div class="reveal-animation row col-md-5 vapaatekstivastaus" ng-if="vapaateksti2">
-          <textarea ng-model="vapaatekstikentta2" placeholder="Kirjoita vastauksesi tähän" rows="4" class="form-control"></textarea>
+        <div class="row">
+          <div class="reveal-animation col-md-5 vapaatekstivastaus" ng-if="vapaateksti2">
+            <textarea ng-model="vapaatekstikentta2" placeholder="Kirjoita vastauksesi tähän" rows="4" class="form-control"></textarea>
+          </div>
         </div>
       </section>
 
