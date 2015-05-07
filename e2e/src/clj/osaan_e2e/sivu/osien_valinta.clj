@@ -12,26 +12,10 @@
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; European Union Public Licence for more details.
 
-(ns osaan-e2e.sivu.etusivu
+(ns osaan-e2e.sivu.osien-valinta
   (:require [clj-webdriver.taxi :as w]
             [osaan-e2e.avaus :as avaus]
             [osaan-e2e.util :refer :all]))
 
-(def etusivu "/#/")
-
-(defn avaa-sivu []
-  (avaus/avaa etusivu))
-
 (defn sivun-sisalto []
   (w/text (w/find-element {:css "body"})))
-
-(defn aseta-tutkinnon-nimi [nimi]
-  (odota-kunnes (w/visible? {:css ".e2e-tutkinnon-nimi"}))
-  (w/input-text {:css ".e2e-tutkinnon-nimi"} nimi))
-
-(defn valitse-tutkinto
-  [nimi]
-  (odota-kunnes (w/visible? {:css ".e2e-haettu-tutkinto"}))
-  (let [tutkinto (first (filter (fn [element] (.contains (w/text element) nimi))
-                                (w/find-elements {:css ".e2e-haettu-tutkinto"})))]
-    (w/click tutkinto)))

@@ -14,7 +14,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label translate="etusivu.tutkinnon_nimi" for="tutkinnon-nimi"></label>
-          <input type="text" class="form-control" id="tutkinnon-nimi" placeholder="{{ 'etusivu.tutkinnon_nimi_placeholder' | translate }}" ng-model="haku.tutkinto" ng-model-options="{debounce: 500}">
+          <input type="text" class="form-control e2e-tutkinnon-nimi" id="tutkinnon-nimi" placeholder="{{ 'etusivu.tutkinnon_nimi_placeholder' | translate }}" ng-model="haku.tutkinto" ng-model-options="{debounce: 500}">
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
     </div>
 
     <div class="col-md-8" style="padding: 0px;">
-        <a class="btn btn-primary pull-left" style="width: 100%; text-align: left; margin-bottom: 5px; white-space: normal;" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_diaarinumero}}" role="button" ng-repeat="tutkinto in tutkinnot" ng-click="tyhjennaValitutOsatunnukset()">
+        <a class="btn btn-primary pull-left e2e-haettu-tutkinto" style="width: 100%; text-align: left; margin-bottom: 5px; white-space: normal;" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_diaarinumero}}" role="button" ng-repeat="tutkinto in tutkinnot" ng-click="tyhjennaValitutOsatunnukset()">
           {{ tutkinto | lokalisoiKentta:'nimi' }}&nbsp;({{ tutkinto | lokalisoiKentta:'opintoala_nimi' }})&nbsp;&nbsp;
           <span class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true"></span>
         </a>
