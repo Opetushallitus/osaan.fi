@@ -20,4 +20,4 @@
   "Hakee ohjeen id:n perusteella."
   [ohjetunniste]
   (sql-util/select-unique :ohje
-      (sql/where {:ohjetunniste ohjetunniste})))
+    (sql/where {:ohjetunniste ohjetunniste})))
