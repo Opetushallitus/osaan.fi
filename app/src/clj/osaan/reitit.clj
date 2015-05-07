@@ -21,7 +21,7 @@
             [stencil.core :as s]
             [osaan.infra.status :refer [status piilota-salasanat]]
             [osaan.rest-api.arvio]
-            [osaan.rest-api.arviointi]
+            [osaan.rest-api.arvioinnin-kohde]
             [osaan.rest-api.koulutusala]
             [osaan.rest-api.ohje]
             [osaan.rest-api.tutkinnonosa]
@@ -40,7 +40,7 @@
                                                                         pprint)))))
      (c/GET "/status" [] (s/render-string "OK" {})))
     (c/context "/api/arvio" [] osaan.rest-api.arvio/reitit)
-    (c/context "/api/arviointi" [] osaan.rest-api.arviointi/reitit)
+    (c/context "/api/arvioinninkohde" [] osaan.rest-api.arvioinnin-kohde/reitit)
     (c/context "/api/koulutusala" [] osaan.rest-api.koulutusala/reitit)
     (c/context "/api/ohje" [] osaan.rest-api.ohje/reitit)
     (c/context "/api/tutkinnonosa" [] osaan.rest-api.tutkinnonosa/reitit)

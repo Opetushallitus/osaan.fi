@@ -12,13 +12,13 @@
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; European Union Public Licence for more details.
 
-(ns osaan.rest-api.arviointi
+(ns osaan.rest-api.arvioinnin-kohde
   (:require [compojure.core :as c]
             [oph.common.util.http-util :refer [json-response]]
-            [osaan.arkisto.arviointi :as arkisto]
+            [osaan.arkisto.arvioinnin-kohde :as arkisto]
             [osaan.compojure-util :as cu]
             [osaan.skeema :as skeema]))
 
 (c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/kohdealueet" [tutkinnonosatunnus]
+  (cu/defapi :julkinen nil :get "/alueet" [tutkinnonosatunnus]
     (json-response (arkisto/hae-kohdealueet-kohteineen tutkinnonosatunnus) [skeema/ArvioinninKohdealue])))

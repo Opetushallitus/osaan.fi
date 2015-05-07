@@ -28,7 +28,7 @@
       (is (= (get-in response [:headers "Content-Type"]) "application/json") polku))))
 
 (deftest ^:integraatio api-smoke
-  (doseq [polku ["/api/arviointi/kohdealueet?tutkinnonosatunnus=100001"
+  (doseq [polku ["/api/arvioinninkohde/alueet?tutkinnonosatunnus=100001"
                  "/api/koulutusala"
                  "/api/ohje/etusivu"
                  "/api/tutkinnonosa?peruste=41%2F011%2F2005&tutkintotunnus=324601"
