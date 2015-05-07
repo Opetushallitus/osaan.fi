@@ -18,7 +18,7 @@ angular.module('osaan.palvelut.arviointi', [])
 
   .factory('Arviointi', [function() {
     var tila = {
-      arviot: {},
+      arviot: {}, // tutkinnonosatunnus -> arvioinninkohde_id -> {arvio, vapaateksti}
       'osatunnukset': []
     };
     var _tallennaTila = function() {
