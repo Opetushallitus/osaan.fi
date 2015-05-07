@@ -23,20 +23,21 @@ angular.module('osaan.fi', [
 
   'yhteiset.palvelut.lokalisointi',
 
+  'osaan.arviointi.arviointiui',
   'osaan.etusivu.etusivuui',
   'osaan.direktiivit.kielen-vaihto',
   'osaan.direktiivit.ohje',
   'osaan.osien-valinta.osien-valintaui',
-  'osaan.arviointi.arviointiui',
   'osaan.palvelut.arviointi',
   'osaan.rest.arvio',
   'osaan.rest.arvioinninkohde',
   'osaan.rest.koulutusala',
   'osaan.rest.tutkinnonosa',
   'osaan.rest.tutkinto',
-  'osaan.tekstit']).
+  'osaan.tekstit'
+])
 
-  controller('OsaanController', ['$scope', 'breadcrumbs', function($scope, breadcrumbs){
+  .controller('OsaanController', ['$scope', 'breadcrumbs', function($scope, breadcrumbs){
     $scope.breadcrumbs = breadcrumbs;
   }])
 ;
