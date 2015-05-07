@@ -14,6 +14,7 @@
 
 (ns osaan.rest-api.arvio
   (:require [compojure.core :as c]
+            [schema.core :as s]
             [oph.common.util.http-util :refer [json-response]]
             [osaan.arkisto.arvio :as arkisto]
             [osaan.compojure-util :as cu]
@@ -21,4 +22,7 @@
 
 (c/defroutes reitit
   (cu/defapi :julkinen nil :get "/:tunniste" [tunniste]
-    (json-response (arkisto/hae tunniste) skeema/Arvio)))
+    (json-response (arkisto/hae tunniste) skeema/Arvio))
+  (cu/defapi :julkinen nil :post "/" [& tila]
+    (s/validate skeema/Arvio tila)
+    (json-response (arkisto/tallenna tila))))

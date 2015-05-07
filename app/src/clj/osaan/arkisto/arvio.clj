@@ -37,6 +37,12 @@
     (sql/fields :osa)
     (sql/where {:arviotunnus arviotunnus})))
 
+(defn ^:private luo-arviotunniste
+  []
+  (let [chars (map char (concat (range 48 58) (range 65 91) (range 97 123)))
+        tunniste (take 16 (repeatedly #(rand-nth chars)))]
+    (reduce str tunniste)))
+
 (defn hae
   [arviotunnus]
   (let [arvio (hae-arvio arviotunnus)
@@ -45,3 +51,22 @@
         tutkinnonosat (hae-tutkinnonosat arviotunnus)]
     (assoc arvio :kohdearviot tutkinnonosa->kohde->arviot
                  :tutkinnonosat (map :osa tutkinnonosat))))
+
+(defn tallenna
+  [tila]
+  (let [{:keys [peruste tutkinnonosat kohdearviot]} tila
+        tunniste (luo-arviotunniste)]
+    (sql/insert :arvio
+      (sql/values {:tunniste tunniste
+                   :peruste peruste}))
+    (sql/insert :arvio_tutkinnonosa
+      (sql/values (for [osa tutkinnonosat]
+                    {:arviotunnus tunniste
+                     :osa osa})))
+    (sql/insert :kohdearvio
+      (sql/values (for [[arvioinnin_kohde {:keys [arvio vapaateksti]}] (into {} (vals kohdearviot))]
+                    {:arviotunnus tunniste
+                     :arvioinnin_kohde (Integer/parseInt (name arvioinnin_kohde))
+                     :arvio arvio
+                     :kommentti vapaateksti})))
+    tunniste))
