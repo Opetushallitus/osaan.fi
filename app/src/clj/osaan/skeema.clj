@@ -15,6 +15,13 @@
 (ns osaan.skeema
   (:require [schema.core :as s]))
 
+(def Arvio {:tutkintotunnus s/Str
+            :peruste s/Str
+            :kohdearviot [{:arvioinnin_kohde s/Int
+                           :arvio (s/maybe s/Int)
+                           :kommentti (s/maybe s/Str)}]
+            :tutkinnonosat [s/Str]})
+
 (def ArvioinninKohde {:arvioinninkohde_id s/Int
                       :nimi_fi s/Str
                       :nimi_sv s/Str})
