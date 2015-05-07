@@ -32,6 +32,4 @@
 (defn valitse-tutkinto
   [nimi]
   (odota-kunnes (w/visible? {:css ".e2e-haettu-tutkinto"}))
-  (let [tutkinto (first (filter (fn [element] (.contains (w/text element) nimi))
-                                (w/find-elements {:css ".e2e-haettu-tutkinto"})))]
-    (w/click tutkinto)))
+  (w/click {:css ".e2e-haettu-tutkinto"}))
