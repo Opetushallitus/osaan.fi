@@ -38,7 +38,7 @@
   <div class="panel-footer">
     <div class="row">
       <div class="col-md-12">
-        <button class="btn btn-primary pull-right" role="button" ng-if="seuraavaTutkinnonosa() !== undefined" ng-click="seuraavaOsa()">
+        <button class="btn btn-primary pull-right" role="button" ng-if="seuraavaTutkinnonosa() !== undefined" ng-click="avaaSeuraavaOsa()">
           Arvioi osaaminen: {{ tutkinnonosatById[seuraavaTutkinnonosa()] | lokalisoiKentta:'nimi' }}
           <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
         </button>
@@ -51,7 +51,7 @@
           <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
           Valitse tutkinnon osat
         </button>
-        <button class="btn btn-primary pull-left" role="button" ng-if="edellinenTutkinnonosa() !== undefined" ng-click="edellinenOsa()">
+        <button class="btn btn-primary pull-left" role="button" ng-if="edellinenTutkinnonosa() !== undefined" ng-click="avaaEdellinenOsa()">
           <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
           Arvioi osaaminen: {{ tutkinnonosatById[edellinenTutkinnonosa()] | lokalisoiKentta:'nimi' }}
         </button>

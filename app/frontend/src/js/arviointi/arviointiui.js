@@ -61,11 +61,11 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
       $location.url('/osien-valinta?tutkinto=' + Arviointi.valittuTutkintotunnus() + '&peruste=' + Arviointi.valittuPeruste());
     };
 
-    $scope.edellinenOsa = function() {
+    $scope.avaaEdellinenOsa = function() {
       $location.url('/osien-valinta/arviointi?osa=' + Arviointi.edellinenOsatunnus(tutkinnonosa));
     };
 
-    $scope.seuraavaOsa = function() {
+    $scope.avaaSeuraavaOsa = function() {
       $location.url('/osien-valinta/arviointi?osa=' + Arviointi.seuraavaOsatunnus(tutkinnonosa));
 
     };
