@@ -26,7 +26,9 @@
 (defn ^:private hae-kohdearviot
   [arviotunnus]
   (sql/select :kohdearvio
-    (sql/fields :arvioinnin_kohde :arvio :kommentti)
+    (sql/join :arvioinnin_kohde (= :arvioinnin_kohde.arvioinninkohde_id :arvioinnin_kohde))
+    (sql/join :arvioinnin_kohdealue (= :arvioinnin_kohdealue.arvioinninkohdealue_id :arvioinnin_kohde.arvioinninkohdealue))
+    (sql/fields [:arvioinnin_kohdealue.osa :tutkinnonosa] :arvioinnin_kohde :arvio [:kommentti :vapaateksti])
     (sql/where {:arviotunnus arviotunnus})))
 
 (defn ^:private hae-tutkinnonosat
@@ -39,6 +41,7 @@
   [arviotunnus]
   (let [arvio (hae-arvio arviotunnus)
         kohdearviot (hae-kohdearviot arviotunnus)
+        tutkinnonosa->kohde->arviot (reduce #(assoc-in %1 [(:tutkinnonosa %2) (:arvioinnin_kohde %2)] (dissoc %2 :tutkinnonosa :arvioinnin_kohde)) {} kohdearviot)
         tutkinnonosat (hae-tutkinnonosat arviotunnus)]
-    (assoc arvio :kohdearviot kohdearviot
+    (assoc arvio :kohdearviot tutkinnonosa->kohde->arviot
                  :tutkinnonosat (map :osa tutkinnonosat))))
