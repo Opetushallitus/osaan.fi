@@ -16,7 +16,7 @@
 
 angular.module('osaan.rest.arvioinninkohde', [])
 
-  .factory('ArvioinninKohteet', ['$http', function($http) {
+  .factory('ArvioinninKohde', ['$http', function($http) {
     return {
       haeKohdealueet: function(tutkinnonosatunnus) {
         return $http.get('api/arviointi/kohdealueet?tutkinnonosatunnus=' + tutkinnonosatunnus).then(function(response) {
