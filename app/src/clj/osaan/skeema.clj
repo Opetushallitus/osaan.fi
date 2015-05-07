@@ -58,3 +58,5 @@
                    :nimi_sv (s/maybe s/Str)
                    :osatunnus s/Str
                    :pakollinen s/Bool})
+
+(def Tutkinnonosa->ArvioinninKohdealueet {s/Str [ArvioinninKohdealue]})

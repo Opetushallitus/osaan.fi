@@ -21,4 +21,9 @@
 
 (c/defroutes reitit
   (cu/defapi :julkinen nil :get "/alueet" [tutkinnonosatunnus]
-    (json-response (arkisto/hae-kohdealueet-kohteineen tutkinnonosatunnus) [skeema/ArvioinninKohdealue])))
+    (let [osatunnukset (if (sequential? tutkinnonosatunnus)
+                         tutkinnonosatunnus
+                         [tutkinnonosatunnus])]
+      (json-response (into {} (for [osatunnus osatunnukset]
+                                {osatunnus (arkisto/hae-kohdealueet-kohteineen osatunnus)}))
+                     skeema/Tutkinnonosa->ArvioinninKohdealueet))))
