@@ -24,6 +24,4 @@
     (testing
       "arvion tekeminen"
       (etusivu/avaa-sivu)
-      (etusivu/aseta-tutkinnon-nimi "audio")
-
-      (is (.contains (osien-valinta-sivu/sivun-sisalto) "Valitse tutkinnon osat")))))
+      (etusivu/aseta-tutkinnon-nimi "audio"))))
