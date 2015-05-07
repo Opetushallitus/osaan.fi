@@ -18,8 +18,8 @@
 (def Arvio {:tutkintotunnus s/Str
             :peruste s/Str
             ; tutkinnonosatunnus -> arvioinninkohde_id -> { arvio, vapaateksti }
-            :kohdearviot {s/Any {s/Any {:arvio (s/maybe s/Int)
-                                        :vapaateksti (s/maybe s/Str)}}}
+            :kohdearviot {s/Any {s/Any {(s/optional-key :arvio) (s/maybe s/Int)
+                                        (s/optional-key :vapaateksti) (s/maybe s/Str)}}}
             :tutkinnonosat [s/Str]})
 
 (def ArvioinninKohde {:arvioinninkohde_id s/Int
