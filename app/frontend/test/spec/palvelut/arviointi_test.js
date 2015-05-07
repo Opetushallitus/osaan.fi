@@ -43,4 +43,31 @@ describe('Arviointi', function() {
     expect(Arviointi.seuraavaOsatunnus()).toEqual('100001');
     expect(Arviointi.seuraavaOsatunnus('100001')).toEqual('100002');
   });
+
+  it('Luo kopiot sisään tulevista tietorakenteista', function() {
+    var osatunnukset = ['100001', '100002'];
+
+    Arviointi.asetaOsatunnukset(osatunnukset);
+    osatunnukset.push('100003');
+    expect(Arviointi.valitutOsatunnukset()).toEqual(['100001', '100002']);
+
+    var arviot = {'-1':{'arvio':1}};
+    Arviointi.asetaArviot('100001', arviot);
+    arviot['-2'] = {'arvio':3};
+    expect(Arviointi.haeArviot('100001')).toEqual({'-1':{'arvio':1}});
+  });
+
+  it('Luo kopiot ulos annettavista tietorakenteista', function() {
+    var osatunnukset = Arviointi.valitutOsatunnukset();
+    var osatunnuksetAlkup = angular.copy(osatunnukset);
+
+    osatunnukset.push('100003');
+    expect(Arviointi.valitutOsatunnukset()).toEqual(osatunnuksetAlkup);
+
+    Arviointi.asetaArviot('100001', {'-1':{'arvio':1}});
+    var arviot = Arviointi.haeArviot('100001');
+    var arviotAlkup = angular.copy(arviot);
+    arviot['-2'] = {'arvio':3};
+    expect(Arviointi.haeArviot('100001')).toEqual(arviotAlkup);
+  });
 });

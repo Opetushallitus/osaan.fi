@@ -31,12 +31,12 @@ angular.module('osaan.palvelut.arviointi', [])
     }
 
     var asetaArviot = function(tutkinnonosatunnus, arviot) {
-      tila.arviot[tutkinnonosatunnus] = arviot;
+      tila.arviot[tutkinnonosatunnus] = angular.copy(arviot);
       _tallennaTila();
     };
 
     var asetaOsatunnukset = function(osat) {
-      tila.osatunnukset = osat;
+      tila.osatunnukset = angular.copy(osat);
       _tallennaTila();
     };
 
@@ -56,7 +56,7 @@ angular.module('osaan.palvelut.arviointi', [])
     };
 
     var haeArviot = function(tutkinnonosatunnus) {
-      return tila.arviot[tutkinnonosatunnus];
+      return angular.copy(tila.arviot[tutkinnonosatunnus]);
     };
 
     var seuraavaOsatunnus = function(osatunnus) {
@@ -72,7 +72,7 @@ angular.module('osaan.palvelut.arviointi', [])
 
     var valittuPeruste = function() { return tila.peruste; };
     var valittuTutkintotunnus = function() { return tila.tutkintotunnus; };
-    var valitutOsatunnukset = function() { return tila.osatunnukset; };
+    var valitutOsatunnukset = function() { return angular.copy(tila.osatunnukset); };
 
     return {
       asetaArviot: asetaArviot,
