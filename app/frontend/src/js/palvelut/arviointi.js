@@ -18,6 +18,7 @@ angular.module('osaan.palvelut.arviointi', [])
 
   .factory('Arviointi', [function() {
     var tila = {
+      arviot: {},
       'osatunnukset': []
     };
     var _tallennaTila = function() {
@@ -28,6 +29,11 @@ angular.module('osaan.palvelut.arviointi', [])
     if (sessionStorage.getItem('arviointi') !== null) {
       tila = JSON.parse(sessionStorage.getItem('arviointi'));
     }
+
+    var asetaArviot = function(tutkinnonosatunnus, arviot) {
+      tila.arviot[tutkinnonosatunnus] = arviot;
+      _tallennaTila();
+    };
 
     var asetaOsatunnukset = function(osat) {
       tila.osatunnukset = osat;
@@ -49,6 +55,10 @@ angular.module('osaan.palvelut.arviointi', [])
       return undefined;
     };
 
+    var haeArviot = function(tutkinnonosatunnus) {
+      return tila.arviot[tutkinnonosatunnus];
+    };
+
     var seuraavaOsatunnus = function(osatunnus) {
       if (osatunnus === undefined) {
         return tila.osatunnukset[0];
@@ -65,9 +75,11 @@ angular.module('osaan.palvelut.arviointi', [])
     var valitutOsatunnukset = function() { return tila.osatunnukset; };
 
     return {
+      asetaArviot: asetaArviot,
       asetaOsatunnukset: asetaOsatunnukset,
       asetaTutkintoJaPeruste: asetaTutkintoJaPeruste,
       edellinenOsatunnus: edellinenOsatunnus,
+      haeArviot: haeArviot,
       seuraavaOsatunnus: seuraavaOsatunnus,
       valittuPeruste: valittuPeruste,
       valittuTutkintotunnus: valittuTutkintotunnus,

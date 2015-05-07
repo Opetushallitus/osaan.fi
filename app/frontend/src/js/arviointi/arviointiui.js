@@ -33,6 +33,14 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
     });
 
     $scope.arviot = {}; // arvioinninkohde_id -> {arvio, vapaateksti}
+    $scope.$watch('arviot', function(arviot) {
+      Arviointi.asetaArviot(tutkinnonosa, arviot);
+    }, true);
+
+    var arviot = Arviointi.haeArviot(tutkinnonosa);
+    if (arviot) {
+      $scope.arviot = arviot;
+    }
 
     $scope.palaaOsienValintaan = function() {
       $location.url('/osien-valinta?tutkinto=' + Arviointi.valittuTutkintotunnus() + '&peruste=' + Arviointi.valittuPeruste());
