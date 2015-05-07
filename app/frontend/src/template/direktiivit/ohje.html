@@ -1,6 +1,8 @@
 <div class="ohje">
   <div class="ohje-popup" ng-show="nayta">
-    <button class="icon delete-icon sulje" ng-click="piilotaOhje()"></button>
+    <a class="sulje" ng-click="piilotaOhje()">
+      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </a>
     <p ng-repeat="kappale in ohje">{{kappale}}</p>
   </div>
   <div class="avaa" ng-click="naytaOhje()"></div>

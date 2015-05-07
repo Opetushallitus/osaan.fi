@@ -37,9 +37,11 @@
     background-color: white;
     min-height: 100px;
     padding: 22px 10px 20px 10px;
-    right: 37px;
-    top: 10px;
+    right: 10px;
+    top: 2px;
     width: $ohje-popup-width;
+    opacity: .94;
+    color: $darkest-gray;
     &.muokkaus {
       width: $ohje-popup-muokkaus-width;
       padding-bottom: 5px;
@@ -47,8 +49,9 @@
     p {}
     a {
       position: absolute;
-      right: 3px;
-      bottom: 0;
+      right: 6px;
+      top: 3px;
+      font-size: 18px;
     }
     fieldset {
       display: block;
