@@ -33,22 +33,30 @@
 
     <div class="row">
       <div class="col-md-6">
-        <strong style="margin-bottom: -10px;"><br/>Valitse tutkintotyyppi</strong>
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" ng-model="naytavoimaantulevat" value="false">
+            Näytä myös voimaantulevat
+          </label>
+        </div>
+
+        <strong style="margin-bottom: -10px;">Tutkintotyyppi</strong>
         <div class="radio" style="margin-top: 0;">
           <label>
-            <input type="radio" name="tutkintotyyppi" id="optionsRadios1" value="erikoisammattitutkinto" checked>
+            <input type="radio" ng-model="tutkintotyyppi" name="tutkintotyyppi" value="erikoisammattitutkinto" checked>
             Erikoisammattitutkinto
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" name="tutkintotyyppi" id="optionsRadios1" value="perustutkinto">
+            <input type="radio" ng-model="tutkintotyyppi" name="tutkintotyyppi" value="perustutkinto">
             Perustutkinto
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" name="tutkintotyyppi" id="optionsRadios1" value="ammattitutkinto">
+            <input type="radio" ng-model="tutkintotyyppi" name="tutkintotyyppi" value="ammattitutkinto">
             Ammattitutkinto
           </label>
         </div>

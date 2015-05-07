@@ -11,20 +11,25 @@
       <section class="kysymys" ng-repeat="kohde in kohdealue.kohteet">
         <p>{{ kohde | lokalisoiKentta:'nimi' }}</p>
         <div class="vastaus_valinnat">
-          <label ng-repeat="vaihtoehto in [1,2,3,4]" style="display: block;" ng-class="{checked: arviot[kohde.arvioinninkohde_id].arvio == vaihtoehto}" tooltip="{{ 'arvointi.asteikko'+vaihtoehto | translate }}" tooltip-placement="top">
-            <input type="radio" ng-model="arviot[kohde.arvioinninkohde_id].arvio" ng-value="vaihtoehto" name="kysymys1">
-            {{ vaihtoehto }}
-          </label>
+          <div class="valinnat-container arvosanat">
+            <label ng-repeat="vaihtoehto in [1,2,3,4]" style="display: block;" ng-class="{checked: arviot[kohde.arvioinninkohde_id].arvio == vaihtoehto}">
+              <input type="radio" ng-model="arviot[kohde.arvioinninkohde_id].arvio" ng-value="vaihtoehto">
+              {{ vaihtoehto }}
+              <span class="asteikkoteksti">{{ 'arvointi.asteikko'+vaihtoehto | translate }}</span>
+            </label>
+          </div>
+          <div class="valinnat-container muut">
+            <label style="display: block;" class="eos" ng-class="{checked: arviot[kohde.arvioinninkohde_id].arvio === null}">
+              <input type="radio" ng-model="arviot[kohde.arvioinninkohde_id].arvio" ng-value="null" />
+              En osaa sanoa
+            </label>
 
-          <label style="display: block" class="eos" ng-class="{checked: arviot[kohde.arvioinninkohde_id].arvio === null}">
-            <input type="radio" ng-model="arviot[kohde.arvioinninkohde_id].arvio" ng-value="null" name="kysymys1">
-            En osaa sanoa
-          </label>
-
-          <label style="display: block" class="vapaateksti-toggle" tooltip="Anna vapaatekstivastaus" tooltip-placement="top" ng-class="{checked: vapaateksti_auki}">
-            <input type="checkbox" ng-model="vapaateksti_auki" ng-value="false" name="vapaateksti">
-            <span class="glyphicon glyphicon-pencil"></span>
-          </label>
+            <label style="display: block" class="needsclick vapaateksti-toggle" ng-class="{checked: vapaateksti_auki}" ng-click="">
+              <input type="checkbox" ng-model="vapaateksti_auki" ng-value="false" name="vapaateksti" class="needsclick" ng-click="" />
+              <span class="glyphicon glyphicon-pencil"></span>
+              <span class="asteikkoteksti">Tekstivastaus</span>
+            </label>
+          </div>
         </div>
         <div class="row">
           <div class="reveal-animation col-md-5 vapaatekstivastaus" ng-if="vapaateksti_auki">

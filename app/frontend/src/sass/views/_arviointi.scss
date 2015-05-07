@@ -19,7 +19,7 @@
 
     textarea {
       border-width: 1px;
-      margin-top: 1em;
+      margin-bottom: 1em;
       position: relative;
       bottom: 0;
     }
@@ -42,6 +42,15 @@
     margin-top: 1em;
     padding-left: 0;
 
+    .valinnat-container {
+      float: left;
+      overflow: visible;
+      margin-right: 2em;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
     label {
       margin: 0;
       font-size: 1.71428571428571em; /* 24px */
@@ -55,9 +64,24 @@
       vertical-align: top;
       text-align: center;
       padding: .5em 0px 0px 0px;
-      margin-right: .3em;
+      margin-right: .7em;
+      margin-bottom: 1.7em;
       color: $gray-color;
       position: relative;
+      &:last-child {
+        margin-right: 0;
+      }
+      .asteikkoteksti {
+        font-size: 0.4166666667em;
+        color: $darker-gray;
+        line-height: 1.2em;
+        width: 6em;
+        display: block;
+        position: absolute;
+        margin-left: -3em;
+        left: 50%;
+        top: 5em;
+      }
       input {
         visibility: hidden;
         position: absolute;
@@ -75,10 +99,11 @@
         color: white;
       }
       &.vapaateksti-toggle {
+
       }
       &.eos {
-        margin-left: 1.9em;
-        width: auto;
+        /* margin-left: 1.9em; */
+        width: 10em;
         border-radius: 2.66666666666667em;
         padding: 0 1em 0 1em;
         font-size: 1.28571428571429em; /* 18px */
@@ -89,6 +114,9 @@
       &.checked{
         background-color: $primary-color;
         color: white;
+        .asteikkoteksti {
+          color: $darker-primary;
+        }
         &:hover{
           background-color: $primary-color !important;
           color: #ffffff;
