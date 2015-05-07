@@ -52,7 +52,7 @@
           <div><small>{{ tutkinnonosatById[seuraavaTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small></div>
         </div>
 
-        <button class="btn btn-primary pull-right" role="button" ng-if="seuraavaTutkinnonosa() === undefined">
+        <button class="btn btn-primary pull-right" role="button" ng-if="seuraavaTutkinnonosa() === undefined" ng-click="siirryRaporttiin()">
           Näytä raportti&nbsp;
           <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
         </button>

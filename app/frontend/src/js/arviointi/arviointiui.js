@@ -77,5 +77,9 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
     $scope.seuraavaTutkinnonosa = function() {
       return Arviointi.seuraavaOsatunnus(tutkinnonosa);
     };
+
+    $scope.siirryRaporttiin = function() {
+      $location.url('/raportti');
+    };
   }])
 ;
