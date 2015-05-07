@@ -22,6 +22,11 @@ angular.module('osaan.rest.arvio', [])
         return $http.get('api/arvio/' + arviotunniste).then(function(response) {
           return response.data;
         });
+      },
+      tallenna: function(tila) {
+        return $http.post('api/arvio', tila).then(function(response) {
+          return response.data;
+        });
       }
     };
   }])
