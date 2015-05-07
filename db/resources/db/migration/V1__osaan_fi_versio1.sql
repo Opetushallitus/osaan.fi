@@ -305,14 +305,14 @@ create table arvio_tutkinnonosa (
 
 create table kohdearvio (
   arviotunnus varchar(16) NOT NULL references arvio(tunniste),
-  arviokohde integer NOT NULL references arvioinnin_kohde(arvioinninkohde_id),
+  arvioinnin_kohde integer NOT NULL references arvioinnin_kohde(arvioinninkohde_id),
   arvio integer, 
   kommentti text,
   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   muutettuaika timestamptz NOT NULL,
   luotuaika timestamptz NOT NULL,
-  PRIMARY KEY (arviotunnus, arviokohde),
+  PRIMARY KEY (arviotunnus, arvioinnin_kohde),
   CONSTRAINT arvosana_rajat CHECK ((arvio < 5) and (arvio > 0))
 );
 

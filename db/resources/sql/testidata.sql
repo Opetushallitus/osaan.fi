@@ -48,7 +48,7 @@ insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_a
 
 insert into arvio (tunniste, peruste) values ('testiarvio', '41/011/2005');
 insert into arvio_tutkinnonosa (arviotunnus, osa)  values ('testiarvio', '100001');
-insert into kohdearvio (arviotunnus, arviokohde, arvio, kommentti)
+insert into kohdearvio (arviotunnus, arvioinnin_kohde, arvio, kommentti)
   values
     ('testiarvio', -1, 1, null),
     ('testiarvio', -2, 3, null),
