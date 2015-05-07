@@ -25,13 +25,19 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
       });
   }])
 
-  .controller('ArviointiController', ['$location', '$routeParams', '$scope', 'ArvioinninKohteet', 'Arviointi', 'Tutkinto', function($location, $routeParams, $scope, ArvioinninKohteet, Arviointi, Tutkinto) {
+  .controller('ArviointiController', ['$location', '$routeParams', '$scope', 'ArvioinninKohteet', 'Arviointi', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, ArvioinninKohteet, Arviointi, Tutkinnonosa, Tutkinto) {
     var tutkinnonosa = $routeParams.osa;
+    $scope.tutkinnonosa = tutkinnonosa;
     var tutkintotunnus = Arviointi.valittuTutkintotunnus();
+    var peruste = Arviointi.valittuPeruste();
 
-    if (tutkintotunnus !== undefined) {
+    if (tutkintotunnus !== undefined && peruste !== undefined) {
       Tutkinto.hae(tutkintotunnus).then(function(tutkinto) {
         $scope.tutkinto = tutkinto;
+      });
+      Tutkinnonosa.hae(peruste, tutkintotunnus).then(function(tutkinnonosat) {
+        $scope.tutkinnonosat = tutkinnonosat;
+        $scope.tutkinnonosatById = _.indexBy(tutkinnonosat, 'osatunnus');
       });
     } else {
       $location.url('/');

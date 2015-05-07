@@ -3,7 +3,7 @@
     <h3 class="panel-title">Arvioi osaamisesi - {{ tutkinto | lokalisoiKentta:'nimi' }}</h3>
   </div>
   <div class="panel-body">
-    <h2>Tutkinnon osa 1</h2>
+    <h2>{{ tutkinnonosatById[tutkinnonosa] | lokalisoiKentta:'nimi' }}</h2>
 
     <section class="kohdealue" ng-repeat="kohdealue in kohdealueet">
       <h3>{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
@@ -39,7 +39,7 @@
     <div class="row">
       <div class="col-md-12">
         <button class="btn btn-primary pull-right" role="button" ng-if="seuraavaTutkinnonosa() !== undefined" ng-click="seuraavaOsa()">
-          Arvioi osaaminen
+          Arvioi osaaminen: {{ tutkinnonosatById[seuraavaTutkinnonosa()] | lokalisoiKentta:'nimi' }}
           <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
         </button>
         <button class="btn btn-primary pull-right" role="button" ng-if="seuraavaTutkinnonosa() === undefined">
@@ -53,7 +53,7 @@
         </button>
         <button class="btn btn-primary pull-left" role="button" ng-if="edellinenTutkinnonosa() !== undefined" ng-click="edellinenOsa()">
           <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
-          Arvioi osaaminen
+          Arvioi osaaminen: {{ tutkinnonosatById[edellinenTutkinnonosa()] | lokalisoiKentta:'nimi' }}
         </button>
       </div>
     </div>
