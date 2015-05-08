@@ -9,6 +9,22 @@
       <section class="kohdealue" ng-repeat="kohdealue in kohdealueet[tutkinnonosa.osatunnus]">
         <h3>{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
 
+        <table>
+          <thead>
+            <tr>
+              <th>Arvioinnin kohde</th>
+              <th>Arvio</th>
+              <th>Kommentti</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="kohde in kohdealue.kohteet">
+              <td>{{ kohde | lokalisoiKentta:'nimi' }}</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
       </section>
     </section>
   </div>
