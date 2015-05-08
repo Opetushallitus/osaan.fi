@@ -21,7 +21,7 @@ angular.module('osaan.direktiivit.tallennus', [])
       restrict: 'E',
       scope: {
       },
-      template: '<button ng-click="tallenna()">Tallenna</button>',
+      template: '<div class="tallennus"><a ng-click="tallenna()">Tallenna</a></div>',
       controller: ['$scope', 'Arvio', 'Arviointi', function($scope, Arvio, Arviointi) {
         $scope.tallenna = function() {
           var tila = {};
