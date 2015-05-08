@@ -52,7 +52,8 @@
       (sql/fields :tutkintotunnus :nimi_fi :nimi_sv [:opintoala.nimi_fi :opintoala_nimi_fi] 
                   [:opintoala.nimi_sv :opintoala_nimi_sv] 
                   [:peruste.diaarinumero :peruste_diaarinumero]
-                  [:peruste.eperustetunnus :peruste_eperustetunnus])
+                  [:peruste.eperustetunnus :peruste_eperustetunnus]
+                  [:peruste.tyyppi :peruste_tyyppi])
       (sql/where (or {:nimi_fi [sql-util/ilike nimi]}
                      {:nimi_sv [sql-util/ilike nimi]}))
       (cond->
