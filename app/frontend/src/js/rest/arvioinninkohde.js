@@ -22,6 +22,14 @@ angular.module('osaan.rest.arvioinninkohde', [])
         return $http.get('api/arvioinninkohde/alueet?tutkinnonosatunnus=' + tutkinnonosatunnus).then(function(response) {
           return response.data[tutkinnonosatunnus];
         });
+      },
+      haeKohdealueetTutkinnonosille: function(tutkinnonosatunnukset) {
+        var params = _(tutkinnonosatunnukset)
+          .map(function(tunnus) {return 'tutkinnonosatunnus=' + tunnus;})
+          .join('&');
+        return $http.get('api/arvioinninkohde/alueet?' + params).then(function(response) {
+          return response.data;
+        });
       }
     };
   }])

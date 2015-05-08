@@ -5,6 +5,11 @@
   <div class="panel-body">
     <section class="tutkinnonosa" ng-repeat="tutkinnonosa in tutkinnonosat">
       <h2>{{ tutkinnonosa | lokalisoiKentta:'nimi' }}</h2>
+
+      <section class="kohdealue" ng-repeat="kohdealue in kohdealueet[tutkinnonosa.osatunnus]">
+        <h3>{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
+
+      </section>
     </section>
   </div>
 </div>

@@ -25,11 +25,16 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
       });
   }])
 
-  .controller('RaporttiController', ['$location', '$routeParams', '$scope', 'Arviointi', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, Arviointi, Tutkinnonosa, Tutkinto) {
+  .controller('RaporttiController', ['$location', '$routeParams', '$scope', 'ArvioinninKohde', 'Arviointi', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, ArvioinninKohde, Arviointi, Tutkinnonosa, Tutkinto) {
 
     Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus())
       .then(function(tutkinnonosat) {
         $scope.tutkinnonosat = _(tutkinnonosat).groupBy('osatunnus').pick(Arviointi.valitutOsatunnukset()).values().flatten().value();
+      });
+
+    ArvioinninKohde.haeKohdealueetTutkinnonosille(Arviointi.valitutOsatunnukset())
+      .then(function(kohdealueet) {
+        $scope.kohdealueet = kohdealueet;
       });
   }])
 ;
