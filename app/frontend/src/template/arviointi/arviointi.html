@@ -43,10 +43,15 @@
   <div class="panel-footer">
     <div class="row">
       <div class="col-md-12">
-        <button class="btn btn-primary pull-right" role="button" ng-if="seuraavaTutkinnonosa() !== undefined" ng-click="avaaSeuraavaOsa()">
-          Arvioi osaaminen: {{ tutkinnonosatById[seuraavaTutkinnonosa()] | lokalisoiKentta:'nimi' }}
-          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-        </button>
+
+        <div ng-if="seuraavaTutkinnonosa() !== undefined" class="pull-right text-right">
+          <button class="btn btn-primary pull-right" role="button" ng-click="avaaSeuraavaOsa()">
+            Arvioi osaaminen&nbsp;
+            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          </button>
+          <div><small>{{ tutkinnonosatById[seuraavaTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small></div>
+        </div>
+
         <button class="btn btn-primary pull-right" role="button" ng-if="seuraavaTutkinnonosa() === undefined">
           Näytä raportti&nbsp;
           <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
@@ -56,10 +61,14 @@
           <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
           Valitse tutkinnon osat
         </button>
-        <button class="btn btn-primary pull-left" role="button" ng-if="edellinenTutkinnonosa() !== undefined" ng-click="avaaEdellinenOsa()">
-          <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
-          Arvioi osaaminen: {{ tutkinnonosatById[edellinenTutkinnonosa()] | lokalisoiKentta:'nimi' }}
-        </button>
+
+        <div ng-if="edellinenTutkinnonosa() !== undefined" class="pull-left text-left">
+          <button class="btn btn-primary pull-left" role="button" ng-click="avaaEdellinenOsa()">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
+            Arvioi osaaminen&nbsp;
+          </button>
+          <div><small>{{ tutkinnonosatById[edellinenTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small></div>
+        </div>
       </div>
     </div>
   </div>
