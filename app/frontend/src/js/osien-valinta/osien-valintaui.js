@@ -49,7 +49,7 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
       $scope.valinnat[osatunnus] = true;
     });
 
-    Tutkinto.hae(tutkintotunnus).then(function(tutkinto) {
+    Tutkinto.haePerusteella(peruste).then(function(tutkinto) {
       $scope.tutkinto = tutkinto;
     });
 
