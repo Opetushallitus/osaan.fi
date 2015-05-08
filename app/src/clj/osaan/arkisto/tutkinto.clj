@@ -38,11 +38,6 @@
                 [:peruste.eperustetunnus :peruste_eperustetunnus]
                 [:peruste.tyyppi :peruste_tyyppi])
     (sql/where where-ehto))) 
-  
-(defn hae
-  "Hae tutkinto tutkintotunnuksella."
-  [tutkintotunnus]
-  (hae-yksi {:tutkintotunnus tutkintotunnus}))
 
 (defn hae-perusteella
   "Hae tutkinto tutkinnon perusteen diaarinumerolla."

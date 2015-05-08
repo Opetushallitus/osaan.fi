@@ -5,6 +5,14 @@
   <div class="panel-body">
 
     <h2>{{ tutkinto | lokalisoiKentta:'nimi' }}</h2>
+    
+    <a  style="width: 30%; text-align: left; margin-bottom: 5px; white-space: normal;" href="https://eperusteet.opintopolku.fi/#/fi/esitys/{{tutkinto.peruste_eperustetunnus}}/{{tutkinto.peruste_tyyppi}}/tiedot" role="button" target="blank">
+        Katso tutkinnon yksityiskohtainen sisältö ePerusteet-järjestelmässä
+    </a>
+    <br>
+    <a  style="width: 30%; text-align: left; margin-bottom: 5px; white-space: normal;" href="http://www.nayttotutkintohaku.fi/fi/#/tutkinto/{{tutkinto.tutkintotunnus}}" role="button" target="blank">
+        Katso näyttötutkintojen järjestäjät
+    </a>
 
     <h3 ng-if="(tutkinnonosat | filter: {pakollinen: true}).length" translate="osien-valinta.pakolliset_osat"></h3>
     <div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: true}" class="checkbox">
