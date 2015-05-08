@@ -36,5 +36,9 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
       .then(function(kohdealueet) {
         $scope.kohdealueet = kohdealueet;
       });
+
+    $scope.arviot = _.zipObject(
+      _.map(Arviointi.valitutOsatunnukset(),
+        function(osatunnus) {return [osatunnus, Arviointi.haeArviot(osatunnus)];}));
   }])
 ;
