@@ -17,8 +17,11 @@ insert into opintoala (opintoalatunnus, koulutusala, nimi_fi, nimi_sv, voimassa_
   insert into tutkintonimike(nimiketunnus, nimi_fi, nimi_sv, tutkinto)
    values ('10092', 'Media-assistentti', 'Medieassistent', '324601');
 
-insert into peruste (diaarinumero, alkupvm, tutkinto, tyyppi)
- values ('41/011/2005', to_date('2005-01-01', 'YYYY-MM-DD'), '324601', 'naytto');
+insert into peruste (diaarinumero, alkupvm, tutkinto, tyyppi, eperustetunnus)
+ values
+   ('41/011/2005', to_date('2005-01-01', 'YYYY-MM-DD'), '324601', 'ops', 611),
+   ('38/011/2014', to_date('2005-01-01', 'YYYY-MM-DD'), '324601', 'naytto', 611);
+   
 
 insert into tutkinnonosa(osatunnus, nimi_fi) values
   ('100001','Audiovisuaalinen tuotanto'),

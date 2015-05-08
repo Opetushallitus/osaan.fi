@@ -135,6 +135,7 @@ create table perustetyyppi (
 
 create table peruste (
     diaarinumero varchar(20) not null primary key,
+    eperustetunnus integer not null,
     alkupvm date not null,
     siirtymaajan_loppupvm date NOT NULL DEFAULT to_date('21990101', 'YYYYMMDD'),
     tyyppi varchar(6) NOT NULL references perustetyyppi(tunnus),
@@ -360,6 +361,7 @@ COMMENT ON TABLE ohje  IS 'Käyttöohjeet, jotka näkyvät käyttöliittymässä
 COMMENT ON TABLE opintoala  IS 'Tilastokeskuksen luokittelun mukainen opintoala.';
 
 COMMENT ON TABLE peruste IS 'Tutkinnon peruste. Peruste määrää tutkinnonosat ja suorituskriteerit tutkinnolle.';
+COMMENT ON COLUMN peruste.eperustetunnus IS 'ePerusteet järjestelmän käyttämä id-numero tutkinnon perusteesta.';
 COMMENT ON COLUMN peruste.diaarinumero IS 'Perustemääräyksen diaarinumero. Yksilöi perusteen sisällön.';
 COMMENT ON TABLE tutkinnonosa_ja_peruste IS 'Liitostaulu. Tutkinnon osa voi olla vapaaehtoinen toisessa tutkinnossa ja pakollinen toisessa.';
 COMMENT ON TABLE arvio IS 'Osaamisarvio. Arviolle annetaan tunniste, jota käytetään tarvittaessa myös tiedon lataamiseen.';
