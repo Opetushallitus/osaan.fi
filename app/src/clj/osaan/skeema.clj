@@ -42,7 +42,10 @@
 
 (def Tutkinto {:nimi_fi s/Str
                :nimi_sv (s/maybe s/Str)
-               :tutkintotunnus s/Str})
+               :tutkintotunnus s/Str
+               :peruste_diaarinumero s/Str
+               :peruste_tyyppi s/Str
+               :peruste_eperustetunnus s/Int})
 
 (def TutkintoHakutulos (merge Tutkinto
                               {:peruste_diaarinumero s/Str

@@ -23,6 +23,11 @@ angular.module('osaan.rest.tutkinto', [])
           return response.data;
         });
       },
+      haePerusteella: function(peruste) {
+        return $http.get('api/tutkinto/peruste/' + encodeURIComponent(peruste), {cache: true}).then(function(response) {
+          return response.data;
+        });
+      },
       haeEhdoilla: function(opintoala, nimi) {
         return $http.get('api/tutkinto', {params: {opintoala: opintoala, nimi: nimi}}).then(function(response) {
           return response.data;

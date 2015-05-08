@@ -29,13 +29,25 @@
     (sql/set-fields tiedot)
     (sql/where {:tutkintotunnus tutkintotunnus})))
 
+(defn ^:private hae-yksi [where-ehto]
+  (sql-util/select-unique-or-nil
+    :tutkinto
+    (sql/join :peruste (= :peruste.tutkinto :tutkintotunnus))
+    (sql/fields :tutkintotunnus :nimi_fi :nimi_sv
+                [:peruste.diaarinumero :peruste_diaarinumero]
+                [:peruste.eperustetunnus :peruste_eperustetunnus]
+                [:peruste.tyyppi :peruste_tyyppi])
+    (sql/where where-ehto))) 
+  
 (defn hae
   "Hae tutkinto tutkintotunnuksella."
   [tutkintotunnus]
-  (sql-util/select-unique-or-nil
-    :tutkinto
-    (sql/fields :tutkintotunnus :nimi_fi :nimi_sv)
-    (sql/where {:tutkintotunnus tutkintotunnus})))
+  (hae-yksi {:tutkintotunnus tutkintotunnus}))
+
+(defn hae-perusteella
+  "Hae tutkinto tutkinnon perusteen diaarinumerolla."
+  [diaarinumero]
+  (hae-yksi {:peruste.diaarinumero diaarinumero}))
 
 (defn hae-kaikki
   []

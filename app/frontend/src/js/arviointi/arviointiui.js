@@ -32,7 +32,7 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
     var peruste = Arviointi.valittuPeruste();
 
     if (tutkintotunnus !== undefined && peruste !== undefined) {
-      Tutkinto.hae(tutkintotunnus).then(function(tutkinto) {
+      Tutkinto.haePerusteella(peruste).then(function(tutkinto) {
         $scope.tutkinto = tutkinto;
       });
       Tutkinnonosa.hae(peruste, tutkintotunnus).then(function(tutkinnonosat) {
