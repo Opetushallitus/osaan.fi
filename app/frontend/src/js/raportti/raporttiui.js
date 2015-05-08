@@ -27,6 +27,10 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
 
   .controller('RaporttiController', ['$location', '$routeParams', '$scope', 'ArvioinninKohde', 'Arviointi', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, ArvioinninKohde, Arviointi, Tutkinnonosa, Tutkinto) {
 
+    Tutkinto.haePerusteella(Arviointi.valittuPeruste()).then(function(tutkinto) {
+      $scope.tutkinto = tutkinto;
+    });
+
     Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus())
       .then(function(tutkinnonosat) {
         $scope.tutkinnonosat = _(tutkinnonosat).groupBy('osatunnus').pick(Arviointi.valitutOsatunnukset()).values().flatten().value();
