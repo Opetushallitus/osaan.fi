@@ -21,7 +21,7 @@
             <tr ng-repeat="kohde in kohdealue.kohteet">
               <td>{{ kohde | lokalisoiKentta:'nimi' }}</td>
               <td>{{ arviot[tutkinnonosa.osatunnus][kohde.arvioinninkohde_id].arvio }}</td>
-              <td></td>
+              <td>{{ arviot[tutkinnonosa.osatunnus][kohde.arvioinninkohde_id].vapaateksti }}</td>
             </tr>
           </tbody>
         </table>
