@@ -40,5 +40,9 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     $scope.arviot = _.zipObject(
       _.map(Arviointi.valitutOsatunnukset(),
         function(osatunnus) {return [osatunnus, Arviointi.haeArviot(osatunnus)];}));
+
+    $scope.palaaArviointiin = function() {
+      $location.url('/osien-valinta/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
+    };
   }])
 ;
