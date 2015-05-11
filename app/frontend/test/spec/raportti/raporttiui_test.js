@@ -35,5 +35,22 @@ describe('osaan.raportti.raporttiui:', function() {
           .toEqual([{osatunnus: 1, kentta: 'arvo'}]);
       });
     });
+
+    describe('liitaTutkinnonOsiinArviot:', function() {
+      it('pitäisi liittää osiin arviot', function () {
+        function haeArviot(osatunnus) {
+          if (osatunnus === 1) {
+            return {i: 'arviot1'};
+          } else if (osatunnus === 2) {
+            return {i: 'arviot2'};
+          }
+        }
+        expect(RaporttiApurit.liitaTutkinnonOsiinArviot([1, 2], haeArviot))
+          .toEqual({
+            1: {i: 'arviot1'},
+            2: {i: 'arviot2'}
+          });
+      });
+    });
   });
 });
