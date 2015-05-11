@@ -5,6 +5,8 @@
     </h3>
   </div>
   <div class="panel-body">
+    Päiväys: {{ paivays | date: 'dd.MM.yyyy' }}
+
     <section class="tutkinnonosa" ng-repeat="tutkinnonosa in tutkinnonosat">
       <h2>{{ tutkinnonosa | lokalisoiKentta:'nimi' }}</h2>
 

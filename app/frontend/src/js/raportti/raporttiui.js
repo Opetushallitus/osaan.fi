@@ -45,6 +45,8 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
       _.map(Arviointi.valitutOsatunnukset(),
         function(osatunnus) {return [osatunnus, Arviointi.haeArviot(osatunnus)];}));
 
+    $scope.paivays = new Date();
+
     $scope.palaaArviointiin = function() {
       $location.url('/osien-valinta/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
     };
