@@ -25,7 +25,15 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
       });
   }])
 
-  .controller('RaporttiController', ['$location', '$routeParams', '$scope', 'ArvioinninKohde', 'Arviointi', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, ArvioinninKohde, Arviointi, Tutkinnonosa, Tutkinto) {
+  .factory('RaporttiApurit', [function() {
+    return {
+      valitseTutkinnonOsat: function(tutkinnonosat, valitutOsatunnukset) {
+        return _(tutkinnonosat).groupBy('osatunnus').pick(valitutOsatunnukset).values().flatten().value();
+      }
+    };
+  }])
+
+  .controller('RaporttiController', ['$location', '$routeParams', '$scope', 'ArvioinninKohde', 'Arviointi', 'RaporttiApurit', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, ArvioinninKohde, Arviointi, RaporttiApurit, Tutkinnonosa, Tutkinto) {
 
     Tutkinto.haePerusteella(Arviointi.valittuPeruste()).then(function(tutkinto) {
       $scope.tutkinto = tutkinto;
@@ -33,7 +41,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
 
     Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus())
       .then(function(tutkinnonosat) {
-        $scope.tutkinnonosat = _(tutkinnonosat).groupBy('osatunnus').pick(Arviointi.valitutOsatunnukset()).values().flatten().value();
+        $scope.tutkinnonosat = RaporttiApurit.valitseTutkinnonOsat(tutkinnonosat, Arviointi.valitutOsatunnukset());
       });
 
     ArvioinninKohde.haeKohdealueetTutkinnonosille(Arviointi.valitutOsatunnukset())
