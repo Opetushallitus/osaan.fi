@@ -235,3 +235,20 @@ button.button-with-icon {
   ;
   }
 }
+
+/* Extend bootstrap icons to support bitmap logos */
+.glyphicon.bitmap {
+  background-repeat: no-repeat;
+  height: 22px;
+  width: 22px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -5px;
+}
+.glyphicon.bitmap.icon-eperuste {
+  background-image: url("../img/ikoni_eperuste_22.png");
+}
+
+.glyphicon.bitmap.icon-nayttotutkintohaku {
+  background-image: url("../img/turre_22.png");
+}

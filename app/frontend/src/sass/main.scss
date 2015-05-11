@@ -1,3 +1,15 @@
+/* Theme colors
+------------------------------------------------------------------------------*/
+@import "yhteiset/_theme";
+
+/* Bootstrap sass style variables and overrides
+------------------------------------------------------------------------------*/
+@import "yhteiset/_bootstrap";
+
+/* Bootstrap sass
+------------------------------------------------------------------------------*/
+@import "../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap";
+
 /* YHTEISET
 ----------------------------------------------------------------------------- */
 @import "yhteiset/_yhteiset";
