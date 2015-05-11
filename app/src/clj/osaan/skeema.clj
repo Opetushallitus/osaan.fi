@@ -48,10 +48,7 @@
                :peruste_eperustetunnus s/Int})
 
 (def TutkintoHakutulos (merge Tutkinto
-                              {:peruste_diaarinumero s/Str
-                               :peruste_eperustetunnus s/Int
-                               :peruste_tyyppi s/Str
-                               :opintoala_nimi_fi s/Str
+                              {:opintoala_nimi_fi s/Str
                                :opintoala_nimi_sv s/Str}))
 
 (def Tutkinnonosa {:nimi_fi s/Str
