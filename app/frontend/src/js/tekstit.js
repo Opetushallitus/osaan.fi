@@ -33,7 +33,13 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf',
       'osien-valinta.eteenpain': 'Eteenpäin',
       'osien-valinta.pakolliset_osat': 'Pakolliset osat',
-      'osien-valinta.valinnaiset_osat': 'Valinnaiset osat'
+      'osien-valinta.valinnaiset_osat': 'Valinnaiset osat',
+      'raportti.arvio': 'Arvio',
+      'raportti.arvioinnin_kohde': 'Arvioinnin kohde',
+      'raportti.kommentti': 'Kommentti',
+      'raportti.otsikko': 'Raportti',
+      'raportti.paivays': 'Päiväys',
+      'raportti.palaa_arviointiin': 'Arvioi osaaminen'
     },
     sv: {
       'arvointi.asteikko1' : 'En osaa (sv)',
@@ -52,7 +58,13 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf',
       'osien-valinta.eteenpain': 'Eteenpäin (sv)',
       'osien-valinta.pakolliset_osat': 'Pakolliset osat (sv)',
-      'osien-valinta.valinnaiset_osat': 'Valinnaiset osat (sv)'
+      'osien-valinta.valinnaiset_osat': 'Valinnaiset osat (sv)',
+      'raportti.arvio': 'Arvio (sv)',
+      'raportti.arvioinnin_kohde': 'Arvioinnin kohde (sv)',
+      'raportti.kommentti': 'Kommentti (sv)',
+      'raportti.otsikko': 'Raportti (sv)',
+      'raportti.paivays': 'Päiväys (sv)',
+      'raportti.palaa_arviointiin': 'Arvioi osaaminen (sv)'
     }
   })
 

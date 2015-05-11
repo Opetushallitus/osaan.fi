@@ -1,11 +1,11 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">
-      Raportti - {{ tutkinto | lokalisoiKentta:'koulutusala_nimi' }} - {{ tutkinto | lokalisoiKentta:'opintoala_nimi' }} - {{ tutkinto | lokalisoiKentta:'nimi' }}
+      {{ 'raportti.otsikko' | translate }} - {{ tutkinto | lokalisoiKentta:'koulutusala_nimi' }} - {{ tutkinto | lokalisoiKentta:'opintoala_nimi' }} - {{ tutkinto | lokalisoiKentta:'nimi' }}
     </h3>
   </div>
   <div class="panel-body">
-    Päiväys: {{ paivays | date: 'dd.MM.yyyy' }}
+    {{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy' }}
 
     <section class="tutkinnonosa" ng-repeat="tutkinnonosa in tutkinnonosat">
       <h2>{{ tutkinnonosa | lokalisoiKentta:'nimi' }}</h2>
@@ -16,9 +16,9 @@
         <table>
           <thead>
             <tr>
-              <th>Arvioinnin kohde</th>
-              <th>Arvio</th>
-              <th>Kommentti</th>
+              <th translate="raportti.arvioinnin_kohde"></th>
+              <th translate="raportti.arvio"></th>
+              <th translate="raportti.kommentti"></th>
             </tr>
           </thead>
           <tbody>
@@ -37,7 +37,7 @@
       <div class="col-md-12">
         <button class="btn btn-primary pull-left" role="button" ng-click="palaaArviointiin()">
           <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
-          Arvioi osaaminen
+          {{ 'raportti.palaa_arviointiin' | translate }}
         </button>
       </div>
     </div>
