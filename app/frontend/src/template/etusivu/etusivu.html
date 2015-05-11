@@ -68,13 +68,7 @@
           {{ tutkinto | lokalisoiKentta:'nimi' }}&nbsp;({{tutkinto.peruste_tyyppi}}) &nbsp;&nbsp;
           <span class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true"></span>
         </a>
-        <!-- TODO: linkeille joku direktiivi tms. joka generoi ne kun tarvitaan muillakin sivuilla. Kieli huomioitava -->
-        <a  style="width: 30%; text-align: left; margin-bottom: 5px; white-space: normal;" href="https://eperusteet.opintopolku.fi/#/fi/esitys/{{tutkinto.peruste_eperustetunnus}}/{{tutkinto.peruste_tyyppi}}/tiedot" role="button" target="blank">
-          Perusteet ePerusteet-järjestelmässä
-        </a>
-        <a  style="width: 30%; text-align: left; margin-bottom: 5px; white-space: normal;" href="http://www.nayttotutkintohaku.fi/fi/#/tutkinto/{{tutkinto.tutkintotunnus}}" role="button" target="blank">
-          Näyttötutkintojen järjestäjät
-        </a>
+        <eperusteet-linkki kieli="{{kieli}}" eperustetunnus="{{tutkinto.peruste_eperustetunnus}}" eperustetyyppi="{{tutkinto.peruste_tyyppi}}" tutkintotunnus="{{tutkinto.tutkintotunnus}}"></eperusteet-linkki>
       </div>
     </div>
   </div>
