@@ -17,20 +17,21 @@
 angular.module('osaan.rest.arvioinninkohde', [])
 
   .factory('ArvioinninKohde', ['$http', function($http) {
-    return {
-      haeKohdealueet: function(tutkinnonosatunnus) {
-        return $http.get('api/arvioinninkohde/alueet?tutkinnonosatunnus=' + tutkinnonosatunnus).then(function(response) {
-          return response.data[tutkinnonosatunnus];
-        });
-      },
-      haeKohdealueetTutkinnonosille: function(tutkinnonosatunnukset) {
-        var params = _(tutkinnonosatunnukset)
-          .map(function(tunnus) {return 'tutkinnonosatunnus=' + tunnus;})
-          .join('&');
-        return $http.get('api/arvioinninkohde/alueet?' + params).then(function(response) {
+    function haeKohdealueetTutkinnonosille(tutkinnonosatunnukset) {
+      return $http.get('api/arvioinninkohde/alueet', {cache: true, params: {tutkinnonosatunnus: tutkinnonosatunnukset}})
+        .then(function(response) {
           return response.data;
         });
-      }
+    }
+
+    return {
+      haeKohdealueet: function(tutkinnonosatunnus) {
+        return haeKohdealueetTutkinnonosille(tutkinnonosatunnus)
+          .then(function(kohdealueet) {
+            return kohdealueet[tutkinnonosatunnus];
+          });
+      },
+      haeKohdealueetTutkinnonosille: haeKohdealueetTutkinnonosille
     };
   }])
 ;
