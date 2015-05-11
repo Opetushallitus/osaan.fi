@@ -18,11 +18,6 @@ angular.module('osaan.rest.tutkinto', [])
 
   .factory('Tutkinto', ['$http', function($http) {
     return {
-      hae: function(tutkintotunnus) {
-        return $http.get('api/tutkinto/' + tutkintotunnus, {cache: true}).then(function(response) {
-          return response.data;
-        });
-      },
       haePerusteella: function(peruste) {
         return $http.get('api/tutkinto/peruste/' + encodeURIComponent(peruste), {cache: true}).then(function(response) {
           return response.data;
