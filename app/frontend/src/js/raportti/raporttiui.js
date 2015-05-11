@@ -27,6 +27,11 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
 
   .factory('RaporttiApurit', [function() {
     return {
+      liitaTutkinnonOsiinArviot: function(osatunnukset, haeArvio) {
+        return _.zipObject(
+          _.map(osatunnukset, function(osatunnus) {return [osatunnus, haeArvio(osatunnus)];})
+        );
+      },
       valitseTutkinnonOsat: function(tutkinnonosat, valitutOsatunnukset) {
         return _(tutkinnonosat).groupBy('osatunnus').pick(valitutOsatunnukset).values().flatten().value();
       }
@@ -49,9 +54,9 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
         $scope.kohdealueet = kohdealueet;
       });
 
-    $scope.arviot = _.zipObject(
-      _.map(Arviointi.valitutOsatunnukset(),
-        function(osatunnus) {return [osatunnus, Arviointi.haeArviot(osatunnus)];}));
+    $scope.arviot = RaporttiApurit.liitaTutkinnonOsiinArviot(Arviointi.valitutOsatunnukset(),
+      function(osatunnus) {return Arviointi.haeArviot(osatunnus);}
+    );
 
     $scope.paivays = new Date();
 
