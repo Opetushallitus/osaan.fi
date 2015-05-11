@@ -40,16 +40,20 @@
                   :nimi_sv s/Str
                   :opintoalat [Opintoala]})
 
-(def Tutkinto {:nimi_fi s/Str
-               :nimi_sv (s/maybe s/Str)
-               :tutkintotunnus s/Str
-               :peruste_diaarinumero s/Str
-               :peruste_tyyppi s/Str
-               :peruste_eperustetunnus s/Int})
+(def ^:private TutkintoPerustiedot {:nimi_fi s/Str
+                                    :nimi_sv (s/maybe s/Str)
+                                    :opintoala_nimi_fi s/Str
+                                    :opintoala_nimi_sv (s/maybe s/Str)
+                                    :peruste_diaarinumero s/Str
+                                    :peruste_tyyppi s/Str
+                                    :peruste_eperustetunnus s/Int
+                                    :tutkintotunnus s/Str})
 
-(def TutkintoHakutulos (merge Tutkinto
-                              {:opintoala_nimi_fi s/Str
-                               :opintoala_nimi_sv s/Str}))
+(def Tutkinto (merge TutkintoPerustiedot
+                     {:koulutusala_nimi_fi s/Str
+                      :koulutusala_nimi_sv (s/maybe s/Str)}))
+
+(def TutkintoHakutulos TutkintoPerustiedot)
 
 (def Tutkinnonosa {:nimi_fi s/Str
                    :nimi_sv (s/maybe s/Str)

@@ -32,12 +32,18 @@
 (defn ^:private hae-yksi [where-ehto]
   (sql-util/select-unique-or-nil
     :tutkinto
+    (sql/join :opintoala (= :opintoala.opintoalatunnus :opintoala))
+    (sql/join :koulutusala (= :koulutusala.koulutusalatunnus :opintoala.koulutusala))
     (sql/join :peruste (= :peruste.tutkinto :tutkintotunnus))
     (sql/fields :tutkintotunnus :nimi_fi :nimi_sv
+                [:koulutusala.nimi_fi :koulutusala_nimi_fi]
+                [:koulutusala.nimi_sv :koulutusala_nimi_sv]
+                [:opintoala.nimi_fi :opintoala_nimi_fi]
+                [:opintoala.nimi_sv :opintoala_nimi_sv]
                 [:peruste.diaarinumero :peruste_diaarinumero]
                 [:peruste.eperustetunnus :peruste_eperustetunnus]
                 [:peruste.tyyppi :peruste_tyyppi])
-    (sql/where where-ehto))) 
+    (sql/where where-ehto)))
 
 (defn hae-perusteella
   "Hae tutkinto tutkinnon perusteen diaarinumerolla."
@@ -56,8 +62,9 @@
       (sql/select* :tutkinto)
       (sql/join :opintoala (= :opintoala.opintoalatunnus :opintoala))
       (sql/join :peruste (= :peruste.tutkinto :tutkintotunnus))
-      (sql/fields :tutkintotunnus :nimi_fi :nimi_sv [:opintoala.nimi_fi :opintoala_nimi_fi] 
-                  [:opintoala.nimi_sv :opintoala_nimi_sv] 
+      (sql/fields :tutkintotunnus :nimi_fi :nimi_sv
+                  [:opintoala.nimi_fi :opintoala_nimi_fi]
+                  [:opintoala.nimi_sv :opintoala_nimi_sv]
                   [:peruste.diaarinumero :peruste_diaarinumero]
                   [:peruste.eperustetunnus :peruste_eperustetunnus]
                   [:peruste.tyyppi :peruste_tyyppi])
