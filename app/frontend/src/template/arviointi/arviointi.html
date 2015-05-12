@@ -24,8 +24,8 @@
               En osaa sanoa
             </label>
 
-            <label style="display: block" class="needsclick vapaateksti-toggle" ng-class="{checked: vapaateksti_auki}" ng-click="">
-              <input type="checkbox" ng-model="vapaateksti_auki" ng-value="false" name="vapaateksti" class="needsclick" ng-click="" />
+            <label style="display: block" class="vapaateksti-toggle" ng-class="{checked: vapaateksti_auki}" ng-click="">
+              <input type="checkbox" ng-model="vapaateksti_auki" name="vapaateksti" ng-click="" ng-checked="arviot[kohde.arvioinninkohde_id].vapaateksti" ng-init="vapaateksti_auki = arviot[kohde.arvioinninkohde_id].vapaateksti.length > 0" />
               <span class="glyphicon glyphicon-pencil"></span>
               <span class="asteikkoteksti">Tekstivastaus</span>
             </label>

@@ -12,6 +12,10 @@ input[type="radio"], input[type="checkbox"] {
   margin: 6px 0 0;
 }
 
+.list-group-item-text {
+  line-height: 1.8em !important;
+}
+
 // Override Bootstrap variables here (defaults from bootstrap-sass v3.3.4):
 
 //
@@ -208,11 +212,11 @@ $input-border:                   $brand-primary;
 // TODO: Rename `$input-border-radius` to `$input-border-radius-base` in v4
 //** Default `.form-control` border radius
 // This has no effect on `<select>`s in some browsers, due to the limited stylability of `<select>`s in CSS.
-// $input-border-radius:            $border-radius-base
+$input-border-radius:            4px;
 //** Large `.form-control` border radius
-// $input-border-radius-large:      $border-radius-large
+$input-border-radius-large:      4px;
 //** Small `.form-control` border radius
-// $input-border-radius-small:      $border-radius-small
+$input-border-radius-small:      4px;
 
 //** Border color for inputs on focus
 // $input-border-focus:             #66afe9
@@ -683,7 +687,7 @@ $input-border:                   $brand-primary;
 //##
 
 //** Background color on `.list-group-item`
-// $list-group-bg:                 #fff
+//$list-group-bg:                 $lightest-gray;
 //** `.list-group-item` border color
 // $list-group-border:             #ddd
 //** List group border radius
