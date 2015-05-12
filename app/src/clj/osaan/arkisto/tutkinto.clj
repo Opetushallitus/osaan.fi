@@ -56,20 +56,23 @@
     (sql/order :tutkintotunnus)))
 
 (defn hae-ehdoilla
-  [nimi opintoala]
-  (let [nimi (str "%" nimi "%")]
-    (->
-      (sql/select* :tutkinto)
-      (sql/join :opintoala (= :opintoala.opintoalatunnus :opintoala))
-      (sql/join :peruste (= :peruste.tutkinto :tutkintotunnus))
-      (sql/fields :tutkintotunnus :nimi_fi :nimi_sv
-                  [:opintoala.nimi_fi :opintoala_nimi_fi]
-                  [:opintoala.nimi_sv :opintoala_nimi_sv]
-                  [:peruste.diaarinumero :peruste_diaarinumero]
-                  [:peruste.eperustetunnus :peruste_eperustetunnus]
-                  [:peruste.tyyppi :peruste_tyyppi])
-      (sql/where (or {:nimi_fi [sql-util/ilike nimi]}
-                     {:nimi_sv [sql-util/ilike nimi]}))
-      (cond->
-        opintoala (sql/where {:opintoala opintoala}))
-      sql/exec)))
+  [nimi opintoala tutkintotaso]
+    (let [nimi (str "%" nimi "%")]
+      (->
+        (sql/select* :tutkinto)
+        (sql/join :opintoala (= :opintoala.opintoalatunnus :opintoala))
+        (sql/join :peruste (= :peruste.tutkinto :tutkintotunnus))
+        (sql/fields :tutkintotunnus :nimi_fi :nimi_sv
+                    [:opintoala.nimi_fi :opintoala_nimi_fi]
+                    [:opintoala.nimi_sv :opintoala_nimi_sv]
+                    [:peruste.diaarinumero :peruste_diaarinumero]
+                    [:peruste.eperustetunnus :peruste_eperustetunnus]
+                    [:peruste.tyyppi :peruste_tyyppi])
+        (sql/where (or {:nimi_fi [sql-util/ilike nimi]}
+                       {:nimi_sv [sql-util/ilike nimi]}))
+        (cond->
+          opintoala (sql/where {:opintoala opintoala}))
+        (cond->
+          tutkintotaso (sql/where {:tutkintotaso tutkintotaso}))
+        sql/exec)))
+    

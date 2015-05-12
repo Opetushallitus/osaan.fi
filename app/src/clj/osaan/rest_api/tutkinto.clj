@@ -23,5 +23,5 @@
   (cu/defapi :julkinen nil :get "/peruste/:perustediaarinumero" [perustediaarinumero]
     (json-response (arkisto/hae-perusteella perustediaarinumero) skeema/Tutkinto))
 
-  (cu/defapi :julkinen nil :get "/" [nimi opintoala]
-    (json-response (arkisto/hae-ehdoilla nimi opintoala) [skeema/TutkintoHakutulos])))
+  (cu/defapi :julkinen nil :get "/" [nimi opintoala tutkintotyyppi]
+    (json-response (arkisto/hae-ehdoilla nimi opintoala tutkintotyyppi) [skeema/TutkintoHakutulos])))
