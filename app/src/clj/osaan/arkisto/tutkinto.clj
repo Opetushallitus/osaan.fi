@@ -57,7 +57,7 @@
     (sql/order :tutkintotunnus)))
 
 (defn hae-ehdoilla
-  [nimi opintoala tutkintotaso]
+  [nimi opintoala tutkintotaso voimaantulevat]
     (let [nimi (str "%" nimi "%")]
       (->
         (sql/select* :tutkinto)
@@ -76,4 +76,6 @@
           opintoala (sql/where {:opintoala opintoala}))
         (cond->
           tutkintotaso (sql/where {:tutkintotaso tutkintotaso}))
+        (cond-> 
+          (false? (boolean voimaantulevat)) (sql/where (< :voimassa_alkupvm [(sql/raw "current_date")])))
         sql/exec)))

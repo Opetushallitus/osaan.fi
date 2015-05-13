@@ -35,7 +35,7 @@ angular.module('osaan.etusivu.etusivuui', ['ngRoute'])
     });
 
     $scope.$watch('haku', function() {
-      Tutkinto.haeEhdoilla($scope.haku.opintoala, $scope.haku.tutkinto, $scope.haku.tutkintotyyppi).then(function(tutkinnot) {
+      Tutkinto.haeEhdoilla($scope.haku.opintoala, $scope.haku.tutkinto, $scope.haku.tutkintotyyppi, $scope.haku.voimaantulevat).then(function(tutkinnot) {
         $scope.tutkinnot = tutkinnot;
       });
     }, true);

@@ -22,12 +22,16 @@
 (use-fixtures :each tietokanta-fixture)
 
 (deftest ^:integraatio testaahaku
-  (let [ei-tulosta (tutkinto-db/hae-ehdoilla "huliviliveli" nil nil)
-        kaksi-perustetta (tutkinto-db/hae-ehdoilla "Aud" nil nil)
-        tutkintotason-suodatus (tutkinto-db/hae-ehdoilla "Käs" nil "erikoisammattitutkinto")
-        tutkintotaso-eitulosta (tutkinto-db/hae-ehdoilla "Käs" nil "perustutkinto")]
+  (let [ei-tulosta (tutkinto-db/hae-ehdoilla "huliviliveli" nil nil false)
+        kaksi-perustetta (tutkinto-db/hae-ehdoilla "Aud" nil nil false)
+        tutkintotason-suodatus (tutkinto-db/hae-ehdoilla "Käs" nil "erikoisammattitutkinto" false)
+        tutkintotaso-eitulosta (tutkinto-db/hae-ehdoilla "Käs" nil "perustutkinto" false)
+        ei-voimaantulevia (tutkinto-db/hae-ehdoilla nil nil nil nil)
+        voimaantulevat (tutkinto-db/hae-ehdoilla nil nil nil true)]
     (is (= 0 (count ei-tulosta)))
     (is (= 2 (count kaksi-perustetta)))
     (is (= 1 (count tutkintotason-suodatus)))
-    (is (= 0 (count tutkintotaso-eitulosta)))))
+    (is (= 0 (count tutkintotaso-eitulosta)))
+    (is (= 4 (count voimaantulevat)))
+    (is (= 3 (count ei-voimaantulevia)))))
     

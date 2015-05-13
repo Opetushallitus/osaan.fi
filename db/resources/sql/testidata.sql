@@ -11,16 +11,18 @@ insert into opintoala (opintoalatunnus, koulutusala, nimi_fi, nimi_sv, voimassa_
  insert into tutkinto(tutkintotunnus, opintoala, nimi_fi,voimassa_alkupvm, tutkintotaso)
    values 
     ('324601', '202', 'Audiovisuaalisen viestinnän ammattitutkinto', to_date('1997-01-01', 'YYYY-MM-DD'), 'ammattitutkinto'),
-    ('327128', '201', 'Käsityömestarin erikoisammattitutkinto', to_date('1997-01-01', 'YYYY-MM-DD'), 'erikoisammattitutkinto');
+    ('327128', '201', 'Käsityömestarin erikoisammattitutkinto', to_date('1997-01-01', 'YYYY-MM-DD'), 'erikoisammattitutkinto'),
+    ('987654', '202', 'Tekoälymasentajan keksitty tutkinto', to_date('2050-01-01', 'YYYY-MM-DD'), 'erikoisammattitutkinto');
 
-  insert into tutkintonimike(nimiketunnus, nimi_fi, nimi_sv, tutkinto)
+insert into tutkintonimike(nimiketunnus, nimi_fi, nimi_sv, tutkinto)
    values ('10092', 'Media-assistentti', 'Medieassistent', '324601');
 
 insert into peruste (diaarinumero, voimassa_alkupvm, tutkinto, tyyppi, eperustetunnus)
  values
    ('41/011/2005', to_date('2005-01-01', 'YYYY-MM-DD'), '324601', 'ops', 611),
    ('38/011/2014', to_date('2005-01-01', 'YYYY-MM-DD'), '324601', 'naytto', 611),
-   ('34/011/2010', to_date('2005-01-01', 'YYYY-MM-DD'), '327128', 'naytto', 986531);
+   ('34/011/2010', to_date('2005-01-01', 'YYYY-MM-DD'), '327128', 'naytto', 986531),
+   ('01/011/2040', to_date('2040-01-01', 'YYYY-MM-DD'), '987654', 'naytto', 999999);
    
 
 insert into tutkinnonosa(osatunnus, nimi_fi) values
