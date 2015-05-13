@@ -34,4 +34,11 @@
     (is (= 0 (count tutkintotaso-eitulosta)))
     (is (= 4 (count voimaantulevat)))
     (is (= 3 (count ei-voimaantulevia)))))
+
+(deftest ^:integraatio testaa-perustehaku
+  (let [yksi (tutkinto-db/hae-perusteella -1)
+        ei-tulosta (tutkinto-db/hae-perusteella -98765)]
+    (is (nil? ei-tulosta))
+    (is (some? yksi))))
+
     
