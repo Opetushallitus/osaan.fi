@@ -24,4 +24,5 @@
     (json-response (arkisto/hae-perusteella perustediaarinumero) skeema/Tutkinto))
 
   (cu/defapi :julkinen nil :get "/" [nimi opintoala tutkintotyyppi]
-    (json-response (arkisto/hae-ehdoilla nimi opintoala tutkintotyyppi) [skeema/TutkintoHakutulos])))
+     (let [tutkintotaso (if (= "kaikki" tutkintotyyppi) nil tutkintotyyppi)]
+       (json-response (arkisto/hae-ehdoilla nimi opintoala tutkintotaso) [skeema/TutkintoHakutulos]))))
