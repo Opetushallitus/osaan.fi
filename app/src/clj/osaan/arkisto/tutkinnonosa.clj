@@ -17,14 +17,13 @@
 
 (defn hae-perusteen-tutkinnon-osat
   "Hae perusteeseen liittyvät tutkinnon osat."
-  [perusteen-diaarinumero]
+  [peruste-id]
   (sql/select
-    :peruste
-    (sql/join :inner :tutkinnonosa_ja_peruste (= :peruste.diaarinumero :tutkinnonosa_ja_peruste.peruste))
-    (sql/join :inner :tutkinnonosa (= :tutkinnonosa_ja_peruste.osa :tutkinnonosa.osatunnus))
+    :tutkinnonosa
+    (sql/join :inner :tutkinnonosa_ja_peruste (= :tutkinnonosa_ja_peruste.osa :tutkinnonosa.osatunnus))
     (sql/fields :tutkinnonosa.nimi_fi
                 :tutkinnonosa.nimi_sv
                 :tutkinnonosa.osatunnus
                 :tutkinnonosa_ja_peruste.pakollinen)
-    (sql/where {:peruste.diaarinumero perusteen-diaarinumero})))
+    (sql/where {:tutkinnonosa_ja_peruste.peruste peruste-id})))
 

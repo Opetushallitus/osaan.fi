@@ -40,15 +40,16 @@
                 [:koulutusala.nimi_sv :koulutusala_nimi_sv]
                 [:opintoala.nimi_fi :opintoala_nimi_fi]
                 [:opintoala.nimi_sv :opintoala_nimi_sv]
+                :peruste.peruste_id
                 [:peruste.diaarinumero :peruste_diaarinumero]
                 [:peruste.eperustetunnus :peruste_eperustetunnus]
                 [:peruste.tyyppi :peruste_tyyppi])
     (sql/where where-ehto)))
 
 (defn hae-perusteella
-  "Hae tutkinto tutkinnon perusteen diaarinumerolla."
-  [diaarinumero]
-  (hae-yksi {:peruste.diaarinumero diaarinumero}))
+  "Hae tutkinto tutkinnon perusteen id:llä."
+  [id]
+  (hae-yksi {:peruste.peruste_id id}))
 
 (defn hae-kaikki
   []
@@ -65,6 +66,7 @@
         (sql/fields :tutkintotunnus :nimi_fi :nimi_sv
                     [:opintoala.nimi_fi :opintoala_nimi_fi]
                     [:opintoala.nimi_sv :opintoala_nimi_sv]
+                    :peruste.peruste_id
                     [:peruste.diaarinumero :peruste_diaarinumero]
                     [:peruste.eperustetunnus :peruste_eperustetunnus]
                     [:peruste.tyyppi :peruste_tyyppi])
@@ -75,4 +77,3 @@
         (cond->
           tutkintotaso (sql/where {:tutkintotaso tutkintotaso}))
         sql/exec)))
-    

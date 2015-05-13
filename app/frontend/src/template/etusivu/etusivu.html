@@ -70,7 +70,7 @@
     </div>
 
     <div class="list-group" style="margin-top: 10px;">
-        <a ng-repeat="tutkinto in tutkinnot" class="list-group-item e2e-haettu-tutkinto" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_diaarinumero}}" role="button" ng-click="tyhjennaValitutOsatunnukset()">
+        <a ng-repeat="tutkinto in tutkinnot" class="list-group-item e2e-haettu-tutkinto" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}" role="button" ng-click="tyhjennaValitutOsatunnukset()">
           <h4 class="list-group-item-heading pull-left">{{ tutkinto | lokalisoiKentta:'nimi' }}&nbsp;({{tutkinto.peruste_tyyppi}})</h4> &nbsp;&nbsp;
           <span class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true"></span>
           <p class="list-group-item-text">

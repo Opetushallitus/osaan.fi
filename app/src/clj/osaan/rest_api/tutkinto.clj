@@ -20,8 +20,8 @@
             [osaan.skeema :as skeema]))
 
 (c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/peruste/:perustediaarinumero" [perustediaarinumero]
-    (json-response (arkisto/hae-perusteella perustediaarinumero) skeema/Tutkinto))
+  (cu/defapi :julkinen nil :get "/peruste/:perusteid" [perusteid]
+    (json-response (arkisto/hae-perusteella (Integer/parseInt perusteid)) skeema/Tutkinto))
 
   (cu/defapi :julkinen nil :get "/" [nimi opintoala tutkintotyyppi]
      (let [tutkintotaso (if (= "kaikki" tutkintotyyppi) nil tutkintotyyppi)]

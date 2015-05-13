@@ -44,6 +44,7 @@
                                     :nimi_sv (s/maybe s/Str)
                                     :opintoala_nimi_fi s/Str
                                     :opintoala_nimi_sv (s/maybe s/Str)
+                                    :peruste_id s/Int
                                     :peruste_diaarinumero s/Str
                                     :peruste_tyyppi s/Str
                                     :peruste_eperustetunnus s/Int

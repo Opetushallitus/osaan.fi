@@ -19,7 +19,7 @@
 (defn ^:private hae-arvio
   [arviotunnus]
   (sql-util/select-unique :arvio
-    (sql/join :peruste (= :peruste.diaarinumero :peruste))
+    (sql/join :peruste (= :peruste.peruste_id :peruste))
     (sql/fields :peruste [:peruste.tutkinto :tutkintotunnus])
     (sql/where {:tunniste arviotunnus})))
 

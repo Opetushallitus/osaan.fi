@@ -16,7 +16,7 @@ insert into opintoala (opintoalatunnus, koulutusala, nimi_fi, nimi_sv, voimassa_
   insert into tutkintonimike(nimiketunnus, nimi_fi, nimi_sv, tutkinto)
    values ('10092', 'Media-assistentti', 'Medieassistent', '324601');
 
-insert into peruste (diaarinumero, alkupvm, tutkinto, tyyppi, eperustetunnus)
+insert into peruste (diaarinumero, voimassa_alkupvm, tutkinto, tyyppi, eperustetunnus)
  values
    ('41/011/2005', to_date('2005-01-01', 'YYYY-MM-DD'), '324601', 'ops', 611),
    ('38/011/2014', to_date('2005-01-01', 'YYYY-MM-DD'), '324601', 'naytto', 611),
@@ -29,9 +29,9 @@ insert into tutkinnonosa(osatunnus, nimi_fi) values
   ('100003','Televisiotuotanto');
 
 insert into tutkinnonosa_ja_peruste(osa, peruste, jarjestys, pakollinen)
-values ('100001', '41/011/2005', 1, true),
- ('100002', '41/011/2005', 2, true),
- ('100003', '41/011/2005', 3, true);
+values ('100001', (select peruste_id from peruste where diaarinumero = '41/011/2005'), 1, true),
+ ('100002', (select peruste_id from peruste where diaarinumero = '41/011/2005'), 2, true),
+ ('100003', (select peruste_id from peruste where diaarinumero = '41/011/2005'), 3, true);
 
 insert into arvioinnin_kohdealue(arvioinninkohdealue_id, osa, nimi_fi, nimi_sv, jarjestys)
  values
@@ -49,7 +49,7 @@ insert into arvioinnin_kohde(arvioinninkohde_id, arvioinninkohdealue, nimi_fi, n
 insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_alkupvm, voimassa_loppupvm, versio, koodistoversio) values ('2002', '324601', 'Kuvauksen ja valaisun osaamisala', '', '2014-01-01', '2199-01-01', 1, 1);
 insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_alkupvm, voimassa_loppupvm, versio, koodistoversio) values ('2003', '324601', 'Mediatyön osaamisala', '', '2014-01-01', '2199-01-01', 1, 1);
 
-insert into arvio (tunniste, peruste) values ('testiarvio', '41/011/2005');
+insert into arvio (tunniste, peruste) values ('testiarvio', (select peruste_id from peruste where diaarinumero = '41/011/2005'));
 insert into arvio_tutkinnonosa (arviotunnus, osa)  values ('testiarvio', '100001');
 insert into kohdearvio (arviotunnus, arvioinnin_kohde, arvio, kommentti)
   values

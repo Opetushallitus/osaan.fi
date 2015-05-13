@@ -2,6 +2,7 @@ set session osaan.kayttaja='JARJESTELMA';
 
 CREATE SEQUENCE arvioinninkohde_id_seq;
 CREATE SEQUENCE arvioinninkohdealue_id_seq;
+CREATE SEQUENCE peruste_id_seq;
 
 create table kayttaja(
     oid varchar(80) NOT NULL primary key,
@@ -134,9 +135,11 @@ create table perustetyyppi (
 );
 
 create table peruste (
-    diaarinumero varchar(20) not null primary key,
+    peruste_id integer not null primary key default nextval('peruste_id_seq'), 
+    diaarinumero varchar(20) not null,
     eperustetunnus integer not null,
-    alkupvm date not null,
+    voimassa_alkupvm date not null,
+    voimassa_loppupvm date not null DEFAULT to_date('21990101', 'YYYYMMDD'),
     siirtymaajan_loppupvm date NOT NULL DEFAULT to_date('21990101', 'YYYYMMDD'),
     tyyppi varchar(6) NOT NULL references perustetyyppi(tunnus),
     tutkinto varchar(6) NOT NULL references tutkinto(tutkintotunnus),
@@ -185,7 +188,7 @@ create table osaamisala(
 
 create table tutkinnonosa_ja_peruste (
   osa varchar(6) not null references tutkinnonosa(osatunnus),
-  peruste varchar(20) not null references peruste(diaarinumero),
+  peruste integer not null references peruste(peruste_id),
   jarjestys int not null,
   pakollinen boolean not null,
   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
@@ -288,7 +291,7 @@ create table arvioinnin_kohde (
 
 create table arvio (
   tunniste varchar(16) NOT NULL primary key,
-  peruste varchar(20) NOT NULL references peruste(diaarinumero),
+  peruste integer NOT NULL references peruste(peruste_id),
   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   muutettuaika timestamptz NOT NULL,
