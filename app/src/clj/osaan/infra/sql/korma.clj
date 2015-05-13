@@ -16,11 +16,12 @@
   (:require [korma.core :as sql]
             [oph.korma.common :refer [defentity]]))
 
-(declare tutkinto opintoala koulutusala)
+(declare tutkinto opintoala koulutusala peruste)
 
 (defentity tutkinto
   (sql/pk :tutkintotunnus)
-  (sql/belongs-to opintoala {:fk :opintoala}))
+  (sql/belongs-to opintoala {:fk :opintoala})
+  (sql/has-many peruste {:fk :tutkinto}))
 
 (defentity opintoala
   (sql/pk :opintoalatunnus)
@@ -30,3 +31,12 @@
 (defentity koulutusala
   (sql/pk :koulutusalatunnus)
   (sql/has-many opintoala {:fk :koulutusala}))
+
+(defentity peruste
+  (sql/pk :peruste_id)
+  (sql/belongs-to tutkinto {:fk :tutkinto}))
+
+(defentity tutkinnonosa-ja-peruste)
+
+(defentity tutkinnonosa
+  (sql/pk :osatunnus))

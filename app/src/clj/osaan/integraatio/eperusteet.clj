@@ -16,7 +16,8 @@
  (:require [clojure.tools.logging :as log]
            [clj-time.core :as time]
            [clj-time.coerce :as c]
-           [oph.common.util.util :refer :all]))
+           [oph.common.util.util :refer :all]
+           [osaan.arkisto.peruste :as peruste-arkisto]))
 
 (defn lataa-kaikki-sivut [url options]
   (loop [vanha-data []
@@ -27,41 +28,65 @@
         data
         (recur data (inc sivu))))))
 
-(defn muotoile-arvioinnin-kohde [index alue]
-  {:jarjestys (inc index)
-   :nimi_fi (get-in alue [:otsikko :fi])
-   :nimi_sv (get-in alue [:otsikko :sv])})
+(defn muotoile-arvioinnin-kohde [index kohde]
+  {:arvioinninkohde_id (get-in kohde [:otsikko :_id])
+   :jarjestys (inc index)
+   :nimi_fi (get-in kohde [:otsikko :fi])
+   :nimi_sv (get-in kohde [:otsikko :sv])})
 
 (defn muotoile-arvioinnin-kohdealue [index alue]
-  {:jarjestys (inc index)
+  {:arvioinninkohdealue_id  (get-in alue [:otsikko :_id])
+   :jarjestys (inc index)
    :nimi_fi (get-in alue [:otsikko :fi])
    :nimi_sv (get-in alue [:otsikko :sv])
    :arvioinnin_kohteet (map-indexed muotoile-arvioinnin-kohde (:arvioinninKohteet alue))})
 
+(defn osatunnus [osa]
+  (cond
+    (= 6 (count (:koodiArvo osa))) (:koodiArvo osa)
+    (:koodiUri osa) (second (re-matches #"^tutkinnonosat_(\d+)$" (:koodiUri osa)))
+    (:koodiArvo osa) (second (re-matches #"^tutkinnonosat_(\d+)$" (:koodiArvo osa)))))
+
 (defn muotoile-tutkinnonosa [index osa]
-  {:osatunnus (:koodiArvo osa)
+  {:osatunnus (osatunnus osa)
    :jarjestys (inc index)
    :nimi_fi (get-in osa [:nimi :fi])
    :nimi_sv (get-in osa [:nimi :sv])
    :arvioinnin_kohdealueet (map-indexed muotoile-arvioinnin-kohdealue (get-in osa [:arviointi :arvioinninKohdealueet]))})
 
+(defn hae-osat [rakenne]
+  (if (:osat rakenne)
+    (mapcat hae-osat (:osat rakenne))
+    [rakenne]))
+
+(defn muotoile-suoritustapa
+  [osaviite->osatunnus]
+  (fn [suoritustapa]
+    (let [pakollisuus (into {}
+                            (for [osa (hae-osat (:rakenne suoritustapa))]
+                              [(:_tutkinnonOsaViite osa) (:pakollinen osa)]))]
+      {:suoritustapakoodi (:suoritustapakoodi suoritustapa)
+       :osat (map-indexed (fn [index osa]
+                            {:jarjestys (inc index)
+                             :pakollinen (pakollisuus (str (:id osa)))
+                             :tutkinnonosa (osaviite->osatunnus (:_tutkinnonOsa osa))})
+                          (:tutkinnonOsaViitteet suoritustapa))})))
+
 (defn muotoile-peruste [peruste]
-  {:diaarinumero (:diaarinumero peruste)
-   :voimassa_alkupvm (c/from-long (:voimassaoloAlkaa peruste))
-   :voimassa_loppupvm (c/from-long (:voimassaoloLoppuu peruste))
-   :siirtymaajan_loppupvm (c/from-long (:siirtymaPaattyy peruste))
-   :tutkinnonosat (map-indexed muotoile-tutkinnonosa (:tutkinnonOsat peruste))
-   :suoritustavat (map :suoritustapakoodi (:suoritustavat peruste))})
+  (let [osaviite->osatunnus (into {} (for [osa (:tutkinnonOsat peruste)]
+                                       [(str (:id osa)) (osatunnus osa)]))]
+    {:diaarinumero (:diaarinumero peruste)
+     :eperustetunnus (:id peruste)
+     :voimassa_alkupvm (c/to-local-date (:voimassaoloAlkaa peruste))
+     :voimassa_loppupvm (c/to-local-date (:voimassaoloLoppuu peruste))
+     :siirtymaajan_loppupvm (c/to-local-date (:siirtymaPaattyy peruste))
+     :tutkinnonosat (map-indexed muotoile-tutkinnonosa (:tutkinnonOsat peruste))
+     :tutkinnot (map :koulutuskoodiArvo (:koulutukset peruste))
+     :suoritustavat (map (muotoile-suoritustapa osaviite->osatunnus) (:suoritustavat peruste))}))
 
 (defn hae-peruste [id asetukset]
   (muotoile-peruste (get-json-from-url (str (:url asetukset) "api/perusteet/" id "/kaikki"))))
 
 (defn hae-perusteet [viimeisin-haku asetukset]
-  (for [peruste (lataa-kaikki-sivut (str (:url asetukset) "api/perusteet") {:query-params {:muokattu (c/to-long viimeisin-haku)}})
-        :let [peruste-data (hae-peruste (:id peruste) asetukset)]
-        tutkinto (:koulutukset peruste)
-        suoritustapa (:suoritustavat peruste-data)]
-    (-> peruste-data
-      (assoc :tutkinto (:koulutuskoodiArvo tutkinto)
-             :tyyppi suoritustapa)
-      (dissoc :suoritustavat))))
+  (for [peruste (lataa-kaikki-sivut (str (:url asetukset) "api/perusteet") {:query-params {:muokattu (c/to-long viimeisin-haku)}})]
+    (hae-peruste (:id peruste) asetukset)))
