@@ -17,6 +17,8 @@
 angular.module('osaan.tekstit', ['pascalprecht.translate'])
   .constant('tekstit', {
     fi: {
+      'yleiset.kielen_vaihto' : 'På svenska',
+      'yleiset.tallenna' : 'Tallenna',
       'arvointi.asteikko1' : 'En osaa',
       'arvointi.asteikko2' : 'Osaan hiukan',
       'arvointi.asteikko3' : 'Osaan melko hyvin',
@@ -39,9 +41,20 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'raportti.kommentti': 'Kommentti',
       'raportti.otsikko': 'Raportti',
       'raportti.paivays': 'Päiväys',
-      'raportti.palaa_arviointiin': 'Arvioi osaaminen'
+      'raportti.palaa_arviointiin': 'Arvioi osaaminen',
+      'tutkinto.otsikko': 'Aloita etsimällä ja valitsemalla haluamasi tutkinto',
+      'tutkinto.voimaantulevat': 'Näytä myös voimaantulevat',
+      'tutkinto.tyyppi': 'Tutkintotyyppi',
+      'tutkinto.tyyppi_kaikki': 'Kaikki',
+      'tutkinto.tyyppi_erikoisammattitutkinto': 'Erikoisammattitutkinto',
+      'tutkinto.tyyppi_perustutkinto': 'Perustutkinto',
+      'tutkinto.tyyppi_ammattitutkinto': 'Ammattitutkinto',
+      'tutkinto.eperusteet_linkki': 'Katso tutkinnon perusteet ePerusteet-järjestelmässä',
+      'tutkinto.nayttotutkintojenjarjestajat_linkki': 'Katso näyttötutkintojen järjestäjät'
     },
     sv: {
+      'yleiset.kielen_vaihto' : 'Suomeksi',
+      'yleiset.tallenna' : 'Tallenna (sv)',
       'arvointi.asteikko1' : 'En osaa (sv)',
       'arvointi.asteikko2' : 'Osaan hiukan (sv)',
       'arvointi.asteikko3' : 'Osaan melko hyvin (sv)',
@@ -64,7 +77,16 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'raportti.kommentti': 'Kommentti (sv)',
       'raportti.otsikko': 'Raportti (sv)',
       'raportti.paivays': 'Päiväys (sv)',
-      'raportti.palaa_arviointiin': 'Arvioi osaaminen (sv)'
+      'raportti.palaa_arviointiin': 'Arvioi osaaminen (sv)',
+      'tutkinto.otsikko':'Aloita etsimällä ja valitsemalla haluamasi tutkinto (sv)',
+      'tutkinto.voimaantulevat':'Näytä myös voimaantulevat (sv)',
+      'tutkinto.tyyppi':'Tutkintotyyppi (sv)',
+      'tutkinto.tyyppi_kaikki': 'Kaikki (sv)',
+      'tutkinto.tyyppi_erikoisammattitutkinto': 'Erikoisammattitutkinto (sv)',
+      'tutkinto.tyyppi_perustutkinto': 'Perustutkinto (sv)',
+      'tutkinto.tyyppi_ammattitutkinto': 'Ammattitutkinto (sv)',
+      'tutkinto.eperusteet_linkki': 'Katso tutkinnon perusteet ePerusteet-järjestelmässä (sv)',
+      'tutkinto.nayttotutkintojenjarjestajat_linkki': 'Katso näyttötutkintojen järjestäjät (sv)'
     }
   })
 

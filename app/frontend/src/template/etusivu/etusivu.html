@@ -5,7 +5,7 @@
 
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Aloita etsimällä ja valitsemalla haluamasi tutkinto</h3>
+    <h3 class="panel-title" translate="tutkinto.otsikko"></h3>
   </div>
   <div class="panel-body">
 
@@ -36,34 +36,34 @@
         <div class="checkbox">
           <label>
             <input type="checkbox" ng-model="haku.voimaantulevat" name="voimaantulevat" value="false">
-            Näytä myös voimaantulevat
+            {{ 'tutkinto.voimaantulevat' | translate }}
           </label>
         </div>
 
-        <strong style="margin-bottom: -10px;">Tutkintotyyppi</strong>
+        <strong style="margin-bottom: -10px;" translate="tutkinto.tyyppi"></strong>
 
         <div class="radio" style="margin-top: 0;">
           <label>
             <input type="radio" ng-model="haku.tutkintotyyppi" name="tutkintotyyppi" value="kaikki" ng-checked="true">
-            Kaikki
+            {{ 'tutkinto.tyyppi_kaikki' | translate }}
           </label>
         </div>
         <div class="radio">
           <label>
             <input type="radio" ng-model="haku.tutkintotyyppi" name="tutkintotyyppi" value="erikoisammattitutkinto">
-            Erikoisammattitutkinto
+            {{ 'tutkinto.tyyppi_erikoisammattitutkinto' | translate }}
           </label>
         </div>
         <div class="radio">
           <label>
             <input type="radio" ng-model="haku.tutkintotyyppi" name="tutkintotyyppi" value="perustutkinto">
-            Perustutkinto
+            {{ 'tutkinto.tyyppi_perustutkinto' | translate }}
           </label>
         </div>
         <div class="radio">
           <label>
             <input type="radio" ng-model="haku.tutkintotyyppi" name="tutkintotyyppi" value="ammattitutkinto">
-            Ammattitutkinto
+            {{ 'tutkinto.tyyppi_ammattitutkinto' | translate }}
           </label>
         </div>
       </div>
@@ -83,7 +83,3 @@
 
   </div>
 </div>
-
-
-
-
