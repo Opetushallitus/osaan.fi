@@ -17,12 +17,18 @@
 angular.module('osaan.tekstit', ['pascalprecht.translate'])
   .constant('tekstit', {
     fi: {
-      'yleiset.kielen_vaihto' : 'På svenska',
-      'yleiset.tallenna' : 'Tallenna',
-      'arvointi.asteikko1' : 'En osaa',
-      'arvointi.asteikko2' : 'Osaan hiukan',
-      'arvointi.asteikko3' : 'Osaan melko hyvin',
-      'arvointi.asteikko4' : 'Osaan hyvin',
+      'yleiset.kielen_vaihto': 'På svenska',
+      'yleiset.tallenna': 'Tallenna',
+      'arviointi.asteikko1': 'En osaa',
+      'arviointi.asteikko2': 'Osaan hiukan',
+      'arviointi.asteikko3': 'Osaan melko hyvin',
+      'arviointi.asteikko4': 'Osaan hyvin',
+      'arviointi.arvioi_osaamisesi': 'Arvioi osaamisesi',
+      'arviointi.eos': 'En osaa sanoa',
+      'arviointi.tekstivastaus': 'Tekstivastaus',
+      'arviointi.tekstivastaus_placeholder': 'Kirjoita vastauksesi tähän',
+      'arviointi.valitse_osa': 'Valitse tutkinnon osat',
+      'arviointi.raportti': 'Näytä raportti',
       'etusivu.opintoala': 'Ala',
       'etusivu.teksti': 'Tällä työkalulla voit arvioida osaamistasi sinua kiinnostavassa ammatissa (Näyttötutkinnossa). Palvelussa voit vastata valitsemasi tutkinnon osaamisvaatimuksiin ja lopuksi saat tuloksena listan vastauksistasi ja graafiset kuvaajat osaamisvaatimusten keskiarvoista. Voit myös lähettää raportin pdf-tiedostona haluamiisi sähköpostiosoitteisiin.',
       'etusivu.tutkinnon_nimi': 'Tutkinnon nimi',
@@ -57,12 +63,18 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'tutkinto_osa.valitse_tutkinto': 'Valitse tutkinto'
     },
     sv: {
-      'yleiset.kielen_vaihto' : 'Suomeksi',
-      'yleiset.tallenna' : 'Tallenna (sv)',
-      'arvointi.asteikko1' : 'En osaa (sv)',
-      'arvointi.asteikko2' : 'Osaan hiukan (sv)',
-      'arvointi.asteikko3' : 'Osaan melko hyvin (sv)',
-      'arvointi.asteikko4' : 'Osaan hyvin (sv)',
+      'yleiset.kielen_vaihto': 'Suomeksi',
+      'yleiset.tallenna': 'Tallenna (sv)',
+      'arviointi.asteikko1': 'En osaa (sv)',
+      'arviointi.asteikko2': 'Osaan hiukan (sv)',
+      'arviointi.asteikko3': 'Osaan melko hyvin (sv)',
+      'arviointi.asteikko4': 'Osaan hyvin (sv)',
+      'arviointi.arvioi_osaamisesi': 'Arvioi osaamisesi (sv)',
+      'arviointi.eos': 'En osaa sanoa (sv)',
+      'arviointi.tekstivastaus': 'Tekstivastaus (sv)',
+      'arviointi.tekstivastaus_placeholder': 'Kirjoita vastauksesi tähän (sv)',
+      'arviointi.valitse_osa': 'Valitse tutkinnon osat (sv)',
+      'arviointi.raportti': 'Näytä raportti (sv)',
       'etusivu.opintoala': 'Ala (sv)',
       'etusivu.teksti': 'Tällä työkalulla voit arvioida osaamistasi sinua kiinnostavassa ammatissa (Näyttötutkinnossa). Palvelussa voit vastata valitsemasi tutkinnon osaamisvaatimuksiin ja lopuksi saat tuloksena listan vastauksistasi ja graafiset kuvaajat osaamisvaatimusten keskiarvoista. Voit myös lähettää raportin pdf-tiedostona haluamiisi sähköpostiosoitteisiin. (sv)',
       'etusivu.tutkinnon_nimi': 'Tutkinnon nimi (sv)',
@@ -71,8 +83,8 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'footer.ota_yhteytta': 'osaan.fi käyttöä koskevan palautteen voi lähettää sähköpostilla osoitteeseen (sv)',
       'footer.ota_yhteytta_email': 'aitu-tuki@oph.fi',
       'footer.otsikko': 'Palvelun tarjoaa Opetushallitus (sv)',
-      'footer.rekisteriseloste': 'osaan.fi rekisteriselosteen voit lukea osoitteesta:',
-      'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20fi.pdf',
+      'footer.rekisteriseloste': 'osaan.fi rekisteriselosteen voit lukea osoitteesta: (sv)',
+      'footer.rekisteriseloste_url': 'http://osaan.fi/Rekisteriseloste%20Osaan%20sv.pdf',
       'osien-valinta.eteenpain': 'Eteenpäin (sv)',
       'osien-valinta.pakolliset_osat': 'Pakolliset osat (sv)',
       'osien-valinta.valinnaiset_osat': 'Valinnaiset osat (sv)',
@@ -82,9 +94,9 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'raportti.otsikko': 'Raportti (sv)',
       'raportti.paivays': 'Päiväys (sv)',
       'raportti.palaa_arviointiin': 'Arvioi osaaminen (sv)',
-      'tutkinto.otsikko':'Aloita etsimällä ja valitsemalla haluamasi tutkinto (sv)',
-      'tutkinto.voimaantulevat':'Näytä myös voimaantulevat (sv)',
-      'tutkinto.tyyppi':'Tutkintotyyppi (sv)',
+      'tutkinto.otsikko': 'Aloita etsimällä ja valitsemalla haluamasi tutkinto (sv)',
+      'tutkinto.voimaantulevat': 'Näytä myös voimaantulevat (sv)',
+      'tutkinto.tyyppi': 'Tutkintotyyppi (sv)',
       'tutkinto.tyyppi_kaikki': 'Kaikki (sv)',
       'tutkinto.tyyppi_erikoisammattitutkinto': 'Erikoisammattitutkinto (sv)',
       'tutkinto.tyyppi_perustutkinto': 'Perustutkinto (sv)',
@@ -98,14 +110,14 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
     }
   })
 
-  .config(['$translateProvider', 'tekstit', function($translateProvider, tekstit) {
+  .config(['$translateProvider', 'tekstit', function ($translateProvider, tekstit) {
     $translateProvider.translations('fi', tekstit.fi);
     $translateProvider.translations('sv', tekstit.sv);
 
     $translateProvider.use(localStorage.getItem('kieli') || 'fi');
   }])
 
-  .factory('kieli', [function() {
+  .factory('kieli', [function () {
     return localStorage.getItem('kieli') || 'fi';
   }])
 ;
