@@ -8,11 +8,11 @@ insert into opintoala (opintoalatunnus, koulutusala, nimi_fi, nimi_sv, voimassa_
  values ('202', '6', 'Viestintä ja informaatiotieteet', 'Mediekultur och informationsvetenskaper', to_date('1997-01-01', 'YYYY-MM-DD')),
         ('201', '6', 'Käsi- ja taideteollisuus', 'Hantverk och konstindustri', to_date('1997-01-01', 'YYYY-MM-DD'));
 
- insert into tutkinto(tutkintotunnus, opintoala, nimi_fi,voimassa_alkupvm, tutkintotaso)
+ insert into tutkinto(tutkintotunnus, opintoala, nimi_fi, nimi_sv, voimassa_alkupvm, tutkintotaso)
    values 
-    ('324601', '202', 'Audiovisuaalisen viestinnän ammattitutkinto', to_date('1997-01-01', 'YYYY-MM-DD'), 'ammattitutkinto'),
-    ('327128', '201', 'Käsityömestarin erikoisammattitutkinto', to_date('1997-01-01', 'YYYY-MM-DD'), 'erikoisammattitutkinto'),
-    ('987654', '202', 'Tekoälymasentajan keksitty tutkinto', to_date('2050-01-01', 'YYYY-MM-DD'), 'erikoisammattitutkinto');
+    ('324601', '202', 'Audiovisuaalisen viestinnän ammattitutkinto', 'Audiovisuaalisen viestinnän ammattitutkinto (sv)', to_date('1997-01-01', 'YYYY-MM-DD'), 'ammattitutkinto'),
+    ('327128', '201', 'Käsityömestarin erikoisammattitutkinto', 'Käsityömestarin erikoisammattitutkinto (sv)', to_date('1997-01-01', 'YYYY-MM-DD'), 'erikoisammattitutkinto'),
+    ('987654', '202', 'Tekoälymasentajan keksitty tutkinto', 'Tekoälymasentajan keksitty tutkinto (sv)', to_date('2050-01-01', 'YYYY-MM-DD'), 'erikoisammattitutkinto');
 
 insert into tutkintonimike(nimiketunnus, nimi_fi, nimi_sv, tutkinto)
    values ('10092', 'Media-assistentti', 'Medieassistent', '324601');
