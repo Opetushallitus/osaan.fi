@@ -69,7 +69,7 @@
       </div>
     </div>
 
-    <h3 ng-if="tutkinnot.length == 0">Tutkintoja ei löytynyt</h3>
+    <h3 ng-if="tutkinnot.length == 0">{{ 'tutkinto.ei_loytynyt' | translate }}</h3>
 
     <div ng-if="tutkinnot.length > 0" class="list-group" style="margin-top: 10px;">
         <a ng-repeat="tutkinto in tutkinnot" class="list-group-item e2e-haettu-tutkinto" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}" role="button" ng-click="tyhjennaValitutOsatunnukset()">

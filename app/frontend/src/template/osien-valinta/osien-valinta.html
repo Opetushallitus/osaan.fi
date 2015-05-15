@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">Valitse tutkinnon osat jotka haluat arvioida</h3>
+    <h3 class="panel-title">{{ 'tutkinto_osa.valitse' | translate }}</h3>
   </div>
   <div class="panel-body">
 
@@ -28,13 +28,13 @@
     <div class="row">
       <div class="col-md-12">
         <button class="btn btn-primary pull-right" ng-click="eteenpain()" ng-disabled="seuraavaTutkinnonosa() === undefined" role="button">
-          Arvioi osaaminen &nbsp;
+          {{ 'tutkinto_osa.arvioi' | translate}} &nbsp;
           <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
         </button>
 
         <a class="btn btn-primary pull-left" href="#/" role="button">
           <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
-          Valitse tutkinto
+          {{ 'tutkinto_osa.valitse_tutkinto' | translate}}
         </a>
       </div>
     </div>

@@ -23,7 +23,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'arvointi.asteikko2' : 'Osaan hiukan',
       'arvointi.asteikko3' : 'Osaan melko hyvin',
       'arvointi.asteikko4' : 'Osaan hyvin',
-      'etusivu.opintoala': 'Opintoala',
+      'etusivu.opintoala': 'Ala',
       'etusivu.teksti': 'Tällä työkalulla voit arvioida osaamistasi sinua kiinnostavassa ammatissa (Näyttötutkinnossa). Palvelussa voit vastata valitsemasi tutkinnon osaamisvaatimuksiin ja lopuksi saat tuloksena listan vastauksistasi ja graafiset kuvaajat osaamisvaatimusten keskiarvoista. Voit myös lähettää raportin pdf-tiedostona haluamiisi sähköpostiosoitteisiin.',
       'etusivu.tutkinnon_nimi': 'Tutkinnon nimi',
       'etusivu.tutkinnon_nimi_placeholder': 'Kirjoita tutkinnon nimi tai nimen osa',
@@ -50,7 +50,11 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'tutkinto.tyyppi_perustutkinto': 'Perustutkinto',
       'tutkinto.tyyppi_ammattitutkinto': 'Ammattitutkinto',
       'tutkinto.eperusteet_linkki': 'Katso tutkinnon perusteet ePerusteet-järjestelmässä',
-      'tutkinto.nayttotutkintojenjarjestajat_linkki': 'Katso näyttötutkintojen järjestäjät'
+      'tutkinto.nayttotutkintojenjarjestajat_linkki': 'Katso näyttötutkintojen järjestäjät',
+      'tutkinto.ei_loytynyt': 'Tutkintoja ei löytynyt',
+      'tutkinto_osa.valitse': 'Valitse tutkinnon osat jotka haluat arvioida',
+      'tutkinto_osa.arvioi': 'Arvioi osaaminen',
+      'tutkinto_osa.valitse_tutkinto': 'Valitse tutkinto'
     },
     sv: {
       'yleiset.kielen_vaihto' : 'Suomeksi',
@@ -59,7 +63,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'arvointi.asteikko2' : 'Osaan hiukan (sv)',
       'arvointi.asteikko3' : 'Osaan melko hyvin (sv)',
       'arvointi.asteikko4' : 'Osaan hyvin (sv)',
-      'etusivu.opintoala': 'Opintoala (sv)',
+      'etusivu.opintoala': 'Ala (sv)',
       'etusivu.teksti': 'Tällä työkalulla voit arvioida osaamistasi sinua kiinnostavassa ammatissa (Näyttötutkinnossa). Palvelussa voit vastata valitsemasi tutkinnon osaamisvaatimuksiin ja lopuksi saat tuloksena listan vastauksistasi ja graafiset kuvaajat osaamisvaatimusten keskiarvoista. Voit myös lähettää raportin pdf-tiedostona haluamiisi sähköpostiosoitteisiin. (sv)',
       'etusivu.tutkinnon_nimi': 'Tutkinnon nimi (sv)',
       'etusivu.tutkinnon_nimi_placeholder': 'Kirjoita tutkinnon nimi tai nimen osa (sv)',
@@ -86,7 +90,11 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'tutkinto.tyyppi_perustutkinto': 'Perustutkinto (sv)',
       'tutkinto.tyyppi_ammattitutkinto': 'Ammattitutkinto (sv)',
       'tutkinto.eperusteet_linkki': 'Katso tutkinnon perusteet ePerusteet-järjestelmässä (sv)',
-      'tutkinto.nayttotutkintojenjarjestajat_linkki': 'Katso näyttötutkintojen järjestäjät (sv)'
+      'tutkinto.nayttotutkintojenjarjestajat_linkki': 'Katso näyttötutkintojen järjestäjät (sv)',
+      'tutkinto.ei_loytynyt': 'Tutkintoja ei löytynyt (sv)',
+      'tutkinto_osa.valitse': 'Valitse tutkinnon osat jotka haluat arvioida (sv)',
+      'tutkinto_osa.arvioi': 'Arvioi osaaminen (sv)',
+      'tutkinto_osa.valitse_tutkinto': 'Valitse tutkinto (sv)'
     }
   })
 
