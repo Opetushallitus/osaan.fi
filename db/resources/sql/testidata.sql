@@ -25,10 +25,10 @@ insert into peruste (diaarinumero, voimassa_alkupvm, tutkinto, tyyppi, eperustet
    ('01/011/2040', to_date('2040-01-01', 'YYYY-MM-DD'), '987654', 'naytto', 999999, -4);
    
 
-insert into tutkinnonosa(osatunnus, nimi_fi) values
-  ('100001','Audiovisuaalinen tuotanto'),
-  ('100002','Video- ja elokuvatuotanto'),
-  ('100003','Televisiotuotanto');
+insert into tutkinnonosa(osatunnus, nimi_fi, nimi_sv) values
+  ('100001','Audiovisuaalinen tuotanto', 'Audiovisuaalinen tuotanto (sv)'),
+  ('100002','Video- ja elokuvatuotanto', 'Video- ja elokuvatuotanto (sv)'),
+  ('100003','Televisiotuotanto', 'Televisiotuotanto (sv)');
 
 insert into tutkinnonosa_ja_peruste(osa, peruste, jarjestys, pakollinen)
 values ('100001', (select peruste_id from peruste where diaarinumero = '41/011/2005'), 1, true),
