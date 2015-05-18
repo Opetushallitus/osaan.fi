@@ -21,6 +21,9 @@ Vagrant.configure("2") do |config|
     db.vm.box_url = vmbox_url
 
     db.vm.synced_folder "../env", "/env"
+    if File.directory?("../../oph-konversio")
+      db.vm.synced_folder "../../oph-konversio", "/dumps"
+    end
     db.vm.provision "shell", inline: "cd /env && ./db-server.sh local 192.168.50.72 local/ssh/dev_id_rsa.pub"
 
     # local port 4567 -> vm port 5432
