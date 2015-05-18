@@ -10,7 +10,7 @@ insert into opintoala (opintoalatunnus, koulutusala, nimi_fi, nimi_sv, voimassa_
 
  insert into tutkinto(tutkintotunnus, opintoala, nimi_fi, nimi_sv, voimassa_alkupvm, tutkintotaso)
    values 
-    ('324601', '202', 'Audiovisuaalisen viestinnän ammattitutkinto', 'Audiovisuaalisen viestinnän ammattitutkinto (sv)', to_date('1997-01-01', 'YYYY-MM-DD'), 'ammattitutkinto'),
+    ('324601', '202', 'Audiovisuaalisen viestinnän perustutkinto', 'Audiovisuaalisen viestinnän perustutkinto (sv)', to_date('1997-01-01', 'YYYY-MM-DD'), 'ammattitutkinto'),
     ('327128', '201', 'Käsityömestarin erikoisammattitutkinto', 'Käsityömestarin erikoisammattitutkinto (sv)', to_date('1997-01-01', 'YYYY-MM-DD'), 'erikoisammattitutkinto'),
     ('987654', '202', 'Tekoälymasentajan keksitty tutkinto', 'Tekoälymasentajan keksitty tutkinto (sv)', to_date('2050-01-01', 'YYYY-MM-DD'), 'erikoisammattitutkinto');
 
