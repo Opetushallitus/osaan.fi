@@ -17,6 +17,9 @@
             [korma.db :as db]
             [clojure.tools.logging :as log]))
 
+(def integraatio-kayttaja "INTEGRAATIO")
+(def jarjestelma-kayttaja "JARJESTELMA")
+
 (defn with-sql-kayttaja* [oid f]
   (db/transaction
     (try

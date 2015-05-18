@@ -19,7 +19,9 @@
             [clojurewerkz.quartzite.triggers :as t]
             [clojurewerkz.quartzite.schedule.daily-interval :as s]
             [clojurewerkz.quartzite.schedule.cron :as cron]
-            [clojure.tools.logging :as log]))
+            [clojure.tools.logging :as log]
+            osaan.infra.eraajo.eperusteet)
+  (:import osaan.infra.eraajo.eperusteet.PaivitaPerusteetJob))
 
 (defn ajastus [asetukset tyyppi]
   (cron/schedule
@@ -31,4 +33,13 @@
   (log/info "Poistetaan vanhat jobit ennen uudelleenkäynnistystä")
   (qs/clear!)
   (qs/start)
-  (log/info "Eräajomoottori käynnistetty"))
+  (log/info "Eräajomoottori käynnistetty")
+  (let [eperusteet-job (j/build
+                         (j/of-type PaivitaPerusteetJob)
+                         (j/with-identity "paivita-perusteet")
+                         (j/using-job-data {"asetukset" (:eperusteet-palvelu asetukset)}))
+        eperusteet-trigger (t/build
+                             (t/with-identity "eperusteet")
+                             (t/start-now)
+                             (t/with-schedule (ajastus asetukset :eperusteet)))]
+    (qs/schedule eperusteet-job eperusteet-trigger)))

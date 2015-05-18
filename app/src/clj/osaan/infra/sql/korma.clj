@@ -40,3 +40,7 @@
 
 (defentity tutkinnonosa
   (sql/pk :osatunnus))
+
+(defentity eperusteet-log
+  (sql/table :eperusteet_log)
+  (sql/pk :id))

@@ -68,3 +68,13 @@
                                              :voimassa_loppupvm (or (:voimassa_loppupvm peruste) (time/local-date 2199 1 1))
                                              :siirtymaajan_loppupvm (or (:siirtymaajan_loppupvm peruste) (time/local-date 2199 1 1))))]]
     (paivita-perusteen-tutkinnonosat! tallennettu-peruste (:osat tapa))))
+
+(defn ^:integration-api tallenna-viimeisin-paivitys! [ajankohta]
+  (sql/insert taulut/eperusteet-log
+    (sql/values {:paivitetty ajankohta})))
+
+(defn hae-viimeisin-paivitys []
+  (:paivitetty (sql-util/select-unique-or-nil taulut/eperusteet-log
+                 (sql/order :paivitetty :desc)
+                 (sql/limit 1)
+                 (sql/fields :paivitetty))))

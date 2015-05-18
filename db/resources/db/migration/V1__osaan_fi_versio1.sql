@@ -3,6 +3,7 @@ set session osaan.kayttaja='JARJESTELMA';
 CREATE SEQUENCE arvioinninkohde_id_seq;
 CREATE SEQUENCE arvioinninkohdealue_id_seq;
 CREATE SEQUENCE peruste_id_seq;
+CREATE SEQUENCE eperusteet_log_id_seq;
 
 create table kayttaja(
     oid varchar(80) NOT NULL primary key,
@@ -320,6 +321,15 @@ create table kohdearvio (
   CONSTRAINT arvosana_rajat CHECK ((arvio < 5) and (arvio > 0))
 );
 
+create table eperusteet_log (
+  id integer NOT NULL primary key DEFAULT nextval('eperusteet_log_id_seq'),
+  paivitetty timestamptz NOT NULL,
+  muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+  luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
+  muutettuaika timestamptz NOT NULL,
+  luotuaika timestamptz NOT NULL
+);
+
 create trigger arvioinnin_kohdealue_update before update on arvioinnin_kohdealue for each row execute procedure update_stamp() ;
 create trigger arvioinnin_kohdealuel_insert before insert on arvioinnin_kohdealue for each row execute procedure update_created() ;
 create trigger arvioinnin_kohdealuem_insert before insert on arvioinnin_kohdealue for each row execute procedure update_stamp() ;
@@ -355,6 +365,13 @@ create trigger kohdearviom_insert before insert on kohdearvio for each row execu
 create trigger kohdearvio_mu_update before update on kohdearvio for each row execute procedure update_modifier() ;
 create trigger kohdearvio_cu_insert before insert on kohdearvio for each row execute procedure update_creator() ;
 create trigger kohdearvio_mu_insert before insert on kohdearvio for each row execute procedure update_modifier() ;
+
+create trigger eperusteet_log_update before update on eperusteet_log for each row execute procedure update_stamp() ;
+create trigger eperusteet_logl_insert before insert on eperusteet_log for each row execute procedure update_created() ;
+create trigger eperusteet_logm_insert before insert on eperusteet_log for each row execute procedure update_stamp() ;
+create trigger eperusteet_log_mu_update before update on eperusteet_log for each row execute procedure update_modifier() ;
+create trigger eperusteet_log_cu_insert before insert on eperusteet_log for each row execute procedure update_creator() ;
+create trigger eperusteet_log_mu_insert before insert on eperusteet_log for each row execute procedure update_modifier() ;
 
 -- dokumentaatiota
 
