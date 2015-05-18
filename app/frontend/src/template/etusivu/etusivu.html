@@ -76,7 +76,7 @@
           <h4 class="list-group-item-heading pull-left">{{ tutkinto | lokalisoiKentta:'nimi' }}&nbsp;({{tutkinto.peruste_tyyppi}})</h4> &nbsp;&nbsp;
           <span class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true"></span>
           <p class="list-group-item-text">
-            <eperusteet-linkki kieli="{{kieli}}" eperustetunnus="{{tutkinto.peruste_eperustetunnus}}" eperustetyyppi="{{tutkinto.peruste_tyyppi}}" tutkintotunnus="{{tutkinto.tutkintotunnus}}"></eperusteet-linkki>
+            <eperusteet-linkki kieli="{{kieli}}" eperustetunnus="{{tutkinto.peruste_eperustetunnus}}" eperustetyyppi="{{tutkinto.peruste_tyyppi}}" tutkintotunnus="{{tutkinto.tutkintotunnus}}" tutkintonimi="{{ tutkinto | lokalisoiKentta:'nimi' }}"></eperusteet-linkki>
           </p>
         </a>
     </div>
