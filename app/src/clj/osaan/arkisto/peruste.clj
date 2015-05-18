@@ -17,6 +17,7 @@
             [korma.core :as sql]
             [oph.common.util.util :refer [update-in-if-exists]]
             [oph.korma.common :as sql-util]
+            [osaan.arkisto.tutkinnonosa :as tutkinnonosa-arkisto]
             [osaan.infra.sql.korma :as taulut]
             [clojure.tools.logging :as log]))
 
@@ -47,11 +48,13 @@
 
 (defn ^:integration-api paivita-perusteen-tutkinnonosat! [peruste osat]
   (doseq [{:keys [tutkinnonosa pakollinen jarjestys]} osat]
-    (sql-util/insert-or-update :tutkinnonosa_ja_peruste [:osa :peruste]
-      {:osa tutkinnonosa
-       :peruste (:peruste_id peruste)
-       :jarjestys jarjestys
-       :pakollinen pakollinen})))
+    (if (tutkinnonosa-arkisto/hae tutkinnonosa)
+      (sql-util/insert-or-update :tutkinnonosa_ja_peruste [:osa :peruste]
+        {:osa tutkinnonosa
+         :peruste (:peruste_id peruste)
+         :jarjestys jarjestys
+         :pakollinen pakollinen})
+      (log/warn "Tutkinnonosa puuttuu:" tutkinnonosa))))
 
 (defn ^:integration-api lisaa! [peruste]
   (doseq [osa (:tutkinnonosat peruste)]

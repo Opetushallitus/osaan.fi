@@ -13,7 +13,8 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.arkisto.tutkinnonosa
-  (:require [korma.core :as sql]))
+  (:require [korma.core :as sql]
+            [oph.korma.common :as sql-util]))
 
 (defn hae-perusteen-tutkinnon-osat
   "Hae perusteeseen liittyvät tutkinnon osat."
@@ -27,3 +28,7 @@
                 :tutkinnonosa_ja_peruste.pakollinen)
     (sql/where {:tutkinnonosa_ja_peruste.peruste peruste-id})))
 
+(defn hae [osatunnus]
+  (sql-util/select-unique-or-nil
+    :tutkinnonosa
+    (sql/where {:osatunnus osatunnus})))
