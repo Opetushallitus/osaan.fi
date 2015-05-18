@@ -3,7 +3,7 @@
     <span class="glyphicon bitmap icon-eperuste" aria-hidden="true"></span>
     {{ 'tutkinto.eperusteet_linkki' | translate }}
   </a><br />
-  <a href="http://www.nayttotutkintohaku.fi/{{kieli}}/#/tutkinto/{{tutkintotunnus}}" target="blank">
+  <a ng-if="eperustetyyppi!='ops'" href="http://www.nayttotutkintohaku.fi/{{kieli}}/#/tutkinto/{{tutkintotunnus}}" target="blank">
     <span class="glyphicon bitmap icon-nayttotutkintohaku" aria-hidden="true"></span>
     {{ 'tutkinto.nayttotutkintojenjarjestajat_linkki' | translate }}
   </a><br />
