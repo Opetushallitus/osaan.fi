@@ -232,7 +232,6 @@ button.button-with-icon {
     @include icon-after(10px, 2px) {
       @include add-user-icon;
     }
-  ;
   }
 }
 
@@ -251,4 +250,8 @@ button.button-with-icon {
 
 .glyphicon.bitmap.icon-nayttotutkintohaku {
   background-image: url("../img/turre_22.png");
+}
+
+.glyphicon.bitmap.icon-opintopolku {
+  background-image: url("../img/Opintopolku_FI_logo.png");
 }

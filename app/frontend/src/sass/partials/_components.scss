@@ -15,3 +15,7 @@
   padding-left: 35px;
   @include icon-before(-22px, 2px){@include left-arrow;};
 }
+
+.eperusteet a{
+  display: block;
+}
