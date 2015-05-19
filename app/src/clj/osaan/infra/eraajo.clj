@@ -27,12 +27,15 @@
   (cron/schedule
     (cron/cron-schedule (get-in asetukset [:ajastus tyyppi]))))
 
+(def ajastin (promise))
+
 (defn ^:integration-api kaynnista-ajastimet! [asetukset]
   (log/info "Käynnistetään ajastetut eräajot")
-  (qs/initialize)
+  (when-not (realized? ajastin)
+    (deliver ajastin (qs/initialize)))
   (log/info "Poistetaan vanhat jobit ennen uudelleenkäynnistystä")
-  (qs/clear!)
-  (qs/start)
+  (qs/clear! @ajastin)
+  (qs/start @ajastin)
   (log/info "Eräajomoottori käynnistetty")
   (let [eperusteet-job (j/build
                          (j/of-type PaivitaPerusteetJob)
@@ -42,4 +45,4 @@
                              (t/with-identity "eperusteet")
                              (t/start-now)
                              (t/with-schedule (ajastus asetukset :eperusteet)))]
-    (qs/schedule eperusteet-job eperusteet-trigger)))
+    (qs/schedule @ajastin eperusteet-job eperusteet-trigger)))
