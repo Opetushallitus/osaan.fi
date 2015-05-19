@@ -20,8 +20,10 @@
             [clojurewerkz.quartzite.schedule.daily-interval :as s]
             [clojurewerkz.quartzite.schedule.cron :as cron]
             [clojure.tools.logging :as log]
-            osaan.infra.eraajo.eperusteet)
-  (:import osaan.infra.eraajo.eperusteet.PaivitaPerusteetJob))
+            osaan.infra.eraajo.eperusteet
+            osaan.infra.eraajo.tutkinnot)
+  (:import osaan.infra.eraajo.eperusteet.PaivitaPerusteetJob
+           osaan.infra.eraajo.tutkinnot.PaivitaTutkinnotJob))
 
 (defn ajastus [asetukset tyyppi]
   (cron/schedule
@@ -44,5 +46,14 @@
         eperusteet-trigger (t/build
                              (t/with-identity "eperusteet")
                              (t/start-now)
-                             (t/with-schedule (ajastus asetukset :eperusteet)))]
-    (qs/schedule @ajastin eperusteet-job eperusteet-trigger)))
+                             (t/with-schedule (ajastus asetukset :eperusteet)))
+        tutkinnot-job (j/build
+                        (j/of-type PaivitaTutkinnotJob)
+                        (j/with-identity "paivita-tutkinnot")
+                        (j/using-job-data {"asetukset" (:koodistopalvelu asetukset)}))
+        tutkinnot-trigger (t/build
+                            (t/with-identity "tutkinnot")
+                            (t/start-now)
+                            (t/with-schedule (ajastus asetukset :koodistopalvelu)))]
+    (qs/schedule @ajastin eperusteet-job eperusteet-trigger)
+    (qs/schedule @ajastin tutkinnot-job tutkinnot-trigger)))
