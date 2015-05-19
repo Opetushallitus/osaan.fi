@@ -32,10 +32,12 @@
         :maximum-pool-size s/Int
         :minimum-pool-size s/Int}
    :eperusteet-palvelu {:url s/Str}
+   :koodistopalvelu {:url s/Str}
    :eraajo Boolean
    :development-mode Boolean
    :logback {:properties-file s/Str}
-   :ajastus {:eperusteet s/Str}})
+   :ajastus {:eperusteet s/Str
+             :koodistopalvelu s/Str}})
 
 (def oletusasetukset
   {:server {:port 8084
@@ -49,9 +51,11 @@
         :minimum-pool-size 3}
    :eperusteet-palvelu {:url "https://virkailija.opintopolku.fi/eperusteet-service/"}
    :eraajo false
+   :koodistopalvelu {:url "https://virkailija.opintopolku.fi/koodisto-service/rest/json/"}
    :development-mode false ; oletusarvoisesti ei olla kehitysmoodissa. Pitää erikseen kääntää päälle jos tarvitsee kehitysmoodia.
    :logback {:properties-file "resources/logback.xml"}
-   :ajastus {:eperusteet "0 15 4 * * ?"}})
+   :ajastus {:eperusteet "0 15 4 * * ?"
+             :koodistopalvelu "0 15 3 * * ?"}})
 
 (defn hae-asetukset
   ([alkuasetukset] (lue-asetukset alkuasetukset Asetukset "osaan.properties"))
