@@ -16,6 +16,10 @@
   @include icon-before(-22px, 2px){@include left-arrow;};
 }
 
-.eperusteet a{
-  display: block;
+.eperusteet{
+  overflow: auto;
+  a{
+    float: left;
+    clear: both;
+  }
 }
