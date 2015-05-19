@@ -24,7 +24,7 @@
          sivu 0]
     (let [{:keys [data sivuja]} (get-json-from-url url (assoc-in options [:query-params :sivu] sivu))
           data (concat vanha-data data)]
-      (if (= (inc sivu) sivuja)
+      (if (>= (inc sivu) sivuja)
         data
         (recur data (inc sivu))))))
 
