@@ -13,7 +13,7 @@
       <section class="kohdealue" ng-repeat="kohdealue in kohdealueet[tutkinnonosa.osatunnus]">
         <h3>{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
 
-        <table>
+        <table class="raportti table table-striped">
           <thead>
             <tr>
               <th translate="raportti.arvioinnin_kohde"></th>
