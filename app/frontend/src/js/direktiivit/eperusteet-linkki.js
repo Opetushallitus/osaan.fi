@@ -23,6 +23,7 @@ angular.module('osaan.direktiivit.eperusteet-linkki', [])
         kieli: '@',
         eperustetunnus: '@',
         eperustetyyppi: '@',
+        eperustesivu: '@',
         tutkintotunnus: '@',
         tutkintonimi: '@'
       },
