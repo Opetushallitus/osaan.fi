@@ -71,6 +71,11 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
   [koodi]
   ((kuuluu-koodistoon "tutkintotyyppi") koodi))
 
+(defn ^:private tutkintonimike-koodi?
+  [koodi]
+  (and ((kuuluu-koodistoon "tutkintonimikkeet") koodi)
+       (not= "00000" (:koodiArvo koodi))))
+
 (defn koodiston-uusin-versio
   [asetukset koodisto]
   (loop [versio nil]
@@ -91,14 +96,18 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
 (defn ^:private hae-alakoodit
   [asetukset koodi] (get-json-from-url (str (:url asetukset) "relaatio/sisaltyy-alakoodit/" (:koodiUri koodi))))
 
-(defn lisaa-opintoala-ja-tyyppi
+(defn lisaa-opintoala-tyyppi-ja-nimikkeet
   [asetukset tutkinto]
   (let [alakoodit (hae-alakoodit asetukset tutkinto)
         opintoala (some-value opintoala-koodi? alakoodit)
-        tyyppi (some-value tutkintotyyppi-koodi? alakoodit)]
+        tyyppi (some-value tutkintotyyppi-koodi? alakoodit)
+        nimike-kentat [:nimi_fi :nimi_sv :nimiketunnus]
+        nimikkeet (map #(select-keys (koodi->kasite % :nimiketunnus) nimike-kentat)
+                       (filter tutkintonimike-koodi? alakoodit))]
     (assoc tutkinto
            :opintoala (:koodiArvo opintoala)
-           :tyyppi (:koodiArvo tyyppi))))
+           :tyyppi (:koodiArvo tyyppi)
+           :tutkintonimikkeet nimikkeet)))
 
 (defn hae-koodisto
   [asetukset koodisto versio]
@@ -137,11 +146,13 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
 
 (defn hae-tutkinto-muutokset
   [asetukset]
-  (let [tutkinto-kentat [:nimi_fi :nimi_sv :voimassa_alkupvm :voimassa_loppupvm :tutkintotunnus :opintoala]
+  (let [tutkinto-kentat [:nimi_fi :nimi_sv :voimassa_alkupvm :voimassa_loppupvm :tutkintotunnus :opintoala :tutkintonimikkeet]
         vanhat (into {} (for [tutkinto (tutkinto-arkisto/hae-kaikki)]
-                          [(:tutkintotunnus tutkinto) (select-keys tutkinto tutkinto-kentat)]))
+                          [(:tutkintotunnus tutkinto) (->
+                                                        (clojure.set/rename-keys tutkinto {:tutkintonimike :tutkintonimikkeet})
+                                                        (select-keys tutkinto-kentat))]))
         uudet (->> (hae-tutkinnot asetukset)
-                (map (partial lisaa-opintoala-ja-tyyppi asetukset))
+                (map (partial lisaa-opintoala-tyyppi-ja-nimikkeet asetukset))
                 (filter (comp #{"02" "03"} :tyyppi))
                 (map #(select-keys % tutkinto-kentat))
                 (map-by :tutkintotunnus))]

@@ -18,10 +18,15 @@
 
 (declare tutkinto opintoala koulutusala peruste)
 
+(defentity tutkintonimike
+  (sql/pk :nimiketunnus)
+  (sql/belongs-to tutkinto {:fk :tutkinto}))
+
 (defentity tutkinto
   (sql/pk :tutkintotunnus)
   (sql/belongs-to opintoala {:fk :opintoala})
-  (sql/has-many peruste {:fk :tutkinto}))
+  (sql/has-many peruste {:fk :tutkinto})
+  (sql/has-many tutkintonimike {:fk :tutkinto}))
 
 (defentity opintoala
   (sql/pk :opintoalatunnus)

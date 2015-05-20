@@ -18,16 +18,25 @@
             [osaan.infra.sql.korma :as taulut]
             [oph.common.util.util :refer [pvm-mennyt-tai-tanaan? pvm-tuleva-tai-tanaan?]]))
 
+(defn ^:integration-api paivita-tutkintonimike!
+  [tiedot]
+  (sql-util/insert-or-update taulut/tutkintonimike :nimiketunnus
+    tiedot))
+
 (defn ^:integration-api lisaa!
   [tiedot]
   (sql/insert taulut/tutkinto
-    (sql/values tiedot)))
+    (sql/values (dissoc tiedot :tutkintonimikkeet)))
+  (doseq [nimike (:tutkintonimikkeet tiedot)]
+    (paivita-tutkintonimike! (assoc nimike :tutkinto (:tutkintotunnus tiedot)))))
 
 (defn ^:integration-api paivita!
   [tutkintotunnus tiedot]
   (sql-util/update-unique taulut/tutkinto
-    (sql/set-fields tiedot)
-    (sql/where {:tutkintotunnus tutkintotunnus})))
+    (sql/set-fields (dissoc tiedot :tutkintonimikkeet))
+    (sql/where {:tutkintotunnus tutkintotunnus}))
+  (doseq [nimike (:tutkintonimikkeet tiedot)]
+    (paivita-tutkintonimike! (assoc nimike :tutkinto (:tutkintotunnus tiedot)))))
 
 (defn ^:private hae-yksi [where-ehto]
   (sql-util/select-unique-or-nil
@@ -56,6 +65,11 @@
   (sql/select taulut/tutkinto
     (sql/order :tutkintotunnus)))
 
+(defn hae-kaikki-integraatiolle
+  []
+  (sql/select taulut/tutkinto
+    (sql/with taulut/tutkintonimike)))
+
 (defn hae-ehdoilla
   [nimi opintoala tutkintotaso voimaantulevat]
     (let [nimi (str "%" nimi "%")]
@@ -76,6 +90,6 @@
           opintoala (sql/where {:opintoala opintoala}))
         (cond->
           tutkintotaso (sql/where {:tutkintotaso tutkintotaso}))
-        (cond-> 
+        (cond->
           (false? (boolean voimaantulevat)) (sql/where (< :voimassa_alkupvm [(sql/raw "current_date")])))
         sql/exec)))
