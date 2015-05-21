@@ -12,10 +12,10 @@
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; European Union Public Licence for more details.
 
-(ns osaan.rest-api.arvioinnin-kohde
+(ns osaan.rest-api.ammattitaidon-kuvaus
   (:require [compojure.core :as c]
             [oph.common.util.http-util :refer [json-response]]
-            [osaan.arkisto.arvioinnin-kohde :as arkisto]
+            [osaan.arkisto.ammattitaidon-kuvaus :as arkisto]
             [osaan.compojure-util :as cu]
             [osaan.skeema :as skeema]))
 

@@ -29,8 +29,8 @@
 
 (deftest ^:integraatio api-smoke
   (doseq [polku ["/api/arvio/testiarvio"
-                 "/api/arvioinninkohde/alueet?tutkinnonosatunnus=100001"
-                 "/api/arvioinninkohde/alueet?tutkinnonosatunnus=100001&tutkinnonosatunnus=100002"
+                 "/api/ammattitaidonkuvaus/alueet?tutkinnonosatunnus=100001"
+                 "/api/ammattitaidonkuvaus/alueet?tutkinnonosatunnus=100001&tutkinnonosatunnus=100002"
                  "/api/koulutusala"
                  "/api/ohje/etusivu"
                  "/api/tutkinnonosa?peruste=611&tutkintotunnus=324601"

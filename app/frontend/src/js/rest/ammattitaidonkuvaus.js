@@ -18,7 +18,7 @@ angular.module('osaan.rest.ammattitaidonkuvaus', [])
 
   .factory('AmmattitaidonKuvaus', ['$http', function($http) {
     function haeKohdealueetTutkinnonosille(tutkinnonosatunnukset) {
-      return $http.get('api/arvioinninkohde/alueet', {cache: true, params: {tutkinnonosatunnus: tutkinnonosatunnukset}})
+      return $http.get('api/ammattitaidonkuvaus/alueet', {cache: true, params: {tutkinnonosatunnus: tutkinnonosatunnukset}})
         .then(function(response) {
           return response.data;
         });

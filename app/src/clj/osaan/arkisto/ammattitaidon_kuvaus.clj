@@ -12,7 +12,7 @@
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; European Union Public Licence for more details.
 
-(ns osaan.arkisto.arvioinnin-kohde
+(ns osaan.arkisto.ammattitaidon-kuvaus
   (:require [korma.core :as sql]))
 
 (defn ^:private hae-kohdealueet
