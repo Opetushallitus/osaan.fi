@@ -71,6 +71,21 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
   [koodi]
   ((kuuluu-koodistoon "tutkintotyyppi") koodi))
 
+(defn ^:private tutkintotaso-koodi?
+  [koodi]
+  ((kuuluu-koodistoon "koulutustyyppi") koodi))
+
+(defn ^:private koodi->tutkintotaso
+  [koodi]
+  (when (tutkintotaso-koodi? koodi)
+    (case (:koodiArvo koodi)
+      "1" "perustutkinto"
+      "4" "perustutkinto"
+      "12" "erikoisammattitutkinto"
+      "13" "perustutkinto"
+      "14" "ammattitutkinto"
+      nil)))
+
 (defn ^:private tutkintonimike-koodi?
   [koodi]
   (and ((kuuluu-koodistoon "tutkintonimikkeet") koodi)
@@ -101,12 +116,14 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
   (let [alakoodit (hae-alakoodit asetukset tutkinto)
         opintoala (some-value opintoala-koodi? alakoodit)
         tyyppi (some-value tutkintotyyppi-koodi? alakoodit)
+        taso (some koodi->tutkintotaso alakoodit)
         nimike-kentat [:nimi_fi :nimi_sv :nimiketunnus]
         nimikkeet (map #(select-keys (koodi->kasite % :nimiketunnus) nimike-kentat)
                        (filter tutkintonimike-koodi? alakoodit))]
     (assoc tutkinto
            :opintoala (:koodiArvo opintoala)
            :tyyppi (:koodiArvo tyyppi)
+           :tutkintotaso taso
            :tutkintonimikkeet nimikkeet)))
 
 (defn hae-koodisto
@@ -146,7 +163,7 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
 
 (defn hae-tutkinto-muutokset
   [asetukset]
-  (let [tutkinto-kentat [:nimi_fi :nimi_sv :voimassa_alkupvm :voimassa_loppupvm :tutkintotunnus :opintoala :tutkintonimikkeet]
+  (let [tutkinto-kentat [:nimi_fi :nimi_sv :voimassa_alkupvm :voimassa_loppupvm :tutkintotunnus :opintoala :tutkintotaso :tutkintonimikkeet]
         vanhat (into {} (for [tutkinto (tutkinto-arkisto/hae-kaikki)]
                           [(:tutkintotunnus tutkinto) (->
                                                         (clojure.set/rename-keys tutkinto {:tutkintonimike :tutkintonimikkeet})
@@ -259,7 +276,7 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
                          :when (map? tutkinto)]
                      (assoc (uudet-arvot tutkinto) :tutkintotunnus tunnus))]
     (tallenna-uudet-tutkinnot! (filter :opintoala uudet))
-    (tallenna-muuttuneet-tutkinnot! (filter :opintoala muuttuneet))))
+    (tallenna-muuttuneet-tutkinnot! muuttuneet)))
 
 (defn ^:integration-api paivita-tutkinnot! [asetukset]
   (try
