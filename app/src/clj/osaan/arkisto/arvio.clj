@@ -26,9 +26,9 @@
 (defn ^:private hae-kohdearviot
   [arviotunnus]
   (sql/select :kohdearvio
-    (sql/join :arvioinnin_kohde (= :arvioinnin_kohde.arvioinninkohde_id :arvioinnin_kohde))
-    (sql/join :arvioinnin_kohdealue (= :arvioinnin_kohdealue.arvioinninkohdealue_id :arvioinnin_kohde.arvioinninkohdealue))
-    (sql/fields [:arvioinnin_kohdealue.osa :tutkinnonosa] :arvioinnin_kohde :arvio [:kommentti :vapaateksti])
+    (sql/join :ammattitaidon_kuvaus (= :ammattitaidon_kuvaus.ammattitaidonkuvaus_id :ammattitaidon_kuvaus))
+    (sql/join :arvioinnin_kohdealue (= :arvioinnin_kohdealue.arvioinninkohdealue_id :ammattitaidon_kuvaus.arvioinninkohdealue))
+    (sql/fields [:arvioinnin_kohdealue.osa :tutkinnonosa] :ammattitaidon_kuvaus :arvio [:kommentti :vapaateksti])
     (sql/where {:arviotunnus arviotunnus})))
 
 (defn ^:private hae-tutkinnonosat
@@ -47,7 +47,7 @@
   [arviotunnus]
   (let [arvio (hae-arvio arviotunnus)
         kohdearviot (hae-kohdearviot arviotunnus)
-        tutkinnonosa->kohde->arviot (reduce #(assoc-in %1 [(:tutkinnonosa %2) (:arvioinnin_kohde %2)] (dissoc %2 :tutkinnonosa :arvioinnin_kohde)) {} kohdearviot)
+        tutkinnonosa->kohde->arviot (reduce #(assoc-in %1 [(:tutkinnonosa %2) (:ammattitaidon_kuvaus %2)] (dissoc %2 :tutkinnonosa :ammattitaidon_kuvaus)) {} kohdearviot)
         tutkinnonosat (hae-tutkinnonosat arviotunnus)]
     (assoc arvio :kohdearviot tutkinnonosa->kohde->arviot
                  :tutkinnonosat (map :osa tutkinnonosat))))
@@ -64,9 +64,9 @@
                     {:arviotunnus tunniste
                      :osa osa})))
     (sql/insert :kohdearvio
-      (sql/values (for [[arvioinnin_kohde {:keys [arvio vapaateksti]}] (into {} (vals kohdearviot))]
+      (sql/values (for [[ammattitaidon_kuvaus {:keys [arvio vapaateksti]}] (into {} (vals kohdearviot))]
                     {:arviotunnus tunniste
-                     :arvioinnin_kohde (Integer/parseInt (name arvioinnin_kohde))
+                     :ammattitaidon_kuvaus (Integer/parseInt (name ammattitaidon_kuvaus))
                      :arvio arvio
                      :kommentti vapaateksti})))
     tunniste))

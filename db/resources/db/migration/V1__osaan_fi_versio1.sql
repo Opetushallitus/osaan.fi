@@ -1,6 +1,6 @@
 set session osaan.kayttaja='JARJESTELMA';
 
-CREATE SEQUENCE arvioinninkohde_id_seq;
+CREATE SEQUENCE ammattitaidonkuvaus_id_seq;
 CREATE SEQUENCE arvioinninkohdealue_id_seq;
 CREATE SEQUENCE peruste_id_seq;
 CREATE SEQUENCE eperusteet_log_id_seq;
@@ -278,8 +278,9 @@ create table arvioinnin_kohdealue (
    luotuaika timestamptz NOT NULL
 );
 
-create table arvioinnin_kohde (
-   arvioinninkohde_id integer NOT NULL primary key DEFAULT nextval('arvioinninkohde_id_seq'),
+
+create table ammattitaidon_kuvaus (
+   ammattitaidonkuvaus_id integer NOT NULL primary key DEFAULT nextval('ammattitaidonkuvaus_id_seq'),
    arvioinninkohdealue integer NOT NULL references arvioinnin_kohdealue(arvioinninkohdealue_id),
    nimi_fi text not null,
    nimi_sv text,
@@ -310,14 +311,14 @@ create table arvio_tutkinnonosa (
 
 create table kohdearvio (
   arviotunnus varchar(16) NOT NULL references arvio(tunniste),
-  arvioinnin_kohde integer NOT NULL references arvioinnin_kohde(arvioinninkohde_id),
+  ammattitaidon_kuvaus integer NOT NULL references ammattitaidon_kuvaus(ammattitaidonkuvaus_id),
   arvio integer, 
   kommentti text,
   muutettu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   luotu_kayttaja varchar(80) NOT NULL references kayttaja(oid),
   muutettuaika timestamptz NOT NULL,
   luotuaika timestamptz NOT NULL,
-  PRIMARY KEY (arviotunnus, arvioinnin_kohde),
+  PRIMARY KEY (arviotunnus, ammattitaidon_kuvaus),
   CONSTRAINT arvosana_rajat CHECK ((arvio < 5) and (arvio > 0))
 );
 
@@ -337,12 +338,12 @@ create trigger arvioinnin_kohdealue_mu_update before update on arvioinnin_kohdea
 create trigger arvioinnin_kohdealue_cu_insert before insert on arvioinnin_kohdealue for each row execute procedure update_creator() ;
 create trigger arvioinnin_kohdealue_mu_insert before insert on arvioinnin_kohdealue for each row execute procedure update_modifier() ;
 
-create trigger arvioinnin_kohde_update before update on arvioinnin_kohde for each row execute procedure update_stamp() ;
-create trigger arvioinnin_kohdel_insert before insert on arvioinnin_kohde for each row execute procedure update_created() ;
-create trigger arvioinnin_kohdem_insert before insert on arvioinnin_kohde for each row execute procedure update_stamp() ;
-create trigger arvioinnin_kohde_mu_update before update on arvioinnin_kohde for each row execute procedure update_modifier() ;
-create trigger arvioinnin_kohde_cu_insert before insert on arvioinnin_kohde for each row execute procedure update_creator() ;
-create trigger arvioinnin_kohde_mu_insert before insert on arvioinnin_kohde for each row execute procedure update_modifier() ;
+create trigger ammattitaidon_kuvaus_update before update on ammattitaidon_kuvaus for each row execute procedure update_stamp() ;
+create trigger ammattitaidon_kuvausl_insert before insert on ammattitaidon_kuvaus for each row execute procedure update_created() ;
+create trigger ammattitaidon_kuvausm_insert before insert on ammattitaidon_kuvaus for each row execute procedure update_stamp() ;
+create trigger ammattitaidon_kuvaus_mu_update before update on ammattitaidon_kuvaus for each row execute procedure update_modifier() ;
+create trigger ammattitaidon_kuvaus_cu_insert before insert on ammattitaidon_kuvaus for each row execute procedure update_creator() ;
+create trigger ammattitaidon_kuvaus_mu_insert before insert on ammattitaidon_kuvaus for each row execute procedure update_modifier() ;
 
 create trigger arvio_tutkinnonosa_update before update on arvio_tutkinnonosa for each row execute procedure update_stamp() ;
 create trigger arvio_tutkinnonosal_insert before insert on arvio_tutkinnonosa for each row execute procedure update_created() ;
@@ -386,11 +387,11 @@ COMMENT ON COLUMN peruste.diaarinumero IS 'Perustemääräyksen diaarinumero. Yk
 COMMENT ON TABLE tutkinnonosa_ja_peruste IS 'Liitostaulu. Tutkinnon osa voi olla vapaaehtoinen toisessa tutkinnossa ja pakollinen toisessa.';
 COMMENT ON TABLE arvio IS 'Osaamisarvio. Arviolle annetaan tunniste, jota käytetään tarvittaessa myös tiedon lataamiseen.';
 COMMENT ON TABLE arvioinnin_kohdealue IS 'Arvioitavat asiat jakautuvat eri kohdealueille. Kohdealue lähinnä otsikoi arvioinnin kohteet.';
-COMMENT ON TABLE arvioinnin_kohde IS 'Yksittäinen arvioitava osaamisen osa-alue.';
+COMMENT ON TABLE ammattitaidon_kuvaus IS 'Yksittäinen arvioitava osaamisen osa-alue.';
 COMMENT ON COLUMN kohdearvio.arvio IS 'Arvio numeerisena arvosanana [1-4]. Eri tasojen kriteerit määritelty perusteissa. Null tulkitaan tarkoittavan "en osaa sanoa"';
 COMMENT ON COLUMN kohdearvio.kommentti IS 'Vapaamuotoinen kommentti arvioitavaan asiaan tai arvosanaan liittyen. Käyttäjä syöttää halutessaan.';
 COMMENT ON COLUMN arvio.tunniste IS 'Osaamisarvion yksilöivä tunnistekoodi.';
-COMMENT ON COLUMN arvioinnin_kohde.jarjestys IS '>= 0. Järjestysnumero on päätelty integraatiossa ePerusteet järjestelmän rajapinnan kautta.';
+COMMENT ON COLUMN ammattitaidon_kuvaus.jarjestys IS '>= 0. Järjestysnumero on päätelty integraatiossa ePerusteet järjestelmän rajapinnan kautta.';
 COMMENT ON COLUMN arvioinnin_kohdealue.jarjestys IS '>= 0. Järjestysnumero on päätelty integraatiossa ePerusteet järjestelmän rajapinnan kautta.';
 COMMENT ON TABLE arvio_tutkinnonosa IS 'Arvioon voi liittyä tutkinnonosia keskeneräisen arvioinnin tapauksessa siten että yhtään arviointia ei ole vielä annettu.';
 COMMENT ON COLUMN arvio.peruste IS 'Tutkinnon perustetta ei voi päätellä suoraan tutkinnonosien kautta yksikäsitteisesti.';
@@ -424,7 +425,7 @@ insert into tutkintotyyppi (tyyppi, selite_fi, selite_sv) values
 -- eheysrajoitteita, tutkinnon arviointiin liittyen
 
 create unique index aka_yksikasitteinen_jarjestys on arvioinnin_kohdealue(osa, jarjestys);
-create unique index ak_yksikasitteinen_jarjestys on arvioinnin_kohde(arvioinninkohdealue, jarjestys);
+create unique index ak_yksikasitteinen_jarjestys on ammattitaidon_kuvaus(arvioinninkohdealue, jarjestys);
 
 -- eheysrajoitteita tutkintoihin liittyen
 create unique index t_osa_yksikasitteinen_jarjestys on tutkinnonosa_ja_peruste(osa, peruste, jarjestys, pakollinen);

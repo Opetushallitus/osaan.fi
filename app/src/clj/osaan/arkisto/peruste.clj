@@ -21,11 +21,11 @@
             [osaan.infra.sql.korma :as taulut]
             [clojure.tools.logging :as log]))
 
-(defn ^:integration-api paivita-arvioinnin-kohde! [kohde]
-  (if (nil? (:nimi_fi kohde))
-    (log/warn "Puutteellinen arvioinnin kohde:" kohde)
-    (sql-util/insert-or-update :arvioinnin_kohde [:arvioinninkohdealue :jarjestys]
-                              (select-keys kohde [:nimi_fi :nimi_sv :arvioinninkohdealue :jarjestys]))))
+(defn ^:integration-api paivita-ammattitaidon-kuvaus! [kuvaus]
+  (if (nil? (:nimi_fi kuvaus))
+    (log/warn "Puutteellinen ammattitaidon kuvaus:" kuvaus)
+    (sql-util/insert-or-update :ammattitaidon_kuvaus [:arvioinninkohdealue :jarjestys]
+                              (select-keys kuvaus [:nimi_fi :nimi_sv :arvioinninkohdealue :jarjestys]))))
 
 (defn ^:integration-api paivita-arvioinnin-kohdealue! [alue]
   (let [tallennettava-alue (select-keys alue [:nimi_fi :nimi_sv :osa :jarjestys])]
@@ -33,8 +33,8 @@
       (log/warn "Puutteellinen arvioinnin kohdealue:" tallennettava-alue)
       (let [tallennettu-alue (sql-util/insert-or-update :arvioinnin_kohdealue [:osa :jarjestys]
                                                         (select-keys alue [:nimi_fi :nimi_sv :osa :jarjestys]))]
-        (doseq [kohde (:arvioinnin_kohteet alue)]
-          (paivita-arvioinnin-kohde! (assoc kohde :arvioinninkohdealue (:arvioinninkohdealue_id tallennettu-alue))))))))
+        (doseq [kuvaus (:ammattitaidon_kuvaukset alue)]
+          (paivita-ammattitaidon-kuvaus! (assoc kuvaus :arvioinninkohdealue (:arvioinninkohdealue_id tallennettu-alue))))))))
 
 (defn ^:integration-api paivita-tutkinnonosa! [osa]
   (let [tallennettava-osa (select-keys osa [:osatunnus :nimi_fi :nimi_sv])]

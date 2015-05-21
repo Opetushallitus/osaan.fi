@@ -25,5 +25,5 @@
                          tutkinnonosatunnus
                          [tutkinnonosatunnus])]
       (json-response (into {} (for [osatunnus osatunnukset]
-                                {osatunnus (arkisto/hae-kohdealueet-kohteineen osatunnus)}))
+                                {osatunnus (arkisto/hae-kohdealueet-kuvauksineen osatunnus)}))
                      skeema/Tutkinnonosa->ArvioinninKohdealueet))))

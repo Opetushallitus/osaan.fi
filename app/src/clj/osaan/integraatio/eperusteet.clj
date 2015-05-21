@@ -28,18 +28,22 @@
         data
         (recur data (inc sivu))))))
 
-(defn muotoile-arvioinnin-kohde [index kohde]
-  {:arvioinninkohde_id (get-in kohde [:otsikko :_id])
-   :jarjestys (inc index)
-   :nimi_fi (get-in kohde [:otsikko :fi])
-   :nimi_sv (get-in kohde [:otsikko :sv])})
+(defn numeroi [index m]
+  (assoc m :jarjestys (inc index)))
+
+(defn osaamistaso-hyva [tasot]
+  (some-value-with :_osaamistaso "3" tasot))
+
+(defn muotoile-ammattitaidon-kuvaukset [kohde]
+  (for [kriteeri (:kriteerit (osaamistaso-hyva (:osaamistasonKriteerit kohde)))]
+    {:nimi_fi (:fi kriteeri)
+     :nimi_sv (:sv kriteeri)}))
 
 (defn muotoile-arvioinnin-kohdealue [index alue]
-  {:arvioinninkohdealue_id  (get-in alue [:otsikko :_id])
-   :jarjestys (inc index)
+  {:jarjestys (inc index)
    :nimi_fi (get-in alue [:otsikko :fi])
    :nimi_sv (get-in alue [:otsikko :sv])
-   :arvioinnin_kohteet (map-indexed muotoile-arvioinnin-kohde (:arvioinninKohteet alue))})
+   :ammattitaidon_kuvaukset (map-indexed numeroi (mapcat muotoile-ammattitaidon-kuvaukset (:arvioinninKohteet alue)))})
 
 (defn osatunnus [osa]
   (cond

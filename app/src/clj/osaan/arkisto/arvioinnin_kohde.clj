@@ -22,15 +22,15 @@
     (sql/where {:osa tutkinnonosatunnus})
     (sql/order :jarjestys :ASC)))
 
-(defn ^:private hae-kohteet
+(defn ^:private hae-ammattitaidon-kuvaukset
   [arvioinninkohdealue_id]
-  (sql/select :arvioinnin_kohde
-    (sql/fields :arvioinninkohde_id :nimi_fi :nimi_sv)
+  (sql/select :ammattitaidon_kuvaus
+    (sql/fields :ammattitaidonkuvaus_id :nimi_fi :nimi_sv)
     (sql/where {:arvioinninkohdealue arvioinninkohdealue_id})
     (sql/order :jarjestys :ASC)))
 
-(defn hae-kohdealueet-kohteineen
+(defn hae-kohdealueet-kuvauksineen
   [tutkinnonosatunnus]
   (let [kohdealueet (hae-kohdealueet tutkinnonosatunnus)]
     (for [kohdealue kohdealueet]
-      (assoc kohdealue :kohteet (hae-kohteet (:arvioinninkohdealue_id kohdealue))))))
+      (assoc kohdealue :kuvaukset (hae-ammattitaidon-kuvaukset (:arvioinninkohdealue_id kohdealue))))))

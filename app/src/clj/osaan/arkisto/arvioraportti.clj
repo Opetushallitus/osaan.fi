@@ -18,7 +18,7 @@
 (defn eos-tulkinta [v]
   (or v "en osaa sanoa"))
 
-(def arvosanat 
+(def arvosanat
   {:fi {1 "En osaa"
         2 "Osaan hiukan"
         3 "Osaan melko hyvin"
@@ -32,16 +32,16 @@
 (defn hae
   [arviotunnus]
   (let [tulos (sql/select :kohdearvio
-                (sql/join :inner :arvioinnin_kohde (= :arvioinnin_kohde.arvioinninkohde_id :kohdearvio.arvioinnin_kohde))
-                (sql/join :inner :arvioinnin_kohdealue (= :arvioinnin_kohdealue.arvioinninkohdealue_id :arvioinnin_kohde.arvioinninkohdealue))
-                (sql/fields :arvio :kommentti :arvioinnin_kohde.arvioinninkohde_id :arvioinnin_kohdealue.arvioinninkohdealue_id
-                            :arvioinnin_kohde.arvioinninkohdealue :arvioinnin_kohdealue.osa :arvioinnin_kohde.nimi_fi :arvioinnin_kohde.nimi_sv :arvioinnin_kohde.jarjestys
+                (sql/join :inner :ammattitaidon_kuvaus (= :ammattitaidon_kuvaus.ammattitaidonkuvaus_id :kohdearvio.ammattitaidon_kuvaus))
+                (sql/join :inner :arvioinnin_kohdealue (= :arvioinnin_kohdealue.arvioinninkohdealue_id :ammattitaidon_kuvaus.arvioinninkohdealue))
+                (sql/fields :arvio :kommentti :ammattitaidon_kuvaus.ammattitaidonkuvaus_id :arvioinnin_kohdealue.arvioinninkohdealue_id
+                            :ammattitaidon_kuvaus.arvioinninkohdealue :arvioinnin_kohdealue.osa :ammattitaidon_kuvaus.nimi_fi :ammattitaidon_kuvaus.nimi_sv :ammattitaidon_kuvaus.jarjestys
                             [:arvioinnin_kohdealue.nimi_fi :aka_nimi_fi] [:arvioinnin_kohdealue.nimi_sv :aka_nimi_sv]
                             [:arvioinnin_kohdealue.jarjestys :aka_jarjestys])
                 (sql/where (= :arviotunnus arviotunnus))
                 (sql/order :arvioinnin_kohdealue.osa :ASC)
                 (sql/order :aka_jarjestys :ASC)
-                (sql/order :arvioinnin_kohde.jarjestys :ASC))]
+                (sql/order :ammattitaidon_kuvaus.jarjestys :ASC))]
     (if (empty? tulos)
       nil
       tulos)))

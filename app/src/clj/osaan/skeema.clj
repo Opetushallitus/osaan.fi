@@ -22,14 +22,14 @@
                                         (s/optional-key :vapaateksti) (s/maybe s/Str)}}}
             :tutkinnonosat [s/Str]})
 
-(def ArvioinninKohde {:arvioinninkohde_id s/Int
-                      :nimi_fi s/Str
-                      :nimi_sv s/Str})
+(def AmmattitaidonKuvaus {:ammattitaidonkuvaus_id s/Int
+                          :nimi_fi s/Str
+                          :nimi_sv s/Str})
 
 (def ArvioinninKohdealue {:arvioinninkohdealue_id s/Int
                           :nimi_fi s/Str
                           :nimi_sv s/Str
-                          :kohteet [ArvioinninKohde]})
+                          :kuvaukset [AmmattitaidonKuvaus]})
 
 (def Opintoala {:nimi_fi s/Str
                 :nimi_sv s/Str

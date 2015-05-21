@@ -8,24 +8,24 @@
     <section class="kohdealue" ng-repeat="kohdealue in kohdealueet">
       <h3>{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
 
-      <section class="kysymys" ng-repeat="kohde in kohdealue.kohteet">
-        <p>{{ kohde | lokalisoiKentta:'nimi' }}</p>
+      <section class="kysymys" ng-repeat="kuvaus in kohdealue.kuvaukset">
+        <p>{{ kuvaus | lokalisoiKentta:'nimi' }}</p>
         <div class="vastaus_valinnat">
           <div class="valinnat-container arvosanat">
-            <label ng-repeat="vaihtoehto in [1,2,3,4]" style="display: block;" ng-class="{checked: arviot[kohde.arvioinninkohde_id].arvio == vaihtoehto}">
-              <input type="radio" ng-model="arviot[kohde.arvioinninkohde_id].arvio" ng-value="vaihtoehto">
+            <label ng-repeat="vaihtoehto in [1,2,3,4]" style="display: block;" ng-class="{checked: arviot[kuvaus.ammattitaidonkuvaus_id].arvio == vaihtoehto}">
+              <input type="radio" ng-model="arviot[kuvaus.ammattitaidonkuvaus_id].arvio" ng-value="vaihtoehto">
               {{ vaihtoehto }}
               <span class="asteikkoteksti">{{ 'arviointi.asteikko'+vaihtoehto | translate }}</span>
             </label>
           </div>
           <div class="valinnat-container muut">
-            <label style="display: block;" class="eos" ng-class="{checked: arviot[kohde.arvioinninkohde_id].arvio === null}">
-              <input type="radio" ng-model="arviot[kohde.arvioinninkohde_id].arvio" ng-value="null" />
+            <label style="display: block;" class="eos" ng-class="{checked: arviot[kuvaus.ammattitaidonkuvaus_id].arvio === null}">
+              <input type="radio" ng-model="arviot[kuvaus.ammattitaidonkuvaus_id].arvio" ng-value="null" />
               {{ 'arviointi.eos' | translate }}
             </label>
 
             <label style="display: block" class="vapaateksti-toggle" ng-class="{checked: vapaateksti_auki}" ng-click="">
-              <input type="checkbox" ng-model="vapaateksti_auki" name="vapaateksti" ng-click="" ng-checked="arviot[kohde.arvioinninkohde_id].vapaateksti" ng-init="vapaateksti_auki = arviot[kohde.arvioinninkohde_id].vapaateksti.length > 0" />
+              <input type="checkbox" ng-model="vapaateksti_auki" name="vapaateksti" ng-click="" ng-checked="arviot[kuvaus.ammattitaidonkuvaus_id].vapaateksti" ng-init="vapaateksti_auki = arviot[kuvaus.ammattitaidonkuvaus_id].vapaateksti.length > 0" />
               <span class="glyphicon glyphicon-pencil"></span>
               <span class="asteikkoteksti">{{ 'arviointi.tekstivastaus' | translate }}</span>
             </label>
@@ -33,7 +33,7 @@
         </div>
         <div class="row">
           <div class="reveal-animation col-md-5 vapaatekstivastaus" ng-if="vapaateksti_auki">
-            <textarea ng-model="arviot[kohde.arvioinninkohde_id].vapaateksti" ng-model-options="{debounce: 200}" placeholder="{{ 'arviointi.tekstivastaus_placeholder' | translate }}" rows="4" class="form-control"></textarea>
+            <textarea ng-model="arviot[kuvaus.ammattitaidonkuvaus_id].vapaateksti" ng-model-options="{debounce: 200}" placeholder="{{ 'arviointi.tekstivastaus_placeholder' | translate }}" rows="4" class="form-control"></textarea>
           </div>
         </div>
       </section>
