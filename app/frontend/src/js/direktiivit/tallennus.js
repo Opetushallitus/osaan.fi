@@ -21,8 +21,12 @@ angular.module('osaan.direktiivit.tallennus', [])
       restrict: 'E',
       scope: {
       },
-      template: '<div class="tallennus"><a ng-click="tallenna()" translate="yleiset.tallenna"></a></div>',
+      template: '<div class="tallennus" ng-if="tallennusMahdollinen()"><a ng-click="tallenna()" translate="yleiset.tallenna"></a></div>',
       controller: ['$modal', '$scope', 'Arvio', 'Arviointi', function($modal, $scope, Arvio, Arviointi) {
+        $scope.tallennusMahdollinen = function() {
+          return Arviointi.onkoArvioita();
+        };
+
         $scope.tallenna = function() {
           var tila = {};
 
