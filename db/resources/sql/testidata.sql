@@ -40,7 +40,7 @@ insert into arvioinnin_kohdealue(arvioinninkohdealue_id, osa, nimi_fi, nimi_sv, 
    (-1, '100001', '1. Työprosessin hallinta', 'Behärskande av arbetsprocessen', 1),
    (-2, '100001', '2. Työmenetelmien, -välineiden ja materiaalin hallinta', 'Behärskande av arbetsmetoder, -redskap och material', 2);
 
-insert into arvioinnin_kohde(arvioinninkohde_id, arvioinninkohdealue, nimi_fi, nimi_sv, jarjestys)
+insert into ammattitaidon_kuvaus(ammattitaidonkuvaus_id, arvioinninkohdealue, nimi_fi, nimi_sv, jarjestys)
   values
     (-1, -1, 'Esituotanto','Förproduktion', 1),
     (-2, -1, 'Tuotanto', 'Produktion', 2), 
@@ -53,7 +53,7 @@ insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_a
 
 insert into arvio (tunniste, peruste) values ('testiarvio', (select peruste_id from peruste where diaarinumero = '41/011/2005'));
 insert into arvio_tutkinnonosa (arviotunnus, osa)  values ('testiarvio', '100001');
-insert into kohdearvio (arviotunnus, arvioinnin_kohde, arvio, kommentti)
+insert into kohdearvio (arviotunnus, ammattitaidon_kuvaus, arvio, kommentti)
   values
     ('testiarvio', -1, 1, null),
     ('testiarvio', -2, 3, null),
