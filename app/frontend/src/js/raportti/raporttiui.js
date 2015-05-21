@@ -38,7 +38,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     };
   }])
 
-  .controller('RaporttiController', ['$location', '$routeParams', '$scope', 'ArvioinninKohde', 'Arviointi', 'RaporttiApurit', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, ArvioinninKohde, Arviointi, RaporttiApurit, Tutkinnonosa, Tutkinto) {
+  .controller('RaporttiController', ['$location', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'RaporttiApurit', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, RaporttiApurit, Tutkinnonosa, Tutkinto) {
 
     Tutkinto.haePerusteella(Arviointi.valittuPeruste()).then(function(tutkinto) {
       $scope.tutkinto = tutkinto;
@@ -49,7 +49,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
         $scope.tutkinnonosat = RaporttiApurit.valitseTutkinnonOsat(tutkinnonosat, Arviointi.valitutOsatunnukset());
       });
 
-    ArvioinninKohde.haeKohdealueetTutkinnonosille(Arviointi.valitutOsatunnukset())
+    AmmattitaidonKuvaus.haeKohdealueetTutkinnonosille(Arviointi.valitutOsatunnukset())
       .then(function(kohdealueet) {
         $scope.kohdealueet = kohdealueet;
       });

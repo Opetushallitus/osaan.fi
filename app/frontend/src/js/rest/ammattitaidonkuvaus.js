@@ -14,9 +14,9 @@
 
 'use strict';
 
-angular.module('osaan.rest.arvioinninkohde', [])
+angular.module('osaan.rest.ammattitaidonkuvaus', [])
 
-  .factory('ArvioinninKohde', ['$http', function($http) {
+  .factory('AmmattitaidonKuvaus', ['$http', function($http) {
     function haeKohdealueetTutkinnonosille(tutkinnonosatunnukset) {
       return $http.get('api/arvioinninkohde/alueet', {cache: true, params: {tutkinnonosatunnus: tutkinnonosatunnukset}})
         .then(function(response) {
