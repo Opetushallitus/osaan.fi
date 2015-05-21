@@ -47,7 +47,7 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
       $scope.kohdealueet = kohdealueet;
     });
 
-    $scope.arviot = {}; // arvioinninkohde_id -> {arvio, vapaateksti}
+    $scope.arviot = {}; // ammattitaidonkuvaus_id -> {arvio, vapaateksti}
     $scope.$watch('arviot', function(arviot) {
       Arviointi.asetaArviot(tutkinnonosa, arviot);
     }, true);

@@ -17,7 +17,7 @@
 
 (def Arvio {:tutkintotunnus s/Str
             :peruste s/Int
-            ; tutkinnonosatunnus -> arvioinninkohde_id -> { arvio, vapaateksti }
+            ; tutkinnonosatunnus -> ammattitaidonkuvaus_id -> { arvio, vapaateksti }
             :kohdearviot {s/Any {s/Any {(s/optional-key :arvio) (s/maybe s/Int)
                                         (s/optional-key :vapaateksti) (s/maybe s/Str)}}}
             :tutkinnonosat [s/Str]})
