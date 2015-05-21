@@ -27,7 +27,7 @@ angular.module('osaan.direktiivit.tallennus', [])
           var tila = {};
 
           tila.tutkintotunnus = Arviointi.valittuTutkintotunnus();
-          tila.peruste = Arviointi.valittuPeruste();
+          tila.peruste = parseInt(Arviointi.valittuPeruste());
           tila.tutkinnonosat = Arviointi.valitutOsatunnukset();
           tila.kohdearviot = {};
           _.forEach(tila.tutkinnonosat, function(tutkinnonosatunnus) {
