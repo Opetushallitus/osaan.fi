@@ -114,7 +114,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'tutkinto.peruste_tyyppi_naytto': 'Näyttötutkinto (sv)',
       'tutkinto.eperusteet_linkki': 'Katso tutkinnon perusteet ePerusteet-järjestelmässä (sv)',
       'tutkinto.nayttotutkintojenjarjestajat_linkki': 'Katso näyttötutkintojen järjestäjät (sv)',
-      'tutkinto.koulutustarjonta_linkki': 'Katso koulutuksen järjestäjät (sv)',      
+      'tutkinto.koulutustarjonta_linkki': 'Katso koulutuksen järjestäjät (sv)',
       'tutkinto.ei_loytynyt': 'Tutkintoja ei löytynyt (sv)',
       'tutkinto_osa.valitse': 'Valitse tutkinnon osat jotka haluat arvioida (sv)',
       'tutkinto_osa.arvioi': 'Arvioi osaaminen (sv)',
