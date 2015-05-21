@@ -22,10 +22,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="kohde in kohdealue.kohteet">
-              <td>{{ kohde | lokalisoiKentta:'nimi' }}</td>
-              <td>{{ arviot[tutkinnonosa.osatunnus][kohde.arvioinninkohde_id].arvio }}</td>
-              <td>{{ arviot[tutkinnonosa.osatunnus][kohde.arvioinninkohde_id].vapaateksti }}</td>
+            <tr ng-repeat="kuvaus in kohdealue.kuvaukset">
+              <td>{{ kuvaus | lokalisoiKentta:'nimi' }}</td>
+              <td>{{ arviot[tutkinnonosa.osatunnus][kuvaus.ammattitaidonkuvaus_id].arvio }}</td>
+              <td>{{ arviot[tutkinnonosa.osatunnus][kuvaus.ammattitaidonkuvaus_id].vapaateksti }}</td>
             </tr>
           </tbody>
         </table>
