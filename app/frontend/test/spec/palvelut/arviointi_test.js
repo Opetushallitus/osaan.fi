@@ -26,6 +26,7 @@ describe('Arviointi', function() {
   beforeEach(function() {
     Arviointi.asetaTutkintoJaPeruste('324601', '41/011/2005');
     Arviointi.asetaOsatunnukset(['100001', '100002']);
+    Arviointi.tyhjennaArviot();
   });
 
   it('Valinnat saa luettua', function() {
@@ -69,5 +70,15 @@ describe('Arviointi', function() {
     var arviotAlkup = angular.copy(arviot);
     arviot['-2'] = {'arvio':3};
     expect(Arviointi.haeArviot('100001')).toEqual(arviotAlkup);
+  });
+
+  it('onkoArvioita', function() {
+    expect(Arviointi.onkoArvioita()).toEqual(false);
+
+    Arviointi.asetaArviot('100003', {'-1':{'arvio':1}});
+    expect(Arviointi.onkoArvioita()).toEqual(false);
+
+    Arviointi.asetaArviot('100001', {'-1':{'arvio':1}});
+    expect(Arviointi.onkoArvioita()).toEqual(true);
   });
 });
