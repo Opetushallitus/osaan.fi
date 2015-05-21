@@ -102,12 +102,13 @@
       }
       &.eos {
         /* margin-left: 1.9em; */
-        width: 10em;
+        width: 9em;
         border-radius: 2.66666666666667em;
         padding: 0 1em 0 1em;
-        font-size: 1.28571428571429em; /* 18px */
-        height: 2.66666666666667em; /* 46px */
-        line-height: 2.66666666666667em;
+        font-size: 1em;
+        height: 2.42857142857143em; /* 46px */
+        line-height: 2.42857142857143em;
+        margin-top: .5em;
       }
 
       &.checked{
