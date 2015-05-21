@@ -22,7 +22,7 @@ angular.module('osaan.direktiivit.tallennus', [])
       scope: {
       },
       template: '<div class="tallennus"><a ng-click="tallenna()" translate="yleiset.tallenna"></a></div>',
-      controller: ['$scope', 'Arvio', 'Arviointi', function($scope, Arvio, Arviointi) {
+      controller: ['$modal', '$scope', 'Arvio', 'Arviointi', function($modal, $scope, Arvio, Arviointi) {
         $scope.tallenna = function() {
           var tila = {};
 
@@ -34,11 +34,23 @@ angular.module('osaan.direktiivit.tallennus', [])
             tila.kohdearviot[tutkinnonosatunnus] = Arviointi.haeArviot(tutkinnonosatunnus);
           });
 
-          Arvio.tallenna(tila).then(function(data) {
-            console.log(data); // TODO
+          Arvio.tallenna(tila).then(function(tunnus) {
+            $modal.open({
+              templateUrl: 'template/direktiivit/tallennus.html',
+              controller: 'TallennusModalController',
+              resolve: {
+                tunnus: function() { return tunnus; }
+              }
+            });
           });
         };
       }]
     };
+  }])
+
+  .controller('TallennusModalController', ['$modalInstance', '$scope', 'tunnus', function($modalInstance, $scope, tunnus) {
+    $scope.linkki = document.location.href.split('#')[0] + '#/lataa/' + tunnus;
+
+    $scope.close = $modalInstance.dismiss;
   }])
 ;
