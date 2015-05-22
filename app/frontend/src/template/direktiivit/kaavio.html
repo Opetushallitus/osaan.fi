@@ -1,12 +1,12 @@
 <svg class="kaavio"
-  ng-attr-width="{{asetukset.viivastonLeveys + 350}}" ng-attr-height="{{asetukset.palkinMaksimiPituus + 80}}">
+  ng-attr-width="{{viivastonLeveys() + 50}}" ng-attr-height="{{asetukset.palkinMaksimiPituus + 80}}">
 
   <g transform="translate(50, 20)">
     <line ng-repeat="viiva in viivat"
       class="kaavio-viiva"
       ng-attr-x1="{{0}}"
       ng-attr-y1="{{asetukset.palkinMaksimiPituus * (1 - viiva.paikka)}}"
-      ng-attr-x2="{{asetukset.viivastonLeveys}}"
+      ng-attr-x2="{{viivastonLeveys()}}"
       ng-attr-y2="{{asetukset.palkinMaksimiPituus * (1 - viiva.paikka)}}" />
 
     <line class="kaavio-viiva"
@@ -15,9 +15,9 @@
       ng-attr-x2="{{0}}"
       ng-attr-y2="{{asetukset.palkinMaksimiPituus}}" />
     <line class="kaavio-viiva"
-      ng-attr-x1="{{asetukset.viivastonLeveys}}"
+      ng-attr-x1="{{viivastonLeveys()}}"
       ng-attr-y1="{{0}}"
-      ng-attr-x2="{{asetukset.viivastonLeveys}}"
+      ng-attr-x2="{{viivastonLeveys()}}"
       ng-attr-y2="{{asetukset.palkinMaksimiPituus}}" />
 
     <text ng-repeat="viiva in viivat"
@@ -31,7 +31,7 @@
       class="kaavio-palkki"
       ng-attr-width="{{asetukset.palkinLeveys}}"
       ng-attr-height="{{palkinPituus(data.arvo)}}"
-      ng-attr-x="{{paikkaPalkistonSuhteen($index, 0, 1)}}"
+      ng-attr-x="{{paikkaPalkistonSuhteen($index, 0, 0)}}"
       ng-attr-y="{{asetukset.palkinMaksimiPituus - palkinPituus(data.arvo)}}" />
   </g>
 </svg>

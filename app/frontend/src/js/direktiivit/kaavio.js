@@ -30,8 +30,7 @@ angular.module('osaan.direktiivit.kaavio', [])
         var asetukset = {
           maksimiArvo: 4,
           palkinLeveys: 50,
-          palkinMaksimiPituus: 300,
-          viivastonLeveys: 5*(palkistossaPalkkeja + palkistossaTyhjia)*50
+          palkinMaksimiPituus: 300
         };
 
         scope.asetukset = asetukset;
@@ -43,6 +42,10 @@ angular.module('osaan.direktiivit.kaavio', [])
 
         scope.paikkaPalkistonSuhteen = function(palkisto, palkki, siirtyma) {
           return asetukset.palkinLeveys * ((palkistossaPalkkeja + palkistossaTyhjia)*palkisto + palkki + siirtyma);
+        };
+
+        scope.viivastonLeveys = function() {
+          return scope.jakauma.length*(palkistossaPalkkeja + palkistossaTyhjia)*asetukset.palkinLeveys;
         };
 
         scope.viivat = [
