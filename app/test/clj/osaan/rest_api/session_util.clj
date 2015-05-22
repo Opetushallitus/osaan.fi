@@ -13,7 +13,8 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.rest-api.session-util
-  (:require [peridot.core :as peridot]
+  (:require [cheshire.core :as cheshire]
+            [peridot.core :as peridot]
             [osaan.asetukset :as osaan-asetukset]
             [osaan.palvelin :as palvelin]
             [osaan.sql.test-util :refer [alusta-korma!]]))
@@ -28,3 +29,9 @@
  (peridot/request app url
                   :request-method method
                   :params params))
+
+(defn mock-request-body! [app url method body]
+  (peridot/request app url
+                   :request-method method
+                   :content-type "application/json"
+                   :body (cheshire/generate-string body)))
