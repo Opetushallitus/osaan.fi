@@ -59,6 +59,8 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
 
     $scope.paivays = new Date();
 
+    $scope.jakauma = [{arvo: 1, nimi: 'A'}, {arvo: 2, nimi: 'B'}];
+
     $scope.palaaArviointiin = function() {
       $location.url('/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
     };

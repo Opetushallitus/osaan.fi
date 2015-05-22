@@ -9,6 +9,8 @@
   <div class="panel-body">
     {{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy' }}
 
+    <kaavio jakauma="jakauma"></kaavio>
+
     <section class="tutkinnonosa" ng-repeat="tutkinnonosa in tutkinnonosat">
       <h2>{{ tutkinnonosa | lokalisoiKentta:'nimi' }}</h2>
 

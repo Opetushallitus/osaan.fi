@@ -1,0 +1,18 @@
+.kaavio {
+  fill: $darker-gray;
+  font-size: 0.8em;
+  overflow: visible !important;
+
+  .kaavio-palkki {
+    fill: $lighter-primary;
+  }
+
+  .kaavio-viiva {
+    stroke: $lighter-gray;
+  }
+
+  .kaavio-viivan-otsikko {
+    fill: $lighter-gray;
+    text-anchor: end;
+  }
+}
