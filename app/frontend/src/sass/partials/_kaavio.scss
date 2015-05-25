@@ -7,6 +7,11 @@
     fill: $lighter-primary;
   }
 
+  .kaavio-palkin-otsikko {
+    fill: $lighter-gray;
+    text-anchor: middle;
+  }
+
   .kaavio-viiva {
     stroke: $lighter-gray;
   }

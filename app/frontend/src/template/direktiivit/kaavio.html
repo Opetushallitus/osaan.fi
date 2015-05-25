@@ -1,5 +1,5 @@
 <svg class="kaavio"
-  ng-attr-width="{{viivastonLeveys() + 50}}" ng-attr-height="{{asetukset.palkinMaksimiPituus + 80}}">
+  ng-attr-width="{{viivastonLeveys() + 50}}" ng-attr-height="{{asetukset.palkinMaksimiPituus + 100}}">
 
   <g transform="translate(50, 20)">
     <line ng-repeat="viiva in viivat"
@@ -27,11 +27,24 @@
       {{viiva.teksti}}
     </text>
 
-    <rect ng-repeat="data in jakauma"
+    <rect ng-repeat-start="data in jakauma"
       class="kaavio-palkki"
       ng-attr-width="{{asetukset.palkinLeveys}}"
       ng-attr-height="{{palkinPituus(data.arvo)}}"
       ng-attr-x="{{paikkaPalkistonSuhteen($index, 0, 0)}}"
       ng-attr-y="{{asetukset.palkinMaksimiPituus - palkinPituus(data.arvo)}}" />
+    <text
+      class="kaavio-palkin-otsikko"
+      ng-attr-x="{{paikkaPalkistonSuhteen($index, 0, 0.5)}}"
+      ng-attr-y="{{asetukset.palkinMaksimiPituus + 20}}">
+      {{$index + 1}}.
+    </text>
+    <text
+      ng-attr-x="{{0}}"
+      ng-attr-y="{{asetukset.palkinMaksimiPituus + 20 * ($index + 3)}}"
+      ng-repeat-end>
+      {{$index + 1}}. {{ data | lokalisoiKentta:'nimi' }}
+    </text>
+
   </g>
 </svg>

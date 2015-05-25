@@ -44,6 +44,10 @@ angular.module('osaan.direktiivit.kaavio', [])
           return asetukset.palkinLeveys * ((palkistossaPalkkeja + palkistossaTyhjia)*palkisto + palkki + siirtyma);
         };
 
+        scope.viivastonKorkeus = function() {
+          return asetukset.palkinMaksimiPituus + 20 * (scope.jakauma.length + 2);
+        };
+
         scope.viivastonLeveys = function() {
           return scope.jakauma.length*(palkistossaPalkkeja + palkistossaTyhjia)*asetukset.palkinLeveys;
         };

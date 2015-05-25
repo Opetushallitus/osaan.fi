@@ -57,6 +57,20 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus())
       .then(function(tutkinnonosat) {
         $scope.tutkinnonosat = RaporttiApurit.valitseTutkinnonOsat(tutkinnonosat, Arviointi.valitutOsatunnukset());
+        return $scope.tutkinnonosat;
+      })
+      .then(function(tutkinnonosat) {
+        var tutkinnonOsanTulos = _.mapValues($scope.arviot, RaporttiApurit.arvioidenKeskiarvo);
+
+        $scope.jakauma = _.map(
+          _.keys(tutkinnonOsanTulos),
+          function(osatunnus) {
+            var tutkinnonosa = _.find(tutkinnonosat, {osatunnus: osatunnus});
+            return _.merge(_.pick(tutkinnonosa, ['nimi_fi', 'nimi_sv']), {
+              arvo: tutkinnonOsanTulos[osatunnus]
+            });
+          }
+        );
       });
 
     AmmattitaidonKuvaus.haeKohdealueetTutkinnonosille(Arviointi.valitutOsatunnukset())
@@ -67,15 +81,8 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     $scope.arviot = RaporttiApurit.liitaTutkinnonOsiinArviot(Arviointi.valitutOsatunnukset(),
       function(osatunnus) {return Arviointi.haeArviot(osatunnus);}
     );
-
+    $scope.jakauma = [];
     $scope.paivays = new Date();
-
-    var tutkinnonOsanTulos = _.mapValues($scope.arviot, RaporttiApurit.arvioidenKeskiarvo);
-
-    $scope.jakauma = _.map(
-      _.keys(tutkinnonOsanTulos),
-      function(osa) {return {arvo: tutkinnonOsanTulos[osa], nimi: osa};}
-    );
 
     $scope.palaaArviointiin = function() {
       $location.url('/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
