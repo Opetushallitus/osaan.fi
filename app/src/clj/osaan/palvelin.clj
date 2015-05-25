@@ -58,21 +58,21 @@
 (defn app
   "Ring-wrapperit ja compojure-reitit ilman HTTP-palvelinta"
   [asetukset]
-  (let [_ (json-gen/add-encoder org.joda.time.LocalDate
-                                (fn [c json-generator]
-                                  (.writeString json-generator (.toString c "yyyy-MM-dd"))))]
-    (-> (reitit asetukset)
-      wrap-keyword-params
-      wrap-json-params
-      (wrap-resource "public/app")
-      wrap-params
-      wrap-content-type
-      wrap-not-modified
-      wrap-expires
-      (wrap-kayttaja "JARJESTELMA")
-      (wrap-frame-options :deny)
-      log-request-wrapper
-      wrap-poikkeusten-logitus)))
+  (json-gen/add-encoder org.joda.time.LocalDate
+                        (fn [c json-generator]
+                          (.writeString json-generator (.toString c "yyyy-MM-dd"))))
+  (-> (reitit asetukset)
+    wrap-keyword-params
+    wrap-json-params
+    (wrap-resource "public/app")
+    wrap-params
+    wrap-content-type
+    wrap-not-modified
+    wrap-expires
+    (wrap-kayttaja "JARJESTELMA")
+    (wrap-frame-options :deny)
+    log-request-wrapper
+    wrap-poikkeusten-logitus))
 
 (defn ^:integration-api kaynnista-eraajon-ajastimet! [asetukset]
   (eraajo/kaynnista-ajastimet! asetukset))
