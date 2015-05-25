@@ -16,7 +16,6 @@
 
 angular.module('osaan.fi', [
   'ngAnimate',
-  'ng-breadcrumbs',
   'ngRoute',
   'taiPlaceholder',
   'ui.bootstrap',
@@ -41,8 +40,4 @@ angular.module('osaan.fi', [
   'osaan.rest.tutkinto',
   'osaan.tekstit'
 ])
-
-  .controller('OsaanController', ['$scope', 'breadcrumbs', function($scope, breadcrumbs){
-    $scope.breadcrumbs = breadcrumbs;
-  }])
 ;

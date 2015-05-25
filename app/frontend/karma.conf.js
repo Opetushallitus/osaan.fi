@@ -34,7 +34,6 @@ module.exports = function(config) {
       'src/bower_components/jquery-ui/jquery-ui.js',
       'src/bower_components/angular/angular.js',
       'src/bower_components/select2/select2.js',
-      'src/bower_components/ng-breadcrumbs/dist/ng-breadcrumbs.js',
       'src/bower_components/angular-animate/angular-animate.js',
       'src/bower_components/angular-cookies/angular-cookies.js',
       'src/bower_components/angular-route/angular-route.js',
