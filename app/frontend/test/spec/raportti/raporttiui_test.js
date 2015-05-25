@@ -24,6 +24,16 @@ describe('osaan.raportti.raporttiui:', function() {
       RaporttiApurit = _RaporttiApurit_;
     }));
 
+    describe('arvioidenKeskiarvo', function() {
+      it('pitäisi laskea arvioiden keskiarvo', function () {
+        expect(RaporttiApurit.arvioidenKeskiarvo({'a': {arvio: 2}, 'b': {arvio: 4}})). toEqual(3);
+      });
+
+      it('pitäisi palauttaa nolla tyhjälle', function () {
+        expect(RaporttiApurit.arvioidenKeskiarvo({})). toEqual(0);
+      });
+    });
+
     describe('valitseTutkinnonOsat:', function() {
       it('pitäisi valita tutkinnon osat osatunnuksella', function () {
         expect(RaporttiApurit.valitseTutkinnonOsat([{osatunnus: 1}, {osatunnus: 2}], [2]))

@@ -26,6 +26,17 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
 
   .factory('RaporttiApurit', [function() {
     return {
+      arvioidenKeskiarvo: function(kuvauksenArvio) {
+        var sum = _.chain(kuvauksenArvio)
+          .values()
+          .pluck('arvio')
+          .reduce(function add(result, x) {return result + x;})
+          .value();
+        var n = _.keys(kuvauksenArvio).length;
+
+        return n >= 1 ? sum / n : 0;
+      },
+
       liitaTutkinnonOsiinArviot: function(osatunnukset, haeArvio) {
         return _.zipObject(
           _.map(osatunnukset, function(osatunnus) {return [osatunnus, haeArvio(osatunnus)];})
@@ -59,7 +70,12 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
 
     $scope.paivays = new Date();
 
-    $scope.jakauma = [{arvo: 1, nimi: 'A'}, {arvo: 2, nimi: 'B'}, {arvo: 3, nimi: 'B'}, {arvo: 4, nimi: 'B'}, {arvo: 3, nimi: 'B'}, {arvo: 2, nimi: 'B'}, {arvo: 1, nimi: 'B'}];
+    var tutkinnonOsanTulos = _.mapValues($scope.arviot, RaporttiApurit.arvioidenKeskiarvo);
+
+    $scope.jakauma = _.map(
+      _.keys(tutkinnonOsanTulos),
+      function(osa) {return {arvo: tutkinnonOsanTulos[osa], nimi: osa};}
+    );
 
     $scope.palaaArviointiin = function() {
       $location.url('/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
