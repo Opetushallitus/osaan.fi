@@ -62,5 +62,12 @@ describe('osaan.raportti.raporttiui:', function() {
           });
       });
     });
+
+    describe('muodostaJakauma:', function() {
+      it('pitäisi muodostaa jakauma kaaviota varten', function () {
+        expect(RaporttiApurit.muodostaJakauma([{nimi_fi: 'fi', nimi_sv: 'sv', osatunnus: 1}], {1: 3.5}))
+          .toEqual([{arvo: 3.5, nimi_fi: 'fi', nimi_sv: 'sv'}]);
+      });
+    });
   });
 });

@@ -42,6 +42,18 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
           _.map(osatunnukset, function(osatunnus) {return [osatunnus, haeArvio(osatunnus)];})
         );
       },
+
+      muodostaJakauma: function(tutkinnonosat, tutkinnonOsanTulos) {
+        return _.map(
+          tutkinnonosat,
+          function(tutkinnonosa) {
+            return _.merge(_.pick(tutkinnonosa, ['nimi_fi', 'nimi_sv']), {
+              arvo: tutkinnonOsanTulos[tutkinnonosa.osatunnus]
+            });
+          }
+        );
+      },
+
       valitseTutkinnonOsat: function(tutkinnonosat, valitutOsatunnukset) {
         return _(tutkinnonosat).groupBy('osatunnus').pick(valitutOsatunnukset).values().flatten().value();
       }
@@ -61,16 +73,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
       })
       .then(function(tutkinnonosat) {
         var tutkinnonOsanTulos = _.mapValues($scope.arviot, RaporttiApurit.arvioidenKeskiarvo);
-
-        $scope.jakauma = _.map(
-          _.keys(tutkinnonOsanTulos),
-          function(osatunnus) {
-            var tutkinnonosa = _.find(tutkinnonosat, {osatunnus: osatunnus});
-            return _.merge(_.pick(tutkinnonosa, ['nimi_fi', 'nimi_sv']), {
-              arvo: tutkinnonOsanTulos[osatunnus]
-            });
-          }
-        );
+        $scope.jakauma = RaporttiApurit.muodostaJakauma(tutkinnonosat, tutkinnonOsanTulos);
       });
 
     AmmattitaidonKuvaus.haeKohdealueetTutkinnonosille(Arviointi.valitutOsatunnukset())
