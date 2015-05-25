@@ -13,7 +13,7 @@
     <h3 ng-if="(tutkinnonosat | filter: {pakollinen: true}).length" translate="osien-valinta.pakolliset_osat"></h3>
     <div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: true}" class="checkbox">
       <label>
-        <input type="checkbox" ng-model="valinnat[osa.osatunnus]" ng-click="isValinnatempty()">
+        <input type="checkbox" ng-model="valinnat[osa.osatunnus]">
         {{ osa | lokalisoiKentta:'nimi' }}
       </label>
     </div>
@@ -21,7 +21,7 @@
     <h3 ng-if="(tutkinnonosat | filter: {pakollinen: false}).length" translate="osien-valinta.valinnaiset_osat"></h3>
     <div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: false}">
       <label>
-        <input type="checkbox" ng-model="valinnat[osa.osatunnus]" ng-click="isValinnatempty()">
+        <input type="checkbox" ng-model="valinnat[osa.osatunnus]">
         {{ osa | lokalisoiKentta:'nimi' }}
       </label>
     </div>
