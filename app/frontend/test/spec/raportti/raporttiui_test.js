@@ -29,6 +29,10 @@ describe('osaan.raportti.raporttiui:', function() {
         expect(RaporttiApurit.arvioidenKeskiarvo({'a': {arvio: 2}, 'b': {arvio: 4}})). toEqual(3);
       });
 
+      it('pitäisi jättää arvioimattomat ulkopuolelle', function () {
+        expect(RaporttiApurit.arvioidenKeskiarvo({'a': {arvio: 2}, 'c': {arvio: null}})).toEqual(2);
+      });
+
       it('pitäisi palauttaa nolla tyhjälle', function () {
         expect(RaporttiApurit.arvioidenKeskiarvo({})). toEqual(0);
       });

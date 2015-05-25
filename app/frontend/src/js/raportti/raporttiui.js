@@ -27,14 +27,15 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
   .factory('RaporttiApurit', [function() {
     return {
       arvioidenKeskiarvo: function(kuvauksenArvio) {
-        var sum = _.chain(kuvauksenArvio)
+        var arviot = _.chain(kuvauksenArvio)
           .values()
           .pluck('arvio')
-          .reduce(function add(result, x) {return result + x;})
+          .filter(_.isNumber)
           .value();
-        var n = _.keys(kuvauksenArvio).length;
+        var summa = _.reduce(arviot, function add(result, x) {return result + x;});
+        var n = arviot.length;
 
-        return n >= 1 ? sum / n : 0;
+        return n >= 1 ? summa / n : 0;
       },
 
       liitaTutkinnonOsiinArviot: function(osatunnukset, haeArvio) {
