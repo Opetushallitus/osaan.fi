@@ -1,0 +1,24 @@
+<section class="app-wrapper clearfix">
+  <div class="container-fluid" style="background-color: whitesmoke">
+    <div class="row">
+      <div class="col-md-2">
+        <a href="#/">Valitse tutkinto</a>
+      </div>
+      <div class="col-md-1">&raquo;</div>
+      <div class="col-md-2">
+        <a ng-if="tutkinto && peruste" ng-href="#/osien-valinta?tutkinto={{tutkinto}}&peruste={{peruste}}">Valitse tutkinnon osat</a>
+        <span ng-if="!tutkinto || !peruste">Valitse tutkinnon osat</span>
+      </div>
+      <div class="col-md-1">&raquo;</div>
+      <div class="col-md-2">
+        <a ng-if="osatunnus" ng-href="#/osien-valinta/arviointi?osa={{osatunnus}}">Arvioi osaaminen</a>
+        <span ng-if="!osatunnus">Arvioi osaaminen</span>
+      </div>
+      <div class="col-md-1">&raquo;</div>
+      <div class="col-md-2">
+        <a ng-if="arvioita" href="#/raportti">Raportti</a>
+        <span ng-if="!arvioita">Raportti</span>
+      </div>
+    </div>
+  </div>
+</section>
