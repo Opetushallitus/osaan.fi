@@ -16,6 +16,7 @@
         <input type="checkbox" ng-model="valinnat[osa.osatunnus]">
         {{ osa | lokalisoiKentta:'nimi' }}
       </label>
+      <span><a class="small" ng-if="onkoArvioita(osa.osatunnus)" ng-click="poistaArviot(osa.osatunnus)" translate="osien-valinta.poista_arviot"></a></span>
     </div>
 
     <h3 ng-if="(tutkinnonosat | filter: {pakollinen: false}).length" translate="osien-valinta.valinnaiset_osat"></h3>

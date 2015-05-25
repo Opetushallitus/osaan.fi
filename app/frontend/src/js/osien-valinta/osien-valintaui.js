@@ -52,6 +52,14 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
       $scope.tutkinto = tutkinto;
     });
 
+    $scope.onkoArvioita = function(osatunnus) {
+      return Arviointi.onkoArvioita(osatunnus);
+    };
+
+    $scope.poistaArviot = function(osatunnus) {
+      Arviointi.poistaArviot(osatunnus);
+    };
+
     $scope.seuraavaTutkinnonosa = function() {
       return Arviointi.seuraavaOsatunnus();
     };

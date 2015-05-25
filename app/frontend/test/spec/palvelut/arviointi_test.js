@@ -74,11 +74,14 @@ describe('Arviointi', function() {
 
   it('onkoArvioita', function() {
     expect(Arviointi.onkoArvioita()).toEqual(false);
+    expect(Arviointi.onkoArvioita('10001')).toEqual(false);
 
     Arviointi.asetaArviot('100003', {'-1':{'arvio':1}});
     expect(Arviointi.onkoArvioita()).toEqual(false);
+    expect(Arviointi.onkoArvioita('100003')).toEqual(false);
 
     Arviointi.asetaArviot('100001', {'-1':{'arvio':1}});
     expect(Arviointi.onkoArvioita()).toEqual(true);
+    expect(Arviointi.onkoArvioita('100001')).toEqual(true);
   });
 });
