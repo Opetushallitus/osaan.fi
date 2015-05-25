@@ -66,7 +66,6 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
 
     $scope.avaaSeuraavaOsa = function() {
       $location.url('/arviointi?osa=' + Arviointi.seuraavaOsatunnus(tutkinnonosa));
-
     };
 
     $scope.edellinenTutkinnonosa = function() {
