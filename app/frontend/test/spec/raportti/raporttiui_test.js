@@ -65,8 +65,13 @@ describe('osaan.raportti.raporttiui:', function() {
 
     describe('muodostaJakauma:', function() {
       it('pitäisi muodostaa jakauma kaaviota varten', function () {
-        expect(RaporttiApurit.muodostaJakauma([{nimi_fi: 'fi', nimi_sv: 'sv', osatunnus: 1}], {1: 3.5}))
-          .toEqual([{arvo: 3.5, nimi_fi: 'fi', nimi_sv: 'sv'}]);
+        expect(RaporttiApurit.muodostaJakauma([{nimi_fi: 'fi', nimi_sv: 'sv', osatunnus: 1, pakollinen: true}], {1: 3.5}))
+          .toEqual([{arvo: 3.5, nimi_fi: 'fi', nimi_sv: 'sv', vari: 0}]);
+      });
+
+      it('pitäisi vaihtaa valinnaisen väri', function () {
+        expect(RaporttiApurit.muodostaJakauma([{nimi_fi: 'fi', nimi_sv: 'sv', osatunnus: 1, pakollinen: false}], {1: 3.5}))
+          .toEqual([{arvo: 3.5, nimi_fi: 'fi', nimi_sv: 'sv', vari: 1}]);
       });
     });
   });

@@ -3,13 +3,17 @@
   font-size: 0.8em;
   overflow: visible !important;
 
-  .kaavio-palkki {
-    fill: $lighter-primary;
-  }
-
   .kaavio-palkin-otsikko {
     fill: $lighter-gray;
     text-anchor: middle;
+  }
+
+  .kaavio-palkin-vari-0 {
+    fill: $lighter-primary;
+  }
+
+  .kaavio-palkin-vari-1 {
+    fill: $lightest-primary;
   }
 
   .kaavio-viiva {

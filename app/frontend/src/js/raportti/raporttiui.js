@@ -48,7 +48,8 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
           tutkinnonosat,
           function(tutkinnonosa) {
             return _.merge(_.pick(tutkinnonosa, ['nimi_fi', 'nimi_sv']), {
-              arvo: tutkinnonOsanTulos[tutkinnonosa.osatunnus]
+              arvo: tutkinnonOsanTulos[tutkinnonosa.osatunnus],
+              vari: tutkinnonosa.pakollinen ? 0 : 1
             });
           }
         );

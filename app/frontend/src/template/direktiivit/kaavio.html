@@ -28,7 +28,7 @@
     </text>
 
     <rect ng-repeat-start="data in jakauma"
-      class="kaavio-palkki"
+      ng-attr-class="{{ 'kaavio-palkin-vari-' + data.vari }}"
       ng-attr-width="{{asetukset.palkinLeveys}}"
       ng-attr-height="{{palkinPituus(data.arvo)}}"
       ng-attr-x="{{paikkaPalkistonSuhteen($index, 0, 0)}}"
