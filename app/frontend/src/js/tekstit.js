@@ -72,7 +72,8 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'tutkinto.ei_loytynyt': 'Tutkintoja ei löytynyt',
       'tutkinto_osa.valitse': 'Valitse tutkinnon osat jotka haluat arvioida',
       'tutkinto_osa.arvioi': 'Arvioi osaaminen',
-      'tutkinto_osa.valitse_tutkinto': 'Valitse tutkinto'
+      'tutkinto_osa.valitse_tutkinto': 'Valitse tutkinto',
+      'varmistus.peruuta': 'Peruuta'
     },
     sv: {
       'yleiset.kielen_vaihto': 'Suomeksi',
@@ -130,7 +131,8 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'tutkinto.ei_loytynyt': 'Tutkintoja ei löytynyt (sv)',
       'tutkinto_osa.valitse': 'Valitse tutkinnon osat jotka haluat arvioida (sv)',
       'tutkinto_osa.arvioi': 'Arvioi osaaminen (sv)',
-      'tutkinto_osa.valitse_tutkinto': 'Valitse tutkinto (sv)'
+      'tutkinto_osa.valitse_tutkinto': 'Valitse tutkinto (sv)',
+      'varmistus.peruuta': 'Peruuta (sv)'
     }
   })
 

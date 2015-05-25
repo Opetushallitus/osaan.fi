@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <h4>{{ otsikko }}</h4>
+</div>
+
+<div class="modal-body">
+  <div class="alert alert-danger" role="alert">
+    {{ teksti }}
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-danger pull-right" ng-click="ok()">{{ vahvistusnappi }}</button>
+  <button class="btn btn-default pull-right" ng-click="cancel()" translate="varmistus.peruuta"></button>
+</div>
