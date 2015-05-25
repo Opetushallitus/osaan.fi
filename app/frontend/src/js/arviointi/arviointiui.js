@@ -56,6 +56,13 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
       $scope.arviot = arviot;
     }
 
+    $scope.puuttuukoArvioita = function() {
+      var kohteet = _($scope.kohdealueet).map('kuvaukset').flatten().map('ammattitaidonkuvaus_id').value();
+      var arvioidut = _($scope.arviot).map(function(v, k) { return [k,v]; }).filter(function(x) { return x[1].arvio !== undefined; }).map(function(x) { return parseInt(x[0]); }).value();
+
+      return _.difference(kohteet, arvioidut).length > 0;
+    };
+
     $scope.palaaOsienValintaan = function() {
       $location.url('/osien-valinta?tutkinto=' + Arviointi.valittuTutkintotunnus() + '&peruste=' + Arviointi.valittuPeruste());
     };
