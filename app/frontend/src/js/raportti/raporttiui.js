@@ -20,8 +20,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     $routeProvider
       .when('/raportti', {
         controller: 'RaporttiController',
-        templateUrl: 'template/raportti/raportti.html',
-        label: 'Raportti'
+        templateUrl: 'template/raportti/raportti.html'
       });
   }])
 
