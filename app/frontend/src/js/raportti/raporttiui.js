@@ -60,7 +60,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     $scope.paivays = new Date();
 
     $scope.palaaArviointiin = function() {
-      $location.url('/osien-valinta/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
+      $location.url('/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
     };
   }])
 ;

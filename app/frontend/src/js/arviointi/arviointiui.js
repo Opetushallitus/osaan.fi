@@ -18,7 +18,7 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
 
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
-      .when('/osien-valinta/arviointi', {
+      .when('/arviointi', {
         controller: 'ArviointiController',
         templateUrl: 'template/arviointi/arviointi.html'
       });
@@ -61,11 +61,11 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
     };
 
     $scope.avaaEdellinenOsa = function() {
-      $location.url('/osien-valinta/arviointi?osa=' + Arviointi.edellinenOsatunnus(tutkinnonosa));
+      $location.url('/arviointi?osa=' + Arviointi.edellinenOsatunnus(tutkinnonosa));
     };
 
     $scope.avaaSeuraavaOsa = function() {
-      $location.url('/osien-valinta/arviointi?osa=' + Arviointi.seuraavaOsatunnus(tutkinnonosa));
+      $location.url('/arviointi?osa=' + Arviointi.seuraavaOsatunnus(tutkinnonosa));
 
     };
 

@@ -57,7 +57,7 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
     };
 
     $scope.eteenpain = function() {
-      $location.url('/osien-valinta/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
+      $location.url('/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
     };
 
     Tutkinnonosa.hae(peruste, tutkintotunnus).then(function(tutkinnonosat) {
