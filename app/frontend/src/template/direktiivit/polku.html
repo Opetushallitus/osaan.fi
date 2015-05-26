@@ -1,24 +1,18 @@
-<section class="app-wrapper clearfix">
-  <div class="container-fluid" style="background-color: whitesmoke">
-    <div class="row">
-      <div class="col-md-2">
-        <a href="#/" translate="polku.valitse_tutkinto"></a>
-      </div>
-      <div class="col-md-1">&raquo;</div>
-      <div class="col-md-2">
-        <a ng-if="tutkinto && peruste" ng-href="#/osien-valinta?tutkinto={{tutkinto}}&peruste={{peruste}}" translate="polku.valitse_tutkinnon_osat"></a>
-        <span ng-if="!tutkinto || !peruste" translate="polku.valitse_tutkinnon_osat"></span>
-      </div>
-      <div class="col-md-1">&raquo;</div>
-      <div class="col-md-2">
-        <a ng-if="osatunnus" ng-href="#/arviointi?osa={{osatunnus}}" translate="polku.arvioi_osaaminen"></a>
-        <span ng-if="!osatunnus" translate="polku.arvioi_osaaminen"></span>
-      </div>
-      <div class="col-md-1">&raquo;</div>
-      <div class="col-md-2">
-        <a ng-if="arvioita" href="#/raportti" translate="polku.raportti"></a>
-        <span ng-if="!arvioita" translate="polku.raportti"></span>
-      </div>
-    </div>
+<div class="row wizard">
+  <div class="col-md-3">
+    <a href="#/" translate="polku.valitse_tutkinto" class="btn btn-primary"></a>
   </div>
-</section>
+  <div class="col-md-3">
+    <a ng-if="tutkinto && peruste" ng-href="#/osien-valinta?tutkinto={{tutkinto}}&peruste={{peruste}}" translate="polku.valitse_tutkinnon_osat"></a>
+    <span ng-if="!tutkinto || !peruste" translate="polku.valitse_tutkinnon_osat"></span>
+  </div>
+  <div class="col-md-3">
+    <a ng-if="osatunnus" ng-href="#/arviointi?osa={{osatunnus}}" translate="polku.arvioi_osaaminen"></a>
+    <span ng-if="!osatunnus" translate="polku.arvioi_osaaminen"></span>
+  </div>
+  <div class="col-md-3">
+    <a ng-if="arvioita" href="#/raportti" translate="polku.raportti"></a>
+    <span ng-if="!arvioita" translate="polku.raportti"></span>
+  </div>
+</div>
+<br />

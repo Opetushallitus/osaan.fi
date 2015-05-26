@@ -41,7 +41,10 @@
       </section>
     </section>
 
-    <p ng-if="puuttuukoArvioita()" class="bg-danger" style="padding: 0.5em" translate="arviointi.arvioita_puuttuu"></p>
+    <div ng-if="puuttuukoArvioita()" class="alert alert-warning" role="alert">
+      <p translate="arviointi.arvioita_puuttuu"></p>
+    </div>
+
   </div>
   <div class="panel-footer">
     <div class="row">

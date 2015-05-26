@@ -5,7 +5,8 @@ button {
   border: none;
   height: $baseline*1.5;
   box-shadow: none;
-  /* margin: $marginS $marginL $marginS 0; */
+  margin-left: .2em;
+  margin-right: .2em;
   cursor: pointer;
   padding-left: 15px;
   padding-right: 15px;
@@ -17,4 +18,10 @@ button {
 button:disabled {
   opacity: 0.5;
   background-color: $primary-color;
+}
+
+.wizard .btn {
+  &:after{
+   content: '>';
+  }
 }

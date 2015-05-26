@@ -19,16 +19,22 @@
     </div>
 
     <h3 ng-if="(tutkinnonosat | filter: {pakollinen: false}).length" translate="osien-valinta.valinnaiset_osat"></h3>
-    <div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: false}">
+    <div ng-repeat="osa in tutkinnonosat | filter: {pakollinen: false}" class="checkbox">
       <label>
         <input type="checkbox" ng-model="valinnat[osa.osatunnus]">
         {{ osa | lokalisoiKentta:'nimi' }}
       </label>
     </div>
 
-    <div class="bg-info" style="padding: 0.5em" ng-if="onkoArvioita()">
-      <span translate="osien-valinta.arvioita_on"></span>
-      <span><a class="small" ng-click="poistaArviot()" translate="osien-valinta.poista_arviot"></a></span>
+    <div class="alert alert-warning" role="alert" ng-if="onkoArvioita()">
+      <p class="lead">{{ 'osien-valinta.arvioita_on' | translate}}</p>
+      <p>
+        {{ 'osien-valinta.poisto-teksti' | translate}}  &nbsp;&nbsp;
+        <a class="btn btn-sm btn-danger" ng-click="poistaArviot()">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+          {{ 'osien-valinta.poista_arviot' | translate}}
+        </a>
+      </p>
     </div>
   </div>
   <div class="panel-footer">
