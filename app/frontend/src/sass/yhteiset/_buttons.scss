@@ -20,8 +20,53 @@ button:disabled {
   background-color: $primary-color;
 }
 
-.wizard .btn {
-  &:after{
-   content: '>';
+.wizard {
+  margin-bottom: .5em;
+  margin-bottom: 1em;
+  .wizard-item {
+    text-align: center;
+    background-color: $lightest-gray;
+    height: 2em;
+    line-height: 2em;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2px;
+    font-size: 1.14285714285714em;
+    color: $gray-color;
+    &.active {
+      background-color: $lighter-primary;
+      a {
+        color: white;
+      }
+    }
+    &.enabled {
+    }
+    &:after,
+    &:before {
+      content: ' ';
+      position: absolute;
+      right: 0;
+      top: -5px;
+      width: 15px;
+      height: 42px;
+      background-image: url("../img/path.png");
+      background-repeat: no-repeat;
+      background-position: 0 0;
+    }
+    &:before {
+      background-image: url("../img/path-inverse.png");
+      left: 0;
+    }
+    &:first-child {
+      &:before {
+        background-image: none;
+      }
+    }
+    &:last-child {
+      &:after {
+        background-image: none;
+      }
+    }
   }
 }

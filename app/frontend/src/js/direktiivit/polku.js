@@ -14,7 +14,7 @@
 
 'use strict';
 
-angular.module('osaan.direktiivit.polku', [])
+angular.module('osaan.direktiivit.polku', ['ngRoute'])
 
   .directive('polku', [function() {
     return {
@@ -22,7 +22,8 @@ angular.module('osaan.direktiivit.polku', [])
       scope: {
       },
       templateUrl: 'template/direktiivit/polku.html',
-      controller: ['$scope', 'Arviointi', function($scope, Arviointi) {
+      controller: ['$scope', 'Arviointi', '$route', '$routeParams', '$location', function($scope, Arviointi, $route, $routeParams, $location) {
+        $scope.path = $location.path();
         $scope.$watch(function() {
           return Arviointi.valittuTutkintotunnus();
         }, function(tutkinto) {
