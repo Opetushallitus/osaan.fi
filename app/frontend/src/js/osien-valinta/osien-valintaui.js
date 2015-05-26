@@ -52,13 +52,17 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
       $scope.tutkinto = tutkinto;
     });
 
-    $scope.onkoArvioita = function(osatunnus) {
-      return Arviointi.onkoArvioita(osatunnus);
+    $scope.onkoArvioita = function() {
+      return Arviointi.onkoArvioita();
     };
 
-    $scope.poistaArviot = function(osatunnus) {
+    $scope.poistaArviot = function() {
       varmistus.varmista($translate.instant('osien-valinta.poista_arviot'), $translate.instant('osien-valinta.poista_arviot_varoitus'), $translate.instant('osien-valinta.poista_arviot')).then(function() {
-        Arviointi.poistaArviot(osatunnus);
+        _.forEach($scope.valinnat, function (valittu, osatunnus) {
+          if (valittu) {
+            Arviointi.poistaArviot(osatunnus);
+          }
+        });
       });
     };
 
