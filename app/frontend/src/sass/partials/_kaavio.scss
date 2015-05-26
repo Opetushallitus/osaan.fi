@@ -1,6 +1,6 @@
 .kaavio {
   fill: $darker-gray;
-  font-size: 0.8em;
+  font-size: 1em;
   overflow: visible !important;
 
   .kaavio-palkin-otsikko {
@@ -21,7 +21,13 @@
   }
 
   .kaavio-viivan-otsikko {
-    fill: $lighter-gray;
+    fill: $gray-color;
+    font-size: 1.71428571428571em; /* 24px */
+    font-weight: normal;
     text-anchor: end;
+  }
+
+  .kaavio-viivan-otsikon-tausta {
+    fill: $lightest-gray;
   }
 }
