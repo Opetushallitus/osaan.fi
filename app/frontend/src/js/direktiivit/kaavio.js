@@ -49,7 +49,7 @@ angular.module('osaan.direktiivit.kaavio', [])
         };
 
         scope.viivastonLeveys = function() {
-          return scope.jakauma.length*(palkistossaPalkkeja + palkistossaTyhjia)*asetukset.palkinLeveys;
+          return (scope.jakauma.length + 1)*(palkistossaPalkkeja + palkistossaTyhjia)*asetukset.palkinLeveys;
         };
 
         scope.viivat = [

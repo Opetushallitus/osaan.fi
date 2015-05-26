@@ -38,11 +38,11 @@
       ng-attr-class="{{ 'kaavio-palkin-vari-' + data.vari }}"
       ng-attr-width="{{asetukset.palkinLeveys}}"
       ng-attr-height="{{palkinPituus(data.arvo)}}"
-      ng-attr-x="{{paikkaPalkistonSuhteen($index, 0, 0)}}"
+      ng-attr-x="{{paikkaPalkistonSuhteen($index, 0, 0.5)}}"
       ng-attr-y="{{asetukset.palkinMaksimiPituus - palkinPituus(data.arvo)}}" />
     <text
       class="kaavio-palkin-otsikko"
-      ng-attr-x="{{paikkaPalkistonSuhteen($index, 0, 0.5)}}"
+      ng-attr-x="{{paikkaPalkistonSuhteen($index, 0, 1)}}"
       ng-attr-y="{{asetukset.palkinMaksimiPituus + 20}}">
       {{$index + 1}}.
     </text>
