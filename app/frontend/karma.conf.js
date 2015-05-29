@@ -45,7 +45,6 @@ module.exports = function(config) {
       'src/bower_components/stacktrace/stacktrace.js',
       'src/bower_components/AngularJS-Toaster/toaster.js',
       'src/bower_components/angular-mocks/angular-mocks.js',
-      'src/bower_components/aituaipaljs/**/*.js',
       'src/js/**/*.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js',
