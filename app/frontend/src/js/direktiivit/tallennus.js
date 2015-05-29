@@ -21,7 +21,7 @@ angular.module('osaan.direktiivit.tallennus', [])
       restrict: 'E',
       scope: {
       },
-      template: '<div class="tallennus" ng-if="tallennusMahdollinen()"><a ng-click="tallenna()" translate="yleiset.tallenna"></a></div>',
+      template: '<div class="tallennus pull-right" ng-if="tallennusMahdollinen()"><a class="btn btn-primary" ng-click="tallenna()"><span class="glyphicon glyphicon-floppy-disk aria-hidden="true"></span>&nbsp;<span translate="yleiset.tallenna"></span></a></div>',
       controller: ['$modal', '$scope', 'Arvio', 'Arviointi', function($modal, $scope, Arvio, Arviointi) {
         $scope.tallennusMahdollinen = function() {
           return Arviointi.onkoArvioita();
