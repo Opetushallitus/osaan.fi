@@ -29,7 +29,7 @@ angular.module('osaan.lataa.lataaui', ['ngRoute'])
     Arvio.lataa($routeParams.arviotunnus).then(function(arvio) {
       Arviointi.lataa(arvio);
 
-      $location.url('/osien-valinta?tutkinto=' + arvio.tutkintotunnus + '&peruste=' + arvio.peruste + '&ladattu');
+      $location.url('/osien-valinta?tutkinto=' + arvio.tutkintotunnus + '&peruste=' + arvio.peruste + '&ladattu=' + arvio.luotuaika);
     }, function() {
       $scope.virhe = true;
     });
