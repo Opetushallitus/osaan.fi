@@ -19,7 +19,7 @@ angular.module('osaan.rest.ohje', [])
   .factory('Ohje', ['$http', function($http) {
     return {
       hae: function(ohjetunniste) {
-        return $http.get('api/ohje/' + ohjetunniste).then(function(response) {
+        return $http.get('api/ohje/' + ohjetunniste, {cache: true}).then(function(response) {
           return response.data;
         });
       }
