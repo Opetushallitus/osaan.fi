@@ -31,19 +31,25 @@ angular.module('osaan.palvelut.arviointi', [])
     }
 
     var asetaArviot = function(tutkinnonosatunnus, arviot) {
-      tila.arviot[tutkinnonosatunnus] = angular.copy(arviot);
-      _tallennaTila();
+      if (!_.isEqual(tila.arviot[tutkinnonosatunnus], arviot)) {
+        tila.arviot[tutkinnonosatunnus] = angular.copy(arviot);
+        _tallennaTila();
+      }
     };
 
     var asetaOsatunnukset = function(osat) {
-      tila.osatunnukset = angular.copy(osat);
-      _tallennaTila();
+      if (!_.isEqual(tila.osatunnukset, osat)) {
+        tila.osatunnukset = angular.copy(osat);
+        _tallennaTila();
+      }
     };
 
     var asetaTutkintoJaPeruste = function(tutkintotunnus, peruste) {
-      tila.tutkintotunnus = tutkintotunnus;
-      tila.peruste = peruste;
-      _tallennaTila();
+      if (tutkintotunnus !== tila.tutkintotunnus || peruste !== tila.peruste) {
+        tila.tutkintotunnus = tutkintotunnus;
+        tila.peruste = peruste;
+        _tallennaTila();
+      }
     };
 
     var edellinenOsatunnus = function(osatunnus) {
