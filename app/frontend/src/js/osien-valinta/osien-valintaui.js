@@ -28,6 +28,10 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
     var peruste = $routeParams.peruste;
     var tutkintotunnus = $routeParams.tutkinto;
 
+    if ($location.search().ladattu !== undefined) {
+      $scope.ladattu = true;
+    }
+
     Arviointi.asetaTutkintoJaPeruste(tutkintotunnus, peruste);
 
     var valitutOsatunnukset = function() {
