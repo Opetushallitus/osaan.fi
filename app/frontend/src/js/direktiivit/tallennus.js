@@ -45,6 +45,10 @@ angular.module('osaan.direktiivit.tallennus', [])
               resolve: {
                 tunnus: function() { return tunnus; }
               }
+            }).result.then(function() {
+              Arviointi.asetaLadatuksi();
+            }, function() {
+              Arviointi.asetaLadatuksi();
             });
           });
         };
@@ -55,6 +59,6 @@ angular.module('osaan.direktiivit.tallennus', [])
   .controller('TallennusModalController', ['$modalInstance', '$scope', 'tunnus', function($modalInstance, $scope, tunnus) {
     $scope.linkki = document.location.href.split('#')[0] + '#/lataa/' + tunnus;
 
-    $scope.close = $modalInstance.dismiss;
+    $scope.close = $modalInstance.close;
   }])
 ;

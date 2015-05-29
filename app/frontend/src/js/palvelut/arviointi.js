@@ -21,8 +21,10 @@ angular.module('osaan.palvelut.arviointi', [])
       arviot: {}, // tutkinnonosatunnus -> ammattitaidonkuvaus_id -> {arvio, vapaateksti}
       osatunnukset: []
     };
+    var ladattu = true;
     var _tallennaTila = function() {
       sessionStorage.setItem('arviointi', JSON.stringify(tila));
+      ladattu = false;
     };
 
     // Lataa tila sessionStoragesta servicen alustuksessa
@@ -35,6 +37,10 @@ angular.module('osaan.palvelut.arviointi', [])
         tila.arviot[tutkinnonosatunnus] = angular.copy(arviot);
         _tallennaTila();
       }
+    };
+
+    var asetaLadatuksi = function() {
+      ladattu = true;
     };
 
     var asetaOsatunnukset = function(osat) {
@@ -71,6 +77,7 @@ angular.module('osaan.palvelut.arviointi', [])
       _.forEach(uusiTila.kohdearviot, function(arviot, tutkinnonosatunnus) {
         asetaArviot(tutkinnonosatunnus, arviot);
       });
+      ladattu = true;
     };
 
     var onkoArvioita = function(osatunnusOption) {
@@ -83,6 +90,10 @@ angular.module('osaan.palvelut.arviointi', [])
         }
       });
       return onko;
+    };
+
+    var onkoLadattu = function() {
+      return ladattu;
     };
 
     var poistaArviot = function(tutkinnonosatunnus) {
@@ -111,12 +122,14 @@ angular.module('osaan.palvelut.arviointi', [])
 
     return {
       asetaArviot: asetaArviot,
+      asetaLadatuksi: asetaLadatuksi,
       asetaOsatunnukset: asetaOsatunnukset,
       asetaTutkintoJaPeruste: asetaTutkintoJaPeruste,
       edellinenOsatunnus: edellinenOsatunnus,
       haeArviot: haeArviot,
       lataa: lataa,
       onkoArvioita: onkoArvioita,
+      onkoLadattu: onkoLadattu,
       poistaArviot: poistaArviot,
       seuraavaOsatunnus: seuraavaOsatunnus,
       tyhjennaArviot: tyhjennaArviot,
