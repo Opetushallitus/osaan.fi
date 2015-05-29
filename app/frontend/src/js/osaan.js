@@ -46,7 +46,7 @@ angular.module('osaan.fi', [
   // Poistumisvaroitus
   .run(['Arviointi', function(Arviointi) {
     var confirmBeforeUnload = function(e) {
-      if (Arviointi.onkoLadattu()) {
+      if (Arviointi.onkoLadattu() || !Arviointi.onkoArvioita()) {
         return;
       }
 
