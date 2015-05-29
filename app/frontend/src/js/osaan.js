@@ -42,4 +42,20 @@ angular.module('osaan.fi', [
   'osaan.rest.tutkinto',
   'osaan.tekstit'
 ])
+
+  // Poistumisvaroitus
+  .run(['Arviointi', function(Arviointi) {
+    var confirmBeforeUnload = function(e) {
+      if (Arviointi.onkoLadattu()) {
+        return;
+      }
+
+      var confirmationMessage = 'Haluatko varmasti poistua tallentamatta?';
+
+      (e || window.event).returnValue = confirmationMessage; // Gecko + IE
+      return confirmationMessage; // Webkit, Safari, Chrome etc.
+    };
+
+    window.addEventListener('beforeunload', confirmBeforeUnload, false);
+  }])
 ;
