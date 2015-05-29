@@ -22,8 +22,6 @@
                                         (s/optional-key :vapaateksti) (s/maybe s/Str)}}}
             :tutkinnonosat [s/Str]})
 
-(def ArvioUlos (assoc Arvio (s/optional-key :luotuaika) java.sql.Timestamp))
-
 (def AmmattitaidonKuvaus {:ammattitaidonkuvaus_id s/Int
                           :nimi_fi s/Str
                           :nimi_sv s/Str})

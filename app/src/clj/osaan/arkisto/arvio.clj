@@ -20,7 +20,7 @@
   [arviotunnus]
   (sql-util/select-unique :arvio
     (sql/join :peruste (= :peruste.peruste_id :peruste))
-    (sql/fields :peruste [:peruste.tutkinto :tutkintotunnus] :luotuaika)
+    (sql/fields :peruste [:peruste.tutkinto :tutkintotunnus])
     (sql/where {:tunniste arviotunnus})))
 
 (defn ^:private hae-kohdearviot
