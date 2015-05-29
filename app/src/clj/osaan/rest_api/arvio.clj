@@ -22,7 +22,7 @@
 
 (c/defroutes reitit
   (cu/defapi :julkinen nil :get "/:tunniste" [tunniste]
-    (json-response (arkisto/hae tunniste) skeema/Arvio))
+    (json-response (arkisto/hae tunniste) skeema/ArvioUlos))
   (cu/defapi :julkinen nil :post "/" [& tila]
     (s/validate skeema/Arvio tila)
     (json-response (arkisto/tallenna tila))))
