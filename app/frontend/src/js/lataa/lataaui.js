@@ -27,12 +27,7 @@ angular.module('osaan.lataa.lataaui', ['ngRoute'])
 
   .controller('LataaController', ['$location', '$routeParams', '$scope', 'Arvio', 'Arviointi', function($location, $routeParams, $scope, Arvio, Arviointi) {
     Arvio.lataa($routeParams.arviotunnus).then(function(arvio) {
-      Arviointi.asetaTutkintoJaPeruste(arvio.tutkintotunnus, arvio.peruste);
-      Arviointi.asetaOsatunnukset(arvio.tutkinnonosat);
-
-      _.forEach(arvio.kohdearviot, function(arviot, tutkinnonosatunnus) {
-        Arviointi.asetaArviot(tutkinnonosatunnus, arviot);
-      });
+      Arviointi.lataa(arvio);
 
       $location.url('/osien-valinta?tutkinto=' + arvio.tutkintotunnus + '&peruste=' + arvio.peruste);
     }, function() {

@@ -59,6 +59,14 @@ angular.module('osaan.palvelut.arviointi', [])
       return angular.copy(tila.arviot[tutkinnonosatunnus]);
     };
 
+    var lataa = function(uusiTila) {
+      asetaTutkintoJaPeruste(uusiTila.tutkintotunnus, String(uusiTila.peruste));
+      asetaOsatunnukset(uusiTila.tutkinnonosat);
+      _.forEach(uusiTila.kohdearviot, function(arviot, tutkinnonosatunnus) {
+        asetaArviot(tutkinnonosatunnus, arviot);
+      });
+    };
+
     var onkoArvioita = function(osatunnusOption) {
       // Tarkistetaan vain valitut osatunnukset
       var osatunnukset = _.intersection(_.keys(tila.arviot), tila.osatunnukset);
@@ -101,6 +109,7 @@ angular.module('osaan.palvelut.arviointi', [])
       asetaTutkintoJaPeruste: asetaTutkintoJaPeruste,
       edellinenOsatunnus: edellinenOsatunnus,
       haeArviot: haeArviot,
+      lataa: lataa,
       onkoArvioita: onkoArvioita,
       poistaArviot: poistaArviot,
       seuraavaOsatunnus: seuraavaOsatunnus,
