@@ -33,6 +33,7 @@ angular.module('osaan.fi', [
   'osaan.lataa.lataaui',
   'osaan.osien-valinta.osien-valintaui',
   'osaan.palvelut.arviointi',
+  'osaan.palvelut.tekstiraportti',
   'osaan.palvelut.varmistus',
   'osaan.raportti.raporttiui',
   'osaan.rest.ammattitaidonkuvaus',
