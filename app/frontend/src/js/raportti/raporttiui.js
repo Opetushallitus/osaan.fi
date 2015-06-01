@@ -70,12 +70,12 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
       $scope.tutkinto = tutkinto;
     });
 
-    var tutkinnonosatPromise = Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus());
-    tutkinnonosatPromise
+    var tutkinnonosatPromise = Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus())
       .then(function(tutkinnonosat) {
         $scope.tutkinnonosat = RaporttiApurit.valitseTutkinnonOsat(tutkinnonosat, Arviointi.valitutOsatunnukset());
         return $scope.tutkinnonosat;
-      })
+      });
+    tutkinnonosatPromise
       .then(function(tutkinnonosat) {
         var tutkinnonOsanTulos = _.mapValues($scope.arviot, RaporttiApurit.arvioidenKeskiarvo);
         $scope.jakauma = RaporttiApurit.muodostaJakauma(tutkinnonosat, tutkinnonOsanTulos);
