@@ -82,10 +82,3 @@ a {color : $primary-color; text-decoration: none;
   font-weight: 700;
   src: local('Open Sans Condensed Bold'), local('OpenSans-CondensedBold'), url('../font/opensans-condensed-bold.woff') format('woff');
 }
-
-/* Override bootstrap icons default font-path. fonts -> font */
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('../font/glyphicons-halflings-regular.eot');
-  src: url('../font/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../font/glyphicons-halflings-regular.woff') format('woff'), url('../font/glyphicons-halflings-regular.ttf') format('truetype'), url('../font/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-}
