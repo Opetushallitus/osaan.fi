@@ -87,5 +87,9 @@ describe('Raportti', function() {
     expect(raportti.tutkinnonosat).not.toEqual(undefined);
     expect(raportti.tutkinnonosat[0].kohdealueet).not.toEqual(undefined);
     expect(raportti.tutkinnonosat[0].kohdealueet[0].kuvaukset).not.toEqual(undefined);
+
+    expect(raportti.keskiarvo).toEqual(2);
+    expect(raportti.tutkinnonosat[0].keskiarvo).toEqual(2);
+    expect(raportti.tutkinnonosat[0].kohdealueet[0].keskiarvo).toEqual(2);
   });
 });

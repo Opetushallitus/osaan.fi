@@ -16,24 +16,46 @@
 
 angular.module('osaan.palvelut.raportti', [])
 
-  .factory('Raportti', [function() {
+  .factory('Raportti', ['Arviointi', function(Arviointi) {
     var service = {};
 
     service.luoRaportti = function(tutkinto, tutkinnonosat, kohdealueet) {
       var raportti = angular.copy(tutkinto);
 
+      var tutkintoSumma = 0;
+      var tutkintoArvioita = 0;
+
       raportti.tutkinnonosat = [];
       _.forEach(tutkinnonosat, function(tutkinnonosa_) {
         var tutkinnonosa = angular.copy(tutkinnonosa_);
+        var arviot = Arviointi.haeArviot(tutkinnonosa.osatunnus);
+        var arvioidutAmmattitaidonKuvausIdt = _.map(_.keys(arviot), function(x) { return parseInt(x); });
+        var tutkinnonosaSumma = 0;
+        var tutkinnonosaArvioita = 0;
 
         var osanKohdealueet = [];
         _.forEach(kohdealueet[tutkinnonosa.osatunnus], function(kohdealue) {
+          var ammattitaidonKuvausIdt = _.pluck(kohdealue.kuvaukset, 'ammattitaidonkuvaus_id');
+          var kohdealueenArvioIdt = _.intersection(arvioidutAmmattitaidonKuvausIdt, ammattitaidonKuvausIdt);
+          var kohdealueenArviot = _.filter(_.map(kohdealueenArvioIdt, function(id) { return arviot[id].arvio; }), _.isNumber);
+          var summa = _.reduce(kohdealueenArviot, function(total, n) { return total + n; }, 0);
+          var arvioita = kohdealueenArviot.length;
+          tutkinnonosaSumma += summa;
+          tutkinnonosaArvioita += arvioita;
+
+          kohdealue.keskiarvo = arvioita > 0 ? (summa / arvioita) : 0;
           osanKohdealueet.push(angular.copy(kohdealue));
         });
         tutkinnonosa.kohdealueet = osanKohdealueet;
+        tutkinnonosa.keskiarvo = tutkinnonosaArvioita > 0 ? (tutkinnonosaSumma / tutkinnonosaArvioita) : 0;
+
+        tutkintoSumma += tutkinnonosaSumma;
+        tutkintoArvioita += tutkinnonosaArvioita;
 
         raportti.tutkinnonosat.push(tutkinnonosa);
       });
+
+      raportti.keskiarvo = tutkintoArvioita > 0 ? (tutkintoSumma / tutkintoArvioita) : 0;
 
       return raportti;
     };
