@@ -34,7 +34,8 @@ angular.module('osaan.palvelut.raportti', [])
         var tutkinnonosaArvioita = 0;
 
         var osanKohdealueet = [];
-        _.forEach(kohdealueet[tutkinnonosa.osatunnus], function(kohdealue) {
+        _.forEach(kohdealueet[tutkinnonosa.osatunnus], function(kohdealue_) {
+          var kohdealue = angular.copy(kohdealue_);
           var ammattitaidonKuvausIdt = _.pluck(kohdealue.kuvaukset, 'ammattitaidonkuvaus_id');
           var kohdealueenArvioIdt = _.intersection(arvioidutAmmattitaidonKuvausIdt, ammattitaidonKuvausIdt);
           var kohdealueenArviot = _.filter(_.map(kohdealueenArvioIdt, function(id) { return arviot[id].arvio; }), _.isNumber);
@@ -43,8 +44,14 @@ angular.module('osaan.palvelut.raportti', [])
           tutkinnonosaSumma += summa;
           tutkinnonosaArvioita += arvioita;
 
+          _.forEach(kohdealue.kuvaukset, function(kuvaus) {
+            if (arviot[kuvaus.ammattitaidonkuvaus_id] !== undefined) {
+              kuvaus.arvio = angular.copy(arviot[kuvaus.ammattitaidonkuvaus_id]);
+            }
+          });
+
           kohdealue.keskiarvo = arvioita > 0 ? (summa / arvioita) : 0;
-          osanKohdealueet.push(angular.copy(kohdealue));
+          osanKohdealueet.push(kohdealue);
         });
         tutkinnonosa.kohdealueet = osanKohdealueet;
         tutkinnonosa.keskiarvo = tutkinnonosaArvioita > 0 ? (tutkinnonosaSumma / tutkinnonosaArvioita) : 0;

@@ -91,5 +91,6 @@ describe('Raportti', function() {
     expect(raportti.keskiarvo).toEqual(2);
     expect(raportti.tutkinnonosat[0].keskiarvo).toEqual(2);
     expect(raportti.tutkinnonosat[0].kohdealueet[0].keskiarvo).toEqual(2);
+    expect(raportti.tutkinnonosat[0].kohdealueet[0].kuvaukset[0].arvio.arvio).toEqual(1);
   });
 });
