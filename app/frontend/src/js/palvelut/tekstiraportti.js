@@ -16,18 +16,21 @@
 
 angular.module('osaan.palvelut.tekstiraportti', [])
 
-  .factory('TekstiRaportti', ['$filter', '$translate', 'Arviointi', function($filter, $translate, Arviointi) {
+  .factory('TekstiRaportti', ['$filter', '$translate', 'Arviointi', 'Raportti', function($filter, $translate, Arviointi, Raportti) {
     return {
       luoRaportti: function(tutkinto, tutkinnonosat, kohdealueet) {
+        var raportti = Raportti.luoRaportti(tutkinto, tutkinnonosat, kohdealueet);
+
         var lokalisoiKentta = $filter('lokalisoiKentta');
+        var number = $filter('number');
         var t = '';
 
         // Otsikko
-        t += lokalisoiKentta(tutkinto, 'koulutusala_nimi');
+        t += lokalisoiKentta(raportti, 'koulutusala_nimi');
         t += ' -> ';
-        t += lokalisoiKentta(tutkinto, 'opintoala_nimi');
+        t += lokalisoiKentta(raportti, 'opintoala_nimi');
         t += ' -> ';
-        t += lokalisoiKentta(tutkinto, 'nimi');
+        t += lokalisoiKentta(raportti, 'nimi');
         t += '\n\n\n';
 
         t += 'Päiväys: ';
@@ -44,26 +47,26 @@ angular.module('osaan.palvelut.tekstiraportti', [])
         t += '\n\n';
 
         t += 'Arvio   Tutkinnon osa -> kohdealue -> ammattitaito\n';
-        t += '=====   ==========================================\n\n\n';
+        t += '=====   ==========================================\n\n';
 
-        _.forEach(tutkinnonosat, function(tutkinnonosa) {
+        t += number(raportti.keskiarvo, 2) + '    ' + lokalisoiKentta(raportti, 'nimi') + '\n';
+
+        _.forEach(raportti.tutkinnonosat, function(tutkinnonosa) {
           var arviot = Arviointi.haeArviot(tutkinnonosa.osatunnus);
 
-          // TODO arvio tutkinnonosalle
-          t += '___     ' + lokalisoiKentta(tutkinnonosa, 'nimi') + '\n';
-          _.forEach(kohdealueet[tutkinnonosa.osatunnus], function(kohdealue) {
-            // TODO arvio kohdealueelle
-            t += '___        ' + lokalisoiKentta(kohdealue, 'nimi') + '\n';
+          t += number(tutkinnonosa.keskiarvo, 2) + '    ' + lokalisoiKentta(tutkinnonosa, 'nimi') + '\n';
+          _.forEach(tutkinnonosa.kohdealueet, function(kohdealue) {
+            t += number(kohdealue.keskiarvo, 2) + '       ' + lokalisoiKentta(kohdealue, 'nimi') + '\n';
 
             _.forEach(kohdealue.kuvaukset, function(kuvaus) {
               var arvio = arviot[kuvaus.ammattitaidonkuvaus_id];
               var num = '-  ';
               if (arvio) {
-                num = arvio.arvio ? arvio.arvio : '?  ';
+                num = arvio.arvio ? arvio.arvio : '?';
               }
-              t += num + '              ' + lokalisoiKentta(kuvaus, 'nimi') + '\n';
+              t += num + '             ' + lokalisoiKentta(kuvaus, 'nimi') + '\n';
               if (arvio && arvio.vapaateksti) {
-                t += '               KOMMENTTI: ' + arvio.vapaateksti + '\n';
+                t += '              KOMMENTTI: ' + arvio.vapaateksti + '\n';
               }
             });
           });
