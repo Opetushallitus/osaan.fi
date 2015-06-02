@@ -16,7 +16,7 @@
 
 angular.module('osaan.palvelut.tekstiraportti', [])
 
-  .factory('TekstiRaportti', ['$filter', '$translate', 'Arviointi', 'Raportti', function($filter, $translate, Arviointi, Raportti) {
+  .factory('TekstiRaportti', ['$filter', '$translate', 'Raportti', function($filter, $translate, Raportti) {
     return {
       luoRaportti: function(tutkinto, tutkinnonosat, kohdealueet) {
         var raportti = Raportti.luoRaportti(tutkinto, tutkinnonosat, kohdealueet);
@@ -52,21 +52,18 @@ angular.module('osaan.palvelut.tekstiraportti', [])
         t += number(raportti.keskiarvo, 2) + '    ' + lokalisoiKentta(raportti, 'nimi') + '\n';
 
         _.forEach(raportti.tutkinnonosat, function(tutkinnonosa) {
-          var arviot = Arviointi.haeArviot(tutkinnonosa.osatunnus);
-
           t += number(tutkinnonosa.keskiarvo, 2) + '    ' + lokalisoiKentta(tutkinnonosa, 'nimi') + '\n';
           _.forEach(tutkinnonosa.kohdealueet, function(kohdealue) {
             t += number(kohdealue.keskiarvo, 2) + '       ' + lokalisoiKentta(kohdealue, 'nimi') + '\n';
 
             _.forEach(kohdealue.kuvaukset, function(kuvaus) {
-              var arvio = arviot[kuvaus.ammattitaidonkuvaus_id];
               var num = '-  ';
-              if (arvio) {
-                num = arvio.arvio ? arvio.arvio : '?';
+              if (kuvaus.arvio) {
+                num = kuvaus.arvio.arvio ? kuvaus.arvio.arvio : '?';
               }
               t += num + '             ' + lokalisoiKentta(kuvaus, 'nimi') + '\n';
-              if (arvio && arvio.vapaateksti) {
-                t += '              KOMMENTTI: ' + arvio.vapaateksti + '\n';
+              if (kuvaus.arvio && kuvaus.arvio.vapaateksti) {
+                t += '              KOMMENTTI: ' + kuvaus.arvio.vapaateksti + '\n';
               }
             });
           });
