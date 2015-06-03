@@ -62,7 +62,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     };
   }])
 
-  .controller('RaporttiController', ['$location', '$q', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'RaporttiApurit', 'TekstiRaportti', 'Tutkinnonosa', 'Tutkinto', function($location, $q, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, RaporttiApurit, TekstiRaportti, Tutkinnonosa, Tutkinto) {
+  .controller('RaporttiController', ['$location', '$q', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'Raportti', 'RaporttiApurit', 'TekstiRaportti', 'Tutkinnonosa', 'Tutkinto', function($location, $q, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, Raportti, RaporttiApurit, TekstiRaportti, Tutkinnonosa, Tutkinto) {
     $scope.valittuRaportti = 'raportti';
 
     var tutkintoPromise = Tutkinto.haePerusteella(Arviointi.valittuPeruste());
@@ -88,7 +88,8 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
       });
 
     $q.all({tutkinto: tutkintoPromise, tutkinnonosat: tutkinnonosatPromise, kohdealueet: kohdealueetPromise}).then(function(tulokset) {
-      $scope.tekstiRaportti = TekstiRaportti.luoRaportti(tulokset.tutkinto, tulokset.tutkinnonosat, tulokset.kohdealueet);
+      var raportti = Raportti.luoRaportti(tulokset.tutkinto, tulokset.tutkinnonosat, tulokset.kohdealueet);
+      $scope.tekstiRaportti = TekstiRaportti.luoRaportti(raportti);
     });
 
     $scope.arviot = RaporttiApurit.liitaTutkinnonOsiinArviot(Arviointi.valitutOsatunnukset(),

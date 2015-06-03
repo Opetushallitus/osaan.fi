@@ -16,11 +16,9 @@
 
 angular.module('osaan.palvelut.tekstiraportti', [])
 
-  .factory('TekstiRaportti', ['$filter', '$translate', 'Raportti', function($filter, $translate, Raportti) {
+  .factory('TekstiRaportti', ['$filter', '$translate', function($filter, $translate) {
     return {
-      luoRaportti: function(tutkinto, tutkinnonosat, kohdealueet) {
-        var raportti = Raportti.luoRaportti(tutkinto, tutkinnonosat, kohdealueet);
-
+      luoRaportti: function(raportti) {
         var lokalisoiKentta = $filter('lokalisoiKentta');
         var number = $filter('number');
         var t = '';
