@@ -10,8 +10,8 @@
     <div class="row">
       <div class="pull-right">
         <div class="btn-group">
-          <label class="btn btn-success" ng-model="valittuRaportti" btn-radio="'raportti'">Raportti</label>
-          <label class="btn btn-success" ng-model="valittuRaportti" btn-radio="'tekstiraportti'">Tekstiraportti</label>
+          <label class="btn btn-success" ng-model="valittuRaportti" btn-radio="'raportti'">{{ 'raportti.tyyppi_raportti' | translate }}</label>
+          <label class="btn btn-success" ng-model="valittuRaportti" btn-radio="'tekstiraportti'">{{ 'raportti.tyyppi_tekstiraportti' | translate }}</label>
         </div>
         <div class="btn-group">
           <form action="api/kaiku" method="post">
@@ -24,7 +24,7 @@
 
     </div>
     <div ng-if="valittuRaportti == 'tekstiraportti'">
-      <h2>Tekstiraportti</h2>
+      <h2 translate="raportti.tyyppi_tekstiraportti"></h2>
 
       <div class="col-md-12">
         <div class="form-group">
