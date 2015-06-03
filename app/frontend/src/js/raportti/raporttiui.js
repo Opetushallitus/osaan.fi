@@ -62,26 +62,35 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     };
   }])
 
-  .controller('RaporttiController', ['$location', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'RaporttiApurit', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, RaporttiApurit, Tutkinnonosa, Tutkinto) {
+  .controller('RaporttiController', ['$location', '$q', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'Raportti', 'RaporttiApurit', 'TekstiRaportti', 'Tutkinnonosa', 'Tutkinto', function($location, $q, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, Raportti, RaporttiApurit, TekstiRaportti, Tutkinnonosa, Tutkinto) {
+    $scope.valittuRaportti = 'raportti';
 
-    Tutkinto.haePerusteella(Arviointi.valittuPeruste()).then(function(tutkinto) {
+    var tutkintoPromise = Tutkinto.haePerusteella(Arviointi.valittuPeruste());
+    tutkintoPromise.then(function(tutkinto) {
       $scope.tutkinto = tutkinto;
     });
 
-    Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus())
+    var tutkinnonosatPromise = Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus())
       .then(function(tutkinnonosat) {
         $scope.tutkinnonosat = RaporttiApurit.valitseTutkinnonOsat(tutkinnonosat, Arviointi.valitutOsatunnukset());
         return $scope.tutkinnonosat;
-      })
+      });
+    tutkinnonosatPromise
       .then(function(tutkinnonosat) {
         var tutkinnonOsanTulos = _.mapValues($scope.arviot, RaporttiApurit.arvioidenKeskiarvo);
         $scope.jakauma = RaporttiApurit.muodostaJakauma(tutkinnonosat, tutkinnonOsanTulos);
       });
 
-    AmmattitaidonKuvaus.haeKohdealueetTutkinnonosille(Arviointi.valitutOsatunnukset())
+    var kohdealueetPromise = AmmattitaidonKuvaus.haeKohdealueetTutkinnonosille(Arviointi.valitutOsatunnukset());
+    kohdealueetPromise
       .then(function(kohdealueet) {
         $scope.kohdealueet = kohdealueet;
       });
+
+    $q.all({tutkinto: tutkintoPromise, tutkinnonosat: tutkinnonosatPromise, kohdealueet: kohdealueetPromise}).then(function(tulokset) {
+      var raportti = Raportti.luoRaportti(tulokset.tutkinto, tulokset.tutkinnonosat, tulokset.kohdealueet);
+      $scope.tekstiRaportti = TekstiRaportti.luoRaportti(raportti);
+    });
 
     $scope.arviot = RaporttiApurit.liitaTutkinnonOsiinArviot(Arviointi.valitutOsatunnukset(),
       function(osatunnus) {return Arviointi.haeArviot(osatunnus);}
