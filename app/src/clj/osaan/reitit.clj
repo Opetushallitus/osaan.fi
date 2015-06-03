@@ -22,6 +22,7 @@
             [osaan.infra.status :refer [status piilota-salasanat]]
             [osaan.rest-api.ammattitaidon-kuvaus]
             [osaan.rest-api.arvio]
+            [osaan.rest-api.kaiku]
             [osaan.rest-api.koulutusala]
             [osaan.rest-api.ohje]
             [osaan.rest-api.tutkinnonosa]
@@ -41,6 +42,7 @@
      (c/GET "/status" [] (s/render-string "OK" {})))
     (c/context "/api/ammattitaidonkuvaus" [] osaan.rest-api.ammattitaidon-kuvaus/reitit)
     (c/context "/api/arvio" [] osaan.rest-api.arvio/reitit)
+    (c/context "/api/kaiku" [] osaan.rest-api.kaiku/reitit)
     (c/context "/api/koulutusala" [] osaan.rest-api.koulutusala/reitit)
     (c/context "/api/ohje" [] osaan.rest-api.ohje/reitit)
     (c/context "/api/tutkinnonosa" [] osaan.rest-api.tutkinnonosa/reitit)
