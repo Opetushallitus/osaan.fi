@@ -13,7 +13,13 @@
           <label class="btn btn-success" ng-model="valittuRaportti" btn-radio="'raportti'">Raportti</label>
           <label class="btn btn-success" ng-model="valittuRaportti" btn-radio="'tekstiraportti'">Tekstiraportti</label>
         </div>
-        <button class="btn btn-default"><span class="glyphicon glyphicon-download-alt"></span> Lataa tekstiraportti</button>
+        <div class="btn-group">
+          <form action="api/kaiku" method="post">
+            <input type="hidden" name="data" value="{{tekstiRaportti}}">
+            <input type="hidden" name="filename" value="raportti.txt">
+            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-download-alt"></span> Lataa tekstiraportti</button>
+          </form>
+        </div>
       </div>
 
     </div>
