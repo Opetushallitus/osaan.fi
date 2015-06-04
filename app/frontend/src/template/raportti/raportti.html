@@ -3,7 +3,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">
-      {{ 'raportti.otsikko' | translate }} - {{ tutkinto | lokalisoiKentta:'koulutusala_nimi' }} - {{ tutkinto | lokalisoiKentta:'opintoala_nimi' }} - {{ tutkinto | lokalisoiKentta:'nimi' }}
+      {{ 'raportti.otsikko' | translate }} - {{ raportti | lokalisoiKentta:'koulutusala_nimi' }} - {{ raportti | lokalisoiKentta:'opintoala_nimi' }} - {{ raportti | lokalisoiKentta:'nimi' }}
     </h3>
   </div>
   <div class="panel-body">
@@ -38,10 +38,10 @@
 
     <kaavio jakauma="jakauma"></kaavio>
 
-    <section class="tutkinnonosa" ng-repeat="tutkinnonosa in tutkinnonosat">
+    <section class="tutkinnonosa" ng-repeat="tutkinnonosa in raportti.tutkinnonosat">
       <h2>{{ tutkinnonosa | lokalisoiKentta:'nimi' }}</h2>
 
-      <section class="kohdealue" ng-repeat="kohdealue in kohdealueet[tutkinnonosa.osatunnus]">
+      <section class="kohdealue" ng-repeat="kohdealue in tutkinnonosa.kohdealueet">
         <h3>{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
 
         <table class="raportti table table-striped table-condensed">
@@ -55,8 +55,8 @@
           <tbody>
             <tr ng-repeat="kuvaus in kohdealue.kuvaukset">
               <td>{{ kuvaus | lokalisoiKentta:'nimi' }}</td>
-              <td>{{ arviot[tutkinnonosa.osatunnus][kuvaus.ammattitaidonkuvaus_id].arvio }}</td>
-              <td>{{ arviot[tutkinnonosa.osatunnus][kuvaus.ammattitaidonkuvaus_id].vapaateksti }}</td>
+              <td>{{ kuvaus.arvio.arvio }}</td>
+              <td>{{ kuvaus.arvio.vapaateksti }}</td>
             </tr>
           </tbody>
         </table>

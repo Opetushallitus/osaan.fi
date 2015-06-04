@@ -26,36 +26,6 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
 
   .factory('RaporttiApurit', [function() {
     return {
-      arvioidenKeskiarvo: function(kuvauksenArvio) {
-        var arviot = _.chain(kuvauksenArvio)
-          .values()
-          .pluck('arvio')
-          .filter(_.isNumber)
-          .value();
-        var summa = _.reduce(arviot, function add(result, x) {return result + x;});
-        var n = arviot.length;
-
-        return n >= 1 ? summa / n : 0;
-      },
-
-      liitaTutkinnonOsiinArviot: function(osatunnukset, haeArvio) {
-        return _.zipObject(
-          _.map(osatunnukset, function(osatunnus) {return [osatunnus, haeArvio(osatunnus)];})
-        );
-      },
-
-      muodostaJakauma: function(tutkinnonosat, tutkinnonOsanTulos) {
-        return _.map(
-          tutkinnonosat,
-          function(tutkinnonosa) {
-            return _.merge(_.pick(tutkinnonosa, ['nimi_fi', 'nimi_sv']), {
-              arvo: tutkinnonOsanTulos[tutkinnonosa.osatunnus],
-              vari: tutkinnonosa.pakollinen ? 0 : 1
-            });
-          }
-        );
-      },
-
       valitseTutkinnonOsat: function(tutkinnonosat, valitutOsatunnukset) {
         return _(tutkinnonosat).groupBy('osatunnus').pick(valitutOsatunnukset).values().flatten().value();
       }
@@ -72,29 +42,24 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
 
     var tutkinnonosatPromise = Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus())
       .then(function(tutkinnonosat) {
-        $scope.tutkinnonosat = RaporttiApurit.valitseTutkinnonOsat(tutkinnonosat, Arviointi.valitutOsatunnukset());
-        return $scope.tutkinnonosat;
-      });
-    tutkinnonosatPromise
-      .then(function(tutkinnonosat) {
-        var tutkinnonOsanTulos = _.mapValues($scope.arviot, RaporttiApurit.arvioidenKeskiarvo);
-        $scope.jakauma = RaporttiApurit.muodostaJakauma(tutkinnonosat, tutkinnonOsanTulos);
+        return RaporttiApurit.valitseTutkinnonOsat(tutkinnonosat, Arviointi.valitutOsatunnukset());
       });
 
     var kohdealueetPromise = AmmattitaidonKuvaus.haeKohdealueetTutkinnonosille(Arviointi.valitutOsatunnukset());
-    kohdealueetPromise
-      .then(function(kohdealueet) {
-        $scope.kohdealueet = kohdealueet;
-      });
 
     $q.all({tutkinto: tutkintoPromise, tutkinnonosat: tutkinnonosatPromise, kohdealueet: kohdealueetPromise}).then(function(tulokset) {
-      var raportti = Raportti.luoRaportti(tulokset.tutkinto, tulokset.tutkinnonosat, tulokset.kohdealueet);
-      $scope.tekstiRaportti = TekstiRaportti.luoRaportti(raportti);
+      $scope.raportti = Raportti.luoRaportti(tulokset.tutkinto, tulokset.tutkinnonosat, tulokset.kohdealueet);
+      $scope.tekstiRaportti = TekstiRaportti.luoRaportti($scope.raportti);
+      $scope.jakauma = _.map($scope.raportti.tutkinnonosat, function(osa) {
+        return {
+          arvo: osa.keskiarvo,
+          nimi_fi: osa.nimi_fi,
+          nimi_sv: osa.nimi_sv,
+          vari: osa.pakollinen ? 0 : 1
+        };
+      });
     });
 
-    $scope.arviot = RaporttiApurit.liitaTutkinnonOsiinArviot(Arviointi.valitutOsatunnukset(),
-      function(osatunnus) {return Arviointi.haeArviot(osatunnus);}
-    );
     $scope.jakauma = [];
     $scope.paivays = new Date();
 
