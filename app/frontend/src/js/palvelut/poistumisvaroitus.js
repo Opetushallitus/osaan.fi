@@ -41,6 +41,6 @@ angular.module('osaan.palvelut.poistumisvaroitus', [])
           estetty = false;
         }, 1000);
       }
-    }
+    };
   }])
 ;
