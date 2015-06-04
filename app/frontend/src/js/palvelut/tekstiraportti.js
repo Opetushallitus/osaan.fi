@@ -28,7 +28,7 @@ angular.module('osaan.palvelut.tekstiraportti', [])
         t += ' -> ';
         t += lokalisoiKentta(raportti, 'opintoala_nimi');
         t += ' -> ';
-        t += lokalisoiKentta(raportti, 'nimi');
+        t += lokalisoiKentta(raportti, 'tutkinto_nimi');
         t += '\n\n\n';
 
         t += 'Päiväys: ';

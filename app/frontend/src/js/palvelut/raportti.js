@@ -20,7 +20,11 @@ angular.module('osaan.palvelut.raportti', [])
     var service = {};
 
     service.luoRaportti = function(tutkinto, tutkinnonosat, kohdealueet) {
-      var raportti = angular.copy(tutkinto);
+      var raportti = _.pick(tutkinto, ['koulutusala_nimi_fi', 'koulutusala_nimi_sv', 'opintoala_nimi_fi', 'opintoala_nimi_sv']);
+      _.merge(raportti, {
+        tutkinto_nimi_fi: tutkinto.nimi_fi,
+        tutkinto_nimi_sv: tutkinto.nimi_sv
+      });
 
       var tutkintoSumma = 0;
       var tutkintoArvioita = 0;
