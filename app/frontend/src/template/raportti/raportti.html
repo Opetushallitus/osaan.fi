@@ -9,9 +9,9 @@
   <div class="panel-body">
     <div class="row">
       <div class="pull-right">
-        <div class="btn-group">
-          <label class="btn btn-success" ng-model="valittuRaportti" btn-radio="'raportti'">{{ 'raportti.tyyppi_raportti' | translate }}</label>
-          <label class="btn btn-success" ng-model="valittuRaportti" btn-radio="'tekstiraportti'">{{ 'raportti.tyyppi_tekstiraportti' | translate }}</label>
+        <div class="btn-group" role="group">
+          <button class="btn btn-success" ng-model="valittuRaportti" btn-radio="'raportti'">{{ 'raportti.tyyppi_raportti' | translate }}</button>
+          <button class="btn btn-success" ng-model="valittuRaportti" btn-radio="'tekstiraportti'">{{ 'raportti.tyyppi_tekstiraportti' | translate }}</button>
         </div>
         <div class="btn-group">
           <form action="api/kaiku" method="post">
