@@ -36,10 +36,9 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
     Arviointi.asetaTutkintoJaPeruste(tutkintotunnus, peruste);
 
     var valitutOsatunnukset = function() {
-      return _($scope.valinnat)
-        .map(function(valittu, osatunnus) { return [osatunnus, valittu]; })
-        .filter(function(x) { return x[1]; })
-        .map(function(x) { return x[0]; })
+      return _($scope.tutkinnonosat)
+        .map('osatunnus')
+        .filter(function(tunnus) { return $scope.valinnat[tunnus]; })
         .value();
     };
 
