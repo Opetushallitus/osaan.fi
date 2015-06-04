@@ -26,7 +26,8 @@
                 :tutkinnonosa.nimi_sv
                 :tutkinnonosa.osatunnus
                 :tutkinnonosa_ja_peruste.pakollinen)
-    (sql/where {:tutkinnonosa_ja_peruste.peruste peruste-id})))
+    (sql/where {:tutkinnonosa_ja_peruste.peruste peruste-id})
+    (sql/order :tutkinnonosa_ja_peruste.jarjestys)))
 
 (defn hae [osatunnus]
   (sql-util/select-unique-or-nil
