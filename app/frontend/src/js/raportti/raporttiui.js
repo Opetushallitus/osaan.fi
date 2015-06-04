@@ -27,7 +27,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
   .factory('RaporttiApurit', [function() {
     return {
       valitseTutkinnonOsat: function(tutkinnonosat, valitutOsatunnukset) {
-        return _(tutkinnonosat).groupBy('osatunnus').pick(valitutOsatunnukset).values().flatten().value();
+        return _(tutkinnonosat).filter(function(osa) { return valitutOsatunnukset.indexOf(osa.osatunnus) >= 0; }).value();
       }
     };
   }])
