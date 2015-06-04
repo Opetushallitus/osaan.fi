@@ -38,6 +38,13 @@
 
     <kaavio jakauma="jakauma"></kaavio>
 
+    <div>
+      <label>
+        <input type="checkbox" ng-model="naytaKommentit">
+        <span translate="raportti.nayta_kommentit"></span>
+      </label>
+    </div>
+
     <section class="tutkinnonosa" ng-repeat="tutkinnonosa in raportti.tutkinnonosat">
       <h2>{{ tutkinnonosa | lokalisoiKentta:'nimi' }}</h2>
 
@@ -56,7 +63,12 @@
             <tr ng-repeat="kuvaus in kohdealue.kuvaukset">
               <td>{{ kuvaus | lokalisoiKentta:'nimi' }}</td>
               <td>{{ kuvaus.arvio.arvio }}</td>
-              <td>{{ kuvaus.arvio.vapaateksti }}</td>
+              <td>
+                <button class="btn btn-default" popover="{{ kuvaus.arvio.vapaateksti }}" popover-placement="left" popover-trigger="mouseenter" ng-if="!naytaKommentit && kuvaus.arvio.vapaateksti">
+                  <span class="glyphicon glyphicon-comment"></span>
+                </button>
+                <span ng-if="naytaKommentit" ng-bind="kuvaus.arvio.vapaateksti"></span>
+              </td>
             </tr>
           </tbody>
         </table>
