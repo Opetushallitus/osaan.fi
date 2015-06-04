@@ -19,27 +19,38 @@ angular.module('osaan.palvelut.raportti', [])
   .factory('Raportti', ['Arviointi', function(Arviointi) {
     var service = {};
 
-    service.luoRaportti = function(tutkinto, tutkinnonosat, kohdealueet) {
+    var yhdistaRakenteet = function(tutkinto, tutkinnonosat, kohdealueet) {
       var raportti = _.pick(tutkinto, ['koulutusala_nimi_fi', 'koulutusala_nimi_sv', 'opintoala_nimi_fi', 'opintoala_nimi_sv']);
       _.merge(raportti, {
         tutkinto_nimi_fi: tutkinto.nimi_fi,
         tutkinto_nimi_sv: tutkinto.nimi_sv
       });
 
+      raportti.tutkinnonosat = _.map(tutkinnonosat, function(tutkinnonosa_) {
+        var tutkinnonosa = angular.copy(tutkinnonosa_);
+        tutkinnonosa.kohdealueet = _.map(kohdealueet[tutkinnonosa.osatunnus], function(kohdealue) {
+          return angular.copy(kohdealue);
+        });
+        return tutkinnonosa;
+      });
+
+      return raportti;
+    };
+
+    service.luoRaportti = function(tutkinto, tutkinnonosat, kohdealueet) {
+      var raportti = yhdistaRakenteet(tutkinto, tutkinnonosat, kohdealueet);
+
+      // Nido arviot rakenteeseen ja laske keskiarvot eri tasoille
       var tutkintoSumma = 0;
       var tutkintoArvioita = 0;
 
-      raportti.tutkinnonosat = [];
-      _.forEach(tutkinnonosat, function(tutkinnonosa_) {
-        var tutkinnonosa = angular.copy(tutkinnonosa_);
+      _.forEach(raportti.tutkinnonosat, function(tutkinnonosa) {
         var arviot = Arviointi.haeArviot(tutkinnonosa.osatunnus);
         var arvioidutAmmattitaidonKuvausIdt = _.map(_.keys(arviot), function(x) { return parseInt(x); });
         var tutkinnonosaSumma = 0;
         var tutkinnonosaArvioita = 0;
 
-        var osanKohdealueet = [];
-        _.forEach(kohdealueet[tutkinnonosa.osatunnus], function(kohdealue_) {
-          var kohdealue = angular.copy(kohdealue_);
+        _.forEach(tutkinnonosa.kohdealueet, function(kohdealue) {
           var ammattitaidonKuvausIdt = _.pluck(kohdealue.kuvaukset, 'ammattitaidonkuvaus_id');
           var kohdealueenArvioIdt = _.intersection(arvioidutAmmattitaidonKuvausIdt, ammattitaidonKuvausIdt);
           var kohdealueenArviot = _.filter(_.map(kohdealueenArvioIdt, function(id) { return arviot[id].arvio; }), _.isNumber);
@@ -55,15 +66,11 @@ angular.module('osaan.palvelut.raportti', [])
           });
 
           kohdealue.keskiarvo = arvioita > 0 ? (summa / arvioita) : 0;
-          osanKohdealueet.push(kohdealue);
         });
-        tutkinnonosa.kohdealueet = osanKohdealueet;
         tutkinnonosa.keskiarvo = tutkinnonosaArvioita > 0 ? (tutkinnonosaSumma / tutkinnonosaArvioita) : 0;
 
         tutkintoSumma += tutkinnonosaSumma;
         tutkintoArvioita += tutkinnonosaArvioita;
-
-        raportti.tutkinnonosat.push(tutkinnonosa);
       });
 
       raportti.keskiarvo = tutkintoArvioita > 0 ? (tutkintoSumma / tutkintoArvioita) : 0;
