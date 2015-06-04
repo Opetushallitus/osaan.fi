@@ -61,4 +61,15 @@ angular.module('osaan.direktiivit.tallennus', [])
 
     $scope.close = $modalInstance.close;
   }])
+
+  .directive('clickToSelect', function() {
+    return {
+      restrict: 'A',
+      link: function(scope, element) {
+        element.on('click', function() {
+          this.select();
+        });
+      }
+    };
+  })
 ;
