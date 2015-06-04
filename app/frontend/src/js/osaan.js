@@ -33,6 +33,7 @@ angular.module('osaan.fi', [
   'osaan.lataa.lataaui',
   'osaan.osien-valinta.osien-valintaui',
   'osaan.palvelut.arviointi',
+  'osaan.palvelut.poistumisvaroitus',
   'osaan.palvelut.raportti',
   'osaan.palvelut.tekstiraportti',
   'osaan.palvelut.varmistus',
@@ -44,20 +45,4 @@ angular.module('osaan.fi', [
   'osaan.rest.tutkinto',
   'osaan.tekstit'
 ])
-
-  // Poistumisvaroitus
-  .run(['Arviointi', function(Arviointi) {
-    var confirmBeforeUnload = function(e) {
-      if (Arviointi.onkoLadattu() || !Arviointi.onkoArvioita()) {
-        return;
-      }
-
-      var confirmationMessage = 'Haluatko varmasti poistua tallentamatta?';
-
-      (e || window.event).returnValue = confirmationMessage; // Gecko + IE
-      return confirmationMessage; // Webkit, Safari, Chrome etc.
-    };
-
-    window.addEventListener('beforeunload', confirmBeforeUnload, false);
-  }])
 ;

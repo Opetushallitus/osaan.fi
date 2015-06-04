@@ -32,7 +32,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     };
   }])
 
-  .controller('RaporttiController', ['$location', '$q', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'Raportti', 'RaporttiApurit', 'TekstiRaportti', 'Tutkinnonosa', 'Tutkinto', function($location, $q, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, Raportti, RaporttiApurit, TekstiRaportti, Tutkinnonosa, Tutkinto) {
+  .controller('RaporttiController', ['$location', '$q', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'Poistumisvaroitus', 'Raportti', 'RaporttiApurit', 'TekstiRaportti', 'Tutkinnonosa', 'Tutkinto', function($location, $q, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, Poistumisvaroitus, Raportti, RaporttiApurit, TekstiRaportti, Tutkinnonosa, Tutkinto) {
     $scope.valittuRaportti = 'raportti';
 
     var tutkintoPromise = Tutkinto.haePerusteella(Arviointi.valittuPeruste());
@@ -62,6 +62,10 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
 
     $scope.jakauma = [];
     $scope.paivays = new Date();
+
+    $scope.estaPoistumisvaroitus = function() {
+      Poistumisvaroitus.estaPoistumisvaroitus();
+    };
 
     $scope.palaaArviointiin = function() {
       $location.url('/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
