@@ -20,6 +20,15 @@ a.list-group-item {
   margin-bottom: 7px;
 }
 
+.alert-dismissable .close, .alert-dismissible button.close {
+    opacity: .5;
+    top: -19px;
+    right: -31px;
+  &:hover {
+    background-color: transparent;
+  }
+}
+
 // Override Bootstrap variables here (defaults from bootstrap-sass v3.3.4):
 
 //
