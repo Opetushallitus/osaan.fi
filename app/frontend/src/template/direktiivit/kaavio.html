@@ -20,7 +20,7 @@
       ng-attr-x2="{{viivastonLeveys()}}"
       ng-attr-y2="{{asetukset.palkinMaksimiPituus}}" />
 
-    <circle ng-repeat-start="viiva in viivat"
+    <circle ng-repeat-start="viiva in viivat.slice(1)"
       class="kaavio-viivan-otsikon-tausta"
       ng-attr-cx="{{-30}}"
       ng-attr-cy="{{asetukset.palkinMaksimiPituus * (1 - viiva.paikka)}}"
