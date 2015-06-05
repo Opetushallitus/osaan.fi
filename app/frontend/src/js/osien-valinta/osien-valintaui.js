@@ -84,7 +84,7 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
       $scope.tutkinnonosat = tutkinnonosat;
 
       // valitutOsatunnukset() vaatii tutkinnonosat järjestyksen saamiseksi
-      $scope.$watch('valinnat', function(valinnat) {
+      $scope.$watch('valinnat', function() {
         Arviointi.asetaOsatunnukset(valitutOsatunnukset());
       }, true);
     });
