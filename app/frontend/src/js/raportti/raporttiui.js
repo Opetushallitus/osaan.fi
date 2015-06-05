@@ -35,7 +35,13 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
   .controller('RaporttiController', ['$location', '$q', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'Poistumisvaroitus', 'Raportti', 'RaporttiApurit', 'TekstiRaportti', 'Tutkinnonosa', 'Tutkinto', function($location, $q, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, Poistumisvaroitus, Raportti, RaporttiApurit, TekstiRaportti, Tutkinnonosa, Tutkinto) {
     $scope.valittuRaportti = 'raportti';
 
-    var tutkintoPromise = Tutkinto.haePerusteella(Arviointi.valittuPeruste());
+    var valittuPeruste = Arviointi.valittuPeruste();
+    if (valittuPeruste === undefined || !Arviointi.onkoArvioita()) {
+      $location.url('/');
+      return;
+    }
+
+    var tutkintoPromise = Tutkinto.haePerusteella(valittuPeruste);
     tutkintoPromise.then(function(tutkinto) {
       $scope.tutkinto = tutkinto;
     });
