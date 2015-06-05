@@ -64,21 +64,20 @@
     [rakenne]))
 
 (defn muotoile-suoritustapa
-  [osaviite->osatunnus]
+  [osa-id->osatunnus]
   (fn [suoritustapa]
-    (let [pakollisuus (into {}
-                            (for [osa (hae-osat (:rakenne suoritustapa))]
-                              [(:_tutkinnonOsaViite osa) (:pakollinen osa)]))]
+    (let [osaviite->osatunnus (into {} (for [viite (:tutkinnonOsaViitteet suoritustapa)]
+                                        [(str (:id viite)) (osa-id->osatunnus (:_tutkinnonOsa viite))]))]
       {:suoritustapakoodi (:suoritustapakoodi suoritustapa)
        :osat (map-indexed (fn [index osa]
                             {:jarjestys (inc index)
-                             :pakollinen (pakollisuus (str (:id osa)))
-                             :tutkinnonosa (osaviite->osatunnus (:_tutkinnonOsa osa))})
-                          (:tutkinnonOsaViitteet suoritustapa))})))
+                             :pakollinen (:pakollinen osa)
+                             :tutkinnonosa (osaviite->osatunnus (:_tutkinnonOsaViite osa))})
+                          (hae-osat (:rakenne suoritustapa)))})))
 
 (defn muotoile-peruste [peruste]
-  (let [osaviite->osatunnus (into {} (for [osa (:tutkinnonOsat peruste)]
-                                       [(str (:id osa)) (osatunnus osa)]))]
+  (let [osa-id->osatunnus (into {} (for [osa (:tutkinnonOsat peruste)]
+                                     [(str (:id osa)) (osatunnus osa)]))]
     {:diaarinumero (:diaarinumero peruste)
      :eperustetunnus (:id peruste)
      :voimassa_alkupvm (c/to-local-date (:voimassaoloAlkaa peruste))
@@ -86,7 +85,7 @@
      :siirtymaajan_loppupvm (c/to-local-date (:siirtymaPaattyy peruste))
      :tutkinnonosat (map-indexed muotoile-tutkinnonosa (:tutkinnonOsat peruste))
      :tutkinnot (map :koulutuskoodiArvo (:koulutukset peruste))
-     :suoritustavat (map (muotoile-suoritustapa osaviite->osatunnus) (:suoritustavat peruste))}))
+     :suoritustavat (map (muotoile-suoritustapa osa-id->osatunnus) (:suoritustavat peruste))}))
 
 (defn hae-peruste [id asetukset]
   (muotoile-peruste (get-json-from-url (str (:url asetukset) "api/perusteet/" id "/kaikki"))))
