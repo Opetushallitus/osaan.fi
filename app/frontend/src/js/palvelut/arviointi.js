@@ -96,6 +96,10 @@ angular.module('osaan.palvelut.arviointi', [])
       return ladattu;
     };
 
+    var onkoValittuOsatunnus = function(osatunnus) {
+      return tila.osatunnukset.indexOf(osatunnus) !== -1;
+    };
+
     var poistaArviot = function(tutkinnonosatunnus) {
       delete tila.arviot[tutkinnonosatunnus];
       _tallennaTila();
@@ -130,6 +134,7 @@ angular.module('osaan.palvelut.arviointi', [])
       lataa: lataa,
       onkoArvioita: onkoArvioita,
       onkoLadattu: onkoLadattu,
+      onkoValittuOsatunnus: onkoValittuOsatunnus,
       poistaArviot: poistaArviot,
       seuraavaOsatunnus: seuraavaOsatunnus,
       tyhjennaArviot: tyhjennaArviot,

@@ -30,7 +30,7 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
     var tutkintotunnus = Arviointi.valittuTutkintotunnus();
     var peruste = Arviointi.valittuPeruste();
 
-    if (tutkintotunnus !== undefined && peruste !== undefined) {
+    if (tutkinnonosa !== undefined && Arviointi.onkoValittuOsatunnus(tutkinnonosa) && tutkintotunnus !== undefined && peruste !== undefined) {
       Tutkinto.haePerusteella(peruste).then(function(tutkinto) {
         $scope.tutkinto = tutkinto;
       });
