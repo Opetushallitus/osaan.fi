@@ -48,9 +48,6 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
     };
 
     $scope.valinnat = {};
-    $scope.$watch('valinnat', function() {
-      Arviointi.asetaOsatunnukset(valitutOsatunnukset());
-    }, true);
 
     // Kun sivulle palataan uudestaan, palauta valinnat
     _.forEach(Arviointi.valitutOsatunnukset(), function(osatunnus) {
@@ -85,6 +82,11 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
 
     Tutkinnonosa.hae(peruste, tutkintotunnus).then(function(tutkinnonosat) {
       $scope.tutkinnonosat = tutkinnonosat;
+
+      // valitutOsatunnukset() vaatii tutkinnonosat järjestyksen saamiseksi
+      $scope.$watch('valinnat', function(valinnat) {
+        Arviointi.asetaOsatunnukset(valitutOsatunnukset());
+      }, true);
     });
   }])
 ;
