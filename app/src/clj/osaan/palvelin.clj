@@ -84,7 +84,8 @@
           _ (konfiguroi-lokitus asetukset)
           _ (oph.korma.common/luo-db (:db asetukset))
           sammuta (hs/run-server (app asetukset)
-                                 {:port (get-in asetukset [:server :port])})]
+                                 {:port (get-in asetukset [:server :port])
+                                  :max-body 1048576})]
       (when (or (not (:development-mode asetukset))
                 (:eraajo asetukset))
         (kaynnista-eraajon-ajastimet! asetukset))
