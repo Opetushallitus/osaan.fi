@@ -33,7 +33,7 @@
                  "/api/ammattitaidonkuvaus/alueet?tutkinnonosatunnus=100001&tutkinnonosatunnus=100002"
                  "/api/koulutusala"
                  "/api/ohje/etusivu"
-                 "/api/tutkinnonosa?peruste=611&tutkintotunnus=324601"
+                 "/api/tutkinnonosa?peruste=-1&tutkintotunnus=324601"
                  "/api/tutkinto"
                  "/api/tutkinto/peruste/-1"]]
     (testaa-api polku)))
