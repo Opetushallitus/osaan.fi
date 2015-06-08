@@ -23,7 +23,11 @@
   (cu/defapi :julkinen nil :get "/alueet" [tutkinnonosatunnus]
     (let [osatunnukset (if (sequential? tutkinnonosatunnus)
                          tutkinnonosatunnus
-                         [tutkinnonosatunnus])]
-      (json-response (into {} (for [osatunnus osatunnukset]
-                                {osatunnus (arkisto/hae-kohdealueet-kuvauksineen osatunnus)}))
-                     skeema/Tutkinnonosa->ArvioinninKohdealueet))))
+                         [tutkinnonosatunnus])
+          tulos (into {} (for [osatunnus osatunnukset]
+                           (let [kohdealueet (arkisto/hae-kohdealueet-kuvauksineen osatunnus)]
+                             (when (not (empty? kohdealueet))
+                               {osatunnus kohdealueet}))))]
+      (when (not (empty? tulos))
+        (json-response tulos
+                       skeema/Tutkinnonosa->ArvioinninKohdealueet)))))

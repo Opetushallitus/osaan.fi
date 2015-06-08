@@ -21,4 +21,6 @@
 
 (c/defroutes reitit
   (cu/defapi :julkinen nil :get "/" [peruste tutkintotunnus]
-    (json-response (arkisto/hae-perusteen-tutkinnon-osat (Integer/parseInt peruste)) [skeema/Tutkinnonosa])))
+    (let [osat (arkisto/hae-perusteen-tutkinnon-osat (Integer/parseInt peruste))]
+      (when (not (empty? osat))
+        (json-response osat [skeema/Tutkinnonosa])))))

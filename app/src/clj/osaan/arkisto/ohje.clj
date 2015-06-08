@@ -19,5 +19,5 @@
 (defn hae
   "Hakee ohjeen id:n perusteella."
   [ohjetunniste]
-  (sql-util/select-unique :ohje
+  (sql-util/select-unique-or-nil :ohje
     (sql/where {:ohjetunniste ohjetunniste})))

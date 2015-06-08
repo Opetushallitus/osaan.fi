@@ -20,12 +20,13 @@
 (use-fixtures :each tietokanta-fixture)
 
 (defn testaa-api
-  [polku]
+  [polku status-koodi]
   (let [crout (init-peridot!)]
     (let [state (mock-request! crout polku :get {})
           response (:response state)]
-      (is (= (:status response) 200) polku)
-      (is (= (get-in response [:headers "Content-Type"]) "application/json") polku))))
+      (is (= (:status response) status-koodi) polku)
+      (when (= status-koodi 200)
+        (is (= (get-in response [:headers "Content-Type"]) "application/json") polku)))))
 
 (deftest ^:integraatio api-smoke
   (doseq [polku ["/api/arvio/testiarvio"
@@ -36,4 +37,10 @@
                  "/api/tutkinnonosa?peruste=-1&tutkintotunnus=324601"
                  "/api/tutkinto"
                  "/api/tutkinto/peruste/-1"]]
-    (testaa-api polku)))
+    (testaa-api polku 200))
+  (doseq [polku ["/api/arvio/puuttuva"
+                 "/api/ammattitaidonkuvaus/alueet?tutkinnonosatunnus=999999"
+                 "/api/ohje/puuttuva"
+                 "/api/tutkinnonosa?peruste=-9999"
+                 "/api/tutkinto/peruste/999"]]
+    (testaa-api polku 404)))

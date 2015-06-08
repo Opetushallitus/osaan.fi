@@ -18,7 +18,7 @@
 
 (defn ^:private hae-arvio
   [arviotunnus]
-  (sql-util/select-unique :arvio
+  (sql-util/select-unique-or-nil :arvio
     (sql/join :peruste (= :peruste.peruste_id :peruste))
     (sql/fields :peruste [:peruste.tutkinto :tutkintotunnus] :luotuaika)
     (sql/where {:tunniste arviotunnus})))
@@ -45,12 +45,12 @@
 
 (defn hae
   [arviotunnus]
-  (let [arvio (hae-arvio arviotunnus)
-        kohdearviot (hae-kohdearviot arviotunnus)
-        tutkinnonosa->kohde->arviot (reduce #(assoc-in %1 [(:tutkinnonosa %2) (:ammattitaidon_kuvaus %2)] (dissoc %2 :tutkinnonosa :ammattitaidon_kuvaus)) {} kohdearviot)
-        tutkinnonosat (hae-tutkinnonosat arviotunnus)]
-    (assoc arvio :kohdearviot tutkinnonosa->kohde->arviot
-                 :tutkinnonosat (map :osa tutkinnonosat))))
+  (when-let [arvio (hae-arvio arviotunnus)]
+    (let [kohdearviot (hae-kohdearviot arviotunnus)
+          tutkinnonosa->kohde->arviot (reduce #(assoc-in %1 [(:tutkinnonosa %2) (:ammattitaidon_kuvaus %2)] (dissoc %2 :tutkinnonosa :ammattitaidon_kuvaus)) {} kohdearviot)
+          tutkinnonosat (hae-tutkinnonosat arviotunnus)]
+      (assoc arvio :kohdearviot tutkinnonosa->kohde->arviot
+                   :tutkinnonosat (map :osa tutkinnonosat)))))
 
 (defn tallenna
   [tila]
