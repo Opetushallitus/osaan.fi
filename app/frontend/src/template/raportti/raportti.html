@@ -68,7 +68,7 @@
                 <td><span class="arvio" ng-if="kuvaus.arvio.arvio">{{ kuvaus.arvio.arvio }}</span></td>
                 <td ng-class="{'text-center': !naytaKommentit, 'text-italic': naytaKommentit}">
                   <a popover="{{ kuvaus.arvio.vapaateksti }}" popover-placement="left" popover-trigger="click" ng-if="!naytaKommentit && kuvaus.arvio.vapaateksti">
-                    <span class="glyphicon glyphicon-comment"></span>
+                    <span class="glyphicon glyphicon-comment" style="font-size: 2em;"></span>
                   </a>
                   <em ng-if="naytaKommentit" ng-bind="kuvaus.arvio.vapaateksti"></em>
                 </td>
