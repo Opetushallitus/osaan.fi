@@ -125,3 +125,22 @@
     }
   }
 }
+
+.arvio {
+  margin: 0;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 100%;
+  background-color: $lightest-gray;
+  float: left;
+  border-radius: 50%;
+  height: 2em;
+  width: 2em;
+  vertical-align: top;
+  text-align: center;
+  padding: .5em 0px 0px 0px;
+  margin-right: 0em;
+  margin-bottom: 0em;
+  color: $darker-gray;
+  position: relative;
+}
