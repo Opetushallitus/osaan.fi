@@ -61,6 +61,6 @@
 (def Tutkinnonosa {:nimi_fi s/Str
                    :nimi_sv (s/maybe s/Str)
                    :osatunnus s/Str
-                   :pakollinen s/Bool})
+                   :tyyppi s/Str})
 
 (def Tutkinnonosa->ArvioinninKohdealueet {s/Str [ArvioinninKohdealue]})

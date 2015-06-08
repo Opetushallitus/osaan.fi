@@ -58,10 +58,21 @@
    :nimi_sv (get-in osa [:nimi :sv])
    :arvioinnin_kohdealueet (map-indexed muotoile-arvioinnin-kohdealue (get-in osa [:arviointi :arvioinninKohdealueet]))})
 
-(defn hae-osat [rakenne]
-  (if (:osat rakenne)
-    (mapcat hae-osat (:osat rakenne))
-    [rakenne]))
+(defn yhteinen-osa? [rakenne]
+  (= (get-in rakenne [:nimi :fi]) "Yhteiset tutkinnon osat"))
+
+(defn hae-osat
+  ([rakenne] (hae-osat "valinnainen" rakenne))
+  ([tyyppi rakenne]
+    (if (:osat rakenne)
+      (let [tyyppi (if (yhteinen-osa? rakenne)
+                     "yhteinen"
+                     tyyppi)]
+        (mapcat (partial hae-osat tyyppi) (:osat rakenne)))
+      (let [tyyppi (if (:pakollinen rakenne)
+                     "pakollinen"
+                     tyyppi)]
+        [(assoc rakenne :tyyppi tyyppi)]))))
 
 (defn muotoile-suoritustapa
   [osa-id->osatunnus]
@@ -71,7 +82,7 @@
       {:suoritustapakoodi (:suoritustapakoodi suoritustapa)
        :osat (map-indexed (fn [index osa]
                             {:jarjestys (inc index)
-                             :pakollinen (:pakollinen osa)
+                             :tyyppi (:tyyppi osa)
                              :tutkinnonosa (osaviite->osatunnus (:_tutkinnonOsaViite osa))})
                           (hae-osat (:rakenne suoritustapa)))})))
 

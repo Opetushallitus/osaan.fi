@@ -47,13 +47,13 @@
           (paivita-arvioinnin-kohdealue! (assoc alue :osa (:osatunnus osa))))))))
 
 (defn ^:integration-api paivita-perusteen-tutkinnonosat! [peruste osat]
-  (doseq [{:keys [tutkinnonosa pakollinen jarjestys]} osat]
+  (doseq [{:keys [tutkinnonosa tyyppi jarjestys]} osat]
     (if (tutkinnonosa-arkisto/hae tutkinnonosa)
       (sql-util/insert-or-update :tutkinnonosa_ja_peruste [:osa :peruste]
         {:osa tutkinnonosa
          :peruste (:peruste_id peruste)
          :jarjestys jarjestys
-         :pakollinen pakollinen})
+         :tyyppi tyyppi})
       (log/warn "Tutkinnonosa puuttuu:" tutkinnonosa))))
 
 (defn ^:integration-api lisaa! [peruste]

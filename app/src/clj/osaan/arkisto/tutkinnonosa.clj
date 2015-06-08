@@ -25,7 +25,7 @@
     (sql/fields :tutkinnonosa.nimi_fi
                 :tutkinnonosa.nimi_sv
                 :tutkinnonosa.osatunnus
-                :tutkinnonosa_ja_peruste.pakollinen)
+                :tutkinnonosa_ja_peruste.tyyppi)
     (sql/where {:tutkinnonosa_ja_peruste.peruste peruste-id})
     (sql/order :tutkinnonosa_ja_peruste.jarjestys)))
 
