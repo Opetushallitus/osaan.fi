@@ -22,5 +22,4 @@
 (use-fixtures :each tietokanta-fixture)
 
 (deftest ^:integraatio hae-puuttuva
-  (is (thrown? Throwable
-               (ohje-db/hae "futil"))))
+  (is (= nil (ohje-db/hae "futil"))))
