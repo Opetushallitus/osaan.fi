@@ -30,10 +30,10 @@ insert into tutkinnonosa(osatunnus, nimi_fi, nimi_sv) values
   ('100002','Video- ja elokuvatuotanto', 'Video- ja elokuvatuotanto (sv)'),
   ('100003','Televisiotuotanto', 'Televisiotuotanto (sv)');
 
-insert into tutkinnonosa_ja_peruste(osa, peruste, jarjestys, pakollinen)
-values ('100001', (select peruste_id from peruste where diaarinumero = '41/011/2005'), 1, true),
- ('100002', (select peruste_id from peruste where diaarinumero = '41/011/2005'), 2, true),
- ('100003', (select peruste_id from peruste where diaarinumero = '41/011/2005'), 3, true);
+insert into tutkinnonosa_ja_peruste(osa, peruste, jarjestys, tyyppi)
+values ('100001', (select peruste_id from peruste where diaarinumero = '41/011/2005'), 1, 'pakollinen'),
+ ('100002', (select peruste_id from peruste where diaarinumero = '41/011/2005'), 2, 'pakollinen'),
+ ('100003', (select peruste_id from peruste where diaarinumero = '41/011/2005'), 3, 'pakollinen');
 
 insert into arvioinnin_kohdealue(arvioinninkohdealue_id, osa, nimi_fi, nimi_sv, jarjestys)
  values
