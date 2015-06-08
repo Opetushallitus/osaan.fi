@@ -30,6 +30,7 @@ angular.module('osaan.fi', [
   'osaan.direktiivit.ohje',
   'osaan.direktiivit.tallennus',
   'osaan.direktiivit.eperusteet-linkki',
+  'osaan.direktiivit.osalista',
   'osaan.lataa.lataaui',
   'osaan.osien-valinta.osien-valintaui',
   'osaan.palvelut.arviointi',

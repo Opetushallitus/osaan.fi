@@ -16,29 +16,9 @@
 
     <eperusteet-linkki kieli="{{kieli}}" eperustesivu="rakenne" eperustetunnus="{{tutkinto.peruste_eperustetunnus}}" eperustetyyppi="{{tutkinto.peruste_tyyppi}}" tutkintotunnus="{{tutkinto.tutkintotunnus}}" tutkintonimi="{{ tutkinto | lokalisoiKentta:'nimi' }}"></eperusteet-linkki>
 
-    <h3 ng-if="(tutkinnonosat | filter: {tyyppi: 'pakollinen'}).length" translate="osien-valinta.pakolliset_osat"></h3>
-    <div ng-repeat="osa in tutkinnonosat | filter: {tyyppi: 'pakollinen'}" class="checkbox">
-      <label>
-        <input type="checkbox" ng-model="valinnat[osa.osatunnus]">
-        {{ osa | lokalisoiKentta:'nimi' }}
-      </label>
-    </div>
-
-    <h3 ng-if="(tutkinnonosat | filter: {tyyppi: 'valinnainen'}).length" translate="osien-valinta.valinnaiset_osat"></h3>
-    <div ng-repeat="osa in tutkinnonosat | filter: {tyyppi: 'valinnainen'}" class="checkbox">
-      <label>
-        <input type="checkbox" ng-model="valinnat[osa.osatunnus]">
-        {{ osa | lokalisoiKentta:'nimi' }}
-      </label>
-    </div>
-
-    <h3 ng-if="(tutkinnonosat | filter: {tyyppi: 'yhteinen'}).length" translate="osien-valinta.yhteiset_osat"></h3>
-    <div ng-repeat="osa in tutkinnonosat | filter: {tyyppi: 'yhteinen'}" class="checkbox">
-      <label>
-        <input type="checkbox" ng-model="valinnat[osa.osatunnus]">
-        {{ osa | lokalisoiKentta:'nimi' }}
-      </label>
-    </div>
+	<osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="tutkinnonosat" tyyppi="pakollinen" valinnat="valinnat"></osalista>
+	<osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="valinnainen" valinnat="valinnat"></osalista>
+	<osalista otsikko="osien-valinta.yhteiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="yhteinen" valinnat="valinnat"></osalista>
 
     <div class="alert alert-warning" role="alert" ng-if="onkoArvioita()">
       <p class="lead">{{ 'osien-valinta.arvioita_on' | translate}}</p>

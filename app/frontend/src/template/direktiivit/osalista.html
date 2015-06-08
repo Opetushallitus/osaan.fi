@@ -1,0 +1,9 @@
+<div>
+  <h3 ng-if="(tutkinnonosat | filter: {tyyppi: tyyppi}).length" translate="{{otsikko}}"></h3>
+  <div ng-repeat="osa in tutkinnonosat | filter: {tyyppi: tyyppi}" class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="valinnat[osa.osatunnus]">
+      {{ osa | lokalisoiKentta:'nimi' }}
+    </label>
+  </div>
+</div>
