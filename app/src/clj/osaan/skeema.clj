@@ -26,11 +26,11 @@
 
 (def AmmattitaidonKuvaus {:ammattitaidonkuvaus_id s/Int
                           :nimi_fi s/Str
-                          :nimi_sv s/Str})
+                          :nimi_sv (s/maybe s/Str)})
 
 (def ArvioinninKohdealue {:arvioinninkohdealue_id s/Int
                           :nimi_fi s/Str
-                          :nimi_sv s/Str
+                          :nimi_sv (s/maybe s/Str)
                           :kuvaukset [AmmattitaidonKuvaus]})
 
 (def Opintoala {:nimi_fi s/Str
