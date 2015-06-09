@@ -35,7 +35,8 @@
   (some-value-with :_osaamistaso "3" tasot))
 
 (defn muotoile-ammattitaidon-kuvaukset [kohde]
-  (for [kriteeri (:kriteerit (osaamistaso-hyva (:osaamistasonKriteerit kohde)))]
+  (for [kriteeri (or (:kriteerit (osaamistaso-hyva (:osaamistasonKriteerit kohde)))
+                     (:kriteerit (first (:osaamistasonKriteerit kohde))))] ;; Vain perustutkinnoilla on erilliset osaamistasot määriteltyinä
     {:nimi_fi (:fi kriteeri)
      :nimi_sv (:sv kriteeri)}))
 
