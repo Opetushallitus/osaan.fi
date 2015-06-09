@@ -3,12 +3,17 @@
     [clj-gatling.core :refer [run-simulation]]
     [osaan.arkisto.peruste :as peruste-arkisto]
     [osaan.arkisto.tutkinnonosa :as tutkinnonosa-arkisto]
+    [osaan.asetukset :as asetukset]
     [osaan.sql.test-util :refer [tietokanta-fixture]])
   (:use clojure.test))
 
 (use-fixtures :each tietokanta-fixture)
 
-(def baseurl "http://localhost:8084/")
+(def baseurl
+  (let [base-url (-> (asetukset/hae-asetukset) :server :base-url)]
+    (if (clojure.string/blank? base-url)
+      "http://localhost:8084/"
+      base-url)))
 
 (defn generoi-ammattitaidonkuvaus-urleja [lkm]
   (map #(str baseurl "api/ammattitaidonkuvaus/alueet?tutkinnonosatunnus=" %) (take lkm (tutkinnonosa-arkisto/hae-osatunnus-idt-joilla-ammattitaidonkuvaus))))
