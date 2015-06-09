@@ -70,3 +70,9 @@
                      :arvio arvio
                      :kommentti vapaateksti})))
     tunniste))
+
+(defn hae-arviotunnukset []
+  (map
+    :tunniste
+    (sql/select :arvio
+      (sql/fields :tunniste))))

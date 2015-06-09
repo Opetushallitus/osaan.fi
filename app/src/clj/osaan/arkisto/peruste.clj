@@ -78,3 +78,9 @@
                  (sql/order :paivitetty :desc)
                  (sql/limit 1)
                  (sql/fields :paivitetty))))
+
+(defn hae-perusteidt []
+  (map
+    :peruste_id
+    (sql/select :peruste
+      (sql/fields :peruste_id))))

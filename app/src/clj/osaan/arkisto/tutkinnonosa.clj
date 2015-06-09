@@ -33,3 +33,12 @@
   (sql-util/select-unique-or-nil
     :tutkinnonosa
     (sql/where {:osatunnus osatunnus})))
+
+(defn hae-osatunnus-idt-joilla-ammattitaidonkuvaus []
+  (map
+    :osa
+    (sql/select
+      :arvioinnin_kohdealue
+      (sql/fields :arvioinnin_kohdealue.osa)
+      (sql/modifier "DISTINCT")
+      (sql/join :ammattitaidon_kuvaus (= :ammattitaidon_kuvaus.arvioinninkohdealue :arvioinnin_kohdealue.arvioinninkohdealue_id)))))
