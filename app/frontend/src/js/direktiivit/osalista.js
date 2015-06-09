@@ -23,7 +23,7 @@ angular.module('osaan.direktiivit.osalista', [])
         otsikko: '@',
         tutkinnonosat: '=',
         tyyppi: '@',
-        valinta: '='
+        valinnat: '='
       },
       templateUrl: 'template/direktiivit/osalista.html',
       replace: true
