@@ -17,10 +17,11 @@
             [oph.common.util.http-util :refer [json-response]]
             [osaan.compojure-util :as cu]
             [osaan.skeema :as skeema]
+            [osaan.arkisto.peruste :as peruste-arkisto]
             [osaan.arkisto.tutkinnonosa :as arkisto]))
 
 (c/defroutes reitit
   (cu/defapi :julkinen nil :get "/" [peruste tutkintotunnus]
-    (let [osat (arkisto/hae-perusteen-tutkinnon-osat (Integer/parseInt peruste))]
-      (when-not (empty? osat)
+    (when (peruste-arkisto/onko-perustetta (Integer/parseInt peruste))
+      (let [osat (arkisto/hae-perusteen-tutkinnon-osat (Integer/parseInt peruste))]
         (json-response osat [skeema/Tutkinnonosa])))))

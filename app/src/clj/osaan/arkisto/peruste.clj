@@ -84,3 +84,11 @@
     :peruste_id
     (sql/select :peruste
       (sql/fields :peruste_id))))
+
+(defn onko-perustetta [peruste-id]
+  (not
+    (empty?
+      (sql-util/select-unique-or-nil
+        :peruste
+        (sql/fields :peruste_id)
+        (sql/where {:peruste_id peruste-id})))))
