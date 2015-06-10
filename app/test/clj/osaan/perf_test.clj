@@ -1,6 +1,7 @@
 (ns osaan.perf-test
   (:require
     [clj-gatling.core :refer [run-simulation]]
+    [clojure.tools.logging :as log]
     [osaan.arkisto.peruste :as peruste-arkisto]
     [osaan.arkisto.tutkinnonosa :as tutkinnonosa-arkisto]
     [osaan.asetukset :as asetukset]
@@ -10,10 +11,12 @@
 (use-fixtures :each tietokanta-fixture)
 
 (def baseurl
-  (let [base-url (-> (asetukset/hae-asetukset) :server :base-url)]
-    (if (clojure.string/blank? base-url)
-      "http://localhost:8084/"
-      base-url)))
+  (let [default-base-url (-> (asetukset/hae-asetukset) :server :base-url)
+        base-url (if (clojure.string/blank? default-base-url)
+                   "http://localhost:8084/"
+                   default-base-url)]
+    (log/info "base-url on" base-url)
+    base-url))
 
 (defn generoi-ammattitaidonkuvaus-urleja [lkm]
   (map #(str baseurl "api/ammattitaidonkuvaus/alueet?tutkinnonosatunnus=" %) (take lkm (tutkinnonosa-arkisto/hae-osatunnus-idt-joilla-ammattitaidonkuvaus))))
