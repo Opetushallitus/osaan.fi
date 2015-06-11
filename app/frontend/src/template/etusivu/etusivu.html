@@ -45,8 +45,14 @@
 
         <div class="radio" style="margin-top: 0;">
           <label>
-            <input type="radio" ng-model="haku.tutkintotyyppi" name="tutkintotyyppi" value="kaikki" ng-checked="true">
-            {{ 'tutkinto.tyyppi_kaikki' | translate }}
+            <input type="radio" ng-model="haku.tutkintotyyppi" name="tutkintotyyppi" value="perustutkinto">
+            {{ 'tutkinto.tyyppi_perustutkinto' | translate }}
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" ng-model="haku.tutkintotyyppi" name="tutkintotyyppi" value="ammattitutkinto">
+            {{ 'tutkinto.tyyppi_ammattitutkinto' | translate }}
           </label>
         </div>
         <div class="radio">
@@ -57,14 +63,8 @@
         </div>
         <div class="radio">
           <label>
-            <input type="radio" ng-model="haku.tutkintotyyppi" name="tutkintotyyppi" value="perustutkinto">
-            {{ 'tutkinto.tyyppi_perustutkinto' | translate }}
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" ng-model="haku.tutkintotyyppi" name="tutkintotyyppi" value="ammattitutkinto">
-            {{ 'tutkinto.tyyppi_ammattitutkinto' | translate }}
+            <input type="radio" ng-model="haku.tutkintotyyppi" name="tutkintotyyppi" value="kaikki" ng-checked="true">
+            {{ 'tutkinto.tyyppi_kaikki' | translate }}
           </label>
         </div>
       </div>
