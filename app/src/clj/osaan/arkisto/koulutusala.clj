@@ -47,7 +47,9 @@
 (defn ^:private hae-opintoalat
   []
   (sql/select :opintoala
-    (sql/fields :opintoalatunnus :koulutusala :nimi_fi :nimi_sv)))
+    (sql/fields :opintoalatunnus :koulutusala :nimi_fi :nimi_sv)
+    (sql/where (sql/sqlfn "exists" (sql/subselect :tutkinto
+                                     (sql/where {:opintoala :opintoala.opintoalatunnus}))))))
 
 (defn hae-koulutusalat-opintoaloilla
   []
@@ -57,5 +59,6 @@
     (for [koulutusala koulutusalat
           :let [koulutusalatunnus (:koulutusalatunnus koulutusala)
                 koulutusalan-opintoalat (get opintoalat-by-koulutusalatunnus koulutusalatunnus)
-                koulutusalan-opintoalat (map #(dissoc % :koulutusala) koulutusalan-opintoalat)]]
+                koulutusalan-opintoalat (map #(dissoc % :koulutusala) koulutusalan-opintoalat)]
+          :when (seq koulutusalan-opintoalat)]
       (assoc koulutusala :opintoalat koulutusalan-opintoalat))))
