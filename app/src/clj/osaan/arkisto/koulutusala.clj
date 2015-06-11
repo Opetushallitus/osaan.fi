@@ -41,7 +41,8 @@
 (defn ^:private hae-koulutusalat
   []
   (sql/select :koulutusala
-    (sql/fields :koulutusalatunnus :nimi_fi :nimi_sv)))
+    (sql/fields :koulutusalatunnus :nimi_fi :nimi_sv)
+    (sql/order :koulutusalatunnus)))
 
 (defn ^:private hae-opintoalat
   []
