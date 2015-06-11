@@ -51,7 +51,7 @@
       <div class="col-md-12">
 
         <div ng-if="seuraavaTutkinnonosa() !== undefined" class="pull-right text-right">
-          <button class="btn btn-primary pull-right" role="button" ng-click="avaaSeuraavaOsa()">
+          <button class="btn btn-primary" role="button" ng-click="avaaSeuraavaOsa()">
             {{ 'tutkinto_osa.arvioi' | translate}}&nbsp;
             <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
           </button>
@@ -69,7 +69,7 @@
         </button>
 
         <div ng-if="edellinenTutkinnonosa() !== undefined" class="pull-left text-left">
-          <button class="btn btn-primary pull-left" role="button" ng-click="avaaEdellinenOsa()">
+          <button class="btn btn-primary" role="button" ng-click="avaaEdellinenOsa()">
             <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
             {{ 'tutkinto_osa.arvioi' | translate}}&nbsp;
           </button>
