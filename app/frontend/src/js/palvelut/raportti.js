@@ -67,6 +67,11 @@ angular.module('osaan.palvelut.raportti', [])
 
           kohdealue.keskiarvo = arvioita > 0 ? (summa / arvioita) : 0;
         });
+
+        var osanKuvaukset = _(tutkinnonosa.kohdealueet).map('kuvaukset').flatten();
+        tutkinnonosa.arvioita = osanKuvaukset.filter('arvio').map('arvio').filter(function(arvio) { return arvio.arvio !== undefined; }).value().length;
+        tutkinnonosa.arvioitavia = osanKuvaukset.flatten().value().length;
+        tutkinnonosa.arvioituna = Math.floor((100 * tutkinnonosa.arvioita) / tutkinnonosa.arvioitavia);
         tutkinnonosa.keskiarvo = tutkinnonosaArvioita > 0 ? (tutkinnonosaSumma / tutkinnonosaArvioita) : 0;
 
         tutkintoSumma += tutkinnonosaSumma;

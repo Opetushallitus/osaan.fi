@@ -88,6 +88,12 @@ describe('Raportti', function() {
     expect(raportti.tutkinnonosat[0].kohdealueet).not.toEqual(undefined);
     expect(raportti.tutkinnonosat[0].kohdealueet[0].kuvaukset).not.toEqual(undefined);
 
+    // Vastausprosentit
+    expect(raportti.tutkinnonosat[0].arvioita).toEqual(2);
+    expect(raportti.tutkinnonosat[0].arvioitavia).toEqual(5);
+    expect(raportti.tutkinnonosat[0].arvioituna).toEqual(40);
+
+    // Keskiarvojen laskenta
     expect(raportti.keskiarvo).toEqual(2);
     expect(raportti.tutkinnonosat[0].keskiarvo).toEqual(2);
     expect(raportti.tutkinnonosat[0].kohdealueet[0].keskiarvo).toEqual(2);
