@@ -19,6 +19,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
     fi: {
       'yleiset.kielen_vaihto': 'På svenska',
       'yleiset.tallenna': 'Tallenna arviot',
+      'yleiset.valitse_tutkinto': 'Valitse tutkinto',
       'arviointi.arvioita_puuttuu': 'Et ole antanut arvioita kaikista ammattitaidoista!',
       'arviointi.asteikko1': 'En osaa',
       'arviointi.asteikko2': 'Osaan vähän',
@@ -94,6 +95,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
     sv: {
       'yleiset.kielen_vaihto': 'Suomeksi',
       'yleiset.tallenna': 'Tallenna arviot (sv)',
+      'yleiset.valitse_tutkinto': 'Valitse tutkinto (sv)',
       'arviointi.arvioita_puuttuu': 'Et ole antanut arvioita kaikista ammattitaidoista! (sv)',
       'arviointi.asteikko1': 'En osaa (sv)',
       'arviointi.asteikko2': 'Osaan vähän (sv)',

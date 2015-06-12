@@ -73,13 +73,18 @@
     <h3 ng-if="tutkinnot.length == 0">{{ 'tutkinto.ei_loytynyt' | translate }}</h3>
 
     <div ng-if="tutkinnot.length > 0" class="list-group" style="margin-top: 10px;">
-        <a ng-repeat="tutkinto in tutkinnot" class="list-group-item e2e-haettu-tutkinto" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}" role="button" ng-click="tyhjennaValitutOsatunnukset()">
+        <div ng-repeat="tutkinto in tutkinnot" class="list-group-item e2e-haettu-tutkinto" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}" ng-click="tyhjennaValitutOsatunnukset()">
           <h4 class="list-group-item-heading pull-left">{{ tutkinto | lokalisoiKentta:'nimi' }}&nbsp;({{ 'tutkinto.peruste_tyyppi_'+tutkinto.peruste_tyyppi | translate }})</h4> &nbsp;&nbsp;
-          <span class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true"></span>
+          <div class="pull-right">
+            <a class="btn btn-primary" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}">
+              <span class="glyphicon glyphicon-arrow-right"></span>
+              <span translate="yleiset.valitse_tutkinto"></span>
+            </a>
+          </div>
           <p class="list-group-item-text">
             <eperusteet-linkki kieli="{{kieli}}" eperustesivu="tiedot" eperustetunnus="{{tutkinto.peruste_eperustetunnus}}" eperustetyyppi="{{tutkinto.peruste_tyyppi}}" tutkintotunnus="{{tutkinto.tutkintotunnus}}" tutkintonimi="{{ tutkinto | lokalisoiKentta:'nimi' }}"></eperusteet-linkki>
           </p>
-        </a>
+        </div>
     </div>
 
   </div>
