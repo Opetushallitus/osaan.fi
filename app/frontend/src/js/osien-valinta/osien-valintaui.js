@@ -33,11 +33,6 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
       return;
     }
 
-    var params = $location.search();
-    if (params.ladattu !== undefined) {
-      $scope.ladattu = params.ladattu;
-    }
-
     Arviointi.asetaTutkintoJaPeruste(tutkintotunnus, peruste);
 
     var valitutOsatunnukset = function() {

@@ -25,11 +25,14 @@ angular.module('osaan.lataa.lataaui', ['ngRoute'])
       });
   }])
 
-  .controller('LataaController', ['$location', '$routeParams', '$scope', 'Arvio', 'Arviointi', function($location, $routeParams, $scope, Arvio, Arviointi) {
+  .controller('LataaController', ['$filter', '$location', '$routeParams', '$scope', '$translate', 'Arvio', 'Arviointi', 'Huomautus', function($filter, $location, $routeParams, $scope, $translate, Arvio, Arviointi, Huomautus) {
     Arvio.lataa($routeParams.arviotunnus).then(function(arvio) {
       Arviointi.lataa(arvio);
 
-      $location.url('/osien-valinta?tutkinto=' + arvio.tutkintotunnus + '&peruste=' + arvio.peruste + '&ladattu=' + arvio.luotuaika);
+      var pvm = $filter('date')(arvio.luotuaika, 'dd.MM.yyyy HH:mm:ss');
+      Huomautus.naytaHuomautus($translate.instant('osien-valinta.arvio_ladattu_otsikko'), $translate.instant('osien-valinta.arvio_ladattu', {luotuaika: pvm}));
+
+      $location.url('/osien-valinta?tutkinto=' + arvio.tutkintotunnus + '&peruste=' + arvio.peruste);
     }, function() {
       $scope.virhe = true;
     });
