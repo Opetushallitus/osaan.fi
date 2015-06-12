@@ -1,0 +1,5 @@
+<div class="alert alert-warning alert-dismissible" role="alert" ng-repeat="huomautus in huomautukset">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <p class="lead" ng-bind="huomautus.otsikko"></p>
+  <p ng-bind="huomautus.teksti"></p>
+</div>
