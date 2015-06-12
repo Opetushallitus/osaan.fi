@@ -21,9 +21,11 @@
             [clojurewerkz.quartzite.schedule.cron :as cron]
             [clojure.tools.logging :as log]
             osaan.infra.eraajo.eperusteet
-            osaan.infra.eraajo.tutkinnot)
+            osaan.infra.eraajo.tutkinnot
+            osaan.infra.eraajo.vanhat-arviot)
   (:import osaan.infra.eraajo.eperusteet.PaivitaPerusteetJob
-           osaan.infra.eraajo.tutkinnot.PaivitaTutkinnotJob))
+           osaan.infra.eraajo.tutkinnot.PaivitaTutkinnotJob
+           osaan.infra.eraajo.vanhat_arviot.PoistaVanhatArviotJob))
 
 (defn ajastus [asetukset tyyppi]
   (cron/schedule
@@ -54,6 +56,15 @@
         tutkinnot-trigger (t/build
                             (t/with-identity "tutkinnot")
                             (t/start-now)
-                            (t/with-schedule (ajastus asetukset :koodistopalvelu)))]
+                            (t/with-schedule (ajastus asetukset :koodistopalvelu)))
+        arviot-job (j/build
+                     (j/of-type PoistaVanhatArviotJob)
+                     (j/with-identity "poista-vanhat-arviot")
+                     (j/using-job-data {"asetukset" (:vanhat-arviot asetukset)}))
+        arviot-trigger (t/build
+                         (t/with-identity "arviot")
+                         (t/start-now)
+                         (t/with-schedule (ajastus asetukset :vanhat-arviot)))]
     (qs/schedule @ajastin eperusteet-job eperusteet-trigger)
-    (qs/schedule @ajastin tutkinnot-job tutkinnot-trigger)))
+    (qs/schedule @ajastin tutkinnot-job tutkinnot-trigger)
+    (qs/schedule @ajastin arviot-job arviot-trigger)))

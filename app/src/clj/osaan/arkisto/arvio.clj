@@ -14,7 +14,22 @@
 
 (ns osaan.arkisto.arvio
   (:require [korma.core :as sql]
-            [oph.korma.common :as sql-util]))
+            [oph.korma.common :as sql-util]
+            [clj-time.coerce :refer [to-sql-time]]))
+
+(defn ^:integration-api poista-vanhat-arviot!
+  [paivamaara]
+  (let [paivamaara (to-sql-time paivamaara)]
+    (sql/delete :kohdearvio
+      (sql/where {:arviotunnus [in (sql/subselect :arvio
+                                     (sql/fields :tunniste)
+                                     (sql/where {:luotuaika [< paivamaara]}))]}))
+  (sql/delete :arvio_tutkinnonosa
+    (sql/where {:arviotunnus [in (sql/subselect :arvio
+                                   (sql/fields :tunniste)
+                                   (sql/where {:luotuaika [< paivamaara]}))]}))
+  (sql/delete :arvio
+    (sql/where {:luotuaika [< paivamaara]}))))
 
 (defn ^:private hae-arvio
   [arviotunnus]
