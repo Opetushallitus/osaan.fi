@@ -34,6 +34,7 @@ angular.module('osaan.fi', [
   'osaan.lataa.lataaui',
   'osaan.osien-valinta.osien-valintaui',
   'osaan.palvelut.arviointi',
+  'osaan.palvelut.huomautus',
   'osaan.palvelut.poistumisvaroitus',
   'osaan.palvelut.raportti',
   'osaan.palvelut.tekstiraportti',
