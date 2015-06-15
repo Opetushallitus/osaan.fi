@@ -28,7 +28,14 @@ angular.module('osaan.direktiivit.eperusteet-linkki', [])
         tutkintonimi: '@'
       },
       templateUrl: 'template/direktiivit/eperusteet-linkki.html',
-      replace: true
+      replace: true,
+      link: function(scope) {
+        if (scope.kieli === 'fi') {
+          scope.opintopolkuUrl = 'https://opintopolku.fi/app/#!/haku/*?page=1&articlePage=1&organisationPage=1&langCleared&itemsPerPage=25&sortCriteria=0&educationCodeFilter=' + encodeURIComponent(scope.tutkintonimi) + '&tab=los';
+        } else {
+          scope.opintopolkuUrl = 'https://studieinfo.fi/app/#!/haku/*?page=1&articlePage=1&organisationPage=1&langCleared&itemsPerPage=25&sortCriteria=0&educationCodeFilter=' + encodeURIComponent(scope.tutkintonimi) + '&tab=los';
+        }
+      }
     };
   }])
 ;
