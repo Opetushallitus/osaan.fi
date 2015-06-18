@@ -14,7 +14,7 @@
 
 'use strict';
 
-angular.module('osaan.direktiivit.tallennus', [])
+angular.module('osaan.direktiivit.tallennus', ['osaan.palvelut.tallennus'])
 
   .directive('tallennus', [function() {
     return {
@@ -22,7 +22,7 @@ angular.module('osaan.direktiivit.tallennus', [])
       scope: {
       },
       template: '<div class="tallennus pull-right" ng-if="tallennusMahdollinen()"><a class="btn btn-primary" ng-click="tallenna()"><span class="glyphicon glyphicon-floppy-disk aria-hidden="true"></span>&nbsp;<span translate="yleiset.tallenna"></span></a></div>',
-      controller: ['$modal', '$scope', 'Arvio', 'Arviointi', function($modal, $scope, Arvio, Arviointi) {
+      controller: ['$modal', '$scope', 'Arviointi', 'Tallennus', function($modal, $scope, Arviointi, Tallennus) {
         $scope.tallennusMahdollinen = function() {
           return Arviointi.onkoArvioita();
         };
@@ -38,7 +38,7 @@ angular.module('osaan.direktiivit.tallennus', [])
             tila.kohdearviot[tutkinnonosatunnus] = Arviointi.haeArviot(tutkinnonosatunnus);
           });
 
-          Arvio.tallenna(tila).then(function(tunnus) {
+          Tallennus.tallenna(tila).then(function(tunnus) {
             $modal.open({
               templateUrl: 'template/direktiivit/tallennus.html',
               controller: 'TallennusModalController',

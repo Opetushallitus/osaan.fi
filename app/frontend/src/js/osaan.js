@@ -38,6 +38,7 @@ angular.module('osaan.fi', [
   'osaan.palvelut.huomautus',
   'osaan.palvelut.poistumisvaroitus',
   'osaan.palvelut.raportti',
+  'osaan.palvelut.tallennus',
   'osaan.palvelut.tekstiraportti',
   'osaan.palvelut.varmistus',
   'osaan.raportti.raporttiui',
