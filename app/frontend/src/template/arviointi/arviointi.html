@@ -8,7 +8,7 @@
     <h2>{{ tutkinnonosatById[tutkinnonosa] | lokalisoiKentta:'nimi' }}</h2>
 
     <section class="kohdealue" ng-repeat="kohdealue in kohdealueet">
-      <h3>{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
+      <h3 sticky-header>{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
 
       <section class="kysymys" ng-repeat="kuvaus in kohdealue.kuvaukset">
         <p>{{ kuvaus | lokalisoiKentta:'nimi' }}</p>
