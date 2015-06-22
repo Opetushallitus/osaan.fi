@@ -36,7 +36,11 @@ angular.module('osaan.etusivu.etusivuui', ['ngRoute'])
 
     $scope.$watch('haku', function() {
       Tutkinto.haeEhdoilla($scope.haku.opintoala, $scope.haku.tutkinto, $scope.haku.tutkintotyyppi, $scope.haku.voimaantulevat).then(function(tutkinnot) {
-        $scope.tutkinnot = $filter('orderByLokalisoitu')(tutkinnot, 'nimi');
+        var perusteTyyppiJarjestysSamannimisille = ['naytto', 'ops'];
+        $scope.tutkinnot = _.sortBy(tutkinnot, function(tutkinto) {
+          var jarjestys = perusteTyyppiJarjestysSamannimisille.indexOf(tutkinto.peruste_tyyppi);
+          return $filter('lokalisoiKentta')(tutkinto, 'nimi') + ' ' + (jarjestys === -1 ? 9 : jarjestys);
+        });
       });
     }, true);
 
