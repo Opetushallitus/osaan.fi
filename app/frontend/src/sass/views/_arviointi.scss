@@ -1,6 +1,4 @@
 .kohdealue {
-  border-top: 5px solid $lighter-primary;
-
   p {
     font-size: 16px;
   }
@@ -10,6 +8,7 @@
     background-color: $lightest-primary;
     color: $darker-gray;
     margin-top: 0;
+    border-top: 5px solid $lighter-primary;
   }
   
   .vapaatekstivastaus {
