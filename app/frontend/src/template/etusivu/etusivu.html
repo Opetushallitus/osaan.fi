@@ -74,16 +74,21 @@
 
     <div ng-if="tutkinnot.length > 0" class="list-group" style="margin-top: 10px;">
         <div ng-repeat="tutkinto in tutkinnot" class="list-group-item e2e-haettu-tutkinto" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}">
-          <h4 class="list-group-item-heading pull-left">{{ tutkinto | lokalisoiKentta:'nimi' }}&nbsp;({{ 'tutkinto.peruste_tyyppi_'+tutkinto.peruste_tyyppi | translate }})</h4> &nbsp;&nbsp;
-          <div class="pull-right">
-            <a class="btn btn-primary" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}">
-              <span class="glyphicon glyphicon-arrow-right"></span>
+<div class="row">
+          <div class="col-md-10">
+            <h4 class="list-group-item-heading">{{ tutkinto | lokalisoiKentta:'nimi' }}&nbsp;({{ 'tutkinto.peruste_tyyppi_'+tutkinto.peruste_tyyppi | translate }})</h4>
+
+            <p class="list-group-item-text">
+              <eperusteet-linkki kieli="{{kieli}}" eperustesivu="tiedot" eperustetunnus="{{tutkinto.peruste_eperustetunnus}}" eperustetyyppi="{{tutkinto.peruste_tyyppi}}" tutkintotunnus="{{tutkinto.tutkintotunnus}}" tutkintonimi="{{ tutkinto | lokalisoiKentta:'nimi' }}"></eperusteet-linkki>
+            </p>
+          </div>
+          <div class="col-md-2">
+            <a class="btn btn-primary pull-right" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}">
               <span translate="yleiset.valitse_tutkinto"></span>
+              <span class="glyphicon glyphicon-arrow-right"></span>
             </a>
           </div>
-          <p class="list-group-item-text">
-            <eperusteet-linkki kieli="{{kieli}}" eperustesivu="tiedot" eperustetunnus="{{tutkinto.peruste_eperustetunnus}}" eperustetyyppi="{{tutkinto.peruste_tyyppi}}" tutkintotunnus="{{tutkinto.tutkintotunnus}}" tutkintonimi="{{ tutkinto | lokalisoiKentta:'nimi' }}"></eperusteet-linkki>
-          </p>
+        </div>
         </div>
     </div>
 
