@@ -29,6 +29,16 @@ describe('Arviointi', function() {
     Arviointi.tyhjennaArviot();
   });
 
+  it('Osatunnukset tyhjennetään kun tutkinto vaihtuu', function() {
+    expect(Arviointi.valitutOsatunnukset()).toEqual(['100001', '100002']);
+
+    Arviointi.asetaTutkintoJaPeruste('324601', '41/011/2005');
+    expect(Arviointi.valitutOsatunnukset()).toEqual(['100001', '100002']);
+
+    Arviointi.asetaTutkintoJaPeruste('324602', '41/011/2006');
+    expect(Arviointi.valitutOsatunnukset()).toEqual([]);
+  });
+
   it('Valinnat saa luettua', function() {
     expect(Arviointi.valittuTutkintotunnus()).toEqual('324601');
     expect(Arviointi.valittuPeruste()).toEqual('41/011/2005');

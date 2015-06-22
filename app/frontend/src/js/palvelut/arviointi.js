@@ -54,6 +54,7 @@ angular.module('osaan.palvelut.arviointi', [])
       if (tutkintotunnus !== tila.tutkintotunnus || peruste !== tila.peruste) {
         tila.tutkintotunnus = tutkintotunnus;
         tila.peruste = peruste;
+        tila.osatunnukset = [];
         _tallennaTila();
       }
     };
