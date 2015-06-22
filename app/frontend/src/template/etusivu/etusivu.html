@@ -73,7 +73,7 @@
     <h3 ng-if="tutkinnot.length == 0">{{ 'tutkinto.ei_loytynyt' | translate }}</h3>
 
     <div ng-if="tutkinnot.length > 0" class="list-group" style="margin-top: 10px;">
-        <div ng-repeat="tutkinto in tutkinnot" class="list-group-item e2e-haettu-tutkinto" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}" ng-click="tyhjennaValitutOsatunnukset()">
+        <div ng-repeat="tutkinto in tutkinnot" class="list-group-item e2e-haettu-tutkinto" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}">
           <h4 class="list-group-item-heading pull-left">{{ tutkinto | lokalisoiKentta:'nimi' }}&nbsp;({{ 'tutkinto.peruste_tyyppi_'+tutkinto.peruste_tyyppi | translate }})</h4> &nbsp;&nbsp;
           <div class="pull-right">
             <a class="btn btn-primary" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}">

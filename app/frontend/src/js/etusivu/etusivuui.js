@@ -43,9 +43,5 @@ angular.module('osaan.etusivu.etusivuui', ['ngRoute'])
         });
       });
     }, true);
-
-    $scope.tyhjennaValitutOsatunnukset = function() {
-      Arviointi.asetaOsatunnukset([]);
-    };
   }])
 ;
