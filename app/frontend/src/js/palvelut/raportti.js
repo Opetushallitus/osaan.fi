@@ -60,7 +60,7 @@ angular.module('osaan.palvelut.raportti', [])
           tutkinnonosaArvioita += arvioita;
 
           _.forEach(kohdealue.kuvaukset, function(kuvaus) {
-            if (arviot[kuvaus.ammattitaidonkuvaus_id] !== undefined) {
+            if (arviot !== undefined && arviot[kuvaus.ammattitaidonkuvaus_id] !== undefined) {
               kuvaus.arvio = angular.copy(arviot[kuvaus.ammattitaidonkuvaus_id]);
             }
           });
