@@ -62,7 +62,7 @@ module.exports = function (grunt) {
           'src/*.html',
           'src/template/**/*.html',
           'src/js/**/*.js',
-          'src/img/**/*.{png,jpg,jpeg,gif,webp,svg}',
+          'src/img/**/*',
           'src/compiled_css/main.css'
         ],
         options: {
@@ -138,7 +138,7 @@ module.exports = function (grunt) {
         cwd: 'src',
         src: ['*.html',
               'template/**/*.html',
-              'img/**/*.{png,jpg,jpeg,gif,webp,svg}',
+              'img/**/*',
               'font/**/*',
               'css/**/*'],
         dest: distDir,
