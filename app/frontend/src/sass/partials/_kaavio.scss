@@ -15,6 +15,21 @@
     stroke: $lighter-gray;
   }
 
+  .kaavio-palkin-otsikko,
+  .kaavio-palkin-keskiarvo{
+    font-family: "Open Sans";
+    stroke-width: 0;
+    font-size: 14px;
+  }
+
+  .kaavio-palkin-otsikko{
+    fill: $darkest-gray;
+  }
+
+  .kaavio-palkin-keskiarvo{
+    fill: $darker-gray;
+  }
+
   .kaavio-viivan-otsikko {
     fill: $gray-color;
     font-size: 1.71428571428571em; /* 24px */

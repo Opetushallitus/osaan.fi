@@ -2,7 +2,7 @@
   ng-attr-width="{{viivastonLeveys() + 50}}"
   ng-attr-height="{{viivastonKorkeus() + 100}}">
 
-  <g transform="translate(50, 40)">
+  <g transform="translate(40, 10)">
     <line ng-repeat="viiva in viivat"
       class="kaavio-viiva"
       ng-attr-y1="{{0}}"
@@ -23,13 +23,13 @@
 
     <circle ng-repeat-start="viiva in viivat.slice(1)"
       class="kaavio-viivan-otsikon-tausta"
-      ng-attr-cy="{{viivastonKorkeus() + 43}}"
+      ng-attr-cy="{{viivastonKorkeus() + 25}}"
       ng-attr-cx="{{asetukset.palkinMaksimiPituus * (viiva.paikka)}}"
-      ng-attr-r="{{23}}">
+      ng-attr-r="{{20}}">
     </circle>
     <text
       class="kaavio-viivan-otsikko"
-      ng-attr-y="{{viivastonKorkeus() + 50}}"
+      ng-attr-y="{{viivastonKorkeus() + 33}}"
       ng-attr-x="{{asetukset.palkinMaksimiPituus * (viiva.paikka)}}"
       ng-repeat-end>
       <tspan text-anchor="middle">{{viiva.teksti}}</tspan>

@@ -29,8 +29,8 @@ angular.module('osaan.direktiivit.kaavio', [])
 
         var asetukset = {
           maksimiArvo: 4,
-          palkinLeveys: 50,
-          palkinMaksimiPituus: 500
+          palkinLeveys: 28,
+          palkinMaksimiPituus: 530
         };
 
         scope.asetukset = asetukset;
