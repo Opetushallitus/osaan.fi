@@ -48,6 +48,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
 
     var tutkinnonosatPromise = Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus())
       .then(function(tutkinnonosat) {
+        $scope.kaikkiTutkinnonosat = tutkinnonosat;
         return RaporttiApurit.valitseTutkinnonOsat(tutkinnonosat, Arviointi.valitutOsatunnukset());
       });
 
