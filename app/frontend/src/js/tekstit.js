@@ -37,7 +37,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'footer.ohje': 'Ammattitaitovaatimukset perustuvat voimassa oleviin tutkinnon perusteisiin. Tarkempia tietoja tutkinnon suorittamisesta ja koulutukseen hakeutumisesta löydät oppilaitosten sivuilta ja',
       'footer.ohje_url': 'https://opintopolku.fi/wp/fi/valintojen-tuki/ohjaus-ja-neuvontapalvelut',
       'footer.ohje_url_title': 'Opintopolku.fi-palvelusta.',
-      'footer.ota_yhteytta': 'Osaan.fi-palvelun käyttöä koskevan palautteen voi lähettää sähköpostilla osoitteeseen:',
+      'footer.ota_yhteytta': 'Osaan.fi-palvelun käyttöä koskevan palautteen voi lähettää sähköpostilla osoitteeseen',
       'footer.ota_yhteytta_email': 'aitu-tuki@oph.fi',
       'footer.otsikko': 'Palvelun tarjoaa Opetushallitus',
       'footer.rekisteriseloste': 'Palvelua voi käyttää anonyymisti.',
