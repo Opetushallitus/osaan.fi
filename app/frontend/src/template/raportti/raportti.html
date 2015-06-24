@@ -35,7 +35,8 @@
     </div>
 
     <div ng-if="valittuRaportti == 'raportti'">
-      <div>{{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy' }}</div>
+      <div class="pull-right">{{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy' }}</div>
+      <h2 translate="raportti.otsikko"></h2>
 
       <h3 translate="raportti.vastausprosentit"></h3>
       <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.pakolliset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="pakollinen"></tutkinnonosa-tilastot>
