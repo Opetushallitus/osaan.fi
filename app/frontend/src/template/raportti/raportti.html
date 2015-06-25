@@ -75,7 +75,7 @@
                 <td>{{ kuvaus | lokalisoiKentta:'nimi' }}</td>
                 <td><span class="arvio" ng-if="kuvaus.arvio.arvio">{{ kuvaus.arvio.arvio }}</span></td>
                 <td ng-class="{'text-center': !naytaKommentit, 'text-italic': naytaKommentit}">
-                  <a popover="{{ kuvaus.arvio.vapaateksti | limitTo:250 }}{{ kuvaus.arvio.vapaateksti.length > 250 ? '...' : '' }}" popover-placement="left" popover-trigger="mouseover" ng-if="!naytaKommentit && kuvaus.arvio.vapaateksti">
+                  <a popover="{{ kuvaus.arvio.vapaateksti | limitTo:250 }}{{ kuvaus.arvio.vapaateksti.length > 250 ? '...' : '' }}" popover-placement="left" popover-trigger="mouseenter" ng-if="!naytaKommentit && kuvaus.arvio.vapaateksti">
                     <span class="glyphicon glyphicon-comment" style="font-size: 2em;"></span>
                   </a>
                   <em ng-if="naytaKommentit" ng-bind="kuvaus.arvio.vapaateksti"></em>
