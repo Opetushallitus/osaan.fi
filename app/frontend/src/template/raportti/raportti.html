@@ -5,7 +5,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">
-      {{ 'raportti.otsikko' | translate }} - {{ raportti | lokalisoiKentta:'koulutusala_nimi' }} - {{ raportti | lokalisoiKentta:'opintoala_nimi' }} - {{ raportti | lokalisoiKentta:'tutkinto_nimi' }}
+      {{ 'yleiset.raportti' | translate }} - {{ raportti | lokalisoiKentta:'koulutusala_nimi' }} - {{ raportti | lokalisoiKentta:'opintoala_nimi' }} - {{ raportti | lokalisoiKentta:'tutkinto_nimi' }}
     </h3>
   </div>
   <div class="panel-body">
@@ -13,7 +13,7 @@
       <div class="col-md-12">
         <div class="pull-right">
           <div class="btn-group" role="group">
-            <button class="btn btn-success" ng-model="valittuRaportti" btn-radio="'raportti'">{{ 'raportti.tyyppi_raportti' | translate }}</button>
+            <button class="btn btn-success" ng-model="valittuRaportti" btn-radio="'raportti'">{{ 'yleiset.raportti' | translate }}</button>
             <button class="btn btn-success" ng-model="valittuRaportti" btn-radio="'tekstiraportti'">{{ 'raportti.tyyppi_tekstiraportti' | translate }}</button>
           </div>
           <div class="btn-group">
@@ -38,7 +38,7 @@
 
     <div ng-if="valittuRaportti == 'raportti'">
       <div class="pull-right">{{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy' }}</div>
-      <h2 translate="raportti.otsikko"></h2>
+      <h2 translate="yleiset.raportti"></h2>
 
       <h3 translate="raportti.vastausprosentit"></h3>
       <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.pakolliset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="pakollinen"></tutkinnonosa-tilastot>
@@ -92,7 +92,7 @@
       <div class="col-md-12">
         <button class="btn btn-primary pull-left" role="button" ng-click="palaaArviointiin()">
           <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
-          {{ 'raportti.palaa_arviointiin' | translate }}
+          {{ 'yleiset.arvioi_osaaminen' | translate }}
         </button>
         <tallennus></tallennus>
       </div>

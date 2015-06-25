@@ -54,7 +54,7 @@
 
         <div ng-if="seuraavaTutkinnonosa() !== undefined" class="pull-right text-right">
           <button class="btn btn-primary" role="button" ng-click="avaaSeuraavaOsa()">
-            {{ 'tutkinto_osa.arvioi' | translate}}&nbsp;
+            {{ 'yleiset.arvioi_osaaminen' | translate}}&nbsp;
             <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
           </button>
           <div><small>{{ tutkinnonosatById[seuraavaTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small></div>
@@ -67,13 +67,13 @@
 
         <button class="btn btn-primary pull-left" role="button" ng-if="edellinenTutkinnonosa() === undefined" ng-click="palaaOsienValintaan()">
           <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
-          {{ 'arviointi.valitse_osa' | translate}}
+          {{ 'yleiset.valitse_tutkinnon_osat' | translate}}
         </button>
 
         <div ng-if="edellinenTutkinnonosa() !== undefined" class="pull-left text-left">
           <button class="btn btn-primary" role="button" ng-click="avaaEdellinenOsa()">
             <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
-            {{ 'tutkinto_osa.arvioi' | translate}}&nbsp;
+            {{ 'yleiset.arvioi_osaaminen' | translate}}&nbsp;
           </button>
           <div><small>{{ tutkinnonosatById[edellinenTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small></div>
         </div>

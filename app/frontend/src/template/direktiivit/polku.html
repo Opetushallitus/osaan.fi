@@ -1,20 +1,20 @@
 <div class="row wizard">
   <div class="col-md-12">
     <div class="wizard-item col-sm-3" ng-class="{active: path=='/'}">
-      <a href="#/" translate="polku.valitse_tutkinto"></a>
+      <a href="#/" translate="yleiset.valitse_tutkinto"></a>
     </div>
     <div class="wizard-item col-sm-3" ng-class="{active: path=='/osien-valinta', enabled: tutkinto && peruste}">
-      <a ng-if="tutkinto && peruste" ng-href="#/osien-valinta?tutkinto={{tutkinto}}&peruste={{peruste}}" translate="polku.valitse_tutkinnon_osat"></a>
-      <span ng-if="!tutkinto || !peruste" translate="polku.valitse_tutkinnon_osat"></span>
+      <a ng-if="tutkinto && peruste" ng-href="#/osien-valinta?tutkinto={{tutkinto}}&peruste={{peruste}}" translate="yleiset.valitse_tutkinnon_osat"></a>
+      <span ng-if="!tutkinto || !peruste" translate="yleiset.valitse_tutkinnon_osat"></span>
 
     </div>
     <div class="wizard-item col-sm-3" ng-class="{active: path=='/arviointi'}">
-      <a ng-if="osatunnus" ng-href="#/arviointi?osa={{osatunnus}}" translate="polku.arvioi_osaaminen"></a>
-      <span ng-if="!osatunnus" translate="polku.arvioi_osaaminen"></span>
+      <a ng-if="osatunnus" ng-href="#/arviointi?osa={{osatunnus}}" translate="yleiset.arvioi_osaaminen"></a>
+      <span ng-if="!osatunnus" translate="yleiset.arvioi_osaaminen"></span>
     </div>
     <div class="wizard-item col-sm-3" ng-class="{active: path=='/raportti'}">
-      <a ng-if="arvioita" href="#/raportti" translate="polku.raportti"></a>
-      <span ng-if="!arvioita" translate="polku.raportti"></span>
+      <a ng-if="arvioita" href="#/raportti" translate="yleiset.raportti"></a>
+      <span ng-if="!arvioita" translate="yleiset.raportti"></span>
     </div>
   </div>
 </div>
