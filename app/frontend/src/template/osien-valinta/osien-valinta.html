@@ -14,11 +14,7 @@
 
     <eperusteet-linkki kieli="{{kieli}}" eperustesivu="rakenne" eperustetunnus="{{tutkinto.peruste_eperustetunnus}}" eperustetyyppi="{{tutkinto.peruste_tyyppi}}" tutkintotunnus="{{tutkinto.tutkintotunnus}}" tutkintonimi="{{ tutkinto | lokalisoiKentta:'nimi' }}"></eperusteet-linkki>
 
-    <osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="tutkinnonosat" tyyppi="pakollinen" valinnat="valinnat"></osalista>
-    <osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="valinnainen" valinnat="valinnat"></osalista>
-    <osalista otsikko="osien-valinta.yhteiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="yhteinen" valinnat="valinnat"></osalista>
-
-    <div class="alert alert-warning" role="alert" ng-if="onkoArvioita()">
+    <div class="alert alert-warning" role="alert" ng-if="onkoArvioita()" style="margin-top: 1em">
       <p class="lead">{{ 'osien-valinta.arvioita_on' | translate}}</p>
       <p>
         {{ 'osien-valinta.tyhjenna-teksti' | translate}}  &nbsp;&nbsp;
@@ -28,6 +24,10 @@
         </a>
       </p>
     </div>
+
+    <osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="tutkinnonosat" tyyppi="pakollinen" valinnat="valinnat"></osalista>
+    <osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="valinnainen" valinnat="valinnat"></osalista>
+    <osalista otsikko="osien-valinta.yhteiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="yhteinen" valinnat="valinnat"></osalista>
   </div>
   <div class="panel-footer">
     <div class="row">
