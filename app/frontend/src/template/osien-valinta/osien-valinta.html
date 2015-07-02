@@ -12,9 +12,11 @@
 
     <h2>{{ tutkinto | lokalisoiKentta:'nimi' }}</h2>
 
-    <div class="alert alert-info">
-      <p translate="osien-valinta.katso-ohje"></p>
-      <eperusteet-linkki kieli="{{kieli}}" eperustesivu="rakenne" eperustetunnus="{{tutkinto.peruste_eperustetunnus}}" eperustetyyppi="{{tutkinto.peruste_tyyppi}}" tutkintotunnus="{{tutkinto.tutkintotunnus}}" tutkintonimi="{{ tutkinto | lokalisoiKentta:'nimi' }}"></eperusteet-linkki>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p translate="osien-valinta.katso-ohje"></p>
+        <eperusteet-linkki kieli="{{kieli}}" eperustesivu="rakenne" eperustetunnus="{{tutkinto.peruste_eperustetunnus}}" eperustetyyppi="{{tutkinto.peruste_tyyppi}}" tutkintotunnus="{{tutkinto.tutkintotunnus}}" tutkintonimi="{{ tutkinto | lokalisoiKentta:'nimi' }}"></eperusteet-linkki>
+      </div>
     </div>
 
     <div class="alert alert-warning" role="alert" ng-if="onkoArvioita()" style="margin-top: 1em">
