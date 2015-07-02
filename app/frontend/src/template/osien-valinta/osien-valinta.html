@@ -14,9 +14,9 @@
 
     <eperusteet-linkki kieli="{{kieli}}" eperustesivu="rakenne" eperustetunnus="{{tutkinto.peruste_eperustetunnus}}" eperustetyyppi="{{tutkinto.peruste_tyyppi}}" tutkintotunnus="{{tutkinto.tutkintotunnus}}" tutkintonimi="{{ tutkinto | lokalisoiKentta:'nimi' }}"></eperusteet-linkki>
 
-	<osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="tutkinnonosat" tyyppi="pakollinen" valinnat="valinnat"></osalista>
-	<osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="valinnainen" valinnat="valinnat"></osalista>
-	<osalista otsikko="osien-valinta.yhteiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="yhteinen" valinnat="valinnat"></osalista>
+    <osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="tutkinnonosat" tyyppi="pakollinen" valinnat="valinnat"></osalista>
+    <osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="valinnainen" valinnat="valinnat"></osalista>
+    <osalista otsikko="osien-valinta.yhteiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="yhteinen" valinnat="valinnat"></osalista>
 
     <div class="alert alert-warning" role="alert" ng-if="onkoArvioita()">
       <p class="lead">{{ 'osien-valinta.arvioita_on' | translate}}</p>
