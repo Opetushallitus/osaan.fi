@@ -58,7 +58,7 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
     };
 
     $scope.poistaArviot = function() {
-      varmistus.varmista($translate.instant('osien-valinta.poista_arviot_otsikko'), $translate.instant('osien-valinta.poista_arviot_varoitus'), $translate.instant('osien-valinta.poista_arviot')).then(function() {
+      varmistus.varmista($translate.instant('osien-valinta.tyhjenna_arviot_otsikko'), $translate.instant('osien-valinta.tyhjenna_arviot_varoitus'), $translate.instant('osien-valinta.tyhjenna_arviot')).then(function() {
         _.forEach($scope.valinnat, function (valittu, osatunnus) {
           if (valittu) {
             Arviointi.poistaArviot(osatunnus);
