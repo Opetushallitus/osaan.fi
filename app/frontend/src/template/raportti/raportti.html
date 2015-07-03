@@ -26,9 +26,17 @@
         </div>
       </div>
     </div>
-    <div ng-if="valittuRaportti == 'tekstiraportti'">
-      <h2>{{ 'raportti.tyyppi_tekstiraportti' | translate }}: {{ raportti | lokalisoiKentta:'tutkinto_nimi' }}</h2>
 
+    <div ng-if="valittuRaportti == 'raportti'" class="pull-right">{{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy' }}</div>
+    <h2>
+      <span ng-if="valittuRaportti == 'tekstiraportti'" translate="raportti.tyyppi_tekstiraportti"></span>
+      <span ng-if="valittuRaportti == 'raportti'" translate="yleiset.raportti"></span>
+      -
+      <span ng-bind="raportti | lokalisoiKentta:'tutkinto_nimi'"></span>
+    </h2>
+    <p ng-bind-html="'raportti.otsikko_ohje' | translate | linky"></p>
+
+    <div ng-if="valittuRaportti == 'tekstiraportti'">
       <div class="col-md-12">
         <div class="form-group">
           <textarea class="form-control" ng-model="tekstiRaportti" style="height: 30em; font-family: monospace" readonly></textarea>
@@ -37,10 +45,6 @@
     </div>
 
     <div ng-if="valittuRaportti == 'raportti'">
-      <div class="pull-right">{{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy' }}</div>
-      <h2>{{ 'yleiset.raportti' | translate }}: {{ raportti | lokalisoiKentta:'tutkinto_nimi' }}</h2>
-      <p ng-bind-html="'raportti.otsikko_ohje' | translate | linky"></p>
-
       <h3 translate="raportti.vastausprosentit"></h3>
       <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.pakolliset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="pakollinen"></tutkinnonosa-tilastot>
       <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.valinnaiset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="valinnainen"></tutkinnonosa-tilastot>
