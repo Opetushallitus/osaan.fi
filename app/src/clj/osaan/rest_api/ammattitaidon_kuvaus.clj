@@ -28,6 +28,5 @@
                                :let [kohdealueet (arkisto/hae-kohdealueet-kuvauksineen osatunnus)]
                                :when (seq kohdealueet)]
                            {osatunnus kohdealueet}))]
-      (when-not (empty? tulos)
-        (json-response tulos
-                       skeema/Tutkinnonosa->ArvioinninKohdealueet)))))
+      (json-response tulos
+                     skeema/Tutkinnonosa->ArvioinninKohdealueet))))
