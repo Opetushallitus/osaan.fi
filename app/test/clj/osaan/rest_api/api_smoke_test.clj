@@ -39,7 +39,6 @@
                  "/api/tutkinto/peruste/-1"]]
     (testaa-api polku 200))
   (doseq [polku ["/api/arvio/puuttuva"
-                 "/api/ammattitaidonkuvaus/alueet?tutkinnonosatunnus=999999"
                  "/api/ohje/puuttuva"
                  "/api/tutkinnonosa?peruste=-9999"
                  "/api/tutkinto/peruste/999"]]
