@@ -17,6 +17,7 @@
 angular.module('osaan.fi', [
   'ngAnimate',
   'ngRoute',
+  'ngSanitize',
   'taiPlaceholder',
   'ui.bootstrap',
 
