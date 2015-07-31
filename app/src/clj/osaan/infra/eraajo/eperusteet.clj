@@ -26,7 +26,8 @@
     (db/transaction
       (log/info "Päivitetään tutkintojen perusteet ePerusteet-järjestelmästä")
       (let [nyt (time/now)
-            viimeisin-paivitys (peruste-arkisto/hae-viimeisin-paivitys)
+            viimeisin-paivitys (when-not (:hae-kaikki asetukset)
+                                 (peruste-arkisto/hae-viimeisin-paivitys))
             perusteet (eperusteet/hae-perusteet viimeisin-paivitys asetukset)]
         (log/info "Perusteet haettu," (count perusteet) "kpl päivittyneitä perusteita")
         (doseq [peruste perusteet]
