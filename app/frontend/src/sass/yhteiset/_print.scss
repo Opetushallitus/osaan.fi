@@ -1,6 +1,24 @@
 /* Print styles */
 @media print {
+  body {
+    font-size: 1em;
+  }
   .no-print, .no-print * {
     display: none !important;
+  }
+  h1.logo {
+    font-size: 1.6em;
+    margin-top: .5em;
+    margin-left: .5em;
+  }
+  header {
+    height: 8em;
+  }
+  .panel, .panel-body{
+    border: 0;
+    padding: 0;
+  }
+  .panel-heading {
+    padding: 0;
   }
 }

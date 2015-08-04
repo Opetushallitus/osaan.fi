@@ -34,13 +34,15 @@
   <section id="page-container">
     <header>
       <section class="app-wrapper">
-        <a id="oph-logo" href="http://www.oph.fi"></a>
-        <a id="turre-logo" href="#/"></a>
-        <h1 class="logo"><a href="#/" translate="etusivu.otsikko"></a><br /><span class="small-type jagkan" translate="etusivu.jagkan"></span></h1>
+        <img src="img/opetushallitus.svg" class="pull-right" width="200" />
+        <a id="oph-logo" class="hidden-print" href="http://www.oph.fi"></a>
+        <img src="img/OPH-Ossi-logo.svg" width="60" class="visible-print" align="left" />
+        <a id="turre-logo" class="hidden-print" href="#/"></a>
 
+        <h1 class="logo"><a href="#/" translate="etusivu.otsikko"></a><br /><span class="small-type jagkan" translate="etusivu.jagkan"></span></h1>
       </section>
     </header>
-    <section class="app-wrapper clearfix lang-nav">
+    <section class="app-wrapper clearfix lang-nav hidden-print">
       <kielen-vaihto></kielen-vaihto>
       <tallennus></tallennus>
     </section>
