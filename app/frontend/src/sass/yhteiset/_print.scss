@@ -21,4 +21,24 @@
   .panel-heading {
     padding: 0;
   }
+  span.arvio {
+    font-size: 1em;
+  }
+  svg.kaavio {
+    transform: scale(.7,.7);
+    -ms-transform: scale(.7,.7); /* IE 9 */
+    -webkit-transform: scale(.7,.7); /* Safari and Chrome */
+    -o-transform: scale(.7,.7); /* Opera */
+    -moz-transform: scale(.7,.7); /* Firefox */
+  }
+  tallennus, button, .btn{
+    display: none;
+  }
+  section.main-content {
+    margin-bottom: 0;
+  }
+  .progress-bar {
+    border: 10px solid #6CC555;
+    line-height: 2px;
+  }
 }
