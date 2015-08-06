@@ -19,6 +19,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
     fi: {
       'arviointi.arvioi_osaamisesi': 'Arvioi osaamisesi',
       'arviointi.arvioita_puuttuu': 'Et ole antanut arvioita kaikista ammattitaidoista!',
+      'arviointi.arvioitu': 'Arvioitu',
       'arviointi.asteikko1': 'En osaa',
       'arviointi.asteikko2': 'Osaan vähän',
       'arviointi.asteikko3': 'Osaan hyvin',
@@ -97,6 +98,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'yleiset.arvioi_osaaminen': 'Arvioi osaaminen',
       'yleiset.kielen_vaihto': 'På svenska',
       'yleiset.raportti': 'Raportti',
+      'yleiset.sivun_loppuun': 'Sivun loppuun',
       'yleiset.tallenna': 'Tallenna arviot',
       'yleiset.valitse_tutkinnon_osat': 'Valitse tutkinnon osat',
       'yleiset.valitse_tutkinto': 'Valitse tutkinto'
@@ -104,6 +106,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
     sv: {
       'arviointi.arvioi_osaamisesi': 'Arvioi osaamisesi (sv)',
       'arviointi.arvioita_puuttuu': 'Et ole antanut arvioita kaikista ammattitaidoista! (sv)',
+      'arviointi.arvioitu': 'Arvioitu (sv)',
       'arviointi.asteikko1': 'En osaa (sv)',
       'arviointi.asteikko2': 'Osaan vähän (sv)',
       'arviointi.asteikko3': 'Osaan hyvin (sv)',
@@ -182,6 +185,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'yleiset.arvioi_osaaminen': 'Arvioi osaaminen (sv)',
       'yleiset.kielen_vaihto': 'Suomeksi',
       'yleiset.raportti': 'Raportti (sv)',
+      'yleiset.sivun_loppuun': 'Sivun loppuun (sv)',
       'yleiset.tallenna': 'Tallenna arviot (sv)',
       'yleiset.valitse_tutkinnon_osat': 'Valitse tutkinnon osat (sv)',
       'yleiset.valitse_tutkinto': 'Valitse tutkinto (sv)'

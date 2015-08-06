@@ -125,6 +125,21 @@
   }
 }
 
+h3.edistyminen {
+  padding: .5em;
+  background-color: $lightest-primary;
+  color: $darker-gray;
+  margin-top: 0;
+  border-top: 5px solid $lighter-primary;
+  position:relative;
+  
+  .btn {
+    position:absolute;
+    right:0;
+    top:0;
+  }
+}
+
 .arvio {
   margin: 0;
   font-size: 16px;

@@ -29,6 +29,7 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
     $scope.tutkinnonosa = tutkinnonosa;
     var tutkintotunnus = Arviointi.valittuTutkintotunnus();
     var peruste = Arviointi.valittuPeruste();
+    $scope.arvioidut = [];
 
     if (tutkinnonosa !== undefined && Arviointi.onkoValittuOsatunnus(tutkinnonosa) && tutkintotunnus !== undefined && peruste !== undefined) {
       Tutkinto.haePerusteella(peruste).then(function(tutkinto) {
@@ -44,11 +45,13 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
 
     AmmattitaidonKuvaus.haeKohdealueet(tutkinnonosa).then(function(kohdealueet) {
       $scope.kohdealueet = kohdealueet;
+      $scope.kohteet = _($scope.kohdealueet).map('kuvaukset').flatten().map('ammattitaidonkuvaus_id').value();
     });
 
     $scope.arviot = {}; // ammattitaidonkuvaus_id -> {arvio, vapaateksti}
     $scope.$watch('arviot', function(arviot) {
       Arviointi.asetaArviot(tutkinnonosa, arviot);
+      $scope.arvioidut = _(arviot).map(function(v, k) { return [k,v]; }).filter(function(x) { return x[1].arvio !== undefined; }).map(function(x) { return parseInt(x[0]); }).value();
     }, true);
 
     var arviot = Arviointi.haeArviot(tutkinnonosa);
@@ -57,10 +60,7 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
     }
 
     $scope.puuttuukoArvioita = function() {
-      var kohteet = _($scope.kohdealueet).map('kuvaukset').flatten().map('ammattitaidonkuvaus_id').value();
-      var arvioidut = _($scope.arviot).map(function(v, k) { return [k,v]; }).filter(function(x) { return x[1].arvio !== undefined; }).map(function(x) { return parseInt(x[0]); }).value();
-
-      return _.difference(kohteet, arvioidut).length > 0;
+      return _.difference($scope.kohteet, $scope.arvioidut).length > 0;
     };
 
     $scope.palaaOsienValintaan = function() {
@@ -86,14 +86,21 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
     $scope.siirryRaporttiin = function() {
       $location.url('/raportti');
     };
+
+    $scope.sivunLoppuun = function() {
+      window.scrollTo(0,document.body.scrollHeight);
+    };
   }])
 
   .directive('stickyHeader', [function() {
     return {
       restrict: 'A',
+      scope: {
+        'top': '='
+      },
       link: function(scope, element) {
         var ele = $(element);
-        ele.scrollFix();
+        ele.scrollFix({'fixTop': scope.top || 0});
         ele.css('z-index', '1');
       }
     };
