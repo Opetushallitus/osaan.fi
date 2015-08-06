@@ -6,12 +6,12 @@
 <div ng-repeat="tutkinnonosa in suodatetutTutkinnonosat" style="margin-left: 4em">
   <div class="row"><div class="col-md-6"><span>{{ tutkinnonosa | lokalisoiKentta:'nimi' }}</span></div></div>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-xs-6">
       <div class="progress">
         <div class="progress-bar" role="progressbar" aria-valuenow="{{ tutkinnonosa.arvioituna }}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{ tutkinnonosa.arvioituna }}%;">{{ tutkinnonosa.arvioituna }}%</div>
       </div>
     </div>
-    <div class="col-md-2">
+    <div class="col-xs-6">
       <span>{{ tutkinnonosa.arvioita }} / {{ tutkinnonosa.arvioitavia }}</span>
     </div>
   </div>
