@@ -22,6 +22,7 @@ h3 + section.kysymys {
   .vapaatekstivastaus {
     overflow: hidden;
     display: block;
+    width: 100%;
 
     textarea {
       border-width: 1px;
@@ -54,6 +55,16 @@ h3 + section.kysymys {
       margin-right: 2em;
       &:last-child {
         margin-right: 0;
+      }
+      
+      &.vapaateksti {
+        @media (min-width: 992px) {
+          width: 42%;
+        }
+        @media (max-width: 991px) {
+          clear:left;
+          width: 100%;
+        }
       }
     }
 
