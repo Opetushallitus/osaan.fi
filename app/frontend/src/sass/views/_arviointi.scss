@@ -58,10 +58,10 @@ h3 + section.kysymys {
       }
       
       &.vapaateksti {
-        @media (min-width: 992px) {
+        @media (min-width: $screen-md-min) {
           width: 42%;
         }
-        @media (max-width: 991px) {
+        @media (max-width: $screen-sm-max) {
           clear:left;
           width: 100%;
         }

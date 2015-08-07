@@ -8,9 +8,8 @@
   </div>
   <div class="panel-body">
     <h3 class="edistyminen" sticky-header top="0">
-      {{ tutkinnonosatById[tutkinnonosa] | lokalisoiKentta:'nimi' }} – {{'arviointi.arvioitu' | translate}} {{arvioidut.length}} / {{kohteet.length}}
+      {{ tutkinnonosatById[tutkinnonosa] | lokalisoiKentta:'nimi' }}<span class="hidden-sm hidden-xs"> – </span><span class="hidden-md hidden-lg"><br></span>{{'arviointi.arvioitu' | translate}}&nbsp;{{arvioidut.length}}&nbsp;/&nbsp;{{kohteet.length}}
       <button class="btn btn-primary" role="button" ng-click="sivunLoppuun()">
-        {{ 'yleiset.sivun_loppuun' | translate}}&nbsp;
         <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>&nbsp;
       </button>
     </h3>
@@ -18,7 +17,8 @@
     <div class="alert alert-warning" role="alert" ng-if="kohdealueet === undefined || kohdealueet.length === 0" translate="arviointi.ei_kohteita"></div>
 
     <section class="kohdealue" ng-repeat="kohdealue in kohdealueet">
-      <h3 sticky-header top="40">{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
+      <h3 sticky-header top="40" class="hidden-sm hidden-xs">{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
+      <h3 sticky-header top="60" class="hidden-md hidden-lg">{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
 
       <section class="kysymys" ng-repeat="kuvaus in kohdealue.kuvaukset">
         <p>{{ kuvaus | lokalisoiKentta:'nimi' }}</p>
