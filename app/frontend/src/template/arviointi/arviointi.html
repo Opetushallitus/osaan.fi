@@ -7,13 +7,13 @@
     <h3 class="panel-title">{{ 'arviointi.arvioi_osaamisesi' | translate }} - {{ tutkinto | lokalisoiKentta:'nimi' }}</h3>
   </div>
   <div class="panel-body">
-    <h3 class="edistyminen" sticky-header top="0">{{'arviointi.arvioitu' | translate}} {{arvioidut.length}} / {{kohteet.length}}
+    <h3 class="edistyminen" sticky-header top="0">
+      {{ tutkinnonosatById[tutkinnonosa] | lokalisoiKentta:'nimi' }} – {{'arviointi.arvioitu' | translate}} {{arvioidut.length}} / {{kohteet.length}}
       <button class="btn btn-primary" role="button" ng-click="sivunLoppuun()">
         {{ 'yleiset.sivun_loppuun' | translate}}&nbsp;
         <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>&nbsp;
       </button>
     </h3>
-    <h2>{{ tutkinnonosatById[tutkinnonosa] | lokalisoiKentta:'nimi' }}</h2>
 
     <div class="alert alert-warning" role="alert" ng-if="kohdealueet === undefined || kohdealueet.length === 0" translate="arviointi.ei_kohteita"></div>
 

@@ -100,7 +100,13 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
       },
       link: function(scope, element) {
         var ele = $(element);
-        ele.scrollFix({'fixTop': scope.top || 0});
+        var top = scope.top || 0;
+        var offset = -top;
+        ele.scrollFix({
+          'fixTop': top,
+          'fixOffset': offset,
+          'unfixOffset': offset
+        });
         ele.css('z-index', '1');
       }
     };
