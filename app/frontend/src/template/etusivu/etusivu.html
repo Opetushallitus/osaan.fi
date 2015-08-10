@@ -73,6 +73,7 @@
     <h3 ng-if="tutkinnot.length == 0">{{ 'tutkinto.ei_loytynyt' | translate }}</h3>
 
     <div ng-if="tutkinnot.length > 0" class="list-group" style="margin-top: 10px;">
+        <h3>{{tutkinnot.length}} {{ 'yleiset.hakutulosta' | translate }}</h3>
         <div ng-repeat="tutkinto in tutkinnot" class="list-group-item e2e-haettu-tutkinto" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}">
 <div class="row">
           <div class="col-md-10">
