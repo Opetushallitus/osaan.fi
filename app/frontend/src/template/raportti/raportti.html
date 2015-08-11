@@ -7,6 +7,12 @@
     <h3 class="panel-title">
       {{ 'yleiset.raportti' | translate }} - {{ raportti | lokalisoiKentta:'koulutusala_nimi' }} - {{ raportti | lokalisoiKentta:'opintoala_nimi' }} - {{ raportti | lokalisoiKentta:'tutkinto_nimi' }}
     </h3>
+    <div ng-if="valittuRaportti == 'raportti'" class="visible-print">
+      <span>
+        <span>{{ 'raportti.tulostus' | translate }}</span>
+      {{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy hh:mm' }}
+      </span>
+    </div>
   </div>
   <div class="panel-body">
     <div class="row hidden-print">
@@ -27,7 +33,10 @@
       </div>
     </div>
 
-    <div ng-if="valittuRaportti == 'raportti'" class="pull-right">{{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy' }}</div>
+    <div ng-if="valittuRaportti == 'raportti'" class="hidden-print pull-right">
+      {{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy hh:mm' }}
+    </div>
+
     <h2>
       <span ng-if="valittuRaportti == 'tekstiraportti'" translate="raportti.tyyppi_tekstiraportti"></span>
       <span ng-if="valittuRaportti == 'raportti'" translate="yleiset.raportti"></span>
