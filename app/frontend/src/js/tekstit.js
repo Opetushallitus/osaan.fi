@@ -152,7 +152,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'raportti.kommentti': 'Kommentti (sv)',
       'raportti.lataa_tekstiraportti': 'Lataa tekstiraportti (sv)',
       'raportti.nayta_kommentit': 'Näytä kaikki kommentit (sv)',
-      'raportti.otsikko_ohje': 'Tutkinto suoritetaan Opetushallituksen määräämien tutkinnon perusteiden mukaisesti. Tutkinnon perusteissa määritellään tutkintoon kuuluvat tutkinnon osat, tutkinnon muodostuminen, vaadittava ammattitaito, arvioinnin perusteet sekä ammattitaidon osoittamistavat. Tutkinnon perusteet näet osoitteesta http://eperusteet.opintopolku.fi/. Tutkinnon muodostumisesta lisätietoja antavat kyseistä tutkintoa järjestävät oppilaitokset sekä oppisopimustoimipisteet. (sv)',
+      'raportti.otsikko_ohje': 'Examen avläggs enligt de examensgrunder som fastställts av Utbildningsstyrelsen. I grunderna för examen definieras examensdelarna, uppbyggnaden av examen, kraven på yrkesskicklighet, bedömningsgrunderna och sätten att påvisa sina yrkeskunskaper. Examensgrunderna hittar du via adressen egrunder.studieinfo.fi. Mer info om uppbyggnaden av en viss examen får du från de läroanstalter och läroavtalsbyråer som anordnar examen.',
       'raportti.paivays': 'Päiväys (sv)',
       'raportti.pakolliset': 'Pakolliset (sv)',
       'raportti.tyyppi_tekstiraportti': 'Tekstiraportti (sv)',
