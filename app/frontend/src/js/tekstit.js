@@ -112,7 +112,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'arviointi.asteikko2': 'Osaan vähän (sv)',
       'arviointi.asteikko3': 'Osaan hyvin (sv)',
       'arviointi.asteikko4': 'Osaan erinomaisesti (sv)',
-      'arviointi.ei_kohteita': 'Arviointikohteita ei ole tällä hetkellä saatavissa. (sv)',
+      'arviointi.ei_kohteita': 'Inga föremål för bedömningen finns för närvarande.',
       'arviointi.eos': 'En osaa sanoa (sv)',
       'arviointi.raportti': 'Näytä raportti (sv)',
       'arviointi.tekstivastaus': 'Tekstivastaus (sv)',
