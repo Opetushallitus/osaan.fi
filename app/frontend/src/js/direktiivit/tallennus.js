@@ -58,6 +58,7 @@ angular.module('osaan.direktiivit.tallennus', ['osaan.palvelut.tallennus'])
 
   .controller('TallennusModalController', ['$modalInstance', '$scope', 'tunnus', function($modalInstance, $scope, tunnus) {
     $scope.linkki = document.location.href.split('#')[0] + '#/lataa/' + tunnus;
+    $scope.linkki_mailto = encodeURIComponent($scope.linkki);
 
     $scope.close = $modalInstance.close;
   }])
