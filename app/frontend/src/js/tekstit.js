@@ -138,7 +138,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'osien-valinta.arvio_ladattu_otsikko': 'Arvio on ladattu (sv)',
       'osien-valinta.arvioita_on': 'Valituille osille löytyy arvioita (sv)',
       'osien-valinta.eteenpain': 'Eteenpäin (sv)',
-      'osien-valinta.katso-ohje': 'Katso tutkinnon perusteista tai selvitä yhdessä oppilaitoksen tai oppisopimustoimipisteen kanssa mitkä tutkinnon osat voit valita, jos tavoitteenasi on koko tutkinnon suorittaminen. (sv)',
+      'osien-valinta.katso-ohje': 'Se i examensgrunderna eller utred tillsammans med läroanstalten eller läroavtalsbyrån vilka examensdelar du kan välja, om du har för avsikt att avlägga en hel examen.',
       'osien-valinta.pakolliset_osat': 'Pakolliset osat (sv)',
       'osien-valinta.tyhjenna_arviot': 'Tyhjennä arviot (sv)',
       'osien-valinta.tyhjenna_arviot_otsikko': 'Haluatko varmasti tyhjentää jo annetut arviot? (sv)',
