@@ -181,7 +181,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'tutkinto.tyyppi_erikoisammattitutkinto': 'Erikoisammattitutkinto (sv)',
       'tutkinto.tyyppi_kaikki': 'Kaikki (sv)',
       'tutkinto.tyyppi_perustutkinto': 'Perustutkinto (sv)',
-      'tutkinto.voimaantulevat': 'Näytä myös tutkinnot, joiden tutkinnon perusteet ovat tulossa voimaan. (sv)',
+      'tutkinto.voimaantulevat': 'Visa också de examina vars examensgrunder kommer att träda i kraft.',
       'tutkinto_osa.valitse': 'Valitse tutkinnon osat jotka haluat arvioida (sv)',
       'varmistus.peruuta': 'Peruuta (sv)',
       'yleiset.arvioi_osaaminen': 'Arvioi osaaminen (sv)',
