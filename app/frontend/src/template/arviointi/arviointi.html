@@ -7,6 +7,13 @@
     <h3 class="panel-title">{{ 'arviointi.arvioi_osaamisesi' | translate }} - {{ tutkinto | lokalisoiKentta:'nimi' }}</h3>
   </div>
   <div class="panel-body">
+    
+    <div class="osienselaus">
+      <div class="row">
+        <osien-selaus></osien-selaus>
+      </div>
+    </div>
+    
     <h3 class="edistyminen" sticky-header top="0">
       {{ tutkinnonosatById[tutkinnonosa] | lokalisoiKentta:'nimi' }}<span class="hidden-sm hidden-xs"> – </span><span class="hidden-md hidden-lg"><br></span>{{'arviointi.arvioitu' | translate}}&nbsp;{{arvioidut.length}}&nbsp;/&nbsp;{{kohteet.length}}
       <button class="btn btn-primary" role="button" ng-click="sivunLoppuun()">
@@ -58,34 +65,7 @@
   </div>
   <div class="panel-footer">
     <div class="row">
-      <div class="col-md-12">
-
-        <div ng-if="seuraavaTutkinnonosa() !== undefined" class="pull-right text-right">
-          <button class="btn btn-primary" role="button" ng-click="avaaSeuraavaOsa()">
-            {{ 'yleiset.arvioi_osaaminen' | translate}}&nbsp;
-            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-          </button>
-          <div><small>{{ tutkinnonosatById[seuraavaTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small></div>
-        </div>
-
-        <button class="btn btn-primary pull-right" role="button" ng-if="seuraavaTutkinnonosa() === undefined" ng-click="siirryRaporttiin()">
-          {{ 'arviointi.raportti' | translate}}&nbsp;
-          <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
-        </button>
-
-        <button class="btn btn-primary pull-left" role="button" ng-if="edellinenTutkinnonosa() === undefined" ng-click="palaaOsienValintaan()">
-          <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
-          {{ 'yleiset.valitse_tutkinnon_osat' | translate}}
-        </button>
-
-        <div ng-if="edellinenTutkinnonosa() !== undefined" class="pull-left text-left">
-          <button class="btn btn-primary" role="button" ng-click="avaaEdellinenOsa()">
-            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
-            {{ 'yleiset.arvioi_osaaminen' | translate}}&nbsp;
-          </button>
-          <div><small>{{ tutkinnonosatById[edellinenTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small></div>
-        </div>
-      </div>
+      <osien-selaus></osien-selaus>
     </div>
   </div>
 </div>

@@ -59,6 +59,10 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
       $scope.arviot = arviot;
     }
 
+    var avaaOsa = function(osa) {
+      $location.url('/arviointi?osa=' + osa);
+    };
+
     $scope.puuttuukoArvioita = function() {
       return _.difference($scope.kohteet, $scope.arvioidut).length > 0;
     };
@@ -68,12 +72,14 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
     };
 
     $scope.avaaEdellinenOsa = function() {
-      $location.url('/arviointi?osa=' + Arviointi.edellinenOsatunnus(tutkinnonosa));
+      avaaOsa(Arviointi.edellinenOsatunnus(tutkinnonosa));
     };
 
     $scope.avaaSeuraavaOsa = function() {
-      $location.url('/arviointi?osa=' + Arviointi.seuraavaOsatunnus(tutkinnonosa));
+      avaaOsa(Arviointi.seuraavaOsatunnus(tutkinnonosa));
     };
+
+    $scope.avaaOsa = avaaOsa;
 
     $scope.edellinenTutkinnonosa = function() {
       return Arviointi.edellinenOsatunnus(tutkinnonosa);
@@ -89,6 +95,18 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
 
     $scope.sivunLoppuun = function() {
       window.scrollTo(0,document.body.scrollHeight);
+    };
+
+    $scope.edellisetOsat = _.takeWhile(Arviointi.valitutOsatunnukset(), function(tunnus) { return tunnus !== tutkinnonosa; });
+
+    $scope.seuraavatOsat = _.takeRightWhile(Arviointi.valitutOsatunnukset(), function(tunnus) { return tunnus !== tutkinnonosa; });
+  }])
+
+  .directive('osienSelaus', [function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'template/direktiivit/osienselaus.html',
+      replace: true
     };
   }])
 

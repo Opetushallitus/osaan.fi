@@ -1,0 +1,42 @@
+<div class="col-md-12">
+  <div ng-if="seuraavaTutkinnonosa() !== undefined" class="pull-right text-right">
+    <button class="btn btn-primary" role="button" ng-click="avaaSeuraavaOsa()">
+      {{ 'yleiset.arvioi_osaaminen' | translate}}&nbsp;
+      <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+    </button>
+    <div><small>{{ tutkinnonosatById[seuraavaTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small></div>
+  </div>
+
+  <button class="btn btn-primary pull-right" role="button" ng-if="seuraavaTutkinnonosa() === undefined" ng-click="siirryRaporttiin()">
+    {{ 'arviointi.raportti' | translate}}&nbsp;
+    <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+  </button>
+
+  <button class="btn btn-primary pull-left" role="button" ng-if="edellinenTutkinnonosa() === undefined" ng-click="palaaOsienValintaan()">
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
+    {{ 'yleiset.valitse_tutkinnon_osat' | translate}}
+  </button>
+
+  <div ng-if="edellinenTutkinnonosa() !== undefined" class="pull-left text-left">
+    <button class="btn btn-primary" role="button" ng-click="avaaEdellinenOsa()">
+      <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
+      {{ 'yleiset.arvioi_osaaminen' | translate}}&nbsp;
+    </button>
+    <div><small>{{ tutkinnonosatById[edellinenTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small></div>
+  </div>
+  
+  <div class="sivut">
+    <div class="sivu edellinen" ng-repeat="osa in edellisetOsat" ng-click="avaaOsa(osa)"
+      popover="{{tutkinnonosatById[osa] | lokalisoiKentta:'nimi'}}" popover-trigger="mouseenter">
+      {{$index + 1}}
+    </div>
+    <div class="sivu nykyinen">
+      {{edellisetOsat.length + 1}}
+    </div>
+    <div class="sivu seuraava" ng-repeat="osa in seuraavatOsat" ng-click="avaaOsa(osa)"
+      popover="{{tutkinnonosatById[osa] | lokalisoiKentta:'nimi'}}" popover-trigger="mouseenter">
+      {{$index + edellisetOsat.length + 2}}
+    </div>
+    <div class="clear-left"></div>
+  </div>
+</div>

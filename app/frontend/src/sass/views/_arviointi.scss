@@ -177,3 +177,43 @@ h3.edistyminen {
   color: $darker-gray;
   position: relative;
 }
+
+.panel-footer, .osienselaus {
+  text-align: center;
+  vertical-align: top;
+}
+
+.sivut {
+  display:inline-block;
+  margin: 0 auto;
+  
+  .clear-left {
+    clear: left;
+  }
+  
+  .sivu {
+    display: inline-block;
+    margin: 0;
+    font-size: 1.28571428em; /* 18px */
+    font-weight: normal;
+    line-height: 100%;
+    background-color: $lightest-gray;
+    height: 2em;
+    width: 2em;
+    vertical-align: top;
+    text-align: center;
+    padding: .5em 0px 0px 0px;
+    margin-right: .7em;
+    color: $gray-color;
+    position: relative;
+    &.nykyinen {
+      background-color: $primary-color;
+      color: white;
+    }
+    &.seuraava:hover, &.edellinen:hover {
+      cursor: pointer;
+      color: $darker-gray;
+    }
+      
+  }
+}
