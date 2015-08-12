@@ -25,6 +25,7 @@ angular.module('osaan.fi', [
 
   'osaan.arviointi.arviointiui',
   'osaan.etusivu.etusivuui',
+  'osaan.direktiivit.http-virhe',
   'osaan.direktiivit.huomautukset',
   'osaan.direktiivit.kaavio',
   'osaan.direktiivit.kielen-vaihto',
@@ -38,6 +39,7 @@ angular.module('osaan.fi', [
   'osaan.lataa.lataaui',
   'osaan.osien-valinta.osien-valintaui',
   'osaan.palvelut.arviointi',
+  'osaan.palvelut.httpvirhe',
   'osaan.palvelut.huomautus',
   'osaan.palvelut.poistumisvaroitus',
   'osaan.palvelut.raportti',
