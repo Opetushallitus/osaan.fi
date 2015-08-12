@@ -30,6 +30,12 @@ angular.module('osaan.direktiivit.http-virhe', ['osaan.palvelut.httpvirhe'])
         }, function(virhetila) {
           $scope.virhetila = virhetila;
         });
+
+        $scope.$watch(function() {
+          return Httpvirhe.onkoYhteyskatko();
+        }, function(yhteyskatko) {
+          $scope.yhteyskatko = yhteyskatko;
+        });
       }]
     };
   }]);

@@ -1,4 +1,10 @@
-<div class="alert alert-danger text-center" ng-if="virhetila">
-  <span class="glyphicon glyphicon-exclamation-sign"></span>
-  <span translate="http-virhe.virhe"></span> <a class="alert-link" ng-click="refresh()" translate="http-virhe.yrita_uudelleen"></a>
+<div class="alert alert-danger text-center" ng-if="virhetila || yhteyskatko">
+  <div ng-if="virhetila">
+    <span class="glyphicon glyphicon-exclamation-sign"></span>
+    <span translate="http-virhe.virhe"></span> <a class="alert-link" ng-click="refresh()" translate="http-virhe.yrita_uudelleen"></a>
+  </div>
+  <div ng-if="!virhetila && yhteyskatko">
+    <span class="fa fa-spinner fa-spin"></span>
+    <span translate="http-virhe.ei_yhteytta"></span>
+  </div>
 </div>

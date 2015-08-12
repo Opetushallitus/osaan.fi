@@ -18,21 +18,42 @@ angular.module('osaan.palvelut.httpvirhe', [])
   .factory('Httpvirhe', [function() {
     var service = {};
     var virhetila = false;
+    var yhteyskatko = 0;
 
     service.asetaVirhetila = function(virhe) {
       virhetila = virhe;
+    };
+
+    service.asetaYhteyskatko = function(katko) {
+      if (katko) {
+        yhteyskatko++;
+      } else {
+        yhteyskatko--;
+      }
     };
 
     service.onkoVirhetila = function() {
       return virhetila;
     };
 
+    service.onkoYhteyskatko = function() {
+      return yhteyskatko > 0;
+    };
+
     return service;
   }])
 
-  .factory('httpResponseErrorInterceptor', ['$injector', '$q', 'Httpvirhe', function($injector, $q, Httpvirhe) {
+  .factory('httpResponseErrorInterceptor', ['$injector', '$q', '$timeout', 'Httpvirhe', function($injector, $q, $timeout, Httpvirhe) {
     return {
       'responseError': function(response) {
+        if (response.status === 0) {
+          Httpvirhe.asetaYhteyskatko(true);
+          return $timeout(function() {
+            var $http = $injector.get('$http');
+            Httpvirhe.asetaYhteyskatko(false);
+            return $http(response.config);
+          }, 15000);
+        }
         Httpvirhe.asetaVirhetila(true);
         return $q.reject(response);
       }
