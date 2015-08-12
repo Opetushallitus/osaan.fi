@@ -7,15 +7,21 @@
     <div><small>{{ tutkinnonosatById[seuraavaTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small></div>
   </div>
 
-  <button class="btn btn-primary pull-right" role="button" ng-if="seuraavaTutkinnonosa() === undefined" ng-click="siirryRaporttiin()">
-    {{ 'arviointi.raportti' | translate}}&nbsp;
-    <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
-  </button>
+  <div ng-if="seuraavaTutkinnonosa() === undefined" class="pull-right text-right">
+    <button class="btn btn-primary" role="button" ng-click="siirryRaporttiin()">
+      {{ 'arviointi.raportti' | translate}}&nbsp;
+      <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+    </button>
+    <div><small>&nbsp;</small></div>
+  </div>
 
-  <button class="btn btn-primary pull-left" role="button" ng-if="edellinenTutkinnonosa() === undefined" ng-click="palaaOsienValintaan()">
-    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
-    {{ 'yleiset.valitse_tutkinnon_osat' | translate}}
-  </button>
+  <div ng-if="edellinenTutkinnonosa() === undefined" class="pull-left text-left">
+    <button class="btn btn-primary pull-left" role="button" ng-click="palaaOsienValintaan()">
+      <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
+      {{ 'yleiset.valitse_tutkinnon_osat' | translate}}
+    </button>
+    <div><small>&nbsp;</small></div>
+  </div>
 
   <div ng-if="edellinenTutkinnonosa() !== undefined" class="pull-left text-left">
     <button class="btn btn-primary" role="button" ng-click="avaaEdellinenOsa()">
@@ -30,7 +36,7 @@
       popover="{{tutkinnonosatById[osa] | lokalisoiKentta:'nimi'}}" popover-trigger="mouseenter">
       {{$index + 1}}
     </div>
-    <div class="sivu nykyinen">
+    <div class="sivu nykyinen" ng-if="edellisetOsat.length > 0 || seuraavatOsat.length > 0">
       {{edellisetOsat.length + 1}}
     </div>
     <div class="sivu seuraava" ng-repeat="osa in seuraavatOsat" ng-click="avaaOsa(osa)"
