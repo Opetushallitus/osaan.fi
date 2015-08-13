@@ -24,8 +24,8 @@
     <div class="alert alert-warning" role="alert" ng-if="kohdealueet === undefined || kohdealueet.length === 0" translate="arviointi.ei_kohteita"></div>
 
     <section class="kohdealue" ng-repeat="kohdealue in kohdealueet">
-      <h3 sticky-header top="40" class="hidden-sm hidden-xs">{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
-      <h3 sticky-header top="60" class="hidden-md hidden-lg">{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
+      <h3 sticky-header top="40" class="hidden-sm hidden-xs">{{ kohdealue | lokalisoiKentta:'nimi' }} – {{'arviointi.miten' | translate}}</h3>
+      <h3 sticky-header top="60" class="hidden-md hidden-lg">{{ kohdealue | lokalisoiKentta:'nimi' }} – {{'arviointi.miten' | translate}}</h3>
 
       <section class="kysymys" ng-repeat="kuvaus in kohdealue.kuvaukset">
         <p>{{ kuvaus | lokalisoiKentta:'nimi' }}</p>
