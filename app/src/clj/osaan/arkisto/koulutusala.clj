@@ -48,8 +48,9 @@
   []
   (sql/select :opintoala
     (sql/fields :opintoalatunnus :koulutusala :nimi_fi :nimi_sv)
-    (sql/where (sql/sqlfn "exists" (sql/subselect :tutkinto
-                                     (sql/where {:opintoala :opintoala.opintoalatunnus}))))))
+    (sql/where (sql/sqlfn "exists" (sql/subselect :peruste
+                                     (sql/join :inner :tutkinto {:tutkinto.tutkintotunnus :peruste.tutkinto})
+                                     (sql/where {:tutkinto.opintoala :opintoala.opintoalatunnus}))))))
 
 (defn hae-koulutusalat-opintoaloilla
   []
