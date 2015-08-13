@@ -211,6 +211,8 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
     $translateProvider.translations('sv', tekstit.sv);
 
     $translateProvider.use(localStorage.getItem('kieli') || 'fi');
+
+    $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
   }])
 
   .factory('kieli', [function () {
