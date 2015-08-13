@@ -34,7 +34,7 @@ angular.module('osaan.palvelut.arviointi', [])
 
     var asetaArviot = function(tutkinnonosatunnus, arviot) {
       if (!_.isEqual(tila.arviot[tutkinnonosatunnus], arviot)) {
-        tila.arviot[tutkinnonosatunnus] = angular.copy(arviot);
+        tila.arviot[tutkinnonosatunnus] = _.cloneDeep(arviot);
         _tallennaTila();
       }
     };
@@ -45,7 +45,7 @@ angular.module('osaan.palvelut.arviointi', [])
 
     var asetaOsatunnukset = function(osat) {
       if (!_.isEqual(tila.osatunnukset, osat)) {
-        tila.osatunnukset = angular.copy(osat);
+        tila.osatunnukset = _.cloneDeep(osat);
         _tallennaTila();
       }
     };
@@ -69,7 +69,7 @@ angular.module('osaan.palvelut.arviointi', [])
     };
 
     var haeArviot = function(tutkinnonosatunnus) {
-      return angular.copy(tila.arviot[tutkinnonosatunnus]);
+      return _.cloneDeep(tila.arviot[tutkinnonosatunnus]);
     };
 
     var lataa = function(uusiTila) {
@@ -123,7 +123,7 @@ angular.module('osaan.palvelut.arviointi', [])
 
     var valittuPeruste = function() { return tila.peruste; };
     var valittuTutkintotunnus = function() { return tila.tutkintotunnus; };
-    var valitutOsatunnukset = function() { return angular.copy(tila.osatunnukset); };
+    var valitutOsatunnukset = function() { return _.cloneDeep(tila.osatunnukset); };
 
     return {
       asetaArviot: asetaArviot,
