@@ -56,6 +56,17 @@ a {color : $primary-color; text-decoration: none;
   }
 }
 
+.linkkipopover {
+  color: $primary-color;
+  margin-left: 5px;
+  padding-top: 3px;
+  opacity: .7;
+}
+
+.linkkipopover:hover {
+  opacity: 1;
+}
+
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
