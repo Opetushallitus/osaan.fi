@@ -41,4 +41,7 @@
     border: 10px solid #6CC555;
     line-height: 2px;
   }
+  section.tutkinnonosa {
+    page-break-before: always;
+  }
 }

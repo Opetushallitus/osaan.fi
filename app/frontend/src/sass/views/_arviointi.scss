@@ -17,6 +17,7 @@ h3 + section.kysymys {
     border-top: 5px solid $lighter-primary;
     position:relative;
     z-index:2;
+    border-bottom: 2px solid $lighter-primary;
   }
   
   .vapaatekstivastaus {
@@ -176,6 +177,12 @@ h3.edistyminen {
   margin-bottom: 0em;
   color: $darker-gray;
   position: relative;
+  &.eos{
+    font-size: .9em;
+    border-radius: 1em;
+    background: rgba(0, 0, 0, 0);
+    color: #808080;
+  }
 }
 
 .panel-footer, .osienselaus {

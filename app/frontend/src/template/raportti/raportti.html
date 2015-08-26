@@ -5,7 +5,7 @@
 <div class="panel panel-primary">
   <div class="panel-heading">
     <h3 class="panel-title">
-      {{ 'yleiset.raportti' | translate }} - {{ raportti | lokalisoiKentta:'koulutusala_nimi' }} - {{ raportti | lokalisoiKentta:'opintoala_nimi' }} - {{ raportti | lokalisoiKentta:'tutkinto_nimi' }}
+      {{ raportti | lokalisoiKentta:'koulutusala_nimi' }} - {{ raportti | lokalisoiKentta:'opintoala_nimi' }} - {{ raportti | lokalisoiKentta:'tutkinto_nimi' }}
     </h3>
     <div ng-if="valittuRaportti == 'raportti'" class="visible-print">
       <span>
@@ -38,9 +38,6 @@
     </div>
 
     <h2>
-      <span ng-if="valittuRaportti == 'tekstiraportti'" translate="raportti.tyyppi_tekstiraportti"></span>
-      <span ng-if="valittuRaportti == 'raportti'" translate="yleiset.raportti"></span>
-      -
       <span ng-bind="raportti | lokalisoiKentta:'tutkinto_nimi'"></span>
     </h2>
     <p ng-bind-html="'raportti.otsikko_ohje' | translate | linky"></p>
@@ -54,14 +51,15 @@
     </div>
 
     <div ng-if="valittuRaportti == 'raportti'">
-      <h3 translate="raportti.vastausprosentit"></h3>
-      <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.pakolliset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="pakollinen"></tutkinnonosa-tilastot>
-      <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.valinnaiset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="valinnainen"></tutkinnonosa-tilastot>
 
       <h3 translate="raportti.keskiarvot"></h3>
       <div class="col-md-12">
         <kaavio jakauma="jakauma"></kaavio>
       </div>
+
+      <h3 translate="raportti.vastausprosentit"></h3>
+      <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.pakolliset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="pakollinen"></tutkinnonosa-tilastot>
+      <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.valinnaiset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="valinnainen"></tutkinnonosa-tilastot>
 
       <div class="checkbox pull-right hidden-print">
         <label>
@@ -87,7 +85,11 @@
             <tbody>
               <tr ng-repeat="kuvaus in kohdealue.kuvaukset">
                 <td>{{ kuvaus | lokalisoiKentta:'nimi' }}</td>
-                <td><span class="arvio" ng-if="kuvaus.arvio.arvio">{{ kuvaus.arvio.arvio }}</span></td>
+                <td>
+                  <span class="arvio eos" ng-if="kuvaus.arvio.arvio === null" translate="arviointi.eos_lyh" popover="{{ 'arviointi.eos' | translate }}"></span>
+                  <span class="arvio" ng-if="kuvaus.arvio.arvio">{{ kuvaus.arvio.arvio }}</span>
+
+                </td>
                 <td ng-class="{'text-center': !naytaKommentit, 'text-italic': naytaKommentit}">
                   <a popover="{{ kuvaus.arvio.vapaateksti | limitTo:250 }}{{ kuvaus.arvio.vapaateksti.length > 250 ? '...' : '' }}" popover-placement="left" popover-trigger="mouseenter" ng-if="!naytaKommentit && kuvaus.arvio.vapaateksti">
                     <span class="glyphicon glyphicon-comment" style="font-size: 2em;"></span>

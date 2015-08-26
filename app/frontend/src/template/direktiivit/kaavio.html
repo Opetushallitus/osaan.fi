@@ -3,6 +3,16 @@
   ng-attr-height="{{viivastonKorkeus() + 100}}">
 
   <g transform="translate(40, 10)">
+    <text
+        class="kaavio-viivan-otsikko" style="font-size: 12px;"
+        ng-attr-y="{{viivastonKorkeus() + 80}}"
+        ng-attr-x="{{0}}">
+      <tspan text-anchor="middle">
+        <tspan translate="arviointi.eos_lyh"></tspan> =
+        <tspan translate="arviointi.eos"></tspan>
+      </tspan>
+    </text>
+
     <line ng-repeat="viiva in viivat"
       class="kaavio-viiva"
       ng-attr-y1="{{0}}"
@@ -27,6 +37,14 @@
       ng-attr-cx="{{asetukset.palkinMaksimiPituus * (viiva.paikka)}}"
       ng-attr-r="{{20}}">
     </circle>
+
+    <text
+        class="kaavio-viivan-otsikko" style="font-size: 12px;"
+        ng-attr-y="{{viivastonKorkeus() + 60}}"
+        ng-attr-x="{{asetukset.palkinMaksimiPituus * (viiva.paikka)}}">
+      <tspan text-anchor="middle" translate="arviointi.asteikko{{$index+1}}"></tspan>
+    </text>
+
     <text
       class="kaavio-viivan-otsikko"
       ng-attr-y="{{viivastonKorkeus() + 33}}"
@@ -34,6 +52,7 @@
       ng-repeat-end>
       <tspan text-anchor="middle">{{viiva.teksti}}</tspan>
     </text>
+
 
     <rect ng-repeat-start="data in jakauma"
       ng-attr-class="{{ 'kaavio-palkin-vari-' + data.vari }}"
