@@ -7,33 +7,16 @@
     <h3 class="panel-title">
       {{ raportti | lokalisoiKentta:'koulutusala_nimi' }} - {{ raportti | lokalisoiKentta:'opintoala_nimi' }} - {{ raportti | lokalisoiKentta:'tutkinto_nimi' }}
     </h3>
-    <div ng-if="valittuRaportti == 'raportti'" class="visible-print">
+    <div class="visible-print">
       <span>
         <span>{{ 'raportti.tulostus' | translate }}</span>
-      {{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy hh:mm' }}
+      {{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy HH:mm' }}
       </span>
     </div>
   </div>
   <div class="panel-body">
-    <div class="row hidden-print">
-      <div class="col-md-12">
-        <div class="pull-right">
-          <div class="btn-group" role="group">
-            <button class="btn btn-success" ng-model="valittuRaportti" btn-radio="'raportti'">{{ 'yleiset.raportti' | translate }}</button>
-            <button class="btn btn-success" ng-model="valittuRaportti" btn-radio="'tekstiraportti'">{{ 'raportti.tyyppi_tekstiraportti' | translate }}</button>
-          </div>
-          <div class="btn-group">
-            <form action="api/kaiku" method="post">
-              <input type="hidden" name="data" value="{{tekstiRaportti}}">
-              <input type="hidden" name="filename" value="raportti.txt">
-              <button class="btn btn-default" type="submit" ng-click="estaPoistumisvaroitus()"><span class="glyphicon glyphicon-download-alt"></span> <span translate="raportti.lataa_tekstiraportti"></span></button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div ng-if="valittuRaportti == 'raportti'" class="hidden-print pull-right">
+    <div class="hidden-print pull-right">
       {{ 'raportti.paivays' | translate }}: {{ paivays | date: 'dd.MM.yyyy hh:mm' }}
     </div>
 
@@ -42,47 +25,52 @@
     </h2>
     <p ng-bind-html="'raportti.otsikko_ohje' | translate | linky"></p>
 
-    <div ng-if="valittuRaportti == 'tekstiraportti'">
+    <div class="row hidden-print">
       <div class="col-md-12">
-        <div class="form-group">
-          <textarea class="form-control" ng-model="tekstiRaportti" style="height: 30em; font-family: monospace" readonly></textarea>
+        <div class="pull-right">
+          <form action="api/kaiku" method="post">
+            <input type="hidden" name="data" value="{{tekstiRaportti}}">
+            <input type="hidden" name="filename" value="raportti.txt">
+            <button class="btn btn-default" type="submit" ng-click="estaPoistumisvaroitus()"><span class="glyphicon glyphicon-download-alt"></span> <span translate="raportti.lataa_tekstiraportti"></span></button>
+          </form>
         </div>
       </div>
     </div>
 
-    <div ng-if="valittuRaportti == 'raportti'">
+    <tabset>
+      <tab select="valittuRaportti='raportti'" heading="{{ 'yleiset.raportti' | translate }}">
+        <br />
+        <h3 translate="raportti.keskiarvot"></h3>
+        <div class="col-md-12">
+          <kaavio jakauma="jakauma"></kaavio>
+        </div>
 
-      <h3 translate="raportti.keskiarvot"></h3>
-      <div class="col-md-12">
-        <kaavio jakauma="jakauma"></kaavio>
-      </div>
+        <h3 translate="raportti.vastausprosentit"></h3>
+        <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.pakolliset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="pakollinen"></tutkinnonosa-tilastot>
+        <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.valinnaiset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="valinnainen"></tutkinnonosa-tilastot>
 
-      <h3 translate="raportti.vastausprosentit"></h3>
-      <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.pakolliset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="pakollinen"></tutkinnonosa-tilastot>
-      <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.valinnaiset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="valinnainen"></tutkinnonosa-tilastot>
+        <div class="checkbox pull-right hidden-print">
+          <label>
+            <input type="checkbox" ng-model="naytaKommentit">
+            <span translate="raportti.nayta_kommentit"></span>
+          </label>
+        </div>
 
-      <div class="checkbox pull-right hidden-print">
-        <label>
-          <input type="checkbox" ng-model="naytaKommentit">
-          <span translate="raportti.nayta_kommentit"></span>
-        </label>
-      </div>
+        <section class="tutkinnonosa" ng-repeat="tutkinnonosa in raportti.tutkinnonosat">
+          <h2>{{ tutkinnonosa | lokalisoiKentta:'nimi' }}</h2>
 
-      <section class="tutkinnonosa" ng-repeat="tutkinnonosa in raportti.tutkinnonosat">
-        <h2>{{ tutkinnonosa | lokalisoiKentta:'nimi' }}</h2>
+          <section class="kohdealue" ng-repeat="kohdealue in tutkinnonosa.kohdealueet">
+            <h3>{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
 
-        <section class="kohdealue" ng-repeat="kohdealue in tutkinnonosa.kohdealueet">
-          <h3>{{ kohdealue | lokalisoiKentta:'nimi' }}</h3>
-
-          <table class="raportti table table-striped table-condensed">
-            <thead>
+            <table class="raportti table table-striped table-condensed">
+              <thead>
               <tr>
                 <th translate="raportti.ammattitaidon_kuvaus" ng-class="{'col-md-5': naytaKommentit, 'col-md-10': !naytaKommentit}" class="tablehead-animate"></th>
                 <th translate="raportti.arvio" ng-class="{'col-md-1': naytaKommentit, 'col-md-1': !naytaKommentit}" class="tablehead-animate"></th>
                 <th translate="raportti.kommentti" ng-class="{'col-md-6': naytaKommentit, 'col-md-1': !naytaKommentit}" class="tablehead-animate"></th>
               </tr>
-            </thead>
-            <tbody>
+              </thead>
+              <tbody>
               <tr ng-repeat="kuvaus in kohdealue.kuvaukset">
                 <td>{{ kuvaus | lokalisoiKentta:'nimi' }}</td>
                 <td>
@@ -97,11 +85,19 @@
                   <em ng-if="naytaKommentit" ng-bind="kuvaus.arvio.vapaateksti"></em>
                 </td>
               </tr>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </section>
         </section>
-      </section>
-    </div>
+      </tab>
+      <tab select="valittuRaportti='tekstiraportti'" heading="{{ 'raportti.tyyppi_tekstiraportti' | translate }}">
+        <br />
+        <div class="form-group">
+          <textarea class="form-control hidden-print" ng-model="tekstiRaportti" style="height: 30em; font-family: monospace" readonly></textarea>
+          <p class="tekstiRaportti visible-print">{{tekstiRaportti}}</p>
+        </div>
+      </tab>
+    </tabset>
   </div>
   <div class="panel-footer">
     <div class="row">

@@ -1,10 +1,10 @@
 /* Print styles */
 @media print {
   body {
-    font-size: 1em;
+    font-size: 10px;
   }
   p{
-    line-height: 1em;
+    line-height: 1.5em;
   }
   .no-print, .no-print * {
     display: none !important;
@@ -46,5 +46,17 @@
   }
   section.tutkinnonosa {
     page-break-before: always;
+  }
+  p.tekstiRaportti {
+    page-break-inside: auto;
+    font-size: 1em;
+    white-space: pre-wrap;
+    word-break: normal;
+    word-wrap: normal;
+    font-family: monospace;
+    line-height: 1.3em;
+  }
+  ul.nav.nav-tabs{
+    display: none;
   }
 }

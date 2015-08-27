@@ -33,7 +33,6 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
   }])
 
   .controller('RaporttiController', ['$location', '$q', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'Poistumisvaroitus', 'Raportti', 'RaporttiApurit', 'TekstiRaportti', 'Tutkinnonosa', 'Tutkinto', function($location, $q, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, Poistumisvaroitus, Raportti, RaporttiApurit, TekstiRaportti, Tutkinnonosa, Tutkinto) {
-    $scope.valittuRaportti = 'raportti';
 
     var valittuPeruste = Arviointi.valittuPeruste();
     if (valittuPeruste === undefined || !Arviointi.onkoArvioita()) {
