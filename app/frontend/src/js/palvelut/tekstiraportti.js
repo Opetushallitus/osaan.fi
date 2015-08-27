@@ -47,7 +47,7 @@ angular.module('osaan.palvelut.tekstiraportti', [])
         t += 'Arvio   Tutkinnon osa -> kohdealue -> ammattitaito\n';
         t += '=====   ==========================================\n\n';
 
-        t += number(raportti.keskiarvo, 2) + '    ' + lokalisoiKentta(raportti, 'nimi') + '\n';
+        t += number(raportti.keskiarvo, 2) + '    ' + lokalisoiKentta(raportti, 'tutkinto_nimi') + '\n';
 
         _.forEach(raportti.tutkinnonosat, function(tutkinnonosa) {
           t += number(tutkinnonosa.keskiarvo, 2) + '    ' + lokalisoiKentta(tutkinnonosa, 'nimi') + '\n';
