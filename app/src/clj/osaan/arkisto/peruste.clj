@@ -75,7 +75,7 @@
 
 (defn hae-viimeisin-paivitys []
   (:paivitetty (sql-util/select-unique-or-nil taulut/eperusteet-log
-                 (sql/order :paivitetty :desc)
+                 (sql/order :id :desc)
                  (sql/limit 1)
                  (sql/fields :paivitetty))))
 
