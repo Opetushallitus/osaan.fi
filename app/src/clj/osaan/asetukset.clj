@@ -31,10 +31,8 @@
         :password s/Str
         :maximum-pool-size s/Int
         :minimum-pool-size s/Int}
-   :eperusteet-palvelu {:url s/Str
-                        :suorita-kaynnistaessa Boolean}
-   :koodistopalvelu {:url s/Str
-                     :suorita-kaynnistaessa Boolean}
+   :eperusteet-palvelu {:url s/Str}
+   :koodistopalvelu {:url s/Str}
    :vanhat-arviot {:paivat s/Int}
    :eraajo Boolean
    :development-mode Boolean
@@ -53,11 +51,9 @@
         :password "osaan"
         :maximum-pool-size 15
         :minimum-pool-size 3}
-   :eperusteet-palvelu {:url "https://virkailija.opintopolku.fi/eperusteet-service/"
-                        :suorita-kaynnistaessa false}
+   :eperusteet-palvelu {:url "https://virkailija.opintopolku.fi/eperusteet-service/"}
    :eraajo false
-   :koodistopalvelu {:url "https://virkailija.opintopolku.fi/koodisto-service/rest/json/"
-                     :suorita-kaynnistaessa false}
+   :koodistopalvelu {:url "https://virkailija.opintopolku.fi/koodisto-service/rest/json/"}
    :vanhat-arviot {:paivat 1095} ;; 3 vuotta
    :development-mode false ; oletusarvoisesti ei olla kehitysmoodissa. Pitää erikseen kääntää päälle jos tarvitsee kehitysmoodia.
    :logback {:properties-file "resources/logback.xml"}

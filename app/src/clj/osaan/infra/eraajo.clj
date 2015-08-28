@@ -68,24 +68,3 @@
     (qs/schedule @ajastin eperusteet-job eperusteet-trigger)
     (qs/schedule @ajastin tutkinnot-job tutkinnot-trigger)
     (qs/schedule @ajastin arviot-job arviot-trigger)))
-
-(defn ^:integration-api suorita-taydelliset-eraajot! [asetukset]
-  {:pre [(realized? ajastin)]}
-  (when (get-in asetukset [:eperusteet-palvelu :suorita-kaynnistaessa])
-    (let [eperusteet-job (j/build
-                         (j/of-type PaivitaPerusteetJob)
-                         (j/with-identity "paivita-perusteet-kaynnistaessa")
-                         (j/using-job-data {"asetukset" (assoc (:eperusteet-palvelu asetukset) :hae-kaikki true)}))
-          eperusteet-trigger (t/build
-                               (t/with-identity "eperusteet-kaynnistaessa")
-                               (t/start-now))]
-      (qs/schedule @ajastin eperusteet-job eperusteet-trigger)))
-  (when (get-in asetukset [:koodistopalvelu :suorita-kaynnistaessa])
-    (let [tutkinnot-job (j/build
-                        (j/of-type PaivitaTutkinnotJob)
-                        (j/with-identity "paivita-tutkinnot-kaynnistaessa")
-                        (j/using-job-data {"asetukset" (assoc (:koodistopalvelu asetukset) :hae-kaikki true)}))
-          tutkinnot-trigger (t/build
-                              (t/with-identity "tutkinnot-kaynnistaessa")
-                              (t/start-now))]
-      (qs/schedule @ajastin tutkinnot-job tutkinnot-trigger))))

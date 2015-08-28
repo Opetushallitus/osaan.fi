@@ -75,8 +75,7 @@
     wrap-poikkeusten-logitus))
 
 (defn ^:integration-api kaynnista-eraajon-ajastimet! [asetukset]
-  (eraajo/kaynnista-ajastimet! asetukset)
-  (eraajo/suorita-taydelliset-eraajot! asetukset))
+  (eraajo/kaynnista-ajastimet! asetukset))
 
 (defn ^:integration-api kaynnista! [oletusasetukset]
   (try
