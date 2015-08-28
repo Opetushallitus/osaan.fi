@@ -81,9 +81,9 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
     (case (:koodiArvo koodi)
       "1" "perustutkinto"
       "4" "perustutkinto"
+      "11" "ammattitutkinto"
       "12" "erikoisammattitutkinto"
       "13" "perustutkinto"
-      "14" "ammattitutkinto"
       nil)))
 
 (defn ^:private tutkintonimike-koodi?
