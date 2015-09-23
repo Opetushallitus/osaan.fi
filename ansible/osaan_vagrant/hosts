@@ -2,9 +2,12 @@
 [oph_db]
 192.168.50.71
 
+[oph_palvelu]
+192.168.50.72
+
 [all:vars]
 ansible_ssh_user = osaanadmin
-tietokanta = osaan 
+tietokanta = osaan
 tietokannan_peruskayttaja = osaan_user
 tietokannan_paakayttaja = osaan_adm
 tietokantapalvelimen_yksityinen_nimi = 192.168.50.71
@@ -12,9 +15,18 @@ tietokantapalvelimen_yksityinen_nimi = 192.168.50.71
 # Käytetään tunnettuja salasanoja, koska dev-scripts/create-db-schema.sh ajaa
 # migraation suoraan (ilman asennusta tai ttk-db.properties-tiedostoa) ja
 # sisältää tämän vuoksi salasanat
-tietokannan_peruskayttajan_salasana = osaan 
+tietokannan_peruskayttajan_salasana = osaan
 tietokannan_paakayttajan_salasana = osaan-adm
 
 [oph_db:vars]
 salli_dumpin_lataus = yes
 
+[oph_palvelu:vars]
+palvelu = osaan
+asennushakemisto = /data00/osaan
+asenna_asetustiedostot = yes
+lokituksen_asetustiedosto = logback.xml
+sovelluksen_asetustiedosto = osaan.properties
+migraation_asetustiedosto = osaan-db.properties
+migraation_argumentit_asennuksen_jalkeen = --clear -t
+migraation_argumentit_dumpin_jalkeen = -t
