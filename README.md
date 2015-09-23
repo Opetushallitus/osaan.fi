@@ -3,30 +3,36 @@ Osaan.fi
 
 Osaan.fi palvelun uudistettu versio. 
 
-# Clojure-utils
+# Lähdekoodin haku
 
-Tämän repositoryn rinnalle on tarkoitus pudottaa [clojure-utils](https://github.com/Opetushallitus/clojure-utils). Muiden Opetushallituksen Clojure-projektien kanssa yhteistä koodia käytetään tällä hetkellä suhteellisella hakemistoviitteellä.
+## Osaan.fi
 
+Hae tämän projektin lähdekoodi esimerkiksi hakemistoon `osaan.fi`.
 
-# Paikallinen kehitysympäristö
+## Clojure-utils
 
-1. Tietokantapalvelin virtuaalikoneena
-```
-cd vagrant
-vagrant up osaan-db
-```
+Hae tämän projektin rinnalle projekti [clojure-utils](https://github.com/Opetushallitus/clojure-utils). Muiden Opetushallituksen Clojure-projektien kanssa yhteistä koodia käytetään tällä hetkellä suhteellisella hakemistoviitteellä.
 
-2. Tietokannan pystyttäminen paikallisesti
+# Paikallinen ympäristö sovelluksen ajoon
 
-Tietokanta tyhjennetään --clear vivun avulla.
+Seuraavilla askelilla sovellus voidaan käynnistää paikallisella Unix-koneella.
 
-```
-cd db
-lein uberjar
-java -jar target/osaan-db-standalone.jar --clear postgresql://osaan_adm:osaan-adm@127.0.0.1:4567/osaan
-```
+1. Kehitystyötä varten tarvittavat ohjelmat
+  - Java SE JDK
+  - [NodeJS](https://nodejs.org/)
+  - [Vagrant](https://www.vagrantup.com/)
+  - [VirtualBox](https://www.virtualbox.org/)
+  - [Ansible](http://www.ansible.com/)
+      - [asennusohjeet](http://docs.ansible.com/ansible/intro_installation.html)
+      - Ansible on saatavilla vain Unix-koneille
+2. Tietokannan pystyttäminen
 
-Tai ilman jar-generointia. 
-```
-lein run --clear postgresql://osaan_adm:osaan-adm@127.0.0.1:4567/osaan
-```
+  ```
+  dev-scripts/init-db.sh
+  ```
+3. Sovelluspalvelimen pystyttäminen ja sovelluksen asentaminen
+
+  ```
+  dev-scripts/init-app.sh
+  ```
+4. Sovellus löytyy osoitteesta http://192.168.50.72/osaan/
