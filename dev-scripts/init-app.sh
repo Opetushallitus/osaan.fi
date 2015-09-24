@@ -9,4 +9,3 @@ cd $REPO_PATH/vagrant
 vagrant destroy -f osaan-app
 vagrant up osaan-app
 
-$REPO_PATH/dev-scripts/deploy.sh
