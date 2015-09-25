@@ -199,7 +199,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'vastaukset-muistissa': 'Dina svar finns lagrade så länge du använder servicen. Om du vill spara din bedömning inom denna examen, välj Spara bedömningen.',
       'yleiset.arvioi_osaaminen': 'Bedöm kunnandet',
       'yleiset.hakutulosta': 'sökträffar',
-      'yleiset.kielen_vaihto': 'På finska',
+      'yleiset.kielen_vaihto': 'Suomeksi',
       'yleiset.raportti': 'Rapport',
       'yleiset.sivun_loppuun': 'Till slutet av sidan',
       'yleiset.tallenna': 'Lagra bedömningarna',
