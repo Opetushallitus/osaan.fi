@@ -6,7 +6,7 @@
   <div class="panel-heading">
     <h3 class="panel-title">{{ 'arviointi.arvioi_osaamisesi' | translate }} - {{ tutkinto | lokalisoiKentta:'nimi' }}</h3>
   </div>
-  <div class="panel-body">
+  <div class="panel-body" scroll-position>
     
     <div class="osienselaus">
       <div class="row">
@@ -16,8 +16,11 @@
     
     <h3 class="edistyminen" sticky-header top="0">
       {{ tutkinnonosatById[tutkinnonosa] | lokalisoiKentta:'nimi' }}<span class="hidden-sm hidden-xs"> – </span><span class="hidden-md hidden-lg"><br></span>{{'arviointi.arvioitu' | translate}}&nbsp;{{arvioidut.length}}&nbsp;/&nbsp;{{kohteet.length}}
-      <button class="btn btn-primary" role="button" ng-click="sivunLoppuun()">
+      <button class="btn btn-primary" role="button" ng-click="sivunLoppuun()" ng-show="scrollPosition == 'top' || scrollPosition == 'middle'">
         <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>&nbsp;
+      </button>
+      <button class="btn btn-primary" role="button" ng-click="sivunAlkuun()" ng-show="scrollPosition == 'bottom' || scrollPosition == 'middle'">
+        <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>&nbsp;
       </button>
     </h3>
 

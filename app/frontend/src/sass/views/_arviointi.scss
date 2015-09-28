@@ -152,11 +152,22 @@ h3.edistyminen {
   margin-top: 0;
   border-top: 5px solid $lighter-primary;
   position:relative;
-  
+
   .btn {
-    position:absolute;
-    right:0;
-    top:0;
+    position: relative;
+    float: right;
+    border: rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0);
+    height: 2em;
+    margin-top: -0.4em;
+    width: 2em;
+    color: #FFF;
+    text-align: center;
+    padding: 0;
+    padding-left: .1em;
+    &:hover{
+      background-color: $primary-color;
+    }
   }
 }
 

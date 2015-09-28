@@ -97,6 +97,10 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
       window.scrollTo(0,document.body.scrollHeight);
     };
 
+    $scope.sivunAlkuun = function() {
+      window.scrollTo(0,0);
+    };
+
     $scope.edellisetOsat = _.takeWhile(Arviointi.valitutOsatunnukset(), function(tunnus) { return tunnus !== tutkinnonosa; });
 
     $scope.seuraavatOsat = _.takeRightWhile(Arviointi.valitutOsatunnukset(), function(tunnus) { return tunnus !== tutkinnonosa; });

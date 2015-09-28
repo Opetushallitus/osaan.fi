@@ -34,6 +34,7 @@ angular.module('osaan.fi', [
   'osaan.direktiivit.tallennus',
   'osaan.direktiivit.eperusteet-linkki',
   'osaan.direktiivit.osalista',
+  'osaan.direktiivit.scroll-position',
   'osaan.direktiivit.tutkinnonosa-tilastot',
   'osaan.direktiivit.vastaukset-muistissa',
   'osaan.lataa.lataaui',
