@@ -15,12 +15,12 @@
 'use strict';
 
 angular.module('osaan.direktiivit.scroll-position', [])
-  .directive("scrollPosition", ['$window', function ($window) {
+  .directive('scrollPosition', ['$window', function ($window) {
     return {
       restrict: 'A',
       scope: false,
       link: function(scope) {
-        angular.element($window).bind("scroll", function() {
+        angular.element($window).bind('scroll', function() {
           
           var clientHeight = $window.document.body.clientHeight - $(window).height();
           var position =  ((this.pageYOffset/clientHeight)*100);
