@@ -45,6 +45,8 @@
           <kaavio jakauma="jakauma"></kaavio>
         </div>
 
+        <div>{{ 'raportti.tutkinnon_keskiarvo' | translate }}: {{ raportti.keskiarvo | number:2 }}</div>
+
         <h3 translate="raportti.vastausprosentit"></h3>
         <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.pakolliset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="pakollinen"></tutkinnonosa-tilastot>
         <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.valinnaiset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="valinnainen"></tutkinnonosa-tilastot>
