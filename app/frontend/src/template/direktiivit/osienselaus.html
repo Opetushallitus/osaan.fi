@@ -4,7 +4,7 @@
       {{ 'yleiset.arvioi_osaaminen' | translate}}&nbsp;
       <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
     </button>
-    <div><small>{{ tutkinnonosatById[seuraavaTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small></div>
+    <div><small ng-if="otsikot">{{ tutkinnonosatById[seuraavaTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small>&nbsp;</div>
   </div>
 
   <div ng-if="seuraavaTutkinnonosa() === undefined" class="pull-right text-right">
@@ -28,7 +28,7 @@
       <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
       {{ 'yleiset.arvioi_osaaminen' | translate}}&nbsp;
     </button>
-    <div><small>{{ tutkinnonosatById[edellinenTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small></div>
+    <div><small ng-if="otsikot">{{ tutkinnonosatById[edellinenTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small>&nbsp;</div>
   </div>
   
   <div class="sivut">

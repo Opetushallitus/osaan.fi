@@ -110,7 +110,11 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
     return {
       restrict: 'E',
       templateUrl: 'template/direktiivit/osienselaus.html',
-      replace: true
+      replace: true,
+      scope: true,
+      link: function(scope, element, attrs) {
+        scope.otsikot = (attrs.otsikot !== 'false');
+      }
     };
   }])
 
