@@ -19,9 +19,8 @@
 
 (c/defroutes reitit
   (cu/defapi :julkinen nil :post "/" request
-    (let [data (-> request :form-params (get "data"))
-          filename (-> request :form-params (get "filename"))]
+    (let [data (-> request :form-params (get "data"))]
       {:status  200
        :headers {"Content-Type"        "text/plain"
-                 "Content-Disposition" (str "attachment; filename=" filename)}
+                 "Content-Disposition" (str "attachment; filename=raportti.txt")}
        :body    data})))
