@@ -40,6 +40,12 @@
     {:nimi_fi (:fi kriteeri)
      :nimi_sv (:sv kriteeri)}))
 
+(defn muotoile-osa-alue [index alue]
+  {:jarjestys (inc index)
+   :nimi_fi (get-in alue [:nimi :fi])
+   :nimi_sv (get-in alue [:nimi :sv])
+   :ammattitaidon_kuvaukset (map-indexed numeroi (mapcat muotoile-ammattitaidon-kuvaukset (-> alue :arviointi :arvioinninKohdealueet first :arvioinninKohteet)))})
+
 (defn muotoile-arvioinnin-kohdealue [index alue]
   {:jarjestys (inc index)
    :nimi_fi (get-in alue [:otsikko :fi])
@@ -53,11 +59,15 @@
     (:koodiArvo osa) (second (re-matches #"^tutkinnonosat_(\d+)$" (:koodiArvo osa)))))
 
 (defn muotoile-tutkinnonosa [index osa]
-  {:osatunnus (osatunnus osa)
-   :jarjestys (inc index)
-   :nimi_fi (get-in osa [:nimi :fi])
-   :nimi_sv (get-in osa [:nimi :sv])
-   :arvioinnin_kohdealueet (map-indexed muotoile-arvioinnin-kohdealue (get-in osa [:arviointi :arvioinninKohdealueet]))})
+  (let [kohdealueet (map-indexed muotoile-arvioinnin-kohdealue (get-in osa [:arviointi :arvioinninKohdealueet]))
+        osa-alueet (map-indexed muotoile-osa-alue (mapcat :osaamistavoitteet (:osaAlueet osa)))] 
+    {:osatunnus (osatunnus osa)
+     :jarjestys (inc index)
+     :nimi_fi (get-in osa [:nimi :fi])
+     :nimi_sv (get-in osa [:nimi :sv])
+     :arvioinnin_kohdealueet (if (seq kohdealueet)
+                               kohdealueet
+                               osa-alueet)}))
 
 (defn yhteinen-osa? [rakenne]
   (= (get-in rakenne [:nimi :fi]) "Yhteiset tutkinnon osat"))
