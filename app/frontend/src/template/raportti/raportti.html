@@ -73,7 +73,7 @@
               </thead>
               <tbody>
               <tr ng-repeat="kuvaus in kohdealue.kuvaukset">
-                <td>{{ kuvaus | lokalisoiKentta:'nimi' }}</td>
+                <td><a ng-href="#/arviointi?osa={{tutkinnonosa.osatunnus}}#kuvaus{{kuvaus.ammattitaidonkuvaus_id}}">{{ kuvaus | lokalisoiKentta:'nimi' }}</a></td>
                 <td>
                   <span class="arvio eos" ng-if="kuvaus.arvio.arvio === null" translate="arviointi.eos_lyh" popover="{{ 'arviointi.eos' | translate }}"></span>
                   <span class="arvio" ng-if="kuvaus.arvio.arvio">{{ kuvaus.arvio.arvio }}</span>

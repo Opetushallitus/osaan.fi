@@ -24,7 +24,7 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
       });
   }])
 
-  .controller('ArviointiController', ['$location', '$routeParams', '$scope', '$timeout', 'AmmattitaidonKuvaus', 'Arviointi', 'Tutkinnonosa', 'Tutkinto', function($location, $routeParams, $scope, $timeout, AmmattitaidonKuvaus, Arviointi, Tutkinnonosa, Tutkinto) {
+  .controller('ArviointiController', ['$anchorScroll', '$location', '$routeParams', '$scope', '$timeout', 'AmmattitaidonKuvaus', 'Arviointi', 'Tutkinnonosa', 'Tutkinto', function($anchorScroll, $location, $routeParams, $scope, $timeout, AmmattitaidonKuvaus, Arviointi, Tutkinnonosa, Tutkinto) {
     var tutkinnonosa = $routeParams.osa;
     $scope.tutkinnonosa = tutkinnonosa;
     var tutkintotunnus = Arviointi.valittuTutkintotunnus();
@@ -46,6 +46,11 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
     AmmattitaidonKuvaus.haeKohdealueet(tutkinnonosa).then(function(kohdealueet) {
       $scope.kohdealueet = kohdealueet;
       $scope.kohteet = _($scope.kohdealueet).map('kuvaukset').flatten().map('ammattitaidonkuvaus_id').value();
+
+      $timeout(function() {
+        $anchorScroll.yOffset = 100;
+        $anchorScroll();
+      });
     });
 
     $scope.arviot = {}; // ammattitaidonkuvaus_id -> {arvio, vapaateksti}
