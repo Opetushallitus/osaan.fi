@@ -14,11 +14,14 @@ Vagrant.configure("2") do |config|
 
   vmbox = "CentOS-6.5-x86_64-v20140311.box"
   vmbox_url = "http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.5-x86_64-v20140311.box"
+  checksum = "7fcb33945b790dccfdb845e127bf98bd9f082282f36e9cec629d88ed6aa5a8a4"
 
   # Kehitystyön tietokantapalvelin
   config.vm.define "osaan-db" do |db|
     db.vm.box = vmbox
     db.vm.box_url = vmbox_url
+    db.vm.box_download_checksum = checksum
+    db.vm.box_download_checksum_type = "sha256"
 
     db.vm.synced_folder "../env", "/env"
     if File.directory?("../../osaan.fi-dbdump")
@@ -35,6 +38,8 @@ Vagrant.configure("2") do |config|
   config.vm.define "osaan-app" do |app|
     app.vm.box = vmbox
     app.vm.box_url = vmbox_url
+    app.vm.box_download_checksum = checksum
+    app.vm.box_download_checksum_type = "sha256"
 
     app.vm.synced_folder "../env", "/env"
     app.vm.provision "shell", inline: "cd /env && ./app-server.sh local local/ssh/dev_id_rsa.pub"
