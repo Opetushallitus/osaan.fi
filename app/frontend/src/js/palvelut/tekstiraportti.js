@@ -31,7 +31,8 @@ angular.module('osaan.palvelut.tekstiraportti', [])
         t += lokalisoiKentta(raportti, 'tutkinto_nimi');
         t += '\n\n\n';
 
-        t += 'Päiväys: ';
+        t += $translate.instant('raportti.paivays');
+        t += ': ';
         t += $filter('date')(new Date(), 'dd.MM.yyyy');
         t += '\n\n\n';
 
@@ -44,24 +45,35 @@ angular.module('osaan.palvelut.tekstiraportti', [])
         t += $translate.instant('arviointi.eos');
         t += '\n\n';
 
-        t += 'Arvio   Tutkinnon osa -> kohdealue -> ammattitaito\n';
-        t += '=====   ==========================================\n\n';
+        var arvio = $translate.instant('raportti.arvio');
+        var hierarkia = $translate.instant('raportti.hierarkia');
+        var space = _.repeat(' ', arvio.length - 1);
+        t += arvio;
+        t += '   ';
+        t += hierarkia;
+        t += '\n';
+        t += _.repeat('=', arvio.length);
+        t += '   ';
+        t += _.repeat('=', hierarkia.length);
+        t += '\n\n';
 
-        t += number(raportti.keskiarvo, 2) + '    ' + lokalisoiKentta(raportti, 'tutkinto_nimi') + '\n';
+        t += number(raportti.keskiarvo, 2) + space + lokalisoiKentta(raportti, 'tutkinto_nimi') + '\n';
 
         _.forEach(raportti.tutkinnonosat, function(tutkinnonosa) {
-          t += number(tutkinnonosa.keskiarvo, 2) + '    ' + lokalisoiKentta(tutkinnonosa, 'nimi') + '\n';
+          t += number(tutkinnonosa.keskiarvo, 2) + space + lokalisoiKentta(tutkinnonosa, 'nimi') + '\n';
           _.forEach(tutkinnonosa.kohdealueet, function(kohdealue) {
-            t += number(kohdealue.keskiarvo, 2) + '       ' + lokalisoiKentta(kohdealue, 'nimi') + '\n';
+            t += number(kohdealue.keskiarvo, 2) + space + '    ' + lokalisoiKentta(kohdealue, 'nimi') + '\n';
 
             _.forEach(kohdealue.kuvaukset, function(kuvaus) {
               var num = '-  ';
               if (kuvaus.arvio) {
                 num = kuvaus.arvio.arvio ? kuvaus.arvio.arvio : '?';
               }
-              t += num + '             ' + lokalisoiKentta(kuvaus, 'nimi') + '\n';
+              t += num + space + '           ' + lokalisoiKentta(kuvaus, 'nimi') + '\n';
               if (kuvaus.arvio && kuvaus.arvio.vapaateksti) {
-                t += '              KOMMENTTI: ' + kuvaus.arvio.vapaateksti + '\n';
+                t += '              ';
+                t += $translate.instant('raportti.kommentti').toUpperCase();
+                t += ': ' + kuvaus.arvio.vapaateksti + '\n';
               }
             });
           });
