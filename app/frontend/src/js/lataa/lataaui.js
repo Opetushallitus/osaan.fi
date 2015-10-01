@@ -25,7 +25,14 @@ angular.module('osaan.lataa.lataaui', ['ngRoute'])
       });
   }])
 
-  .controller('LataaController', ['$filter', '$location', '$routeParams', '$scope', '$translate', 'Arvio', 'Arviointi', 'Huomautus', function($filter, $location, $routeParams, $scope, $translate, Arvio, Arviointi, Huomautus) {
+  .controller('LataaController', ['$filter', '$location', '$routeParams', '$scope', '$translate', '$window', 'Arvio', 'Arviointi', 'Huomautus', 'kieli', function($filter, $location, $routeParams, $scope, $translate, $window, Arvio, Arviointi, Huomautus, kieli) {
+    // Kielen vaihto vaatii reloadin kieli-factorystä johtuen :(
+    if ($routeParams.kieli !== undefined && _.indexOf(['fi', 'sv'], $routeParams.kieli) != -1 && $routeParams.kieli !== kieli) {
+      localStorage.setItem('kieli', $routeParams.kieli);
+      $window.location.reload();
+      return;
+    }
+
     Arvio.lataa($routeParams.arviotunnus).then(function(arvio) {
       Arviointi.lataa(arvio);
 

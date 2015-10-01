@@ -56,8 +56,8 @@ angular.module('osaan.direktiivit.tallennus', ['osaan.palvelut.tallennus'])
     };
   }])
 
-  .controller('TallennusModalController', ['$modalInstance', '$scope', 'tunnus', function($modalInstance, $scope, tunnus) {
-    $scope.linkki = document.location.href.split('#')[0] + '#/lataa/' + tunnus;
+  .controller('TallennusModalController', ['$modalInstance', '$scope', 'kieli', 'tunnus', function($modalInstance, $scope, kieli, tunnus) {
+    $scope.linkki = document.location.href.split('#')[0] + '#/lataa/' + tunnus + '?kieli=' + kieli;
     $scope.linkki_mailto = encodeURIComponent($scope.linkki);
 
     $scope.close = $modalInstance.close;
