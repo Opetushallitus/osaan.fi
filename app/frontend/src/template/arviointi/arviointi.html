@@ -54,7 +54,7 @@
           </div>
           <div class="valinnat-container vapaateksti">
             <div class="reveal-animation vapaatekstivastaus" ng-if="vapaateksti_auki">
-              <textarea ng-model="arviot[kuvaus.ammattitaidonkuvaus_id].vapaateksti" ng-model-options="{debounce: 200}" placeholder="{{ 'arviointi.tekstivastaus_placeholder' | translate }}" rows="4" class="form-control"></textarea>
+              <textarea ng-model="arviot[kuvaus.ammattitaidonkuvaus_id].vapaateksti" ng-model-options="{debounce: 200}" placeholder="{{ 'arviointi.tekstivastaus_placeholder' | translate }}" rows="4" class="form-control" maxlength="10000"></textarea>
             </div>
           </div>
         </div>

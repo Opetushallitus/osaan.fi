@@ -19,7 +19,7 @@
             :peruste s/Int
             ; tutkinnonosatunnus -> ammattitaidonkuvaus_id -> { arvio, vapaateksti }
             :kohdearviot {s/Any {s/Any {(s/optional-key :arvio) (s/maybe s/Int)
-                                        (s/optional-key :vapaateksti) (s/maybe s/Str)}}}
+                                        (s/optional-key :vapaateksti) (s/maybe (s/conditional #(<= (count %) 10000) String))}}}
             :tutkinnonosat [s/Str]})
 
 (def ArvioUlos (assoc Arvio (s/optional-key :luotuaika) java.sql.Timestamp))
