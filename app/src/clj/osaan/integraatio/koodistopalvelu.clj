@@ -50,8 +50,7 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
 
 (defn ^:private hae-koodit
   "Hakee kaikki koodit annetusta koodistosta ja asettaa koodin koodiarvon avaimeksi arvokentta"
-  ([asetukset koodisto] (get-json-from-url (str (:url asetukset) koodisto "/koodi")))
-  ([asetukset koodisto versio] (get-json-from-url (str (:url asetukset) koodisto "/koodi?koodistoVersio=" versio))))
+  ([asetukset koodisto] (get-json-from-url (str (:url asetukset) koodisto "/koodi"))))
 
 (defn kuuluu-koodistoon
   "Filtteröi koodilistasta annetun koodiston koodit"
@@ -91,17 +90,6 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
   (and ((kuuluu-koodistoon "tutkintonimikkeet") koodi)
        (not= "00000" (:koodiArvo koodi))))
 
-(defn koodiston-uusin-versio
-  [asetukset koodisto]
-  (loop [versio nil]
-     (when-let [json (get-json-from-url (str (:url asetukset)
-                                             koodisto
-                                             (when versio (str "?koodistoVersio=" versio))))]
-       (cond
-         (= "HYVAKSYTTY" (:tila json)) (:versio json)
-         (= 1 (:versio json)) 1
-         :else (recur (dec (:versio json)))))))
-
 (defn ^:private lisaa-opintoalaan-koulutusala
   [asetukset opintoala]
   (let [ylakoodit (get-json-from-url (str (:url asetukset) "relaatio/sisaltyy-ylakoodit/" (:koodiUri opintoala)))
@@ -127,28 +115,25 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
            :tutkintonimikkeet nimikkeet)))
 
 (defn hae-koodisto
-  [asetukset koodisto versio]
-  (koodi->kasite (get-json-from-url (str (:url asetukset) koodisto "?koodistoVersio=" versio)) :koodisto))
+  [asetukset koodisto]
+  (koodi->kasite (get-json-from-url (str (:url asetukset) koodisto)) :koodisto))
 
 (defn hae-tutkinnot
   [asetukset]
-  (let [koodistoversio (koodiston-uusin-versio asetukset "koulutus")]
-    (map koodi->tutkinto (hae-koodit asetukset "koulutus" koodistoversio))))
+  (map koodi->tutkinto (hae-koodit asetukset "koulutus")))
 
 (defn hae-koulutusalat
   [asetukset]
-  (let [koodistoversio (koodiston-uusin-versio asetukset "koulutusalaoph2002")]
-    (->> (hae-koodit asetukset "koulutusalaoph2002" koodistoversio)
-      (map koodi->koulutusala)
-      (map #(dissoc % :kuvaus_fi :kuvaus_sv)))))
+  (->> (hae-koodit asetukset "koulutusalaoph2002")
+    (map koodi->koulutusala)
+    (map #(dissoc % :kuvaus_fi :kuvaus_sv))))
 
 (defn hae-opintoalat
   [asetukset]
-  (let [koodistoversio (koodiston-uusin-versio asetukset "opintoalaoph2002")]
-    (->> (hae-koodit asetukset "opintoalaoph2002" koodistoversio)
-      (map koodi->opintoala)
-      (map (partial lisaa-opintoalaan-koulutusala asetukset))
-      (map #(dissoc % :kuvaus_fi :kuvaus_sv)))))
+  (->> (hae-koodit asetukset "opintoalaoph2002")
+    (map koodi->opintoala)
+    (map (partial lisaa-opintoalaan-koulutusala asetukset))
+    (map #(dissoc % :kuvaus_fi :kuvaus_sv))))
 
 (defn muutokset
   [uusi vanha]
