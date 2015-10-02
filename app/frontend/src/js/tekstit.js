@@ -171,7 +171,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'raportti.otsikko_ohje': 'Examen avläggs enligt de examensgrunder som fastställts av Utbildningsstyrelsen. I grunderna för examen definieras examensdelarna, uppbyggnaden av examen, kraven på yrkesskicklighet, bedömningsgrunderna och sätten att påvisa sina yrkeskunskaper. Examensgrunderna hittar du via adressen egrunder.studieinfo.fi. Mer info om uppbyggnaden av en viss examen får du från de läroanstalter och läroavtalsbyråer som anordnar examen.',
       'raportti.paivays': 'Datum',
       'raportti.pakolliset': 'Obligatoriska',
-      'raportti.tutkinnon_keskiarvo': 'Tutkinnon keskiarvo (sv)',
+      'raportti.tutkinnon_keskiarvo': 'Medeltal på examen',
       'raportti.tyyppi_tekstiraportti': 'Textrapport',
       'raportti.valinnaiset': 'Valbara',
       'raportti.valintojen_selitykset': 'Siffrornas förklaringar',
