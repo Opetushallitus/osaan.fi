@@ -18,26 +18,36 @@
             [oph.common.util.util :refer [update-in-if-exists]]
             [oph.korma.common :as sql-util]
             [osaan.arkisto.tutkinnonosa :as tutkinnonosa-arkisto]
+            [osaan.arkisto.tutkinto :as tutkinto-arkisto]
             [osaan.infra.sql.korma :as taulut]
             [clojure.tools.logging :as log]))
 
+(defn taydenna-nimi [data virheilmoitus]
+  (cond
+    (and (nil? (:nimi_fi data))
+         (:nimi_sv data))        (do
+                                   (log/warn virheilmoitus data)
+                                   (assoc data :nimi_fi (:nimi_sv data)))
+    (and (nil? (:nimi_fi data))
+         (nil? (:nimi_sv data))) (log/warn virheilmoitus data)
+    :else data))
+
 (defn ^:integration-api paivita-ammattitaidon-kuvaus! [kuvaus]
-  (if (nil? (:nimi_fi kuvaus))
-    (log/warn "Puutteellinen ammattitaidon kuvaus:" kuvaus)
+  (when-let [kuvaus (taydenna-nimi kuvaus "Puutteellinen ammattitaidon kuvaus")]
     (sql-util/insert-or-update :ammattitaidon_kuvaus [:arvioinninkohdealue :jarjestys]
-                              (select-keys kuvaus [:nimi_fi :nimi_sv :arvioinninkohdealue :jarjestys]))))
+                               (select-keys kuvaus [:nimi_fi :nimi_sv :arvioinninkohdealue :jarjestys]))))
 
 (defn ^:integration-api paivita-arvioinnin-kohdealue! [alue]
-  (let [tallennettava-alue (select-keys alue [:nimi_fi :nimi_sv :osa :jarjestys])]
+  (when-let [tallennettava-alue (taydenna-nimi (select-keys alue [:nimi_fi :nimi_sv :osa :jarjestys]) "Puutteellinen arvioinnin kohdealue")]
     (if (some nil? (map tallennettava-alue [:osa :jarjestys :nimi_fi]))
       (log/warn "Puutteellinen arvioinnin kohdealue:" tallennettava-alue)
       (let [tallennettu-alue (sql-util/insert-or-update :arvioinnin_kohdealue [:osa :jarjestys]
-                                                        (select-keys alue [:nimi_fi :nimi_sv :osa :jarjestys]))]
+                                                        (select-keys tallennettava-alue [:nimi_fi :nimi_sv :osa :jarjestys]))]
         (doseq [kuvaus (:ammattitaidon_kuvaukset alue)]
           (paivita-ammattitaidon-kuvaus! (assoc kuvaus :arvioinninkohdealue (:arvioinninkohdealue_id tallennettu-alue))))))))
 
 (defn ^:integration-api paivita-tutkinnonosa! [osa]
-  (let [tallennettava-osa (select-keys osa [:osatunnus :nimi_fi :nimi_sv])]
+  (when-let [tallennettava-osa (taydenna-nimi (select-keys osa [:osatunnus :nimi_fi :nimi_sv]) "Puutteellinen tutkinnonosa")]
     (if (some nil? (map tallennettava-osa [:osatunnus :nimi_fi]))
       (log/warn "Puutteellinen tutkinnonosa:" tallennettava-osa)
       (do
