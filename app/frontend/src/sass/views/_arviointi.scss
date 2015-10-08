@@ -204,6 +204,7 @@ h3.edistyminen {
 .sivut {
   display:inline-block;
   margin: 0 auto;
+  margin-bottom: .5em;
   
   .clear-left {
     clear: left;
@@ -217,11 +218,10 @@ h3.edistyminen {
     line-height: 100%;
     background-color: $lightest-gray;
     height: 2em;
-    width: 2em;
+    width: auto;
     vertical-align: top;
     text-align: center;
-    padding: .5em 0px 0px 0px;
-    margin-right: .7em;
+    padding: .5em .5em 0 .5em;
     color: $gray-color;
     position: relative;
     &.nykyinen {

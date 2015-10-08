@@ -20,6 +20,7 @@ angular.module('osaan.fi', [
   'ngSanitize',
   'taiPlaceholder',
   'ui.bootstrap',
+  'ng-fastclick',
 
   'yhteiset.palvelut.lokalisointi',
 

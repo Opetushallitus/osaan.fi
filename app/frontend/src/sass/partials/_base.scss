@@ -45,6 +45,7 @@ a{
 
 section.main-content {
   padding-bottom: $footer-height + $marginM + 60;
+  position: relative;
 }
 
 footer {
@@ -94,4 +95,8 @@ footer {
   padding: 1em;
   color: #FFF;
   background-color: #E34045;
+}
+
+.kielen-vaihto{
+  margin-right: 2em;
 }
