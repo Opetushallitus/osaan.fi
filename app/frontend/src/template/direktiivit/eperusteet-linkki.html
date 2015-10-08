@@ -1,23 +1,23 @@
 <div class="eperusteet">
   <div>
+    <span class="glyphicon glyphicon-question-sign linkkipopover" popover="{{ 'tutkinto.eperusteet_linkki_info' | translate }}" popover-trigger="click hover" popover-placement="right"></span>
     <a href="https://eperusteet.opintopolku.fi/#/{{kieli}}/esitys/{{eperustetunnus}}/{{eperustetyyppi}}/{{eperustesivu}}" target="blank">
       <span class="glyphicon bitmap icon-eperuste" aria-hidden="true"></span>
       {{ 'tutkinto.eperusteet_linkki' | translate }}
     </a>
-    <span class="glyphicon glyphicon-question-sign linkkipopover" popover="{{ 'tutkinto.eperusteet_linkki_info' | translate }}" popover-trigger="mouseenter"></span>
   </div>
   <div ng-if="eperustetyyppi!='ops'">
+    <span class="glyphicon glyphicon-question-sign linkkipopover" popover="{{ 'tutkinto.nayttotutkinnonjarjestajat_linkki_info' | translate }}" popover-trigger="click hover" popover-placement="right"></span>
     <a href="http://www.nayttotutkintohaku.fi/{{kieli}}/#/tutkinto/{{tutkintotunnus}}" target="blank">
       <span class="glyphicon bitmap icon-nayttotutkintohaku" aria-hidden="true"></span>
       {{ 'tutkinto.nayttotutkinnonjarjestajat_linkki' | translate }}
     </a>
-    <span class="glyphicon glyphicon-question-sign linkkipopover" popover="{{ 'tutkinto.nayttotutkinnonjarjestajat_linkki_info' | translate }}" popover-trigger="mouseenter"></span>
   </div>
   <div ng-if="eperustetyyppi !== 'naytto'" >
+    <span class="glyphicon glyphicon-question-sign linkkipopover" popover="{{ 'tutkinto.koulutustarjonta_linkki_info' | translate }}" popover-trigger="click hover" popover-placement="right"></span>
     <a ng-href="{{opintopolkuUrl}}" target="blank">
       <span class="glyphicon bitmap icon-opintopolku" aria-hidden="true"></span>
       {{ 'tutkinto.koulutustarjonta_linkki' | translate }}
     </a>
-    <span class="glyphicon glyphicon-question-sign linkkipopover" popover="{{ 'tutkinto.koulutustarjonta_linkki_info' | translate }}" popover-trigger="mouseenter"></span>
   </div>
 </div>
