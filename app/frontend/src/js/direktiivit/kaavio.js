@@ -15,7 +15,7 @@
 'use strict';
 
 angular.module('osaan.direktiivit.kaavio', [])
-  .directive('kaavio', [function() {
+  .directive('kaavio', ['$timeout', function($timeout) {
     return {
       restrict: 'E',
       replace: true,
@@ -59,6 +59,15 @@ angular.module('osaan.direktiivit.kaavio', [])
           {paikka: 0.75, teksti: '3'},
           {paikka: 1.0, teksti: '4'}
         ];
+
+        scope.setHeight = function() {
+          var svg = document.getElementsByTagName("svg")[0];
+          svg.setAttribute("viewBox", "0 0 690 " + (scope.viivastonKorkeus()+100));
+        }
+
+        $timeout(function() {
+          scope.setHeight();
+        }, 500);
       }
     };
   }]);

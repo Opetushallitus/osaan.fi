@@ -216,7 +216,6 @@ h3.edistyminen {
     font-size: 1.28571428em; /* 18px */
     font-weight: normal;
     line-height: 100%;
-    background-color: $lightest-gray;
     height: 2em;
     width: auto;
     vertical-align: top;
@@ -224,6 +223,9 @@ h3.edistyminen {
     padding: .5em .5em 0 .5em;
     color: $gray-color;
     position: relative;
+    &:hover {
+      background-color: $lightest-gray;
+    }
     &.nykyinen {
       background-color: $primary-color;
       color: white;

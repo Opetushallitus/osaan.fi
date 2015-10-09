@@ -1,3 +1,9 @@
+@media only screen and (max-width: 1000px) {
+  .kaavio {
+    max-width: 90%;
+  }
+}
+
 @media only screen and (max-width: 750px) {
   #oph-logo {
     width: 30%;
@@ -35,6 +41,9 @@
   .ohje .ohje-popup {
     width: 315px;
     font-size: 0.85714285714286em;
+  }
+  .kaavio {
+    max-width: 100%;
   }
 }
 
