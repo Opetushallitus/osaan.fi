@@ -21,6 +21,6 @@
   (cu/defapi :julkinen nil :post "/" request
     (let [data (-> request :form-params (get "data"))]
       {:status  200
-       :headers {"Content-Type"        "text/plain"
+       :headers {"Content-Type"        "text/plain; charset=UTF-8"
                  "Content-Disposition" (str "attachment; filename=raportti.txt")}
        :body    data})))
