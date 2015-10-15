@@ -124,7 +124,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'arviointi.asteikko4': 'Jag kan utmärkt',
       'arviointi.ei_kohteita': 'Inga föremål för bedömningen finns för närvarande.',
       'arviointi.eos': 'Svårt att säga',
-      'arviointi.eos_lyh': 'eos (sv)',
+      'arviointi.eos_lyh': 'eos',
       'arviointi.miten': 'Hur beskriver följande påståenden ditt kunnande?',
       'arviointi.raportti': 'Visa rapporten',
       'arviointi.tekstivastaus': 'Textsvar',
