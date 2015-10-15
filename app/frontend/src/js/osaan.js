@@ -18,6 +18,7 @@ angular.module('osaan.fi', [
   'ngAnimate',
   'ngRoute',
   'ngSanitize',
+  'angular-loading-bar',
   'taiPlaceholder',
   'ui.bootstrap',
   'ng-fastclick',
