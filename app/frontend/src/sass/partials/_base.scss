@@ -5,12 +5,24 @@ html {
   text-rendering: optimizeLegibility;
   -ms-touch-action: manipulation;
   touch-action: manipulation;
+  height: 100%;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 body {
   width: 100%;
   margin: 0;
   padding: 0;
+  height: 100%;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 body > #page-container {

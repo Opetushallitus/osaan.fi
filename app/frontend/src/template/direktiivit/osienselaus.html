@@ -1,21 +1,21 @@
 <div class="col-md-12">
-  <div ng-if="seuraavaTutkinnonosa() !== undefined" class="pull-right text-right">
-    <button class="btn btn-primary" role="button" ng-click="avaaSeuraavaOsa()">
+  <div ng-if="seuraavaTutkinnonosa() !== undefined" class="tutkinnon-osa-nav pull-right text-right">
+    <button class="btn btn-primary pull-right" role="button" ng-click="avaaSeuraavaOsa()">
       {{ 'yleiset.arvioi_osaaminen' | translate}}&nbsp;
       <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
     </button>
     <div><small ng-if="otsikot">{{ tutkinnonosatById[seuraavaTutkinnonosa()] | lokalisoiKentta:'nimi' }}</small>&nbsp;</div>
   </div>
 
-  <div ng-if="seuraavaTutkinnonosa() === undefined" class="pull-right text-right">
-    <button class="btn btn-primary" role="button" ng-click="siirryRaporttiin()">
+  <div ng-if="seuraavaTutkinnonosa() === undefined" class="tutkinnon-osa-nav pull-right text-right">
+    <button class="btn btn-primary pull-right" role="button" ng-click="siirryRaporttiin()">
       {{ 'arviointi.raportti' | translate}}&nbsp;
       <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
     </button>
     <div><small>&nbsp;</small></div>
   </div>
 
-  <div ng-if="edellinenTutkinnonosa() === undefined" class="pull-left text-left">
+  <div ng-if="edellinenTutkinnonosa() === undefined" class="tutkinnon-osa-nav pull-left text-left">
     <button class="btn btn-primary pull-left" role="button" ng-click="palaaOsienValintaan()">
       <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
       {{ 'yleiset.valitse_tutkinnon_osat' | translate}}
@@ -23,8 +23,8 @@
     <div><small>&nbsp;</small></div>
   </div>
 
-  <div ng-if="edellinenTutkinnonosa() !== undefined" class="pull-left text-left">
-    <button class="btn btn-primary" role="button" ng-click="avaaEdellinenOsa()">
+  <div ng-if="edellinenTutkinnonosa() !== undefined" class="tutkinnon-osa-nav pull-left text-left">
+    <button class="btn btn-primary pull-left" role="button" ng-click="avaaEdellinenOsa()">
       <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
       {{ 'yleiset.arvioi_osaaminen' | translate}}&nbsp;
     </button>

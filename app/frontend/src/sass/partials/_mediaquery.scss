@@ -63,8 +63,39 @@
     margin: 0;
     margin-bottom: .5em;
   }
-  footer {
+  .kohdealue .vastaus_valinnat .valinnat-container{
+    margin-right: 0;
+  }
+  .tutkinnon-osa-nav {
+    width: 49%;
+    position: relative;
+    .btn {
+      width: 100%;
+      white-space: normal;
+      height: auto;
+      text-align: center;
+      position: relative;
+      height: 3.7em;
+      span.glyphicon {
+        position: absolute;
+        top: 1.2em;
+      }
+      &.pull-left{
+        padding-left: 1.6em;
+        span.glyphicon {
+          left: .4em;
+        }
+      }
+      &.pull-right {
+        padding-right: 1.6em;
+        span.glyphicon {
+          right: .4em;
+        }
+      }
+    }
+  }
 
+  footer {
     .copyright {
       .vertical-wrapper {
         vertical-align: bottom;

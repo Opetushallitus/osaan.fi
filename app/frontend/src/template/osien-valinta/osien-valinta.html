@@ -37,15 +37,19 @@
   <div class="panel-footer">
     <div class="row">
       <div class="col-md-12">
-        <button class="btn btn-primary pull-right" ng-click="eteenpain()" ng-disabled="seuraavaTutkinnonosa() === undefined" role="button">
-          {{ 'yleiset.arvioi_osaaminen' | translate}} &nbsp;
-          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-        </button>
+        <div class="tutkinnon-osa-nav pull-right text-right">
+          <button class="btn btn-primary pull-right" ng-click="eteenpain()" ng-disabled="seuraavaTutkinnonosa() === undefined" role="button">
+            {{ 'yleiset.arvioi_osaaminen' | translate}} &nbsp;
+            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          </button>
+        </div>
 
-        <a class="btn btn-primary pull-left" href="#/" role="button">
-          <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
-          {{ 'yleiset.valitse_tutkinto' | translate}}
-        </a>
+        <div class="tutkinnon-osa-nav pull-left text-left">
+          <a class="btn btn-primary pull-left" href="#/" role="button">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>&nbsp;
+            {{ 'yleiset.valitse_tutkinto' | translate}}
+          </a>
+        </div>
       </div>
     </div>
   </div>
