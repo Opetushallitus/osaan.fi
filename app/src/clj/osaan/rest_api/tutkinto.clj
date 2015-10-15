@@ -24,6 +24,6 @@
     (json-response (arkisto/hae-perusteella (Integer/parseInt perusteid)) skeema/Tutkinto))
 
   (cu/defapi :julkinen nil :get "/" [nimi opintoala tutkintotyyppi voimaantulevat]
-     (let [tutkintotaso (if (= "kaikki" tutkintotyyppi) nil tutkintotyyppi)
-           oala (if (.equals "" opintoala) nil opintoala)]
-       (json-response (arkisto/hae-ehdoilla nimi oala tutkintotaso (Boolean/valueOf voimaantulevat)) [skeema/TutkintoHakutulos]))))
+    (let [tutkintotaso (if (= "kaikki" tutkintotyyppi) nil tutkintotyyppi)
+          oala (if (.equals "" opintoala) nil opintoala)]
+      (json-response (arkisto/hae-ehdoilla nimi oala tutkintotaso (Boolean/valueOf voimaantulevat)) [skeema/TutkintoHakutulos]))))
