@@ -28,13 +28,13 @@ angular.module('osaan.etusivu.etusivuui', ['ngRoute'])
   .controller('EtusivuController', ['$filter', '$scope', 'Arviointi', 'Koulutusala', 'Tutkinto', function($filter, $scope, Arviointi, Koulutusala, Tutkinto) {
     $scope.haku = {};
     $scope.koulutusalat = [];
-    $scope.tutkinnot = [];
 
     Koulutusala.hae().then(function(koulutusalat) {
       $scope.koulutusalat = koulutusalat;
     });
 
     $scope.$watch('haku', function() {
+      delete $scope.tutkinnot;
       Tutkinto.haeEhdoilla($scope.haku.opintoala, $scope.haku.tutkinto, $scope.haku.tutkintotyyppi, $scope.haku.voimaantulevat).then(function(tutkinnot) {
         var perusteTyyppiJarjestysSamannimisille = ['naytto', 'ops'];
         $scope.tutkinnot = _.sortBy(tutkinnot, function(tutkinto) {
