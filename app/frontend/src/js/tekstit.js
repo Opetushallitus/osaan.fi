@@ -163,7 +163,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'osien-valinta.yhteiset_osat': 'Gemensamma delar',
       'raportti.ammattitaidon_kuvaus': 'Beskrivning av yrkesskickligheten',
       'raportti.arvio': 'Bedömning',
-      'raportti.hierarkia': 'Tutkinnon osa -> kohdealue -> ammattitaito (sv)',
+      'raportti.hierarkia': 'Examensdel -> delområde -> yrkesskicklighet',
       'raportti.keskiarvot': 'Medeltal för bedömningen enligt examensdelar.',
       'raportti.kommentti': 'Kommentar',
       'raportti.lataa_tekstiraportti': 'Ladda ned textrapporten',
