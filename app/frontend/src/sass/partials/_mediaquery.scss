@@ -12,7 +12,7 @@
     font-size: 1.5em;
   }
   footer .copyright .app-wrapper {
-    background-size: 30% 30%;
+    background-size: 28%;
   }
   fieldset, .search-field {
     width: 70%;
@@ -62,5 +62,30 @@
     text-align: center;
     margin: 0;
     margin-bottom: .5em;
+  }
+  footer {
+
+    .copyright {
+      .vertical-wrapper {
+        vertical-align: bottom;
+        width: 100%;
+        text-align: center;
+        display: block;
+        position: relative;
+        span {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          left: 0;
+        }
+      }
+
+      .app-wrapper {
+        background: url("../img/oph_logo_footer.svg") left 11% center no-repeat;
+        .no-svg & {background-image: url("../img/oph_logo_footer.png")}
+        background-size: 50%;
+        background-position-y: 7px;
+      }
+    }
   }
 }
