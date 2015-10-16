@@ -1,7 +1,7 @@
 /* Print styles */
 @media print {
   body {
-    font-size: 10px;
+    font-size: 1.2em;
   }
   p{
     line-height: 1.5em;
@@ -58,5 +58,9 @@
   }
   ul.nav.nav-tabs{
     display: none;
+  }
+  .kaavio{
+    max-width: 100%;
+    width: 100%;
   }
 }
