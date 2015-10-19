@@ -3,7 +3,7 @@
     <a class="sulje" ng-click="piilotaOhje()">
       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
     </a>
-    <p ng-repeat="kappale in ohje">{{kappale}}</p>
+    <p ng-repeat="kappale in ohje track by $index">{{kappale}}</p>
   </div>
   <div class="avaa" ng-click="naytaOhje()"></div>
 </div>
