@@ -1,15 +1,5 @@
 <svg class="kaavio" preserveAspectRatio="xMinYMin meet">
   <g>
-    <text
-        class="kaavio-viivan-otsikko" style="font-size: 12px;"
-        ng-attr-y="{{viivastonKorkeus() + 80}}"
-        ng-attr-x="{{60}}">
-      <tspan text-anchor="middle">
-        <tspan translate="arviointi.eos_lyh"></tspan> =
-        <tspan translate="arviointi.eos"></tspan>
-      </tspan>
-    </text>
-
     <line ng-repeat="viiva in viivat"
       class="kaavio-viiva"
       ng-attr-y1="{{0}}"
