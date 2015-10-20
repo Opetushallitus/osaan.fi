@@ -76,7 +76,7 @@
                 <td><a ng-href="#/arviointi?osa={{tutkinnonosa.osatunnus}}#kuvaus{{kuvaus.ammattitaidonkuvaus_id}}" style="color: black; text-decoration: none">{{ kuvaus | lokalisoiKentta:'nimi' }}</a></td>
                 <td>
                   <span class="arvio eos" ng-if="kuvaus.arvio.arvio === null" translate="arviointi.eos_lyh" popover="{{ 'arviointi.eos' | translate }}" popover-trigger="mouseenter click"></span>
-                  <span class="arvio" ng-if="kuvaus.arvio.arvio" popover="{{ 'arviointi.asteikko' + kuvaus.arvio.arvio | translate }}">{{ kuvaus.arvio.arvio }}</span>
+                  <span class="arvio" ng-if="kuvaus.arvio.arvio" popover="{{ 'arviointi.asteikko' + kuvaus.arvio.arvio | translate }}" popover-trigger="mouseenter click">{{ kuvaus.arvio.arvio }}</span>
 
                 </td>
                 <td ng-class="{'text-center': !naytaKommentit, 'text-italic': naytaKommentit}">
