@@ -1,7 +1,7 @@
 /* Print styles */
 @media print {
   body {
-    font-size: 1.2em;
+    font-size: 1.14285714285714em; /* 16px */
   }
   p{
     line-height: 1.5em;
@@ -26,13 +26,6 @@
   }
   span.arvio {
     font-size: 1em;
-  }
-  svg.kaavio {
-    transform: scale(.7,.7);
-    -ms-transform: scale(.7,.7); /* IE 9 */
-    -webkit-transform: scale(.7,.7); /* Safari and Chrome */
-    -o-transform: scale(.7,.7); /* Opera */
-    -moz-transform: scale(.7,.7); /* Firefox */
   }
   tallennus, button, .btn{
     display: none;
@@ -59,6 +52,24 @@
   ul.nav.nav-tabs{
     display: none;
   }
+  .kaavio{
+    max-width: 65%;
+  }
+  .printhead{
+    img {
+      height: 4em;
+    }
+  }
+}
+
+@media print and (max-width:230mm) {
+  .kaavio{
+    max-width: 80%;
+    width: 80%;
+  }
+}
+
+@media print and (max-width:140mm) {
   .kaavio{
     max-width: 100%;
     width: 100%;

@@ -62,7 +62,7 @@ angular.module('osaan.direktiivit.kaavio', [])
 
         scope.setHeight = function() {
           var svg = document.getElementsByTagName('svg')[0];
-          svg.setAttribute('viewBox', '0 0 690 ' + (scope.viivastonKorkeus()+100));
+          svg.setAttribute('viewBox', '0 0 670 ' + (scope.viivastonKorkeus()+100));
         };
 
         $timeout(function() {
