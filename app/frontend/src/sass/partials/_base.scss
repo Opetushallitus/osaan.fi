@@ -23,6 +23,8 @@ body {
   -ms-transform: translateZ(0);
   -o-transform: translateZ(0);
   transform: translateZ(0);
+  text-rendering: optimizeLegibility;
+
 }
 
 body > #page-container {
