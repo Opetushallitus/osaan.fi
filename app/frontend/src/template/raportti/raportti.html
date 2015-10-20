@@ -83,7 +83,7 @@
                   <a popover="{{ kuvaus.arvio.vapaateksti | limitTo:250 }}{{ kuvaus.arvio.vapaateksti.length > 250 ? '...' : '' }}" popover-placement="left" popover-trigger="mouseenter" ng-if="!naytaKommentit && kuvaus.arvio.vapaateksti">
                     <span class="glyphicon glyphicon-comment" style="font-size: 2em;"></span>
                   </a>
-                  <em ng-if="naytaKommentit" ng-bind="kuvaus.arvio.vapaateksti"></em>
+                  <em ng-if="naytaKommentit" ng-bind="kuvaus.arvio.vapaateksti" style="white-space: pre-wrap;"></em>
                 </td>
               </tr>
               </tbody>
