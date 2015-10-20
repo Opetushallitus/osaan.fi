@@ -33,14 +33,14 @@
   
   <div class="sivut">
     <div class="sivu edellinen" ng-repeat="osa in edellisetOsat" ng-click="avaaOsa(osa)"
-      popover="{{tutkinnonosatById[osa] | lokalisoiKentta:'nimi'}}" popover-trigger="mouseenter">
+      popover="{{tutkinnonosatById[osa] | lokalisoiKentta:'nimi'}}" popover-trigger="mouseenter click">
       {{$index + 1}}
     </div>
     <div class="sivu nykyinen" ng-if="edellisetOsat.length > 0 || seuraavatOsat.length > 0">
       {{edellisetOsat.length + 1}}
     </div>
     <div class="sivu seuraava" ng-repeat="osa in seuraavatOsat" ng-click="avaaOsa(osa)"
-      popover="{{tutkinnonosatById[osa] | lokalisoiKentta:'nimi'}}" popover-trigger="mouseenter">
+      popover="{{tutkinnonosatById[osa] | lokalisoiKentta:'nimi'}}" popover-trigger="mouseenter click">
       {{$index + edellisetOsat.length + 2}}
     </div>
     <div class="clear-left"></div>
