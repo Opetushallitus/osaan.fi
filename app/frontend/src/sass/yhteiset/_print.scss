@@ -49,6 +49,10 @@
     font-family: monospace;
     line-height: 1.3em;
   }
+  table.raportti tr th.col-md-6:last-child,
+  table.raportti tr th.col-md-5:first-child{
+    width: 45%;
+  }
   ul.nav.nav-tabs{
     display: none;
   }
