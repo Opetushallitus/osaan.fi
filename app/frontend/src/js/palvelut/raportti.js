@@ -70,6 +70,7 @@ angular.module('osaan.palvelut.raportti', [])
 
         var osanKuvaukset = _(tutkinnonosa.kohdealueet).map('kuvaukset').flatten();
         tutkinnonosa.arvioita = osanKuvaukset.filter('arvio').map('arvio').filter(function(arvio) { return arvio.arvio !== undefined; }).value().length;
+        tutkinnonosa.arvioitaEos = osanKuvaukset.filter('arvio').map('arvio').filter(function(arvio) { return arvio.arvio === null; }).value().length;
         tutkinnonosa.arvioitavia = osanKuvaukset.flatten().value().length;
         tutkinnonosa.arvioituna = Math.floor((100 * tutkinnonosa.arvioita) / tutkinnonosa.arvioitavia);
         tutkinnonosa.keskiarvo = tutkinnonosaArvioita > 0 ? (tutkinnonosaSumma / tutkinnonosaArvioita) : 0;
