@@ -20,8 +20,7 @@ angular.module('osaan.lataa.lataaui', ['ngRoute'])
     $routeProvider
       .when('/lataa/:arviotunnus', {
         controller: 'LataaController',
-        template: '<div ng-if="virhe" class="alert alert-danger"><span translate="lataa.virhe"></span> <a href="#/" translate="lataa.palaa_etusivulle"></a></div>',
-        label: 'Lataa arvio'
+        template: '<div ng-if="virhe" class="alert alert-danger"><span translate="lataa.virhe"></span> <a href="#/" translate="lataa.palaa_etusivulle"></a></div>'
       });
   }])
 

@@ -20,8 +20,7 @@ angular.module('osaan.etusivu.etusivuui', ['ngRoute'])
     $routeProvider
       .when('/', {
         controller: 'EtusivuController',
-        templateUrl: 'template/etusivu/etusivu.html',
-        label: 'Valitse tutkinto'
+        templateUrl: 'template/etusivu/etusivu.html'
       });
   }])
 
