@@ -34,7 +34,7 @@
               <span translate="raportti.tulosta"></span>
             </a>
             <input type="hidden" name="data" value="{{tekstiRaportti}}">
-            <button class="btn btn-default" type="submit" ng-click="estaPoistumisvaroitus()" popover="{{ 'raportti.lataa_tekstiraportti_ohje' | translate }}" popover-trigger="mouseenter"><span class="glyphicon glyphicon-download-alt"></span> <span translate="raportti.lataa_tekstiraportti"></span></button>
+            <button class="btn btn-default" type="submit" ng-click="estaPoistumisvaroitus()" popover="{{ 'raportti.lataa_tekstiraportti_ohje' | translate }}" popover-trigger="mouseenter" popover-append-to-body="true"><span class="glyphicon glyphicon-download-alt"></span> <span translate="raportti.lataa_tekstiraportti"></span></button>
           </form>
         </div>
       </div>
