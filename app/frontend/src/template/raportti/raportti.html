@@ -29,6 +29,10 @@
       <div class="col-md-12">
         <div class="pull-right">
           <form action="api/kaiku" method="post">
+            <a class="btn btn-default" href="javascript:window.print()" popover="{{ 'raportti.tulosta_ohje' | translate }}" popover-trigger="mouseenter">
+              <span class="glyphicon glyphicon-print"></span>
+              <span translate="raportti.tulosta"></span>
+            </a>
             <input type="hidden" name="data" value="{{tekstiRaportti}}">
             <button class="btn btn-default" type="submit" ng-click="estaPoistumisvaroitus()"><span class="glyphicon glyphicon-download-alt"></span> <span translate="raportti.lataa_tekstiraportti"></span></button>
           </form>
