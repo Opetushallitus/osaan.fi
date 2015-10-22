@@ -57,4 +57,12 @@ angular.module('osaan.fi', [
   'osaan.rest.tutkinto',
   'osaan.tekstit'
 ])
+  .run(['$rootScope', '$translate', function($rootScope, $translate) {
+    $rootScope.$on('$routeChangeSuccess', function(event, current) {
+      $rootScope.title = 'osaan.fi';
+      if (current.$$route.title !== undefined) {
+        $rootScope.title = 'osaan.fi - ' + $translate.instant(current.$$route.title);
+      }
+    });
+  }])
 ;

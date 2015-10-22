@@ -20,7 +20,8 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
     $routeProvider
       .when('/osien-valinta', {
         controller: 'OsienValintaController',
-        templateUrl: 'template/osien-valinta/osien-valinta.html'
+        templateUrl: 'template/osien-valinta/osien-valinta.html',
+        title: 'yleiset.valitse_tutkinnon_osat'
       });
   }])
 

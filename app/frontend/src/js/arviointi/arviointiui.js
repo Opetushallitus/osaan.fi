@@ -20,7 +20,8 @@ angular.module('osaan.arviointi.arviointiui', ['ngRoute', 'ngAnimate'])
     $routeProvider
       .when('/arviointi', {
         controller: 'ArviointiController',
-        templateUrl: 'template/arviointi/arviointi.html'
+        templateUrl: 'template/arviointi/arviointi.html',
+        title: 'yleiset.arvioi_osaaminen'
       });
   }])
 
