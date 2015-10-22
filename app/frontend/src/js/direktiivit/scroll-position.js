@@ -22,8 +22,8 @@ angular.module('osaan.direktiivit.scroll-position', [])
       link: function(scope) {
         angular.element($window).bind('scroll', function() {
           
-          var clientHeight = $window.document.body.clientHeight - $(window).height();
-          var position =  ((this.pageYOffset/clientHeight)*100);
+          var clientHeight = $window.document.body.scrollHeight - $(window).height();
+          var position =  (($window.pageYOffset/clientHeight)*100);
           scope.scrollPosition = 'top';
 
           if(position < 5){
