@@ -4,6 +4,10 @@ h3 + section.kysymys {
   margin-top: 1em;
 }
 
+.arviointi h3{
+  box-sizing: content-box; /* Fix ScrollFix offset bug*/
+}
+
 .kohdealue {
   p {
     font-size: 16px;
