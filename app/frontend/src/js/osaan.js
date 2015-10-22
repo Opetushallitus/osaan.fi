@@ -44,6 +44,7 @@ angular.module('osaan.fi', [
   'osaan.palvelut.arviointi',
   'osaan.palvelut.httpvirhe',
   'osaan.palvelut.huomautus',
+  'osaan.palvelut.otsikko',
   'osaan.palvelut.poistumisvaroitus',
   'osaan.palvelut.raportti',
   'osaan.palvelut.tallennus',
@@ -57,12 +58,4 @@ angular.module('osaan.fi', [
   'osaan.rest.tutkinto',
   'osaan.tekstit'
 ])
-  .run(['$rootScope', '$translate', function($rootScope, $translate) {
-    $rootScope.$on('$routeChangeSuccess', function(event, current) {
-      $rootScope.title = 'osaan.fi';
-      if (current.$$route.title !== undefined) {
-        $rootScope.title = 'osaan.fi - ' + $translate.instant(current.$$route.title);
-      }
-    });
-  }])
 ;

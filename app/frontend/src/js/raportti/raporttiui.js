@@ -33,7 +33,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     };
   }])
 
-  .controller('RaporttiController', ['$location', '$q', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'Poistumisvaroitus', 'Raportti', 'RaporttiApurit', 'TekstiRaportti', 'Tutkinnonosa', 'Tutkinto', function($location, $q, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, Poistumisvaroitus, Raportti, RaporttiApurit, TekstiRaportti, Tutkinnonosa, Tutkinto) {
+  .controller('RaporttiController', ['$filter', '$location', '$q', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'Otsikko', 'Poistumisvaroitus', 'Raportti', 'RaporttiApurit', 'TekstiRaportti', 'Tutkinnonosa', 'Tutkinto', function($filter, $location, $q, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, Otsikko, Poistumisvaroitus, Raportti, RaporttiApurit, TekstiRaportti, Tutkinnonosa, Tutkinto) {
 
     var valittuPeruste = Arviointi.valittuPeruste();
     if (valittuPeruste === undefined || !Arviointi.onkoArvioita()) {
@@ -44,6 +44,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     var tutkintoPromise = Tutkinto.haePerusteella(valittuPeruste);
     tutkintoPromise.then(function(tutkinto) {
       $scope.tutkinto = tutkinto;
+      Otsikko.asetaAlaOtsikko($filter('lokalisoiKentta')(tutkinto, 'nimi'));
     });
 
     var tutkinnonosatPromise = Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus())
