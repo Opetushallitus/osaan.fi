@@ -17,7 +17,7 @@
 angular.module('osaan.palvelut.otsikko', [])
 
   .factory('Otsikko', ['$rootScope', '$translate', function($rootScope, $translate) {
-    var sivunAvain = undefined;
+    var sivunAvain;
     var alaotsikko = null;
     var otsikko = 'osaan.fi';
 
@@ -48,7 +48,7 @@ angular.module('osaan.palvelut.otsikko', [])
       haeOtsikko: function() {
         return otsikko;
       }
-    }
+    };
   }])
 
   .directive('titleInjection', ['Otsikko', function(Otsikko) {
