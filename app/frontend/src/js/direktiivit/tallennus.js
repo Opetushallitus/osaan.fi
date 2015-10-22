@@ -22,7 +22,7 @@ angular.module('osaan.direktiivit.tallennus', ['osaan.palvelut.tallennus'])
       scope: {
       },
       template: '<button class="btn btn-primary pull-right" ng-click="tallenna()" ng-if="tallennusMahdollinen()"><span class="glyphicon glyphicon-floppy-disk aria-hidden="true"></span>&nbsp;<span translate="yleiset.tallenna"></span></button>',
-      controller: ['$modal', '$scope', 'Arviointi', 'Tallennus', function($modal, $scope, Arviointi, Tallennus) {
+      controller: ['$uibModal', '$scope', 'Arviointi', 'Tallennus', function($uibModal, $scope, Arviointi, Tallennus) {
         $scope.tallennusMahdollinen = function() {
           return Arviointi.onkoArvioita();
         };
@@ -39,7 +39,7 @@ angular.module('osaan.direktiivit.tallennus', ['osaan.palvelut.tallennus'])
           });
 
           Tallennus.tallenna(tila).then(function(tunnus) {
-            $modal.open({
+            $uibModal.open({
               templateUrl: 'template/direktiivit/tallennus.html',
               controller: 'TallennusModalController',
               resolve: {
