@@ -197,6 +197,9 @@ h3.edistyminen {
     border-radius: 1em;
     background: rgba(0, 0, 0, 0);
     color: #808080;
+    &.raportti{
+      width: auto;
+    }
   }
 }
 
