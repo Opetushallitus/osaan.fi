@@ -167,7 +167,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'osien-valinta.yhteiset_osat': 'Gemensamma delar',
       'raportti.ammattitaidon_kuvaus': 'Beskrivning av yrkesskickligheten',
       'raportti.arvio': 'Bedömning',
-      'raportti.eos_vastauksia': 'joista eos-vastauksia (sv)',
+      'raportti.eos_vastauksia': 'var av vet ej -svar',
       'raportti.hierarkia': 'Examensdel -> delområde -> yrkesskicklighet',
       'raportti.keskiarvot': 'Medeltal för bedömningen enligt examensdelar.',
       'raportti.kommentti': 'Kommentar',
