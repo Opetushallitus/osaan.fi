@@ -64,6 +64,9 @@
       height: 4em;
     }
   }
+  .popover {
+    display: none !important;
+  }
 }
 
 @media print and (max-width:230mm) {
