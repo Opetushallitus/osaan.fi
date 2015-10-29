@@ -60,6 +60,9 @@ angular.module('osaan.direktiivit.kaavio', [])
           {paikka: 1.0, teksti: '4'}
         ];
 
+        // Angularissa bugi missä camelcase-attribuutit asetetaan lower-casena, siksi tämä
+        // setHeight() -korjaus.
+        // TODO: korkeuden asettamisen voi hoitaa suoraan svg -tagiin jos Angular-päivitetään joskus uudempaan versioon.
         scope.setHeight = function() {
           var svg = document.getElementsByTagName('svg')[0];
           svg.setAttribute('viewBox', '0 0 670 ' + (scope.viivastonKorkeus()+100));
