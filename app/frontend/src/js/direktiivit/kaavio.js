@@ -15,7 +15,7 @@
 'use strict';
 
 angular.module('osaan.direktiivit.kaavio', [])
-  .directive('kaavio', ['$timeout', function($timeout) {
+  .directive('kaavio', [function() {
     return {
       restrict: 'E',
       replace: true,
@@ -65,9 +65,9 @@ angular.module('osaan.direktiivit.kaavio', [])
           svg.setAttribute('viewBox', '0 0 670 ' + (scope.viivastonKorkeus()+100));
         };
 
-        $timeout(function() {
+        scope.$watch('jakauma', function() {
           scope.setHeight();
-        }, 500);
+        });
       }
     };
   }]);
