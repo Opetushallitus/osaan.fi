@@ -32,11 +32,13 @@
 
 (defn ^:integration-api paivita!
   [tutkintotunnus tiedot]
-  (sql-util/update-unique taulut/tutkinto
-    (sql/set-fields (dissoc tiedot :tutkintonimikkeet))
-    (sql/where {:tutkintotunnus tutkintotunnus}))
+  (let [tutkinto (dissoc tiedot :tutkintonimikkeet)]
+    (when (seq tutkinto) 
+      (sql-util/update-unique taulut/tutkinto
+        (sql/set-fields tutkinto)
+        (sql/where {:tutkintotunnus tutkintotunnus}))))
   (doseq [nimike (:tutkintonimikkeet tiedot)]
-    (paivita-tutkintonimike! (assoc nimike :tutkinto (:tutkintotunnus tiedot)))))
+    (paivita-tutkintonimike! (assoc nimike :tutkinto tutkintotunnus))))
 
 (defn ^:private hae-yksi [where-ehto]
   (sql-util/select-unique-or-nil
@@ -68,7 +70,8 @@
 (defn hae-kaikki-integraatiolle
   []
   (sql/select taulut/tutkinto
-    (sql/with taulut/tutkintonimike)))
+    (sql/with taulut/tutkintonimike
+      (sql/fields :nimiketunnus :nimi_fi :nimi_sv))))
 
 (defn hae-ehdoilla
   [nimi opintoala tutkintotaso voimaantulevat]

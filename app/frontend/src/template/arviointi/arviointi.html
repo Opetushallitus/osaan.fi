@@ -24,7 +24,7 @@
       </button>
     </h3>
 
-    <div class="alert alert-warning" role="alert" ng-if="kohdealueet.length === 0" translate="arviointi.ei_kohteita"></div>
+    <div class="alert alert-warning" role="alert" ng-if="kohdealueet === undefined || kohdealueet.length === 0" translate="arviointi.ei_kohteita"></div>
 
     <section class="kohdealue" ng-repeat="kohdealue in kohdealueet">
       <h3 sticky-header top="40" class="hidden-sm hidden-xs">{{ kohdealue | lokalisoiKentta:'nimi' }} – {{'arviointi.miten' | translate}}</h3>
