@@ -226,12 +226,19 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
     $translateProvider.translations('fi', tekstit.fi);
     $translateProvider.translations('sv', tekstit.sv);
 
-    $translateProvider.use(localStorage.getItem('kieli') || 'fi');
+	if (localStorage.getItem('kieli') === null) {
+	  if (_.includes(['www.jagkan.fi', 'jagkan.fi'], document.location.hostname)) {
+	    localStorage.setItem('kieli', 'sv');
+	  } else {
+  	    localStorage.setItem('kieli', 'fi');
+  	  }
+	}
+    $translateProvider.use(localStorage.getItem('kieli'));
 
     $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
   }])
 
   .factory('kieli', [function () {
-    return localStorage.getItem('kieli') || 'fi';
+    return localStorage.getItem('kieli');
   }])
 ;
