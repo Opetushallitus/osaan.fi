@@ -106,8 +106,10 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
         tyyppi (some-value tutkintotyyppi-koodi? alakoodit)
         taso (some koodi->tutkintotaso alakoodit)
         nimike-kentat [:nimi_fi :nimi_sv :nimiketunnus]
-        nimikkeet (map #(select-keys (koodi->kasite % :nimiketunnus) nimike-kentat)
-                       (filter tutkintonimike-koodi? alakoodit))]
+        nimikkeet (->> 
+                    (filter tutkintonimike-koodi? alakoodit)
+                    (map #(select-keys (koodi->kasite % :nimiketunnus) nimike-kentat))
+                    distinct)]
     (assoc tutkinto
            :opintoala (:koodiArvo opintoala)
            :tyyppi (:koodiArvo tyyppi)
@@ -149,7 +151,7 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
 (defn hae-tutkinto-muutokset
   [asetukset]
   (let [tutkinto-kentat [:nimi_fi :nimi_sv :voimassa_alkupvm :voimassa_loppupvm :tutkintotunnus :opintoala :tutkintotaso :tutkintonimikkeet]
-        vanhat (into {} (for [tutkinto (tutkinto-arkisto/hae-kaikki)]
+        vanhat (into {} (for [tutkinto (tutkinto-arkisto/hae-kaikki-integraatiolle)]
                           [(:tutkintotunnus tutkinto) (->
                                                         (clojure.set/rename-keys tutkinto {:tutkintonimike :tutkintonimikkeet})
                                                         (select-keys tutkinto-kentat))]))
@@ -249,7 +251,7 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
 (defn ^:integration-api tallenna-muuttuneet-tutkinnot! [tutkinnot]
   (doseq [tutkinto tutkinnot
           :let [tunnus (:tutkintotunnus tutkinto)
-                tutkintotunnus (dissoc tutkinto :tutkintotunnus)]]
+                tutkinto (dissoc tutkinto :tutkintotunnus)]]
     (log/info "Päivitetään tutkinto " tunnus ", muutokset: " tutkinto)
     (tutkinto-arkisto/paivita! tunnus tutkinto)))
 
