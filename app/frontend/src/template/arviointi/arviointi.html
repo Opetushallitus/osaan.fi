@@ -14,7 +14,7 @@
       </div>
     </div>
     
-    <h3 class="edistyminen" sticky-header top="0" ng-show="::kohteet">
+    <h3 class="edistyminen" sticky-header top="0" ng-if="::kohteet">
       {{ tutkinnonosatById[tutkinnonosa] | lokalisoiKentta:'nimi' }}<span class="hidden-sm hidden-xs"> – </span><span class="hidden-md hidden-lg"><br></span>{{'arviointi.arvioitu' | translate}}&nbsp;{{arvioidut.length}}&nbsp;/&nbsp;{{kohteet.length}}
       <button class="btn btn-primary" role="button" ng-click="sivunLoppuun()" ng-show="scrollPosition == 'top' || scrollPosition == 'middle'">
         <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>&nbsp;
