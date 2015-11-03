@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="col-xs-6">
-      <span>{{ tutkinnonosa.arvioita }} / {{ tutkinnonosa.arvioitavia }}, {{ 'raportti.eos_vastauksia' | translate }} {{ tutkinnonosa.arvioitaEos }}</span>
+      <span>{{ tutkinnonosa.arvioita }} / {{ tutkinnonosa.arvioitavia }}<span ng-if="tutkinnonosa.arvioitaEos > 0">, {{ 'raportti.eos_vastauksia' | translate }} {{ tutkinnonosa.arvioitaEos }}</span></span>
     </div>
   </div>
 </div>
