@@ -1,7 +1,7 @@
 /* Print styles */
 @media print {
   body {
-    font-size: 1.14285714285714em; /* 16px */
+    font-size: 9pt;
   }
   p{
     line-height: 1.5em;
@@ -35,6 +35,7 @@
   }
   .graafi {
     display: block;
+    page-break-inside: avoid;
   }
   .progress-bar {
     border: 10px solid #6CC555;
