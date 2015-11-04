@@ -33,6 +33,9 @@
   section.main-content {
     margin-bottom: 0;
   }
+  .graafi {
+    display: block;
+  }
   .progress-bar {
     border: 10px solid #6CC555;
     line-height: 2px;
@@ -56,9 +59,6 @@
   ul.nav.nav-tabs{
     display: none;
   }
-  .kaavio{
-    max-width: 65%;
-  }
   .printhead{
     img {
       height: 4em;
@@ -66,19 +66,5 @@
   }
   .popover {
     display: none !important;
-  }
-}
-
-@media print and (max-width:230mm) {
-  .kaavio{
-    max-width: 80%;
-    width: 80%;
-  }
-}
-
-@media print and (max-width:140mm) {
-  .kaavio{
-    max-width: 100%;
-    width: 100%;
   }
 }

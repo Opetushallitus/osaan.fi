@@ -1,45 +1,23 @@
-.kaavio {
-  fill: $darker-gray;
-  font-size: 1em;
-  overflow: visible !important;
+.progress {
+  position: relative;
+  overflow: visible;
+  z-index: 1;
+}
+#kaavio-container{
+  position: relative;
+  padding-bottom: 5em;
+}
 
-  max-width: 65%;
-
-  .kaavio-palkin-vari-0 {
-    fill: $lighter-primary;
-  }
-
-  .kaavio-palkin-vari-1 {
-    fill: $lightest-primary;
-  }
-
-  .kaavio-viiva {
-    stroke: $lighter-gray;
-  }
-
-  .kaavio-palkin-otsikko,
-  .kaavio-palkin-keskiarvo{
-    font-family: "Open Sans";
-    stroke-width: 0;
-    font-size: 14px;
-  }
-
-  .kaavio-palkin-otsikko{
-    fill: $darkest-gray;
-  }
-
-  .kaavio-palkin-keskiarvo{
-    fill: $darker-gray;
-  }
-
-  .kaavio-viivan-otsikko {
-    fill: $gray-color;
-    font-size: 1.71428571428571em; /* 24px */
-    font-weight: normal;
-    text-anchor: end;
-  }
-
-  .kaavio-viivan-otsikon-tausta {
-    fill: $lightest-gray;
+.kaavio-viiva{
+  position: absolute;
+  border-right: 1px solid $lightest-gray;
+  height: 4em;
+  width: 1px;
+  top: 0;
+  z-index: -1;
+  .arvio {
+    position: relative;
+    margin-top: 3em;
+    margin-left: -1em;
   }
 }

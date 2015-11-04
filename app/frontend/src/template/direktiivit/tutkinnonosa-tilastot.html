@@ -3,7 +3,7 @@
     <strong style="margin-left: 2em">{{ otsikko }} ({{ 'raportti.valittu' | translate }} {{ suodatetutTutkinnonosat.length }}/{{ tutkinnonosiaTyypilla }})</strong>
   </div>
 </div>
-<div ng-repeat="tutkinnonosa in suodatetutTutkinnonosat" style="margin-left: 4em">
+<div ng-repeat="tutkinnonosa in suodatetutTutkinnonosat" style="margin-left: 4em" class="graafi">
   <div class="row"><div class="col-md-6"><span>{{ tutkinnonosa | lokalisoiKentta:'nimi' }}</span></div></div>
   <div class="row">
     <div class="col-xs-6">

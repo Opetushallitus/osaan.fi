@@ -24,53 +24,13 @@ angular.module('osaan.direktiivit.kaavio', [])
       },
       templateUrl: 'template/direktiivit/kaavio.html',
       link: function(scope) {
-        var palkistossaPalkkeja = 1,
-          rakoaPalkkienValissa = 10;
-
-        var asetukset = {
-          maksimiArvo: 4,
-          palkinLeveys: 28,
-          palkinMaksimiPituus: 530
-        };
-
-        scope.asetukset = asetukset;
-
-        function palkinPituus(asetukset, arvo) {
-          return asetukset.palkinMaksimiPituus * arvo / asetukset.maksimiArvo;
-        }
-        scope.palkinPituus = _.partial(palkinPituus, asetukset);
-
-        scope.paikkaPalkistonSuhteen = function(palkisto, palkki, siirtyma) {
-          return (asetukset.palkinLeveys + rakoaPalkkienValissa) * (palkistossaPalkkeja*palkisto + palkki + siirtyma);
-        };
-
-        scope.viivastonLeveys = function() {
-          return asetukset.palkinMaksimiPituus + 20 * (scope.jakauma.length + 2);
-        };
-
-        scope.viivastonKorkeus = function() {
-          return (scope.jakauma.length + 1)*(palkistossaPalkkeja*asetukset.palkinLeveys + rakoaPalkkienValissa);
-        };
 
         scope.viivat = [
-          {paikka: 0, teksti: '0'},
-          {paikka: 0.25, teksti: '1'},
-          {paikka: 0.50, teksti: '2'},
-          {paikka: 0.75, teksti: '3'},
-          {paikka: 1.0, teksti: '4'}
+          {paikka: '25%', teksti: '1'},
+          {paikka: '50%', teksti: '2'},
+          {paikka: '75%', teksti: '3'},
+          {paikka: '100%', teksti: '4'}
         ];
-
-        // Angularissa bugi missä camelcase-attribuutit asetetaan lower-casena, siksi tämä
-        // setHeight() -korjaus.
-        // TODO: korkeuden asettamisen voi hoitaa suoraan svg -tagiin jos Angular-päivitetään joskus uudempaan versioon.
-        scope.setHeight = function() {
-          var svg = document.getElementsByTagName('svg')[0];
-          svg.setAttribute('viewBox', '0 0 670 ' + (scope.viivastonKorkeus()+100));
-        };
-
-        scope.$watch('jakauma', function() {
-          scope.setHeight();
-        });
       }
     };
   }]);
