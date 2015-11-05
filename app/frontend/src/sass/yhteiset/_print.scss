@@ -26,6 +26,13 @@
   }
   span.arvio {
     font-size: 1em;
+    border: 1px solid $gray-color !important;
+    &.eos.raportti {
+        width: 3em;
+    }
+  }
+  #kaavio-container .arvo {
+    top: .8em;
   }
   tallennus, button, .btn{
     display: none;

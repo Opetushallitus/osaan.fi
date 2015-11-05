@@ -118,9 +118,6 @@ h3 + section.kysymys {
         background-color: $primary-color !important;
         color: white;
       }
-      &.vapaateksti-toggle {
-
-      }
       &.eos {
         width: 9em;
         border-radius: 2.66666666666667em;
@@ -130,7 +127,6 @@ h3 + section.kysymys {
         line-height: 2.42857142857143em;
         margin-top: .5em;
       }
-
       &.checked{
         background-color: $primary-color;
         color: white;

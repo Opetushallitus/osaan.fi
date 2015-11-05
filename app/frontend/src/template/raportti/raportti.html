@@ -44,11 +44,11 @@
       <uib-tab select="valittuRaportti='raportti'" heading="{{ 'yleiset.raportti' | translate }}">
         <br />
         <h3 translate="raportti.keskiarvot"></h3>
-        <div id="kaavio-container">
+        <div class="kaavio-container">
           <kaavio jakauma="jakauma"></kaavio>
         </div>
 
-        <div style="margin-left: 4em;">{{ 'raportti.tutkinnon_keskiarvo' | translate }}: <strong>{{ raportti.keskiarvo | number:2 }}</strong></div>
+        <div class="pad-2-left">{{ 'raportti.tutkinnon_keskiarvo' | translate }}: <strong>{{ raportti.keskiarvo | number:2 }}</strong></div>
 
         <h3 translate="raportti.vastausprosentit"></h3>
         <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.pakolliset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="pakollinen"></tutkinnonosa-tilastot>

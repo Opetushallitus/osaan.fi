@@ -1,23 +1,24 @@
-<div style="margin-left: 4em;">
+<div class="pad-2-left">
   <div ng-repeat="data in jakauma" ng-init="last = $last" class="graafi">
     <div class="row">
-      <div class="col-md-6" style="z-index: 1;">
+      <div class="col-md-12" style="z-index: 1;">
         <span>{{ data | lokalisoiKentta:'nimi' }}</span>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-6">
-        <div class="progress" style="margin-bottom: 0;">
+      <div class="col-md-6">
+        <div class="progress">
           <div class="progress-bar" role="progressbar" aria-valuenow="{{ tutkinnonosa.arvioituna }}" aria-valuemin="0" aria-valuemax="100" style="min-width: 0em; width: {{(data.arvo)*25}}%;" ng-style="{ 'width' : (data.arvo)*25+'%'}">
             {{data.arvo | number:2}}
-            <div class="kaavio-viiva" ng-repeat="viiva in viivat" ng-style="{left: viiva.paikka}">
-              <span class="arvio" ng-if="last">{{viiva.teksti}}</span>
+            <span class="arvo">{{data.arvo | number:2}}</span>
+            <div class="kaavio-viiva" ng-class="{'last':last}" ng-repeat="viiva in viivat" ng-style="{left: viiva.paikka}">
+              <span class="arvio" ng-if="last">
+                {{viiva.teksti}}
+                <span class="asteikkoteksti" ng-bind="'arviointi.asteikko'+($index+1) | translate"></span>
+              </span>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-xs-6">
-        <span>{{data.arvo | number:2}}</span>
       </div>
     </div>
   </div>

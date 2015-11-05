@@ -2,10 +2,22 @@
   position: relative;
   overflow: visible;
   z-index: 1;
+  min-width: 18em;
+  max-width: 90%;
+  margin-bottom: 0;
 }
-#kaavio-container{
+
+.kaavio-container{
   position: relative;
-  padding-bottom: 5em;
+  padding-bottom: 6em;
+}
+
+.arvo {
+  display: block;
+  position: absolute;
+  top: .1em;
+  right: -2.5em;
+  color: $darker-gray;
 }
 
 .kaavio-viiva{
@@ -15,9 +27,24 @@
   width: 1px;
   top: 0;
   z-index: -1;
+
+  &.last {
+    height: 2em;
+  }
+
   .arvio {
     position: relative;
-    margin-top: 3em;
+    margin-top: 2em;
     margin-left: -1em;
+
+    .asteikkoteksti {
+      font-size: .75em;
+      width: 5.7em;
+      height: 2em;
+      display: block;
+      margin-left: -1.6em;
+      text-align: center;
+      margin-top: 0.7em;
+    }
   }
 }
