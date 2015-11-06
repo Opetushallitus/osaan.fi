@@ -14,8 +14,8 @@ insert into opintoala (opintoalatunnus, koulutusala, nimi_fi, nimi_sv, voimassa_
     ('327128', '201', 'Käsityömestarin erikoisammattitutkinto', 'Käsityömestarin erikoisammattitutkinto (sv)', to_date('1997-01-01', 'YYYY-MM-DD'), 'erikoisammattitutkinto'),
     ('987654', '202', 'Tekoälymasentajan keksitty tutkinto', 'Tekoälymasentajan keksitty tutkinto (sv)', to_date('2050-01-01', 'YYYY-MM-DD'), 'erikoisammattitutkinto');
 
-insert into tutkintonimike(nimiketunnus, nimi_fi, nimi_sv, tutkinto)
-   values ('10092', 'Media-assistentti', 'Medieassistent', '324601');
+insert into tutkintonimike(nimiketunnus, nimi_fi, nimi_sv)
+   values ('10092', 'Media-assistentti', 'Medieassistent');
 
 insert into peruste (diaarinumero, voimassa_alkupvm, tutkinto, tyyppi, eperustetunnus, peruste_id)
  values
@@ -23,7 +23,11 @@ insert into peruste (diaarinumero, voimassa_alkupvm, tutkinto, tyyppi, eperustet
    ('38/011/2014', to_date('2005-01-01', 'YYYY-MM-DD'), '324601', 'naytto', 611, -2),
    ('34/011/2010', to_date('2005-01-01', 'YYYY-MM-DD'), '327128', 'naytto', 986531, -3),
    ('01/011/2040', to_date('2040-01-01', 'YYYY-MM-DD'), '987654', 'naytto', 999999, -4);
-   
+
+insert into peruste_ja_tutkintonimike (peruste, tutkintonimike)
+  values
+    (-1, '10092'),
+    (-2, '10092');
 
 insert into tutkinnonosa(osatunnus, nimi_fi, nimi_sv) values
   ('100001','Audiovisuaalinen tuotanto', 'Audiovisuaalinen tuotanto (sv)'),
