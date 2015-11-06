@@ -18,27 +18,16 @@
             [osaan.infra.sql.korma :as taulut]
             [oph.common.util.util :refer [pvm-mennyt-tai-tanaan? pvm-tuleva-tai-tanaan?]]))
 
-(defn ^:integration-api paivita-tutkintonimike!
-  [tiedot]
-  (sql-util/insert-or-update taulut/tutkintonimike :nimiketunnus
-    tiedot))
-
 (defn ^:integration-api lisaa!
   [tiedot]
   (sql/insert taulut/tutkinto
-    (sql/values (dissoc tiedot :tutkintonimikkeet)))
-  (doseq [nimike (:tutkintonimikkeet tiedot)]
-    (paivita-tutkintonimike! (assoc nimike :tutkinto (:tutkintotunnus tiedot)))))
+    (sql/values tiedot)))
 
 (defn ^:integration-api paivita!
   [tutkintotunnus tiedot]
-  (let [tutkinto (dissoc tiedot :tutkintonimikkeet)]
-    (when (seq tutkinto) 
-      (sql-util/update-unique taulut/tutkinto
-        (sql/set-fields tutkinto)
-        (sql/where {:tutkintotunnus tutkintotunnus}))))
-  (doseq [nimike (:tutkintonimikkeet tiedot)]
-    (paivita-tutkintonimike! (assoc nimike :tutkinto tutkintotunnus))))
+  (sql-util/update-unique taulut/tutkinto
+    (sql/set-fields tiedot)
+    (sql/where {:tutkintotunnus tutkintotunnus})))
 
 (defn ^:private hae-yksi [where-ehto]
   (sql-util/select-unique-or-nil
@@ -66,12 +55,6 @@
   []
   (sql/select taulut/tutkinto
     (sql/order :tutkintotunnus)))
-
-(defn hae-kaikki-integraatiolle
-  []
-  (sql/select taulut/tutkinto
-    (sql/with taulut/tutkintonimike
-      (sql/fields :nimiketunnus :nimi_fi :nimi_sv))))
 
 (defn hae-ehdoilla
   [nimi opintoala tutkintotaso voimaantulevat]
