@@ -93,8 +93,9 @@
             </p>
           </div>
           <div class="col-md-4">
-            <ul>
-              <li ng-repeat="nimike in tutkinto.tutkintonimikkeet | orderByLokalisoitu:'nimi'">{{nimike | lokalisoiKentta:'nimi'}}</li>
+            <strong ng-if="tutkinto.tutkintonimikkeet">{{'tutkinto.nimikkeet' | translate }}</strong>
+            <ul class="nobullet">
+             <li ng-repeat="nimike in tutkinto.tutkintonimikkeet | orderByLokalisoitu:'nimi'">{{nimike | lokalisoiKentta:'nimi'}}</li>
             </ul>
           </div>
           <div class="col-md-2">
