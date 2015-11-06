@@ -81,7 +81,12 @@
                                 [:peruste.eperustetunnus :peruste_eperustetunnus]
                                 [:peruste.tyyppi :peruste_tyyppi])
                     (sql/where (or {:nimi_fi [sql-util/ilike nimi]}
-                                   {:nimi_sv [sql-util/ilike nimi]}))
+                                   {:nimi_sv [sql-util/ilike nimi]}
+                                   (sql/sqlfn "exists" (sql/subselect :peruste_ja_tutkintonimike
+                                                         (sql/join :inner :tutkintonimike {:peruste_ja_tutkintonimike.tutkintonimike :tutkintonimike.nimiketunnus})
+                                                         (sql/where {:peruste_ja_tutkintonimike.peruste :peruste.peruste_id})
+                                                         (sql/where (or {:tutkintonimike.nimi_fi [sql-util/ilike nimi]}
+                                                                        {:tutkintonimike.nimi_sv [sql-util/ilike nimi]}))))))
                     (cond->
                       opintoala (sql/where {:opintoala opintoala}))
                     (cond->
