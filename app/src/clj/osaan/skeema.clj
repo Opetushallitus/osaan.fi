@@ -56,7 +56,11 @@
                      {:koulutusala_nimi_fi s/Str
                       :koulutusala_nimi_sv (s/maybe s/Str)}))
 
-(def TutkintoHakutulos TutkintoPerustiedot)
+(def Tutkintonimike {:nimi_fi s/Str
+                     :nimi_sv (s/maybe s/Str)})
+
+(def TutkintoHakutulos (merge TutkintoPerustiedot
+                              {:tutkintonimikkeet [Tutkintonimike]}))
 
 (def Tutkinnonosa {:nimi_fi s/Str
                    :nimi_sv (s/maybe s/Str)

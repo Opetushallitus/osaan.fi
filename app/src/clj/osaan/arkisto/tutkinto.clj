@@ -56,26 +56,37 @@
   (sql/select taulut/tutkinto
     (sql/order :tutkintotunnus)))
 
+(defn liita-tutkintonimikkeet [perusteet]
+  (let [nimikkeet (sql/select :peruste_ja_tutkintonimike
+                    (sql/join :inner :tutkintonimike {:tutkintonimike.nimiketunnus :peruste_ja_tutkintonimike.tutkintonimike})
+                    (sql/fields :tutkintonimike.nimi_fi :tutkintonimike.nimi_sv :peruste_ja_tutkintonimike.peruste))
+        peruste->nimikkeet (apply merge-with concat (for [nimike nimikkeet]
+                                                      {(:peruste nimike) [(dissoc nimike :peruste)]}))]
+    (for [peruste perusteet
+          :let [nimikkeet (peruste->nimikkeet (:peruste_id peruste))]]
+      (assoc peruste :tutkintonimikkeet nimikkeet))))
+
 (defn hae-ehdoilla
   [nimi opintoala tutkintotaso voimaantulevat]
-  (let [nimi (str "%" nimi "%")]
-    (->
-      (sql/select* :tutkinto)
-      (sql/join :inner :opintoala (= :opintoala.opintoalatunnus :opintoala))
-      (sql/join :inner :peruste (= :peruste.tutkinto :tutkintotunnus))
-      (sql/fields :tutkintotunnus :nimi_fi :nimi_sv
-                  [:opintoala.nimi_fi :opintoala_nimi_fi]
-                  [:opintoala.nimi_sv :opintoala_nimi_sv]
-                  :peruste.peruste_id
-                  [:peruste.diaarinumero :peruste_diaarinumero]
-                  [:peruste.eperustetunnus :peruste_eperustetunnus]
-                  [:peruste.tyyppi :peruste_tyyppi])
-      (sql/where (or {:nimi_fi [sql-util/ilike nimi]}
-                     {:nimi_sv [sql-util/ilike nimi]}))
-      (cond->
-        opintoala (sql/where {:opintoala opintoala}))
-      (cond->
-        tutkintotaso (sql/where {:tutkintotaso tutkintotaso}))
-      (cond->
-        (false? (boolean voimaantulevat)) (sql/where (< :voimassa_alkupvm [(sql/raw "current_date")])))
-      sql/exec)))
+  (let [nimi (str "%" nimi "%")
+        tutkinnot (->
+                    (sql/select* :tutkinto)
+                    (sql/join :inner :opintoala (= :opintoala.opintoalatunnus :opintoala))
+                    (sql/join :inner :peruste (= :peruste.tutkinto :tutkintotunnus))
+                    (sql/fields :tutkintotunnus :nimi_fi :nimi_sv
+                                [:opintoala.nimi_fi :opintoala_nimi_fi]
+                                [:opintoala.nimi_sv :opintoala_nimi_sv]
+                                :peruste.peruste_id
+                                [:peruste.diaarinumero :peruste_diaarinumero]
+                                [:peruste.eperustetunnus :peruste_eperustetunnus]
+                                [:peruste.tyyppi :peruste_tyyppi])
+                    (sql/where (or {:nimi_fi [sql-util/ilike nimi]}
+                                   {:nimi_sv [sql-util/ilike nimi]}))
+                    (cond->
+                      opintoala (sql/where {:opintoala opintoala}))
+                    (cond->
+                      tutkintotaso (sql/where {:tutkintotaso tutkintotaso}))
+                    (cond->
+                      (false? (boolean voimaantulevat)) (sql/where (< :voimassa_alkupvm [(sql/raw "current_date")])))
+                    sql/exec)]
+    (liita-tutkintonimikkeet tutkinnot)))
