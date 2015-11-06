@@ -97,9 +97,21 @@
                              :tutkinnonosa (osaviite->osatunnus (:_tutkinnonOsaViite osa))})
                           (hae-osat (:rakenne suoritustapa)))})))
 
-(defn muotoile-peruste [peruste]
+(defn nimike-kielella [nimike kieli]
+  (let [kieli (case kieli
+                :fi "FI"
+                :sv "SV")
+        nimiketunnus (:tutkintonimikeArvo nimike)]
+    (:nimi (some-value-with :kieli kieli (get-in nimike [:b (keyword nimiketunnus) :metadata])))))
+
+(defn muotoile-peruste [peruste nimikkeet]
   (let [osa-id->osatunnus (into {} (for [osa (:tutkinnonOsat peruste)]
-                                     [(str (:id osa)) (osatunnus osa)]))]
+                                     [(str (:id osa)) (osatunnus osa)]))
+        nimiketunnus->nimike (into {} (for [nimike nimikkeet
+                                            :let [nimiketunnus (:tutkintonimikeArvo nimike)]]
+                                        [nimiketunnus {:nimiketunnus nimiketunnus
+                                                       :nimi_fi (nimike-kielella nimike :fi)
+                                                       :nimi_sv (nimike-kielella nimike :sv)}]))]
     {:diaarinumero (:diaarinumero peruste)
      :eperustetunnus (:id peruste)
      :voimassa_alkupvm (c/to-local-date (:voimassaoloAlkaa peruste))
@@ -107,10 +119,13 @@
      :siirtymaajan_loppupvm (c/to-local-date (:siirtymaPaattyy peruste))
      :tutkinnonosat (map-indexed muotoile-tutkinnonosa (:tutkinnonOsat peruste))
      :tutkinnot (map :koulutuskoodiArvo (:koulutukset peruste))
+     :tutkintonimikkeet (map (comp nimiketunnus->nimike :tutkintonimikeArvo) (:tutkintonimikkeet peruste))
      :suoritustavat (map (muotoile-suoritustapa osa-id->osatunnus) (:suoritustavat peruste))}))
 
 (defn hae-peruste [id asetukset]
-  (muotoile-peruste (get-json-from-url (str (:url asetukset) "api/perusteet/" id "/kaikki"))))
+  (let [peruste-data (get-json-from-url (str (:url asetukset) "api/perusteet/" id "/kaikki"))
+        nimike-data (get-json-from-url (str (:url asetukset) "api/perusteet/" id "/tutkintonimikekoodit"))]
+    (muotoile-peruste peruste-data nimike-data)))
 
 (defn hae-perusteet [viimeisin-haku asetukset]
   (for [peruste (lataa-kaikki-sivut (str (:url asetukset) "api/perusteet") {:query-params {:muokattu (c/to-long viimeisin-haku)}})]

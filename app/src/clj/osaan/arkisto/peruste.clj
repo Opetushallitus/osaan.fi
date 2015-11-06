@@ -66,6 +66,14 @@
          :tyyppi tyyppi})
       (log/warn "Tutkinnonosa puuttuu:" tutkinnonosa))))
 
+(defn ^:integration-api paivita-perusteen-tutkintonimikkeet! [peruste nimikkeet]
+  (sql/delete :peruste_ja_tutkintonimike
+    (sql/where {:peruste (:peruste_id peruste)}))
+  (doseq [nimike nimikkeet]
+    (sql-util/insert-or-update :tutkintonimike [:nimiketunnus] nimike)
+    (sql-util/insert-if-not-exists :peruste_ja_tutkintonimike {:peruste (:peruste_id peruste)
+                                                               :tutkintonimike (:nimiketunnus nimike)})))
+
 (defn ^:integration-api lisaa! [peruste]
   (doseq [osa (:tutkinnonosat peruste)]
     (paivita-tutkinnonosa! osa))
@@ -77,7 +85,8 @@
                                              :tyyppi (:suoritustapakoodi tapa)
                                              :voimassa_loppupvm (or (:voimassa_loppupvm peruste) (time/local-date 2199 1 1))
                                              :siirtymaajan_loppupvm (or (:siirtymaajan_loppupvm peruste) (time/local-date 2199 1 1))))]]
-    (paivita-perusteen-tutkinnonosat! tallennettu-peruste (:osat tapa))))
+    (paivita-perusteen-tutkinnonosat! tallennettu-peruste (:osat tapa))
+    (paivita-perusteen-tutkintonimikkeet! tallennettu-peruste (:tutkintonimikkeet peruste))))
 
 (defn ^:integration-api tallenna-viimeisin-paivitys! [ajankohta]
   (sql/insert taulut/eperusteet-log
