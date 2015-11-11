@@ -138,7 +138,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'arviointi.tekstivastaus_placeholder': 'Skriv ditt svar här',
       'etusivu.jagkan': 'Jagkan.fi',
       'etusivu.opintoala': 'Bransch',
-      'etusivu.otsikko': 'Erkännande av kunnande',
+      'etusivu.otsikko': 'Identifiering av kunnande',
       'etusivu.teksti': 'Du kan bedöma ditt eget kunnande inom en vald yrkesinriktad grundexamen, yrkesexamen eller specialyrkesexamen.\n\nBedömningen görs utgående från de krav på yrkesskicklighet som förutsätts för examen och som sammanställts i samarbete med arbetslivet. Då man avlägger en examen beaktas tidigare kunnande som t.ex. förvärvats i arbete, studier eller i annan verksamhet. När du ämnar avlägga en examen, utreder läroanstalten ditt tidigare kunnande. Ta kontakt med anordnaren av den fristående examen eller utbildningen som du ser via länken om du är intresserad av att avlägga en examen.\n\nEn fristående examen är planerad särskilt med tanke på vuxna. Den grundläggande yrkesutbildningen är planerad för unga.',
       'etusivu.tutkinnon_nimi': 'Namn på examen',
       'etusivu.tutkinnon_nimi_placeholder': 'Skriv namnet på examen eller en del av namnet',
