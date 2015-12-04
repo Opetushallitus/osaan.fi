@@ -66,7 +66,7 @@ module.exports = function (grunt) {
           'src/compiled_css/main.css'
         ],
         options: {
-          livereload: true
+          livereload: 35733
         }
       }
     },
