@@ -104,6 +104,14 @@
     (sql/select :peruste
       (sql/fields :peruste_id))))
 
+(defn hae-perusteid [diaarinumero tyyppi]
+  (->
+    (sql-util/select-unique-or-nil :peruste
+      (sql/fields :peruste_id)
+      (sql/where {:diaarinumero diaarinumero
+                  :tyyppi tyyppi}))
+    :peruste_id))
+
 (defn onko-perustetta [peruste-id]
   (not
     (empty?

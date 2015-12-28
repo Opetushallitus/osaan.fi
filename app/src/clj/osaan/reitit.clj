@@ -19,6 +19,7 @@
             [ring.util.response :as resp]
             [stencil.core :as s]
             [osaan.infra.status :refer [status piilota-salasanat]]
+            [osaan.linkki]
             [osaan.rest-api.ammattitaidon-kuvaus]
             [osaan.rest-api.arvio]
             [osaan.rest-api.kaiku]
@@ -47,4 +48,5 @@
     (c/context "/api/tutkinnonosa" [] osaan.rest-api.tutkinnonosa/reitit)
     (c/context "/api/tutkinto" [] osaan.rest-api.tutkinto/reitit)
     (c/context "/api/arvioraportti" [] osaan.rest-api.arvioraportti/reitit)
+    (c/context "/linkki" [] (osaan.linkki/reitit asetukset))
     (r/not-found "Not found")))
