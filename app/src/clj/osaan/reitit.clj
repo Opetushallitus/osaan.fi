@@ -13,8 +13,7 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.reitit
-  (:require [clojure.java.io :as io]
-            [clojure.pprint :refer [pprint]]
+  (:require [clojure.pprint :refer [pprint]]
             [compojure.core :as c]
             [compojure.route :as r]
             [ring.util.response :as resp]
