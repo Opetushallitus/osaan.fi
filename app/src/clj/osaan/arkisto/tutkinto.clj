@@ -63,7 +63,7 @@
         peruste->nimikkeet (apply merge-with concat (for [nimike nimikkeet]
                                                       {(:peruste nimike) [(dissoc nimike :peruste)]}))]
     (for [peruste perusteet
-          :let [nimikkeet (peruste->nimikkeet (:peruste_id peruste))]]
+          :let [nimikkeet (get peruste->nimikkeet (:peruste_id peruste))]]
       (assoc peruste :tutkintonimikkeet nimikkeet))))
 
 (defn hae-ehdoilla
