@@ -13,11 +13,9 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.sql.arvioraportti_test
-  (:require 
-    [osaan.sql.test-util :refer :all]
-    [osaan.arkisto.arvioraportti :as arvio-db]
-  )
-  (:use clojure.test))
+  (:require [clojure.test :refer :all]
+            [osaan.sql.test-util :refer :all]
+            [osaan.arkisto.arvioraportti :as arvio-db]))
 
 (use-fixtures :each tietokanta-fixture)
 

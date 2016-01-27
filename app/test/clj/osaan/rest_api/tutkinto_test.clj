@@ -5,7 +5,7 @@
 
 (use-fixtures :each tietokanta-fixture)
 
-(deftest ^:integraatio tyhja-opintoala []
+(deftest ^:integraatio tyhja-opintoala
   (let [crout (init-peridot!)]
     (let [response (mock-request! crout "/api/tutkinto?opintoala=" :get {})]
       (is (= (:status (:response response)) 200))

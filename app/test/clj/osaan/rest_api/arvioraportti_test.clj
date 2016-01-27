@@ -19,19 +19,19 @@
 
 (use-fixtures :each tietokanta-fixture)
 
-(deftest ^:integraatio raportti-virheilmoitus []
+(deftest ^:integraatio raportti-virheilmoitus
   (let [crout (init-peridot!)]
     (let [response (mock-request! crout "/api/arvioraportti/txt/fi/eiole" :get {})]
       (is (= (:status (:response response)) 200))
       (is (= (:body (:response response)) "Tarkista tunnus. Arviota ei löytynyt.")))))
 
-(deftest ^:integraatio raportti-normaali []
+(deftest ^:integraatio raportti-normaali
   (let [crout (init-peridot!)]
     (let [response (mock-request! crout "/api/arvioraportti/txt/fi/testiarvio" :get {})]
       (is (= (:status (:response response)) 200))
       (is (< 0 (.indexOf (:body (:response response)) "En osaa sanoa")))))) ; ainakin yksi "En osaa sanoa" vastaus mukana
 
-(deftest ^:integraatio raportti-json []
+(deftest ^:integraatio raportti-json
   (let [crout (init-peridot!)]
     (let [response (mock-request! crout "/api/arvioraportti/json/testiarvio" :get {})]
       (is (= (:status (:response response)) 200))

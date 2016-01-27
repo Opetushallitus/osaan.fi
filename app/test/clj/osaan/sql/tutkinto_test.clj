@@ -13,11 +13,9 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.sql.tutkinto-test
-  (:require 
-    [osaan.sql.test-util :refer :all]
-    [osaan.arkisto.tutkinto :as tutkinto-db]
-  )
-  (:use clojure.test))
+  (:require [clojure.test :refer :all]
+            [osaan.sql.test-util :refer :all]
+            [osaan.arkisto.tutkinto :as tutkinto-db]))
 
 (use-fixtures :each tietokanta-fixture)
 

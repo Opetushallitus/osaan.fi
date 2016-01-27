@@ -25,7 +25,7 @@
             :peruste -1,
             :tutkintotunnus "324601"})
 
-(deftest ^:integraatio tallennus-ja-lataus []
+(deftest ^:integraatio tallennus-ja-lataus
   (let [crout (init-peridot!)
         state-tallennus (mock-request-body! crout "/api/arvio" :post arvio)]
     (is (= (:status (:response state-tallennus)) 200))

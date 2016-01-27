@@ -13,11 +13,9 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.sql.ohje
-  (:require 
-    [osaan.sql.test-util :refer :all]
-    [osaan.arkisto.ohje :as ohje-db]
-  )
-  (:use clojure.test))
+  (:require [clojure.test :refer :all]
+            [osaan.sql.test-util :refer :all]
+            [osaan.arkisto.ohje :as ohje-db]))
 
 (use-fixtures :each tietokanta-fixture)
 

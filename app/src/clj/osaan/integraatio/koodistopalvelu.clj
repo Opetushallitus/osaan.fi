@@ -168,8 +168,9 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
     (muutokset uudet vanhat)))
 
 
-(defn uusi [[tutkintotunnus muutos]]
+(defn uusi
   "Jos muutos on uuden tiedon lisääminen, palauttaa uudet tiedot, muuten nil"
+  [[tutkintotunnus muutos]]
   (when (vector? muutos)
     (assoc (first muutos) :tutkintotunnus tutkintotunnus)))
 
@@ -179,8 +180,9 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
              :when v]
          [k (first v)])))
 
-(defn muuttunut [[tutkintotunnus muutos]]
+(defn muuttunut
   "Jos muutos on tietojen muuttuminen, palauttaa muuttuneet tiedot, muuten nil"
+  [[tutkintotunnus muutos]]
   (when (and (map? muutos)
              (not-every? nil? (vals muutos)))
     (merge {:tutkintotunnus tutkintotunnus}

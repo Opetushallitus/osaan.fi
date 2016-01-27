@@ -19,7 +19,7 @@
 
 (use-fixtures :each tietokanta-fixture)
 
-(deftest ^:integraatio status-responds []
+(deftest ^:integraatio status-responds
   (let [crout (init-peridot!)]
     (let [response (mock-request! crout "/status" :get {})]
       (is (= (:status (:response response)) 200))

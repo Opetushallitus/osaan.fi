@@ -1,13 +1,12 @@
 (ns osaan.perf-test
-  (:require
-    [clj-gatling.core :refer [run-simulation]]
-    [clojure.tools.logging :as log]
-    [osaan.arkisto.peruste :as peruste-arkisto]
-    [osaan.arkisto.tutkinnonosa :as tutkinnonosa-arkisto]
-    [osaan.asetukset :as asetukset]
-    [osaan.perftest-util :as util]
-    [osaan.sql.test-util :refer [tietokanta-fixture]])
-  (:use clojure.test))
+  (:require [clojure.test :refer :all]
+            [clj-gatling.core :refer [run-simulation]]
+            [clojure.tools.logging :as log]
+            [osaan.arkisto.peruste :as peruste-arkisto]
+            [osaan.arkisto.tutkinnonosa :as tutkinnonosa-arkisto]
+            [osaan.asetukset :as asetukset]
+            [osaan.perftest-util :as util]
+            [osaan.sql.test-util :refer [tietokanta-fixture]]))
 
 (use-fixtures :each tietokanta-fixture)
 

@@ -23,7 +23,6 @@
 (def koulutusalat-opintoaloittain '({:opintoalat ({:nimi_sv "Mediekultur och informationsvetenskaper", :nimi_fi "Viestintä ja informaatiotieteet", :opintoalatunnus "202"}), :nimi_sv "Kultur", :nimi_fi "Kulttuuriala", :koulutusalatunnus "6"}))
 
 (deftest hae-koulutusalat-opintoaloilla
-  []
   (let [koulutusalat (with-redefs [osaan.arkisto.koulutusala/hae-koulutusalat (fn [] koulutusalat)
                                    osaan.arkisto.koulutusala/hae-opintoalat (fn [] opintoalat)]
     (arkisto/hae-koulutusalat-opintoaloilla))]
