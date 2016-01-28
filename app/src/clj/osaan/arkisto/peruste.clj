@@ -74,6 +74,27 @@
     (sql-util/insert-if-not-exists :peruste_ja_tutkintonimike {:peruste (:peruste_id peruste)
                                                                :tutkintonimike (:nimiketunnus nimike)})))
 
+(defn ^:integration-api paivita-osaamisalan-tutkinnonosat! [osaamisala osat]
+  (sql/delete :tutkinnonosa_ja_osaamisala
+    (sql/where {:osaamisala (:osaamisalatunnus osaamisala)}))
+  (doseq [{:keys [tutkinnonosa tyyppi jarjestys]} osat]
+    (if (tutkinnonosa-arkisto/hae tutkinnonosa)
+      (sql-util/insert-or-update :tutkinnonosa_ja_osaamisala [:osa :osaamisala]
+        {:osa tutkinnonosa
+         :osaamisala (:osaamisalatunnus osaamisala)
+         :jarjestys jarjestys
+         :tyyppi tyyppi})
+      (log/warn "Tutkinnonosa puuttuu:" tutkinnonosa))))
+
+(defn ^:integration-api paivita-perusteen-osaamisalat! [peruste osaamisalat]
+  (sql/delete :osaamisala_ja_peruste
+    (sql/where {:peruste (:peruste_id peruste)}))
+  (doseq [ala osaamisalat]
+    (sql-util/insert-or-update :osaamisala [:osaamisalatunnus] (select-keys ala [:osaamisalatunnus :nimi_fi :nimi_sv]))
+    (sql-util/insert-if-not-exists :osaamisala_ja_peruste {:osaamisala (:osaamisalatunnus ala)
+                                                           :peruste (:peruste_id peruste)})
+    (paivita-osaamisalan-tutkinnonosat! ala (:osat ala))))
+
 (defn ^:integration-api lisaa! [peruste]
   (doseq [osa (:tutkinnonosat peruste)]
     (paivita-tutkinnonosa! osa))
@@ -85,7 +106,9 @@
                                              :tyyppi (:suoritustapakoodi tapa)
                                              :voimassa_loppupvm (or (:voimassa_loppupvm peruste) (time/local-date 2199 1 1))
                                              :siirtymaajan_loppupvm (or (:siirtymaajan_loppupvm peruste) (time/local-date 2199 1 1))))]]
-    (paivita-perusteen-tutkinnonosat! tallennettu-peruste (:osat tapa))
+    (if-let [osaamisalat (:osaamisalat tapa)]
+      (paivita-perusteen-osaamisalat! tallennettu-peruste osaamisalat)
+      (paivita-perusteen-tutkinnonosat! tallennettu-peruste (:osat tapa)))
     (paivita-perusteen-tutkintonimikkeet! tallennettu-peruste (:tutkintonimikkeet peruste))))
 
 (defn ^:integration-api tallenna-viimeisin-paivitys! [ajankohta]
