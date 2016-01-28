@@ -85,12 +85,26 @@
                      tyyppi)]
         [(assoc rakenne :tyyppi tyyppi)]))))
 
+(defn muotoile-osaamisala
+  [osaviite->osatunnus]
+  (fn [ala]
+    (when (:osaamisala ala) 
+      {:osaamisalatunnus (get-in ala [:osaamisala :osaamisalakoodiArvo])
+       :nimi_fi (get-in ala [:osaamisala :nimi :fi])
+       :nimi_sv (get-in ala [:osaamisala :nimi :sv])
+       :osat (map-indexed (fn [index osa]
+                            {:jarjestys (inc index)
+                             :tyyppi (:tyyppi osa)
+                             :tutkinnonosa (osaviite->osatunnus (:_tutkinnonOsaViite osa))})
+                          (hae-osat ala))})))
+
 (defn muotoile-suoritustapa
   [osa-id->osatunnus]
   (fn [suoritustapa]
     (let [osaviite->osatunnus (into {} (for [viite (:tutkinnonOsaViitteet suoritustapa)]
                                         [(str (:id viite)) (osa-id->osatunnus (:_tutkinnonOsa viite))]))]
       {:suoritustapakoodi (:suoritustapakoodi suoritustapa)
+       :osaamisalat (keep (muotoile-osaamisala osaviite->osatunnus) (get-in suoritustapa [:rakenne :osat]))
        :osat (map-indexed (fn [index osa]
                             {:jarjestys (inc index)
                              :tyyppi (:tyyppi osa)
