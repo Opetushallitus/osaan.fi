@@ -12,7 +12,7 @@
 
 (defn suodata-fi [tulos]
   (let [suodatettu (map #(select-keys % [ :nimi_fi :osa :aka_nimi_fi :arvio :kommentti]) tulos)
-        nimet (map #(clojure.set/rename-keys % {:nimi_fi :nimi 
+        nimet (map #(clojure.set/rename-keys % {:nimi_fi :nimi
                                                 :aka_nimi_fi :arvioinnin_kohdealue
                                                 :osa :tutkinnon_osa}) suodatettu )
         groupattu (group-and-destroy :tutkinnon_osa nimet)]
@@ -32,9 +32,7 @@
          {:body muotoiltu
           :headers {"Content-Type" "text/plain; charset=utf-8"}
           :status 200})
-      not-found-response
-      ))
-  
+      not-found-response))
   (cu/defapi :julkinen nil :get "/json/:arviotunnus" [kieli arviotunnus]
     (if-let [tulos (arkisto/hae arviotunnus)]
         (json-response tulos)

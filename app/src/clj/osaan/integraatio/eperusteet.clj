@@ -60,7 +60,7 @@
 
 (defn muotoile-tutkinnonosa [index osa]
   (let [kohdealueet (map-indexed muotoile-arvioinnin-kohdealue (get-in osa [:arviointi :arvioinninKohdealueet]))
-        osa-alueet (map-indexed muotoile-osa-alue (mapcat :osaamistavoitteet (:osaAlueet osa)))] 
+        osa-alueet (map-indexed muotoile-osa-alue (mapcat :osaamistavoitteet (:osaAlueet osa)))]
     {:osatunnus (osatunnus osa)
      :jarjestys (inc index)
      :nimi_fi (get-in osa [:nimi :fi])
@@ -88,7 +88,7 @@
 (defn muotoile-osaamisala
   [osaviite->osatunnus]
   (fn [ala]
-    (when (:osaamisala ala) 
+    (when (:osaamisala ala)
       {:osaamisalatunnus (get-in ala [:osaamisala :osaamisalakoodiArvo])
        :nimi_fi (get-in ala [:osaamisala :nimi :fi])
        :nimi_sv (get-in ala [:osaamisala :nimi :sv])

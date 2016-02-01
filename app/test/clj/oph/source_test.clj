@@ -19,7 +19,7 @@
 
 (deftest js-debug-test
   (is (empty? (js-console-log-calls))))
- 
+
 (deftest pre-post-oikeassa-paikassa-test
   (is (empty? (vastaavat-muodot "src/clj" pre-post-vaarassa-paikassa?))))
 

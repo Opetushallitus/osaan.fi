@@ -167,7 +167,6 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
                       (map #(select-keys % opintoala-kentat) (hae-opintoalat asetukset)))]
     (muutokset uudet vanhat)))
 
-
 (defn uusi
   "Jos muutos on uuden tiedon lisääminen, palauttaa uudet tiedot, muuten nil"
   [[tutkintotunnus muutos]]

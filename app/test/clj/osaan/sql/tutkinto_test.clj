@@ -38,5 +38,3 @@
         ei-tulosta (tutkinto-db/hae-perusteella -98765)]
     (is (nil? ei-tulosta))
     (is (some? yksi))))
-
-    

@@ -21,7 +21,7 @@
 
 (defn init-peridot! []
   (let [asetukset (-> osaan-asetukset/oletusasetukset
-                    (assoc :development-mode true)) 
+                    (assoc :development-mode true))
         crout (palvelin/app asetukset)]
     (peridot/session crout)))
 
