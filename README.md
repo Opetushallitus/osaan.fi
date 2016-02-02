@@ -1,7 +1,11 @@
 Osaan.fi 
 ========
 
-Osaan.fi palvelun uudistettu versio. 
+Osaan.fi palvelun uudistettu versio.
+
+# Dokumentaatio
+
+Järjestelmän yleiskuvaus, kuvia arkkitehtuurista yms. löytyy CSC:n confluencesta: [osaan.fi dokumentaatio](https://confluence.csc.fi/display/OPHPALV/osaan.fi).
 
 # Lähdekoodin haku
 
@@ -42,3 +46,4 @@ Seuraavilla askelilla sovellus voidaan käynnistää paikallisella Unix-koneella
   dev-scripts/deploy.sh
   ```
 5. Sovellus löytyy osoitteesta http://192.168.50.72/osaan/
+
