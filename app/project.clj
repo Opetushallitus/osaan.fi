@@ -40,7 +40,7 @@
                  [ring/ring-session-timeout "0.1.0"]
                  [robert/hooke "1.3.0"]]
   :plugins [[test2junit "1.0.1"]
-  	    [jonase/eastwood "0.2.3"]]
+            [jonase/eastwood "0.2.3"]]
   :profiles {:dev {:source-paths ["dev"]
                    :dependencies [[org.clojure/test.check "0.7.0"]
                                   [org.clojure/tools.namespace "0.2.10"]
