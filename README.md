@@ -15,7 +15,8 @@ Hae tämän projektin lähdekoodi esimerkiksi hakemistoon `osaan.fi`.
 
 ## Clojure-utils
 
-Hae tämän projektin rinnalle projekti [clojure-utils](https://github.com/Opetushallitus/clojure-utils). Muiden Opetushallituksen Clojure-projektien kanssa yhteistä koodia käytetään tällä hetkellä suhteellisella hakemistoviitteellä.
+Hae tämän projektin rinnalle projekti [clojure-utils](https://github.com/Opetushallitus/clojure-utils). Muiden Opetushallituksen Clojure-projektien kanssa yhteistä koodia käytetään git submodulena.
+
 
 # Paikallinen ympäristö sovelluksen ajoon
 
