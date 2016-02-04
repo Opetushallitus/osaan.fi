@@ -52,8 +52,15 @@ insert into ammattitaidon_kuvaus(ammattitaidonkuvaus_id, arvioinninkohdealue, ni
     (-4, -2, 'Oman työn suunnittelu', 'Planering av det egna arbetet', 1),
     (-5, -2, 'Aineiston tuottaminen', 'Produktion av material', 2);
 
-insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_alkupvm, voimassa_loppupvm, versio, koodistoversio) values ('2002', '324601', 'Kuvauksen ja valaisun osaamisala', '', '2014-01-01', '2199-01-01', 1, 1);
-insert into osaamisala (osaamisalatunnus, tutkinto, nimi_fi, nimi_sv, voimassa_alkupvm, voimassa_loppupvm, versio, koodistoversio) values ('2003', '324601', 'Mediatyön osaamisala', '', '2014-01-01', '2199-01-01', 1, 1);
+insert into osaamisala (osaamisalatunnus, nimi_fi, nimi_sv) values ('2002', 'Kuvauksen ja valaisun osaamisala', '');
+insert into osaamisala (osaamisalatunnus, nimi_fi, nimi_sv) values ('2003', 'Mediatyön osaamisala', '');
+
+insert into osaamisala_ja_peruste (osaamisala, peruste) values ('2002', -2), ('2003', -2);
+insert into tutkinnonosa_ja_osaamisala (osa, osaamisala, jarjestys, tyyppi) values ('100001', '2002', 1, 'pakollinen');
+insert into tutkinnonosa_ja_osaamisala (osa, osaamisala, jarjestys, tyyppi) values ('100002', '2002', 2, 'valinnainen');
+insert into tutkinnonosa_ja_osaamisala (osa, osaamisala, jarjestys, tyyppi) values ('100002', '2003', 1, 'pakollinen');
+insert into tutkinnonosa_ja_osaamisala (osa, osaamisala, jarjestys, tyyppi) values ('100001', '2003', 2, 'valinnainen');
+insert into tutkinnonosa_ja_osaamisala (osa, osaamisala, jarjestys, tyyppi) values ('100003', '2003', 3, 'valinnainen');
 
 insert into arvio (tunniste, peruste) values ('testiarvio', (select peruste_id from peruste where diaarinumero = '41/011/2005'));
 insert into arvio_tutkinnonosa (arviotunnus, osa)  values ('testiarvio', '100001');
