@@ -25,6 +25,7 @@
             [osaan.rest-api.kaiku]
             [osaan.rest-api.koulutusala]
             [osaan.rest-api.ohje]
+            [osaan.rest-api.osaamisala]
             [osaan.rest-api.tutkinnonosa]
             [osaan.rest-api.tutkinto]
             [osaan.rest-api.arvioraportti]))
@@ -45,6 +46,7 @@
     (c/context "/api/kaiku" [] osaan.rest-api.kaiku/reitit)
     (c/context "/api/koulutusala" [] osaan.rest-api.koulutusala/reitit)
     (c/context "/api/ohje" [] osaan.rest-api.ohje/reitit)
+    (c/context "/api/osaamisala" [] osaan.rest-api.osaamisala/reitit)
     (c/context "/api/tutkinnonosa" [] osaan.rest-api.tutkinnonosa/reitit)
     (c/context "/api/tutkinto" [] osaan.rest-api.tutkinto/reitit)
     (c/context "/api/arvioraportti" [] osaan.rest-api.arvioraportti/reitit)

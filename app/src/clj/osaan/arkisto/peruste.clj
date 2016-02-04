@@ -142,3 +142,21 @@
         :peruste
         (sql/fields :peruste_id)
         (sql/where {:peruste_id peruste-id})))))
+
+(defn hae-osaamisalat
+  "Hakee perusteen osaamisalat"
+  [peruste-id]
+  (let [osaamisalat (sql/select :osaamisala
+                      (sql/join :inner :osaamisala_ja_peruste {:osaamisala_ja_peruste.osaamisala :osaamisala.osaamisalatunnus})
+                      (sql/fields :osaamisala.osaamisalatunnus :osaamisala.nimi_fi :osaamisala.nimi_sv)
+                      (sql/where {:osaamisala_ja_peruste.peruste peruste-id})
+                      (sql/order :osaamisala.osaamisalatunnus))]
+    (for [ala osaamisalat]
+      (assoc ala :tutkinnonosat (sql/select :tutkinnonosa
+                                  (sql/join :inner :tutkinnonosa_ja_osaamisala {:tutkinnonosa_ja_osaamisala.osa :tutkinnonosa.osatunnus})
+                                  (sql/fields :tutkinnonosa.nimi_fi
+                                              :tutkinnonosa.nimi_sv
+                                              :tutkinnonosa.osatunnus
+                                              :tutkinnonosa_ja_osaamisala.tyyppi)
+                                  (sql/where {:tutkinnonosa_ja_osaamisala.osaamisala (:osaamisalatunnus ala)})
+                                  (sql/order :tutkinnonosa_ja_osaamisala.jarjestys))))))

@@ -65,6 +65,11 @@
 (def Tutkinnonosa {:nimi_fi s/Str
                    :nimi_sv (s/maybe s/Str)
                    :osatunnus s/Str
-                   :tyyppi s/Str})
+                   (s/optional-key :tyyppi) s/Str})
+
+(def Osaamisala {:nimi_fi s/Str
+                 :nimi_sv (s/maybe s/Str)
+                 :osaamisalatunnus s/Str
+                 :tutkinnonosat [Tutkinnonosa]})
 
 (def Tutkinnonosa->ArvioinninKohdealueet {s/Str [ArvioinninKohdealue]})

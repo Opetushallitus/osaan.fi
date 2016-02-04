@@ -29,6 +29,18 @@
     (sql/where {:tutkinnonosa_ja_peruste.peruste peruste-id})
     (sql/order :tutkinnonosa_ja_peruste.jarjestys)))
 
+(defn hae-osaamisalojen-tutkinnon-osat
+  "Hae perusteeseen liittyvien osaamisalojen tutkinnon osat"
+  [peruste-id]
+  (sql/select :tutkinnonosa
+    (sql/fields :nimi_fi :nimi_sv :osatunnus)
+    (sql/where (sql/sqlfn "exists" (sql/subselect :tutkinnonosa_ja_osaamisala
+                                     (sql/join :inner :osaamisala {:tutkinnonosa_ja_osaamisala.osaamisala :osaamisala.osaamisalatunnus})
+                                     (sql/join :inner :osaamisala_ja_peruste {:osaamisala.osaamisalatunnus :osaamisala_ja_peruste.osaamisala})
+                                     (sql/where {:tutkinnonosa_ja_osaamisala.osa :tutkinnonosa.osatunnus
+                                                 :osaamisala_ja_peruste.peruste peruste-id}))))
+    (sql/order :osatunnus)))
+
 (defn hae [osatunnus]
   (sql-util/select-unique-or-nil
     :tutkinnonosa

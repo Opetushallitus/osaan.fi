@@ -1,4 +1,4 @@
-;; Copyright (c) 2015 The Finnish National Board of Education - Opetushallitus
+;; Copyright (c) 2016 The Finnish National Board of Education - Opetushallitus
 ;;
 ;; This program is free software:  Licensed under the EUPL, Version 1.1 or - as
 ;; soon as they will be approved by the European Commission - subsequent versions
@@ -12,17 +12,15 @@
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; European Union Public Licence for more details.
 
-(ns osaan.rest-api.tutkinnonosa
+(ns osaan.rest-api.osaamisala
   (:require [compojure.core :as c]
             [oph.common.util.http-util :refer [json-response]]
             [osaan.compojure-util :as cu]
             [osaan.skeema :as skeema]
-            [osaan.arkisto.peruste :as peruste-arkisto]
-            [osaan.arkisto.tutkinnonosa :as arkisto]))
+            [osaan.arkisto.peruste :as arkisto]))
 
 (c/defroutes reitit
   (cu/defapi :julkinen nil :get "/" [peruste tutkintotunnus]
-    (when (peruste-arkisto/onko-perustetta (Integer/parseInt peruste))
-      (let [osat (or (seq (arkisto/hae-osaamisalojen-tutkinnon-osat (Integer/parseInt peruste)))
-                     (arkisto/hae-perusteen-tutkinnon-osat (Integer/parseInt peruste)))]
-        (json-response osat [skeema/Tutkinnonosa])))))
+    (when (arkisto/onko-perustetta (Integer/parseInt peruste))
+      (let [alat (arkisto/hae-osaamisalat (Integer/parseInt peruste))]
+        (json-response alat [skeema/Osaamisala])))))
