@@ -54,6 +54,7 @@ angular.module('osaan.fi', [
   'osaan.rest.ammattitaidonkuvaus',
   'osaan.rest.arvio',
   'osaan.rest.koulutusala',
+  'osaan.rest.osaamisala',
   'osaan.rest.tutkinnonosa',
   'osaan.rest.tutkinto',
   'osaan.tekstit'

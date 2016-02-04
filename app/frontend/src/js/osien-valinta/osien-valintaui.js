@@ -25,7 +25,7 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
       });
   }])
 
-  .controller('OsienValintaController', ['$location', '$routeParams', '$scope', '$translate', 'Arviointi', 'Tutkinnonosa', 'Tutkinto', 'varmistus', function($location, $routeParams, $scope, $translate, Arviointi, Tutkinnonosa, Tutkinto, varmistus) {
+  .controller('OsienValintaController', ['$location', '$routeParams', '$scope', '$translate', 'Arviointi', 'Osaamisala', 'Tutkinnonosa', 'Tutkinto', 'varmistus', function($location, $routeParams, $scope, $translate, Arviointi, Osaamisala, Tutkinnonosa, Tutkinto, varmistus) {
     var peruste = $routeParams.peruste;
     var tutkintotunnus = $routeParams.tutkinto;
 
@@ -75,6 +75,10 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
     $scope.eteenpain = function() {
       $location.url('/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
     };
+
+    Osaamisala.hae(peruste).then(function(osaamisalat) {
+      $scope.osaamisalat = osaamisalat;
+    });
 
     Tutkinnonosa.hae(peruste, tutkintotunnus).then(function(tutkinnonosat) {
       $scope.tutkinnonosat = tutkinnonosat;

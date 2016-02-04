@@ -29,10 +29,17 @@
         </a>
       </p>
     </div>
-
-    <osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="tutkinnonosat" tyyppi="pakollinen" valinnat="valinnat"></osalista>
-    <osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="valinnainen" valinnat="valinnat"></osalista>
-    <osalista otsikko="osien-valinta.yhteiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="yhteinen" valinnat="valinnat"></osalista>
+    <div ng-repeat="ala in osaamisalat">
+      <h3>{{ala | lokalisoiKentta:'nimi'}}</h3>
+      <osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="ala.tutkinnonosat" tyyppi="pakollinen" valinnat="valinnat"></osalista>
+      <osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="ala.tutkinnonosat" tyyppi="valinnainen" valinnat="valinnat"></osalista>
+      <osalista otsikko="osien-valinta.yhteiset_osat" tutkinnonosat="ala.tutkinnonosat" tyyppi="yhteinen" valinnat="valinnat"></osalista>
+    </div>
+    <div ng-if="osaamisalat.length === 0">
+      <osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="tutkinnonosat" tyyppi="pakollinen" valinnat="valinnat"></osalista>
+      <osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="valinnainen" valinnat="valinnat"></osalista>
+      <osalista otsikko="osien-valinta.yhteiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="yhteinen" valinnat="valinnat"></osalista>
+    </div>
   </div>
   <div class="panel-footer">
     <div class="row">
