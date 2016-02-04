@@ -29,12 +29,18 @@
         </a>
       </p>
     </div>
-    <div ng-repeat="ala in osaamisalat">
-      <h3>{{ala | lokalisoiKentta:'nimi'}}</h3>
-      <osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="ala.tutkinnonosat" tyyppi="pakollinen" valinnat="valinnat"></osalista>
-      <osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="ala.tutkinnonosat" tyyppi="valinnainen" valinnat="valinnat"></osalista>
-      <osalista otsikko="osien-valinta.yhteiset_osat" tutkinnonosat="ala.tutkinnonosat" tyyppi="yhteinen" valinnat="valinnat"></osalista>
-    </div>
+    <uib-accordion close-others="false">
+      <uib-accordion-group ng-repeat="ala in osaamisalat" is-open="accordionAuki[ala.osaamisalatunnus]">
+        <uib-accordion-heading>
+          <i class="fa" ng-class="{'fa-chevron-down': accordionAuki[ala.osaamisalatunnus], 'fa-chevron-right': !accordionAuki[ala.osaamisalatunnus]}"></i>
+          {{ala | lokalisoiKentta:'nimi'}}
+          <span class="pull-right badge">{{valittujaOsia[ala.osaamisalatunnus]}}</span>
+        </uib-accordion-heading>
+        <osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="ala.tutkinnonosat" tyyppi="pakollinen" valinnat="valinnat"></osalista>
+        <osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="ala.tutkinnonosat" tyyppi="valinnainen" valinnat="valinnat"></osalista>
+        <osalista otsikko="osien-valinta.yhteiset_osat" tutkinnonosat="ala.tutkinnonosat" tyyppi="yhteinen" valinnat="valinnat"></osalista>
+      </uib-accordion-group>
+    </uib-accordion>
     <div ng-if="osaamisalat.length === 0">
       <osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="tutkinnonosat" tyyppi="pakollinen" valinnat="valinnat"></osalista>
       <osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="tutkinnonosat" tyyppi="valinnainen" valinnat="valinnat"></osalista>

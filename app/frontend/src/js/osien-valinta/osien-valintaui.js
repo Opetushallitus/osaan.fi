@@ -43,6 +43,13 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
         .value();
     };
 
+    var paivitaValittujenMaarat = function(valitutTunnukset) {
+      _.forEach($scope.osaamisalat, function(ala) {
+        var valittuja = _(ala.tutkinnonosat).filter(function(osa) { return valitutTunnukset.indexOf(osa.osatunnus) > -1; }).size();
+        $scope.valittujaOsia[ala.osaamisalatunnus] = valittuja > 0 ? valittuja + '/' + ala.tutkinnonosat.length : '';
+      });
+    };
+
     $scope.valinnat = {};
 
     // Kun sivulle palataan uudestaan, palauta valinnat
@@ -78,6 +85,12 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
 
     Osaamisala.hae(peruste).then(function(osaamisalat) {
       $scope.osaamisalat = osaamisalat;
+      $scope.accordionAuki = new Array(osaamisalat.length);
+      $scope.valittujaOsia = new Array(osaamisalat.length);
+      for(var i = 0; i < osaamisalat.length; i++) {
+        $scope.accordionAuki[osaamisalat[i].osaamisalatunnus] = false;
+      }
+      paivitaValittujenMaarat(valitutOsatunnukset());
     });
 
     Tutkinnonosa.hae(peruste, tutkintotunnus).then(function(tutkinnonosat) {
@@ -85,7 +98,9 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
 
       // valitutOsatunnukset() vaatii tutkinnonosat järjestyksen saamiseksi
       $scope.$watch('valinnat', function() {
-        Arviointi.asetaOsatunnukset(valitutOsatunnukset());
+        var valitut = valitutOsatunnukset();
+        Arviointi.asetaOsatunnukset(valitut);
+        paivitaValittujenMaarat(valitut);
       }, true);
     });
   }])
