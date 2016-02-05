@@ -43,18 +43,18 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
         .value();
     };
 
-    var paivitaValittujenMaarat = function(valitutTunnukset) {
+    var paivitaValittujenMaarat = function() {
       _.forEach($scope.osaamisalat, function(ala) {
-        var valittuja = _(ala.tutkinnonosat).filter(function(osa) { return valitutTunnukset.indexOf(osa.osatunnus) > -1; }).size();
+        var valittuja = _($scope.valinnat[ala.osaamisalatunnus]).filter().size();
         $scope.valittujaOsia[ala.osaamisalatunnus] = valittuja > 0 ? valittuja + '/' + ala.tutkinnonosat.length : '';
       });
     };
 
-    $scope.valinnat = {};
+    $scope.valinnat = {undefined: {}};
 
     // Kun sivulle palataan uudestaan, palauta valinnat
-    _.forEach(Arviointi.valitutOsatunnukset(), function(osatunnus) {
-      $scope.valinnat[osatunnus] = true;
+    _.forEach(Arviointi.valitutOsat(), function(tutkinnonosat, alatunnus) {
+      $scope.valinnat[alatunnus] = tutkinnonosat;
     });
 
     Tutkinto.haePerusteella(peruste).then(function(tutkinto) {
@@ -88,7 +88,11 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
       $scope.accordionAuki = new Array(osaamisalat.length);
       $scope.valittujaOsia = new Array(osaamisalat.length);
       for(var i = 0; i < osaamisalat.length; i++) {
-        $scope.accordionAuki[osaamisalat[i].osaamisalatunnus] = false;
+        var tunnus = osaamisalat[i].osaamisalatunnus;
+        $scope.accordionAuki[tunnus] = false;
+        if($scope.valinnat[tunnus] === undefined) {
+          $scope.valinnat[tunnus] = {};
+        }
       }
       paivitaValittujenMaarat(valitutOsatunnukset());
     });
@@ -98,9 +102,8 @@ angular.module('osaan.osien-valinta.osien-valintaui', ['ngRoute'])
 
       // valitutOsatunnukset() vaatii tutkinnonosat järjestyksen saamiseksi
       $scope.$watch('valinnat', function() {
-        var valitut = valitutOsatunnukset();
-        Arviointi.asetaOsatunnukset(valitut);
-        paivitaValittujenMaarat(valitut);
+        Arviointi.asetaOsat($scope.valinnat);
+        paivitaValittujenMaarat();
       }, true);
     });
   }])

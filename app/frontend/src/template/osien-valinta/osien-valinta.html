@@ -36,9 +36,9 @@
           {{ala | lokalisoiKentta:'nimi'}}
           <span class="pull-right badge">{{valittujaOsia[ala.osaamisalatunnus]}}</span>
         </uib-accordion-heading>
-        <osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="ala.tutkinnonosat" tyyppi="pakollinen" valinnat="valinnat"></osalista>
-        <osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="ala.tutkinnonosat" tyyppi="valinnainen" valinnat="valinnat"></osalista>
-        <osalista otsikko="osien-valinta.yhteiset_osat" tutkinnonosat="ala.tutkinnonosat" tyyppi="yhteinen" valinnat="valinnat"></osalista>
+        <osalista otsikko="osien-valinta.pakolliset_osat" tutkinnonosat="ala.tutkinnonosat" osaamisala="ala.osaamisalatunnus" tyyppi="pakollinen" valinnat="valinnat"></osalista>
+        <osalista otsikko="osien-valinta.valinnaiset_osat" tutkinnonosat="ala.tutkinnonosat" osaamisala="ala.osaamisalatunnus" tyyppi="valinnainen" valinnat="valinnat"></osalista>
+        <osalista otsikko="osien-valinta.yhteiset_osat" tutkinnonosat="ala.tutkinnonosat" osaamisala="ala.osaamisalatunnus" tyyppi="yhteinen" valinnat="valinnat"></osalista>
       </uib-accordion-group>
     </uib-accordion>
     <div ng-if="osaamisalat.length === 0">

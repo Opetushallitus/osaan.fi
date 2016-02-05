@@ -28,7 +28,7 @@ describe('Raportti', function() {
 
   beforeEach(function() {
     Arviointi.asetaTutkintoJaPeruste('324601', '41/011/2005');
-    Arviointi.asetaOsatunnukset(['100001', '100002']);
+    Arviointi.asetaOsat({undefined: {'100001': true, '100002': true}});
     Arviointi.tyhjennaArviot();
     Arviointi.asetaArviot('100001', {'-1': {arvio: 1}, '-2': {arvio: 3}, '-3': {vapaateksti: 'testi'}});
   });

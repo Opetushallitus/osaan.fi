@@ -25,24 +25,35 @@ describe('Arviointi', function() {
 
   beforeEach(function() {
     Arviointi.asetaTutkintoJaPeruste('324601', '41/011/2005');
-    Arviointi.asetaOsatunnukset(['100001', '100002']);
+    Arviointi.asetaOsat({'1001': {'100001': true,
+                                  '100002': true,
+                                  '100003': false},
+                         '1002': {'200001': false}});
     Arviointi.tyhjennaArviot();
   });
 
-  it('Osatunnukset tyhjennetään kun tutkinto vaihtuu', function() {
+  it('Osat tyhjennetään kun tutkinto vaihtuu', function() {
     expect(Arviointi.valitutOsatunnukset()).toEqual(['100001', '100002']);
+    expect(Arviointi.valitutOsaamisalat()).toEqual(['1001']);
 
     Arviointi.asetaTutkintoJaPeruste('324601', '41/011/2005');
     expect(Arviointi.valitutOsatunnukset()).toEqual(['100001', '100002']);
+    expect(Arviointi.valitutOsaamisalat()).toEqual(['1001']);
 
     Arviointi.asetaTutkintoJaPeruste('324602', '41/011/2006');
     expect(Arviointi.valitutOsatunnukset()).toEqual([]);
+    expect(Arviointi.valitutOsaamisalat()).toEqual([]);
   });
 
   it('Valinnat saa luettua', function() {
     expect(Arviointi.valittuTutkintotunnus()).toEqual('324601');
     expect(Arviointi.valittuPeruste()).toEqual('41/011/2005');
     expect(Arviointi.valitutOsatunnukset()).toEqual(['100001', '100002']);
+    expect(Arviointi.valitutOsaamisalat()).toEqual(['1001']);
+    expect(Arviointi.valitutOsat()).toEqual({'1001': {'100001': true,
+                                                      '100002': true,
+                                                      '100003': false},
+                                             '1002': {'200001': false}});
   });
 
   it('Edellinen osatunnus', function() {
@@ -56,11 +67,17 @@ describe('Arviointi', function() {
   });
 
   it('Luo kopiot sisään tulevista tietorakenteista', function() {
-    var osatunnukset = ['100001', '100002'];
+    var osat = {'1001': {'100001': true,
+                         '100002': true,
+                         '100003': false},
+                '1002': {'200001': false}};
 
-    Arviointi.asetaOsatunnukset(osatunnukset);
-    osatunnukset.push('100003');
-    expect(Arviointi.valitutOsatunnukset()).toEqual(['100001', '100002']);
+    Arviointi.asetaOsat(osat);
+    osat['1001']['100003'] = true;
+    expect(Arviointi.valitutOsat()).toEqual({'1001': {'100001': true,
+                                                      '100002': true,
+                                                      '100003': false},
+                                             '1002': {'200001': false}});
 
     var arviot = {'-1':{'arvio':1}};
     Arviointi.asetaArviot('100001', arviot);

@@ -43,6 +43,7 @@
     <uib-tabset>
       <uib-tab select="valittuRaportti='raportti'" heading="{{ 'yleiset.raportti' | translate }}">
         <br />
+        <p>{{'raportti.osaamisalat' | translate}} <span ng-repeat="ala in valitutOsaamisalat">{{ala | lokalisoiKentta:'nimi'}}{{$last ? '' : ', '}}</span></p>
         <h3 translate="raportti.keskiarvot"></h3>
         <div class="kaavio-container">
           <kaavio jakauma="jakauma"></kaavio>

@@ -19,7 +19,9 @@ angular.module('osaan.palvelut.arviointi', [])
   .factory('Arviointi', [function() {
     var tila = {
       arviot: {}, // tutkinnonosatunnus -> ammattitaidonkuvaus_id -> {arvio, vapaateksti}
-      osatunnukset: []
+      osatunnukset: [],
+      osaamisalat: [],
+      osat: {}
     };
     var ladattu = true;
     var _tallennaTila = function() {
@@ -50,11 +52,32 @@ angular.module('osaan.palvelut.arviointi', [])
       }
     };
 
+    var asetaOsat = function(osat) {
+      if (!_.isEqual(tila.osat, osat)) {
+        tila.osat = _.cloneDeep(osat);
+        var osatunnukset = _(osat).values() // osaamisala-objectin arvoista löytyy tutkinnonosat
+                                  .map(function(x) { return _.pairs(x); }) // Muutetaan avain-arvo-pareiksi
+                                  .flatten()
+                                  .filter(function (x) { return x[1]; }) // Otetaan vain parit joissa arvo on true
+                                  .map(function (x) { return x[0]; }) // Otetaan talteen pelkkä avain = osatunnus
+                                  .uniq().value();
+        tila.osatunnukset = _.cloneDeep(osatunnukset);
+        var osaamisalat = _(osat).pairs()
+                                 .filter(function (x) { return _.findKey(x[1]); }) // Palauttaa truthy-arvon jos osista löytyy ainakin yksi truthy-arvo
+                                 .map(function (x) { return x[0]; })
+                                 .value();
+        tila.osaamisalat = _.cloneDeep(osaamisalat);
+        _tallennaTila();
+      }
+    };
+
     var asetaTutkintoJaPeruste = function(tutkintotunnus, peruste) {
       if (tutkintotunnus !== tila.tutkintotunnus || peruste !== tila.peruste) {
         tila.tutkintotunnus = tutkintotunnus;
         tila.peruste = peruste;
         tila.osatunnukset = [];
+        tila.osat = {};
+        tila.osaamisalat = [];
         _tallennaTila();
       }
     };
@@ -124,11 +147,13 @@ angular.module('osaan.palvelut.arviointi', [])
     var valittuPeruste = function() { return tila.peruste; };
     var valittuTutkintotunnus = function() { return tila.tutkintotunnus; };
     var valitutOsatunnukset = function() { return _.cloneDeep(tila.osatunnukset); };
+    var valitutOsat = function() { return _.cloneDeep(tila.osat); };
+    var valitutOsaamisalat = function() { return _.cloneDeep(tila.osaamisalat); };
 
     return {
       asetaArviot: asetaArviot,
       asetaLadatuksi: asetaLadatuksi,
-      asetaOsatunnukset: asetaOsatunnukset,
+      asetaOsat: asetaOsat,
       asetaTutkintoJaPeruste: asetaTutkintoJaPeruste,
       edellinenOsatunnus: edellinenOsatunnus,
       haeArviot: haeArviot,
@@ -141,7 +166,9 @@ angular.module('osaan.palvelut.arviointi', [])
       tyhjennaArviot: tyhjennaArviot,
       valittuPeruste: valittuPeruste,
       valittuTutkintotunnus: valittuTutkintotunnus,
-      valitutOsatunnukset: valitutOsatunnukset
+      valitutOsatunnukset: valitutOsatunnukset,
+      valitutOsaamisalat: valitutOsaamisalat,
+      valitutOsat: valitutOsat
     };
   }])
 ;

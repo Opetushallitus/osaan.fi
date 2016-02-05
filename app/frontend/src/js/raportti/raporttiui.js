@@ -29,11 +29,16 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     return {
       valitseTutkinnonOsat: function(tutkinnonosat, valitutOsatunnukset) {
         return _(tutkinnonosat).filter(function(osa) { return valitutOsatunnukset.indexOf(osa.osatunnus) >= 0; }).value();
+      },
+      valitseOsaamisalat: function(osaamisalat, valitutOsaamisalat) {
+        return _(osaamisalat).filter(function (ala) { return valitutOsaamisalat.indexOf(ala.osaamisalatunnus) >= 0; })
+                             .map(function (ala) { return _.pick(ala, ['nimi_fi', 'nimi_sv']); })
+                             .value();
       }
     };
   }])
 
-  .controller('RaporttiController', ['$filter', '$location', '$q', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'Otsikko', 'Poistumisvaroitus', 'Raportti', 'RaporttiApurit', 'TekstiRaportti', 'Tutkinnonosa', 'Tutkinto', function($filter, $location, $q, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, Otsikko, Poistumisvaroitus, Raportti, RaporttiApurit, TekstiRaportti, Tutkinnonosa, Tutkinto) {
+  .controller('RaporttiController', ['$filter', '$location', '$q', '$routeParams', '$scope', 'AmmattitaidonKuvaus', 'Arviointi', 'Osaamisala', 'Otsikko', 'Poistumisvaroitus', 'Raportti', 'RaporttiApurit', 'TekstiRaportti', 'Tutkinnonosa', 'Tutkinto', function($filter, $location, $q, $routeParams, $scope, AmmattitaidonKuvaus, Arviointi, Osaamisala, Otsikko, Poistumisvaroitus, Raportti, RaporttiApurit, TekstiRaportti, Tutkinnonosa, Tutkinto) {
 
     var valittuPeruste = Arviointi.valittuPeruste();
     if (valittuPeruste === undefined || !Arviointi.onkoArvioita()) {
@@ -54,6 +59,11 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
       });
 
     var kohdealueetPromise = AmmattitaidonKuvaus.haeKohdealueetTutkinnonosille(Arviointi.valitutOsatunnukset());
+
+    Osaamisala.hae(valittuPeruste)
+      .then(function(osaamisalat) {
+        $scope.valitutOsaamisalat = RaporttiApurit.valitseOsaamisalat(osaamisalat, Arviointi.valitutOsaamisalat()); 
+      });
 
     $q.all({tutkinto: tutkintoPromise, tutkinnonosat: tutkinnonosatPromise, kohdealueet: kohdealueetPromise}).then(function(tulokset) {
       $scope.raportti = Raportti.luoRaportti(tulokset.tutkinto, tulokset.tutkinnonosat, tulokset.kohdealueet);
