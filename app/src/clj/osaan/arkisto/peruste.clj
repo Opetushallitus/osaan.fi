@@ -74,14 +74,16 @@
     (sql-util/insert-if-not-exists :peruste_ja_tutkintonimike {:peruste (:peruste_id peruste)
                                                                :tutkintonimike (:nimiketunnus nimike)})))
 
-(defn ^:integration-api paivita-osaamisalan-tutkinnonosat! [osaamisala osat]
-  (sql/delete :tutkinnonosa_ja_osaamisala
-    (sql/where {:osaamisala (:osaamisalatunnus osaamisala)}))
+(defn ^:integration-api paivita-osaamisalan-tutkinnonosat! [peruste-id osaamisalatunnus osat]
+  (sql/delete :tutkinnonosa_ja_osaamisala_ja_peruste
+     (sql/where {:osaamisala osaamisalatunnus
+                 :peruste peruste-id}))
   (doseq [{:keys [tutkinnonosa tyyppi jarjestys]} osat]
     (if (tutkinnonosa-arkisto/hae tutkinnonosa)
-      (sql-util/insert-or-update :tutkinnonosa_ja_osaamisala [:osa :osaamisala]
+      (sql-util/insert-or-update :tutkinnonosa_ja_osaamisala_ja_peruste [:osa :osaamisala :peruste]
         {:osa tutkinnonosa
-         :osaamisala (:osaamisalatunnus osaamisala)
+         :osaamisala osaamisalatunnus
+         :peruste peruste-id
          :jarjestys jarjestys
          :tyyppi tyyppi})
       (log/warn "Tutkinnonosa puuttuu:" tutkinnonosa))))
@@ -93,7 +95,7 @@
     (sql-util/insert-or-update :osaamisala [:osaamisalatunnus] (select-keys ala [:osaamisalatunnus :nimi_fi :nimi_sv]))
     (sql-util/insert-if-not-exists :osaamisala_ja_peruste {:osaamisala (:osaamisalatunnus ala)
                                                            :peruste (:peruste_id peruste)})
-    (paivita-osaamisalan-tutkinnonosat! ala (:osat ala))))
+    (paivita-osaamisalan-tutkinnonosat! (:peruste_id peruste) (:osaamisalatunnus ala) (:osat ala))))
 
 (defn ^:integration-api lisaa! [peruste]
   (doseq [osa (:tutkinnonosat peruste)]
@@ -153,10 +155,11 @@
                       (sql/order :osaamisala.osaamisalatunnus))]
     (for [ala osaamisalat]
       (assoc ala :tutkinnonosat (sql/select :tutkinnonosa
-                                  (sql/join :inner :tutkinnonosa_ja_osaamisala {:tutkinnonosa_ja_osaamisala.osa :tutkinnonosa.osatunnus})
+                                  (sql/join :inner :tutkinnonosa_ja_osaamisala_ja_peruste {:tutkinnonosa_ja_osaamisala_ja_peruste.osa :tutkinnonosa.osatunnus})
                                   (sql/fields :tutkinnonosa.nimi_fi
                                               :tutkinnonosa.nimi_sv
                                               :tutkinnonosa.osatunnus
-                                              :tutkinnonosa_ja_osaamisala.tyyppi)
-                                  (sql/where {:tutkinnonosa_ja_osaamisala.osaamisala (:osaamisalatunnus ala)})
-                                  (sql/order :tutkinnonosa_ja_osaamisala.jarjestys))))))
+                                              :tutkinnonosa_ja_osaamisala_ja_peruste.tyyppi)
+                                  (sql/where {:tutkinnonosa_ja_osaamisala_ja_peruste.osaamisala (:osaamisalatunnus ala)
+                                              :tutkinnonosa_ja_osaamisala_ja_peruste.peruste peruste-id})
+                                  (sql/order :tutkinnonosa_ja_osaamisala_ja_peruste.jarjestys))))))

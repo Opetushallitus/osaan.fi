@@ -72,44 +72,49 @@
 (defn yhteinen-osa? [rakenne]
   (= (get-in rakenne [:nimi :fi]) "Yhteiset tutkinnon osat"))
 
+(defn osaamisalatunnus [rakenne]
+  (second (re-matches #"^osaamisala_(.*)$" (get-in rakenne [:osaamisala :osaamisalakoodiUri] ""))))
+
 (defn hae-osat
-  ([rakenne] (hae-osat "valinnainen" rakenne))
-  ([tyyppi rakenne]
-    (if (:osat rakenne)
-      (let [tyyppi (if (yhteinen-osa? rakenne)
-                     "yhteinen"
-                     tyyppi)]
-        (mapcat (partial hae-osat tyyppi) (:osat rakenne)))
-      (let [tyyppi (if (:pakollinen rakenne)
-                     "pakollinen"
-                     tyyppi)]
-        [(assoc rakenne :tyyppi tyyppi)]))))
+  ([rakenne] (hae-osat "valinnainen" nil rakenne))
+  ([tyyppi osaamisala rakenne]
+    (let [osaamisala (or osaamisala (osaamisalatunnus rakenne))
+          tyyppi (cond
+                   (yhteinen-osa? rakenne) "yhteinen"
+                   (:pakollinen rakenne) "pakollinen"
+                   :else tyyppi)]
+      (if (:osat rakenne)
+       (mapcat (partial hae-osat tyyppi osaamisala) (:osat rakenne))
+       [(assoc rakenne :tyyppi tyyppi, :osaamisala osaamisala)]))))
 
 (defn muotoile-osaamisala
-  [osaviite->osatunnus]
-  (fn [ala]
-    (when (:osaamisala ala)
-      {:osaamisalatunnus (get-in ala [:osaamisala :osaamisalakoodiArvo])
-       :nimi_fi (get-in ala [:osaamisala :nimi :fi])
-       :nimi_sv (get-in ala [:osaamisala :nimi :sv])
-       :osat (map-indexed (fn [index osa]
-                            {:jarjestys (inc index)
-                             :tyyppi (:tyyppi osa)
-                             :tutkinnonosa (osaviite->osatunnus (:_tutkinnonOsaViite osa))})
-                          (hae-osat ala))})))
+  [ala]
+  {:osaamisalatunnus (second (re-matches #"^osaamisala_(.*)$" (:uri ala)))
+   :nimi_fi (get-in ala [:nimi :fi])
+   :nimi_sv (get-in ala [:nimi :sv])})
 
 (defn muotoile-suoritustapa
-  [osa-id->osatunnus]
+  [osa-id->osatunnus osaamisalat]
   (fn [suoritustapa]
     (let [osaviite->osatunnus (into {} (for [viite (:tutkinnonOsaViitteet suoritustapa)]
-                                        [(str (:id viite)) (osa-id->osatunnus (:_tutkinnonOsa viite))]))]
+                                        [(str (:id viite)) (osa-id->osatunnus (:_tutkinnonOsa viite))]))
+          tutkinnonosat (map-indexed (fn [index osa]
+                                       {:jarjestys (inc index)
+                                        :tyyppi (:tyyppi osa)
+                                        :tutkinnonosa (osaviite->osatunnus (:_tutkinnonOsaViite osa))
+                                        :osaamisala (:osaamisala osa)})
+                          (hae-osat (:rakenne suoritustapa)))
+          osaamisalan-tutkinnonosat (group-by :osaamisala tutkinnonosat)
+          osaamisalat (for [ala osaamisalat
+                            :let [osat (concat (osaamisalan-tutkinnonosat nil)
+                                               (osaamisalan-tutkinnonosat (:osaamisalatunnus ala)))]]
+                        (assoc ala :osat osat))]
+      (doseq [ala osaamisalat]
+        (when-not (seq (osaamisalan-tutkinnonosat (:osaamisalatunnus ala)))
+          (log/warn "Osaamisalalla ei ole tutkinnonosia:" (:osaamisalatunnus ala) (:nimi_fi ala))))
       {:suoritustapakoodi (:suoritustapakoodi suoritustapa)
-       :osaamisalat (keep (muotoile-osaamisala osaviite->osatunnus) (get-in suoritustapa [:rakenne :osat]))
-       :osat (map-indexed (fn [index osa]
-                            {:jarjestys (inc index)
-                             :tyyppi (:tyyppi osa)
-                             :tutkinnonosa (osaviite->osatunnus (:_tutkinnonOsaViite osa))})
-                          (hae-osat (:rakenne suoritustapa)))})))
+       :osat tutkinnonosat
+       :osaamisalat osaamisalat})))
 
 (defn nimike-kielella [nimike kieli]
   (let [kieli (case kieli
@@ -125,7 +130,8 @@
                                             :let [nimiketunnus (:tutkintonimikeArvo nimike)]]
                                         [nimiketunnus {:nimiketunnus nimiketunnus
                                                        :nimi_fi (nimike-kielella nimike :fi)
-                                                       :nimi_sv (nimike-kielella nimike :sv)}]))]
+                                                       :nimi_sv (nimike-kielella nimike :sv)}]))
+        osaamisalat (map muotoile-osaamisala (:osaamisalat peruste))]
     {:diaarinumero (:diaarinumero peruste)
      :eperustetunnus (:id peruste)
      :voimassa_alkupvm (c/to-local-date (:voimassaoloAlkaa peruste))
@@ -134,7 +140,7 @@
      :tutkinnonosat (map-indexed muotoile-tutkinnonosa (:tutkinnonOsat peruste))
      :tutkinnot (map :koulutuskoodiArvo (:koulutukset peruste))
      :tutkintonimikkeet (map (comp nimiketunnus->nimike :tutkintonimikeArvo) (:tutkintonimikkeet peruste))
-     :suoritustavat (map (muotoile-suoritustapa osa-id->osatunnus) (:suoritustavat peruste))}))
+     :suoritustavat (map (muotoile-suoritustapa osa-id->osatunnus osaamisalat) (:suoritustavat peruste))}))
 
 (defn hae-peruste [id asetukset]
   (let [peruste-data (get-json-from-url (str (:url asetukset) "api/perusteet/" id "/kaikki"))
