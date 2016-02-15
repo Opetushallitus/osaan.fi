@@ -56,11 +56,11 @@ insert into osaamisala (osaamisalatunnus, nimi_fi, nimi_sv) values ('2002', 'Kuv
 insert into osaamisala (osaamisalatunnus, nimi_fi, nimi_sv) values ('2003', 'Mediatyön osaamisala', '');
 
 insert into osaamisala_ja_peruste (osaamisala, peruste) values ('2002', -2), ('2003', -2);
-insert into tutkinnonosa_ja_osaamisala (osa, osaamisala, jarjestys, tyyppi) values ('100001', '2002', 1, 'pakollinen');
-insert into tutkinnonosa_ja_osaamisala (osa, osaamisala, jarjestys, tyyppi) values ('100002', '2002', 2, 'valinnainen');
-insert into tutkinnonosa_ja_osaamisala (osa, osaamisala, jarjestys, tyyppi) values ('100002', '2003', 1, 'pakollinen');
-insert into tutkinnonosa_ja_osaamisala (osa, osaamisala, jarjestys, tyyppi) values ('100001', '2003', 2, 'valinnainen');
-insert into tutkinnonosa_ja_osaamisala (osa, osaamisala, jarjestys, tyyppi) values ('100003', '2003', 3, 'valinnainen');
+insert into tutkinnonosa_ja_osaamisala_ja_peruste (osa, osaamisala, peruste, jarjestys, tyyppi) values ('100001', '2002', -2, 1, 'pakollinen');
+insert into tutkinnonosa_ja_osaamisala_ja_peruste (osa, osaamisala, peruste, jarjestys, tyyppi) values ('100002', '2002', -2, 2, 'valinnainen');
+insert into tutkinnonosa_ja_osaamisala_ja_peruste (osa, osaamisala, peruste, jarjestys, tyyppi) values ('100002', '2003', -2, 1, 'pakollinen');
+insert into tutkinnonosa_ja_osaamisala_ja_peruste (osa, osaamisala, peruste, jarjestys, tyyppi) values ('100001', '2003', -2, 2, 'valinnainen');
+insert into tutkinnonosa_ja_osaamisala_ja_peruste (osa, osaamisala, peruste, jarjestys, tyyppi) values ('100003', '2003', -2, 3, 'valinnainen');
 
 insert into arvio (tunniste, peruste) values ('testiarvio', (select peruste_id from peruste where diaarinumero = '41/011/2005'));
 insert into arvio_tutkinnonosa (arviotunnus, osa)  values ('testiarvio', '100001');
