@@ -17,14 +17,12 @@
   (:require [cheshire.generate :as json-gen]
             [clojure.tools.logging :as log]
             [clojure.java.io :as io]
+            [compojure.api.middleware :refer [api-middleware]]
+            [compojure.api.exception :as ex]
             [compojure.core :as c]
             [org.httpkit.server :as hs]
-            [ring.middleware.json :refer [wrap-json-params]]
-            [ring.middleware.keyword-params :refer [wrap-keyword-params]]
-            [ring.middleware.params :refer [wrap-params]]
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.not-modified :refer [wrap-not-modified]]
-            [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.x-headers :refer [wrap-frame-options]]
             [ring.util.response :as resp]
             schema.core
@@ -62,11 +60,8 @@
                         (fn [c json-generator]
                           (.writeString json-generator (.toString c "yyyy-MM-dd"))))
   (-> (reitit asetukset)
-    wrap-keyword-params
-    wrap-json-params
+    (api-middleware {:exceptions {:handlers {:schema.core/error ex/schema-error-handler}}})
     (wrap-resource "public/app")
-    wrap-params
-    wrap-content-type
     wrap-not-modified
     wrap-expires
     (wrap-kayttaja "JARJESTELMA")
