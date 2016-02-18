@@ -30,7 +30,7 @@
                  [korma "0.4.2"]
                  [metosin/compojure-api "1.0.0"]
                  [org.slf4j/slf4j-api "1.7.16"]
-                 [org.postgresql/postgresql "9.4-1206-jdbc42"]
+                 [org.postgresql/postgresql "9.4-1201-jdbc41"]
                  [peridot "0.4.3"]
                  [stencil "0.5.0"]
                  [prismatic/schema "1.0.5"]
