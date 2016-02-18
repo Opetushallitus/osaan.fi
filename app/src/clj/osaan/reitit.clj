@@ -14,10 +14,12 @@
 
 (ns osaan.reitit
   (:require [clojure.pprint :refer [pprint]]
-            [compojure.core :as c]
+            [compojure.api.exception :as ex]
+            [compojure.api.sweet :refer [GET api context swagger-routes]]
             [compojure.route :as r]
             [ring.util.response :as resp]
             [stencil.core :as s]
+            [osaan.asetukset :refer [service-path]]
             [osaan.infra.status :refer [status piilota-salasanat]]
             [osaan.linkki]
             [osaan.rest-api.ammattitaidon-kuvaus]
@@ -31,24 +33,34 @@
             [osaan.rest-api.arvioraportti]))
 
 (defn reitit [asetukset]
-  (c/routes
-    (c/GET "/" [] (-> (resp/resource-response "index.html" {:root "public/app"})
-                      (assoc :headers {"Content-type" "text/html; charset=utf-8"})))
+  (api
+    {:exceptions {:handlers {:schema.core/error ex/schema-error-handler}}}
+    (swagger-routes
+      {:ui "/api-docs"
+       :spec "/swagger.json"
+       :data {:info {:title "Osaan.fi API"
+                     :description "Osaan.fi-palvelun rajapinnat."}
+              :basePath (str (service-path (get-in asetukset [:server :base-url])))}})
+    (GET "/" []
+      :summary "Etusivu"
+      (->
+        (resp/resource-response "index.html" {:root "public/app"})
+        (assoc :headers {"Content-type" "text/html; charset=utf-8"})))
     (if (:development-mode asetukset)
-      (c/GET "/status" [] (s/render-file "status" (assoc (status)
-                                                         :asetukset (with-out-str
-                                                                      (-> asetukset
-                                                                        piilota-salasanat
-                                                                        pprint)))))
-     (c/GET "/status" [] (s/render-string "OK" {})))
-    (c/context "/api/ammattitaidonkuvaus" [] osaan.rest-api.ammattitaidon-kuvaus/reitit)
-    (c/context "/api/arvio" [] osaan.rest-api.arvio/reitit)
-    (c/context "/api/kaiku" [] osaan.rest-api.kaiku/reitit)
-    (c/context "/api/koulutusala" [] osaan.rest-api.koulutusala/reitit)
-    (c/context "/api/ohje" [] osaan.rest-api.ohje/reitit)
-    (c/context "/api/osaamisala" [] osaan.rest-api.osaamisala/reitit)
-    (c/context "/api/tutkinnonosa" [] osaan.rest-api.tutkinnonosa/reitit)
-    (c/context "/api/tutkinto" [] osaan.rest-api.tutkinto/reitit)
-    (c/context "/api/arvioraportti" [] osaan.rest-api.arvioraportti/reitit)
-    (c/context "/linkki" [] (osaan.linkki/reitit asetukset))
+      (GET "/status" [] (s/render-file "status" (assoc (status)
+                                                       :asetukset (with-out-str
+                                                                    (-> asetukset
+                                                                      piilota-salasanat
+                                                                      pprint)))))
+     (GET "/status" [] (s/render-string "OK" {})))
+    (context "/api/ammattitaidonkuvaus" [] osaan.rest-api.ammattitaidon-kuvaus/reitit)
+    (context "/api/arvio" [] osaan.rest-api.arvio/reitit)
+    (context "/api/kaiku" [] osaan.rest-api.kaiku/reitit)
+    (context "/api/koulutusala" [] osaan.rest-api.koulutusala/reitit)
+    (context "/api/ohje" [] osaan.rest-api.ohje/reitit)
+    (context "/api/osaamisala" [] osaan.rest-api.osaamisala/reitit)
+    (context "/api/tutkinnonosa" [] osaan.rest-api.tutkinnonosa/reitit)
+    (context "/api/tutkinto" [] osaan.rest-api.tutkinto/reitit)
+    (context "/api/arvioraportti" [] osaan.rest-api.arvioraportti/reitit)
+    (context "/linkki" [] (osaan.linkki/reitit asetukset))
     (r/not-found "Not found")))

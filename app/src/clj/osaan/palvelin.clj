@@ -17,7 +17,6 @@
   (:require [cheshire.generate :as json-gen]
             [clojure.tools.logging :as log]
             [clojure.java.io :as io]
-            [compojure.api.middleware :refer [api-middleware]]
             [compojure.api.exception :as ex]
             [compojure.core :as c]
             [org.httpkit.server :as hs]
@@ -60,7 +59,6 @@
                         (fn [c json-generator]
                           (.writeString json-generator (.toString c "yyyy-MM-dd"))))
   (-> (reitit asetukset)
-    (api-middleware {:exceptions {:handlers {:schema.core/error ex/schema-error-handler}}})
     (wrap-resource "public/app")
     wrap-not-modified
     wrap-expires
