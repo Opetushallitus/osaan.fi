@@ -13,12 +13,14 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.rest-api.koulutusala
-  (:require [compojure.core :as c]
-            [oph.common.util.http-util :refer [json-response]]
+  (:require [compojure.api.core :refer [GET defroutes]]
+            [oph.common.util.http-util :refer [response-or-404]]
             [osaan.arkisto.koulutusala :as arkisto]
-            [osaan.compojure-util :as cu]
+            osaan.compojure-util
             [osaan.skeema :as skeema]))
 
-(c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/" []
-    (json-response (arkisto/hae-koulutusalat-opintoaloilla) [skeema/Koulutusala])))
+(defroutes reitit
+  (GET "/" []
+    :kayttooikeus :julkinen
+    :return [skeema/Koulutusala]
+    (response-or-404 (arkisto/hae-koulutusalat-opintoaloilla))))

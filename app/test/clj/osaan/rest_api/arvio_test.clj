@@ -29,7 +29,7 @@
   (let [crout (init-peridot!)
         state-tallennus (mock-request-body! crout "/api/arvio" :post arvio)]
     (is (= (:status (:response state-tallennus)) 200))
-    (let [tunnus (-> state-tallennus :response :body cheshire/parse-string)
+    (let [tunnus (-> state-tallennus :response :body slurp cheshire/parse-string)
           state-lataus (mock-request! crout (str "/api/arvio/" tunnus) :get {})
-          ladattu-arvio (-> state-lataus :response :body cheshire/parse-string (dissoc "luotuaika"))]
+          ladattu-arvio (-> state-lataus :response :body slurp cheshire/parse-string (dissoc "luotuaika"))]
       (is (= (cheshire/parse-string (cheshire/generate-string arvio)) ladattu-arvio)))))

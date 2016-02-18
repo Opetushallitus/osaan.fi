@@ -13,17 +13,26 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.rest-api.tutkinto
-  (:require [compojure.core :as c]
-            [oph.common.util.http-util :refer [json-response]]
+  (:require [compojure.api.core :refer [GET defroutes]]
+            [schema.core :as s]
+            [oph.common.util.http-util :refer [response-or-404]]
             [osaan.arkisto.tutkinto :as arkisto]
-            [osaan.compojure-util :as cu]
+            osaan.compojure-util
             [osaan.skeema :as skeema]))
 
-(c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/peruste/:perusteid" [perusteid]
-    (json-response (arkisto/hae-perusteella (Integer/parseInt perusteid)) skeema/Tutkinto))
-
-  (cu/defapi :julkinen nil :get "/" [nimi opintoala tutkintotyyppi voimaantulevat]
+(defroutes reitit
+  (GET "/peruste/:perusteid" []
+    :kayttooikeus :julkinen
+    :path-params [perusteid :- s/Int]
+    :return skeema/Tutkinto
+    (response-or-404 (arkisto/hae-perusteella perusteid)))
+  (GET "/" []
+    :kayttooikeus :julkinen
+    :query-params [{nimi :- s/Str nil}
+                   {opintoala :- s/Str nil}
+                   {tutkintotyyppi :- s/Str nil}
+                   {voimaantulevat :- Boolean false}]
+    :return [skeema/TutkintoHakutulos]
     (let [tutkintotaso (if (= "kaikki" tutkintotyyppi) nil tutkintotyyppi)
           oala (if (.equals "" opintoala) nil opintoala)]
-      (json-response (arkisto/hae-ehdoilla nimi oala tutkintotaso (Boolean/valueOf voimaantulevat)) [skeema/TutkintoHakutulos]))))
+      (response-or-404 (arkisto/hae-ehdoilla nimi oala tutkintotaso voimaantulevat)))))

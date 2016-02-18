@@ -13,16 +13,19 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.rest-api.tutkinnonosa
-  (:require [compojure.core :as c]
-            [oph.common.util.http-util :refer [json-response]]
-            [osaan.compojure-util :as cu]
-            [osaan.skeema :as skeema]
+  (:require [compojure.api.core :refer [GET defroutes]]
+            [schema.core :as s]
+            [oph.common.util.http-util :refer [response-or-404]]
             [osaan.arkisto.peruste :as peruste-arkisto]
-            [osaan.arkisto.tutkinnonosa :as arkisto]))
+            [osaan.arkisto.tutkinnonosa :as arkisto]
+            osaan.compojure-util
+            [osaan.skeema :as skeema]))
 
-(c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/" [peruste tutkintotunnus]
-    (when (peruste-arkisto/onko-perustetta (Integer/parseInt peruste))
-      (let [osat (or (seq (arkisto/hae-osaamisalojen-tutkinnon-osat (Integer/parseInt peruste)))
-                     (arkisto/hae-perusteen-tutkinnon-osat (Integer/parseInt peruste)))]
-        (json-response osat [skeema/Tutkinnonosa])))))
+(defroutes reitit
+  (GET "/" []
+    :kayttooikeus :julkinen
+    :query-params [peruste :- s/Int]
+    :return [skeema/Tutkinnonosa]
+    (response-or-404 (when (peruste-arkisto/onko-perustetta peruste)
+                       (or (seq (arkisto/hae-osaamisalojen-tutkinnon-osat peruste))
+                           (arkisto/hae-perusteen-tutkinnon-osat peruste))))))

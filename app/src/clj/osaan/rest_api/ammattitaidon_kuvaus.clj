@@ -13,20 +13,20 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.rest-api.ammattitaidon-kuvaus
-  (:require [compojure.core :as c]
-            [oph.common.util.http-util :refer [json-response]]
+  (:require [compojure.api.core :refer [GET defroutes]]
+            [oph.common.util.http-util :refer [response-or-404]]
             [osaan.arkisto.ammattitaidon-kuvaus :as arkisto]
-            [osaan.compojure-util :as cu]
+            osaan.compojure-util
             [osaan.skeema :as skeema]))
 
-(c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/alueet" [tutkinnonosatunnus]
+(defroutes reitit
+  (GET "/alueet" [tutkinnonosatunnus]
+    :kayttooikeus :julkinen
+    :return skeema/Tutkinnonosa->ArvioinninKohdealueet
     (let [osatunnukset (if (sequential? tutkinnonosatunnus)
                          tutkinnonosatunnus
-                         [tutkinnonosatunnus])
-          tulos (into {} (for [osatunnus osatunnukset
-                               :let [kohdealueet (arkisto/hae-kohdealueet-kuvauksineen osatunnus)]
-                               :when (seq kohdealueet)]
-                           {osatunnus kohdealueet}))]
-      (json-response tulos
-                     skeema/Tutkinnonosa->ArvioinninKohdealueet))))
+                         [tutkinnonosatunnus])]
+      (response-or-404 (into {} (for [osatunnus osatunnukset
+                                      :let [kohdealueet (arkisto/hae-kohdealueet-kuvauksineen osatunnus)]
+                                      :when (seq kohdealueet)]
+                                  {osatunnus kohdealueet}))))))

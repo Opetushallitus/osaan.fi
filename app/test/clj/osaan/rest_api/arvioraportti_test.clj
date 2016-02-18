@@ -35,4 +35,4 @@
   (let [crout (init-peridot!)]
     (let [response (mock-request! crout "/api/arvioraportti/json/testiarvio" :get {})]
       (is (= (:status (:response response)) 200))
-      (is (< 0 (.indexOf (:body (:response response)) "\"arvio\":4"))))))
+      (is (< 0 (.indexOf (slurp (:body (:response response))) "\"arvio\":4"))))))

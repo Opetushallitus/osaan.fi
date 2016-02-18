@@ -1,9 +1,9 @@
 (ns osaan.rest-api.arvioraportti
-  (:require [compojure.core :as c]
-            [oph.common.util.http-util :refer [json-response]]
+  (:require [compojure.api.core :refer [GET defroutes]]
+            [schema.core :as s]
+            [oph.common.util.http-util :refer [response-or-404]]
             [osaan.arkisto.arvioraportti :as arkisto]
-            [osaan.compojure-util :as cu]
-            [cheshire.core :as cheshire]))
+            osaan.compojure-util))
 
 (defn group-and-destroy [k s]
   (let [grouped (group-by k s)
@@ -23,8 +23,11 @@
    :headers {"Content-Type" "text/plain; charset=utf-8"}
    :status 200})
 
-(c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/txt/:kieli/:arviotunnus" [kieli arviotunnus]
+(defroutes reitit
+  (GET "/txt/:kieli/:arviotunnus" []
+    :kayttooikeus :julkinen
+    :path-params [kieli :- s/Str
+                  arviotunnus :- s/Str]
     (if-let [tulo (arkisto/hae arviotunnus)]
       (let [tulos (arkisto/tulkitse-arvosanat tulo (keyword kieli))
             suodatettu (suodata-fi tulos)
@@ -33,7 +36,9 @@
           :headers {"Content-Type" "text/plain; charset=utf-8"}
           :status 200})
       not-found-response))
-  (cu/defapi :julkinen nil :get "/json/:arviotunnus" [kieli arviotunnus]
+  (GET "/json/:arviotunnus" []
+    :kayttooikeus :julkinen
+    :path-params [arviotunnus :- s/Str]
     (if-let [tulos (arkisto/hae arviotunnus)]
-        (json-response tulos)
+      (response-or-404 tulos)
       not-found-response)))

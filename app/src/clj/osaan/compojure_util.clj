@@ -13,11 +13,18 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.compojure-util
-  (:require [oph.compojure-util :as oph-cjure]
-            [osaan.toimiala.kayttajaoikeudet :as ko]))
+  (:require [oph.compojure-util :as cu]
+            [osaan.toimiala.kayttajaoikeudet :as ko]
+            compojure.api.meta))
 
-(defmacro defapi
-  "Esittelee rajapinta-funktion sisältäen käyttöoikeuksien tarkastamisen. Olettaa, että ollaan transaktion sisällä."
-  [toiminto konteksti-arg http-method path args & body]
-  (let [auth-map ko/toiminnot]
-    `(oph-cjure/defapi-within-transaction ~auth-map ~toiminto ~konteksti-arg ~http-method ~path ~args ~@body)))
+(defmethod compojure.api.meta/restructure-param :kayttooikeus
+  [_ kayttooikeus_spec {:keys [body] :as acc}]
+  "Käyttoikeuslaajennos compojure-apin rajapintoihin. Esim:
+
+  :kayttooikeus :jasenesitys-poisto
+  :kayttooikeus [:jasenesitys-poisto jasenyysid]"
+
+  (let [[kayttooikeus konteksti] (if (vector? kayttooikeus_spec) kayttooikeus_spec [kayttooikeus_spec])]
+    (-> acc
+        (assoc-in [:swagger :description] (str "Käyttöoikeus " kayttooikeus " , konteksti: " (or konteksti "N/A")))
+        (assoc :body [`(cu/autorisoitu-transaktio ~ko/toiminnot ~kayttooikeus ~konteksti ~@body)]))))

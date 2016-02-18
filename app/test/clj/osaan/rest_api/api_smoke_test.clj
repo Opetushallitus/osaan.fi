@@ -26,7 +26,7 @@
           response (:response state)]
       (is (= (:status response) status-koodi) polku)
       (when (= status-koodi 200)
-        (is (= (get-in response [:headers "Content-Type"]) "application/json") polku)))))
+        (is (= (get-in response [:headers "Content-Type"]) "application/json; charset=utf-8") polku)))))
 
 (deftest ^:integraatio api-smoke
   (doseq [polku ["/api/arvio/testiarvio"

@@ -13,14 +13,18 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.rest-api.osaamisala
-  (:require [compojure.core :as c]
-            [oph.common.util.http-util :refer [json-response]]
-            [osaan.compojure-util :as cu]
-            [osaan.skeema :as skeema]
-            [osaan.arkisto.peruste :as arkisto]))
+  (:require [compojure.api.core :refer [GET defroutes]]
+            [schema.core :as s]
+            [oph.common.util.http-util :refer [response-or-404]]
+            [osaan.arkisto.peruste :as arkisto]
+            osaan.compojure-util
+            [osaan.skeema :as skeema]))
 
-(c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/" [peruste tutkintotunnus]
-    (when (arkisto/onko-perustetta (Integer/parseInt peruste))
-      (let [alat (arkisto/hae-osaamisalat (Integer/parseInt peruste))]
-        (json-response alat [skeema/Osaamisala])))))
+(defroutes reitit
+  (GET "/" []
+    :kayttooikeus :julkinen
+    :query-params [peruste :- s/Int]
+    :return [skeema/Osaamisala]
+    (response-or-404
+      (when (arkisto/onko-perustetta peruste)
+       (arkisto/hae-osaamisalat peruste)))))

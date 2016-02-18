@@ -13,13 +13,19 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.linkki
-  (:require [compojure.core :as c]
+  (:require [compojure.api.core :refer [GET routes]]
+            [schema.core :as s]
+            [oph.common.util.http-util :refer [response-or-404]]
             [osaan.arkisto.peruste :as peruste-arkisto]
-            [osaan.compojure-util :as cu]))
+            osaan.compojure-util))
 
 (defn reitit [asetukset]
-  (c/routes
-    (cu/defapi :julkinen nil :get "/osien-valinta" [tutkinto diaarinumero tyyppi]
+  (routes
+    (GET "/osien-valinta" []
+      :kayttooikeus :julkinen
+      :query-params [tutkinto :- s/Str
+                     diaarinumero :- s/Str
+                     tyyppi :- s/Str]
       (let [perusteid (peruste-arkisto/hae-perusteid diaarinumero tyyppi)
             url (str (-> asetukset :server :base-url) "/#/osien-valinta?tutkinto=" tutkinto "&peruste=" perusteid)]
         {:status  302

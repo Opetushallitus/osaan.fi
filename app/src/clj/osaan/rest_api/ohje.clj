@@ -13,11 +13,14 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.rest-api.ohje
-  (:require [compojure.core :as c]
-            [oph.common.util.http-util :refer [json-response]]
+  (:require [compojure.api.core :refer [GET defroutes]]
+            [schema.core :as s]
+            [oph.common.util.http-util :refer [response-or-404]]
             [osaan.arkisto.ohje :as arkisto]
-            [osaan.compojure-util :as cu]))
+            osaan.compojure-util))
 
-(c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/:ohjetunniste" [ohjetunniste]
-    (json-response (arkisto/hae ohjetunniste))))
+(defroutes reitit
+  (GET "/:ohjetunniste" []
+    :kayttooikeus :julkinen
+    :path-params [ohjetunniste :- s/Str]
+    (response-or-404 (arkisto/hae ohjetunniste))))

@@ -13,16 +13,21 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.rest-api.arvio
-  (:require [compojure.core :as c]
+  (:require [compojure.api.core :refer [GET POST defroutes]]
             [schema.core :as s]
-            [oph.common.util.http-util :refer [json-response]]
+            [oph.common.util.http-util :refer [response-or-404]]
             [osaan.arkisto.arvio :as arkisto]
-            [osaan.compojure-util :as cu]
+            osaan.compojure-util
             [osaan.skeema :as skeema]))
 
-(c/defroutes reitit
-  (cu/defapi :julkinen nil :get "/:tunniste" [tunniste]
-    (json-response (arkisto/hae tunniste) skeema/ArvioUlos))
-  (cu/defapi :julkinen nil :post "/" [& tila]
-    (s/validate skeema/Arvio tila)
-    (json-response (arkisto/tallenna tila))))
+(defroutes reitit
+  (GET "/:tunniste" []
+    :kayttooikeus :julkinen
+    :path-params [tunniste :- s/Str]
+    :return skeema/ArvioUlos
+    (response-or-404 (arkisto/hae tunniste)))
+  (POST "/" request
+    :kayttooikeus :julkinen
+    :body [tila skeema/Arvio]
+    :return s/Str
+    (response-or-404 (arkisto/tallenna tila))))

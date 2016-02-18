@@ -13,14 +13,15 @@
 ;; European Union Public Licence for more details.
 
 (ns osaan.rest-api.kaiku
-  (:require [compojure.core :as c]
-            [oph.common.util.http-util :refer [json-response]]
-            [osaan.compojure-util :as cu]))
+  (:require [compojure.api.core :refer [POST defroutes]]
+            [oph.common.util.http-util :refer [response-or-404]]
+            osaan.compojure-util))
 
-(c/defroutes reitit
-  (cu/defapi :julkinen nil :post "/" request
-    (let [data (-> request :form-params (get "data"))]
-      {:status  200
-       :headers {"Content-Type"        "text/plain; charset=UTF-8"
-                 "Content-Disposition" (str "attachment; filename=raportti.txt")}
-       :body    data})))
+(defroutes reitit
+  (POST "/" []
+    :kayttooikeus :julkinen
+    :form-params [data]
+    {:status  200
+     :headers {"Content-Type"        "text/plain; charset=UTF-8"
+               "Content-Disposition" (str "attachment; filename=raportti.txt")}
+     :body    data}))

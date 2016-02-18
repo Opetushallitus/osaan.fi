@@ -9,5 +9,5 @@
   (let [crout (init-peridot!)]
     (let [response (mock-request! crout "/api/tutkinto?opintoala=" :get {})]
       (is (= (:status (:response response)) 200))
-      (is (< 2 (count (:body (:response response))))))))
+      (is (< 2 (count (slurp (:body (:response response)))))))))
 
