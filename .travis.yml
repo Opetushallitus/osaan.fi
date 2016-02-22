@@ -24,15 +24,14 @@ script:
 - generate-schemadocs.sh
 - cd ..
 
-#deploy:
-#- provider: s3
-#  access_key_id: $ARTIFACTS_ID
-#  secret_access_key:
-#    secure: B3a0wgKji7D6BHzEGHT0Nj8A+YGduQNt+vz7B476sCW4GDuWWGfkhBsXapMMSBleJqsbLa67yQ6e2yvDijvcN3/870PAKmreYaoHGw+We5J/Qq0UI1Q/JHTCOxTCKRIzESsjlsUMDyEx/4l/U6NVdLQcowpkPLdYLBQhYZgdjeE=    
-#  bucket: opetushallitus-docs
-#  local-dir: db-docs/schemadocs
-#  upload-dir: osaan
-#  acl: public_read
-#  skip_cleanup: true
-#  region: eu-west-1
-
+deploy:
+- provider: s3
+  access_key_id: $ARTIFACTS_ID
+  secret_access_key:
+    secure: Nt6qZv1rAxrWCbkkP79LCTclvQJ5v2M+Ltr+FTaEK/ex7wySZZ9akoiHKQxFK3mVHN1ea+pZGOe2qraNNUAFsmJVC4azKWGd9HMGeTgIJKqMpjaRMVHRknKI5qlTYVxG50gpq8Li9l3/G3T5atvtf1lybGGCpNyIIfFF/1E0zvI=
+  bucket: opetushallitus-docs
+  local-dir: db-docs/schemadocs
+  upload-dir: osaan
+  acl: public_read
+  skip_cleanup: true
+  region: eu-west-1
