@@ -38,6 +38,7 @@
                  [ring/ring-headers "0.1.3"]
                  [ring/ring-json "0.4.0"]]
   :plugins [[test2junit "1.0.1"]
+  	    [codox "0.6.6"]
             [jonase/eastwood "0.2.3"]]
   :profiles {:dev {:source-paths ["dev"]
                    :dependencies [[org.clojure/test.check "0.7.0"]
