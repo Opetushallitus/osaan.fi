@@ -35,3 +35,24 @@ deploy:
   acl: public_read
   skip_cleanup: true
   region: eu-west-1
+- provider: s3
+  access_key_id: $ARTIFACTS_ID
+  secret_access_key:
+    secure: Nt6qZv1rAxrWCbkkP79LCTclvQJ5v2M+Ltr+FTaEK/ex7wySZZ9akoiHKQxFK3mVHN1ea+pZGOe2qraNNUAFsmJVC4azKWGd9HMGeTgIJKqMpjaRMVHRknKI5qlTYVxG50gpq8Li9l3/G3T5atvtf1lybGGCpNyIIfFF/1E0zvI=
+  bucket: opetushallitus-docs
+  local-dir: app/doc
+  upload-dir: osaan-doc
+  acl: public_read
+  skip_cleanup: true
+  region: eu-west-1
+- provider: s3
+  access_key_id: $ARTIFACTS_ID
+  secret_access_key:
+    secure: Nt6qZv1rAxrWCbkkP79LCTclvQJ5v2M+Ltr+FTaEK/ex7wySZZ9akoiHKQxFK3mVHN1ea+pZGOe2qraNNUAFsmJVC4azKWGd9HMGeTgIJKqMpjaRMVHRknKI5qlTYVxG50gpq8Li9l3/G3T5atvtf1lybGGCpNyIIfFF/1E0zvI=
+  bucket: opetushallitus-docs
+  local-dir: app/eastwood
+  upload-dir: osaan-lint
+  acl: public_read
+  skip_cleanup: true
+  region: eu-west-1
+					
