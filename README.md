@@ -3,9 +3,15 @@ Osaan.fi
 
 Osaan.fi palvelun uudistettu versio.
 
+Automaattinen Travis CI ajo: [![Build Status](https://travis-ci.org/Opetushallitus/osaan.fi.svg?branch=master)](https://travis-ci.org/Opetushallitus/osaan.fi)
+
 # Dokumentaatio
 
 Järjestelmän yleiskuvaus, kuvia arkkitehtuurista yms. löytyy CSC:n confluencesta: [osaan.fi dokumentaatio](https://confluence.csc.fi/display/OPHPALV/osaan.fi).
+
+* Automaattisesti generoituva tietokantadokumentaatio: [osaan.fi tietokanta](http://opetushallitus-docs.s3-website-eu-west-1.amazonaws.com/osaan/)
+* Palvelimen [Eastwood](https://github.com/jonase/eastwood) analyysi: [osaan.fi uusin Eastwood lint](http://opetushallitus-docs.s3-website-eu-west-1.amazonaws.com/osaan-lint/osaan-warnings.txt)
+* Palvelimen [Codox](https://github.com/weavejester/codox) dokumentaatio: [osaan.fi palvelin Clojure doc](http://opetushallitus-docs.s3-website-eu-west-1.amazonaws.com/osaan-doc/)
 
 # Lähdekoodin haku
 
