@@ -17,6 +17,9 @@ before_script:
 script:
 - lein run 'postgresql://osaan_adm:osaan-adm@127.0.0.1:5432/osaan' -u osaan_user --clear -t
 - cd ../app
+- lein test
+- echo 'db.port = 5432' > osaan.properties
+- lein test :integraatio
 - lein doc
 - mkdir eastwood
 - lein eastwood "{:out \"eastwood/osaan-warnings.txt\"}" || true
