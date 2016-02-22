@@ -58,3 +58,8 @@ deploy:
   acl: public_read
   skip_cleanup: true
   region: eu-west-1
+
+notifications:
+  hipchat:
+    rooms:
+      secure: tfGGpfVEGwl941KDFVTaM35X7CEqC0Zm/jHCHUnF+Yw1QDplIBSPh5AQIsBRHBru8zEkZ55mMtr5Vd2gDdlh1HoHRdsfhFro5XO6E/KX/iXrusLTSND5cWcmB+pey+7vfS+LlSw8+0oGJCELlagT/uF1MXoUfAMoVu/hFxWWwYQ=
