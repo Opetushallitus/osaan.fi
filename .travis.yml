@@ -55,4 +55,3 @@ deploy:
   acl: public_read
   skip_cleanup: true
   region: eu-west-1
-					
