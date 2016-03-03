@@ -143,7 +143,7 @@ module.exports = function (grunt) {
               'css/**/*'],
         dest: distDir,
         options : {
-          noProcess: '**/*.{png,gif,jpg,ico,svg,woff,pdf}',
+          noProcess: '**/*.{png,gif,jpg,ico,svg,woff,woff2,pdf,ttf,eot,otf}',
           process: function (content) {
             return content.replace(/<!--dev-->.*<!--enddev-->/g, '');
           }
