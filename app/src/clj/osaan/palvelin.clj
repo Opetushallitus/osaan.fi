@@ -22,6 +22,7 @@
             [org.httpkit.server :as hs]
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.not-modified :refer [wrap-not-modified]]
+            [ring.middleware.content-type :refer [wrap-content-type]]            
             [ring.middleware.x-headers :refer [wrap-frame-options]]
             [ring.util.response :as resp]
             schema.core
@@ -62,6 +63,7 @@
     (wrap-resource "public/app")
     wrap-not-modified
     wrap-expires
+    wrap-content-type    
     (wrap-kayttaja "JARJESTELMA")
     (wrap-frame-options :deny)
     log-request-wrapper
