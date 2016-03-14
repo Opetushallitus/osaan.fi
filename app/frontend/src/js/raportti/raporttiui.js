@@ -27,6 +27,13 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
 
   .factory('RaporttiApurit', [function() {
     return {
+      listaaTutkinnonosat: function(osaamisalat, tutkinnonosat) {
+        if(osaamisalat.length === 0) {
+          return tutkinnonosat;
+        } else {
+          return _.flatten(_.map(osaamisalat, 'tutkinnonosat'));
+        }
+      },
       valitseTutkinnonOsat: function(tutkinnonosat, valitutOsatunnukset) {
         return _(tutkinnonosat).filter(function(osa) { return valitutOsatunnukset.indexOf(osa.osatunnus) >= 0; }).value();
       },
@@ -52,21 +59,16 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
       Otsikko.asetaAlaOtsikko($filter('lokalisoiKentta')(tutkinto, 'nimi'));
     });
 
-    var tutkinnonosatPromise = Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus())
-      .then(function(tutkinnonosat) {
-        $scope.kaikkiTutkinnonosat = tutkinnonosat;
-        return RaporttiApurit.valitseTutkinnonOsat(tutkinnonosat, Arviointi.valitutOsatunnukset());
-      });
+    var tutkinnonosatPromise = Tutkinnonosa.hae(Arviointi.valittuPeruste(), Arviointi.valittuTutkintotunnus());
 
     var kohdealueetPromise = AmmattitaidonKuvaus.haeKohdealueetTutkinnonosille(Arviointi.valitutOsatunnukset());
+    
+    var osaamisalaPromise = Osaamisala.hae(valittuPeruste);
 
-    Osaamisala.hae(valittuPeruste)
-      .then(function(osaamisalat) {
-        $scope.valitutOsaamisalat = RaporttiApurit.valitseOsaamisalat(osaamisalat, Arviointi.valitutOsaamisalat()); 
-      });
-
-    $q.all({tutkinto: tutkintoPromise, tutkinnonosat: tutkinnonosatPromise, kohdealueet: kohdealueetPromise}).then(function(tulokset) {
-      $scope.raportti = Raportti.luoRaportti(tulokset.tutkinto, tulokset.tutkinnonosat, tulokset.kohdealueet);
+    $q.all({tutkinto: tutkintoPromise, tutkinnonosat: tutkinnonosatPromise, kohdealueet: kohdealueetPromise, osaamisalat: osaamisalaPromise}).then(function(tulokset) {
+      $scope.kaikkiTutkinnonosat = RaporttiApurit.listaaTutkinnonosat(tulokset.osaamisalat, tulokset.tutkinnonosat);
+      $scope.valitutOsaamisalat = RaporttiApurit.valitseOsaamisalat(tulokset.osaamisalat, Arviointi.valitutOsaamisalat());
+      $scope.raportti = Raportti.luoRaportti(tulokset.tutkinto, RaporttiApurit.valitseTutkinnonOsat($scope.kaikkiTutkinnonosat, Arviointi.valitutOsatunnukset()), tulokset.kohdealueet);
       $scope.tekstiRaportti = TekstiRaportti.luoRaportti($scope.raportti);
       $scope.jakauma = _.map($scope.raportti.tutkinnonosat, function(osa) {
         return {
