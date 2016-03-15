@@ -27,20 +27,33 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
 
   .factory('RaporttiApurit', [function() {
     return {
-      listaaTutkinnonosat: function(osaamisalat, tutkinnonosat) {
+      listaaOsaamisalat: function(osaamisalat, tutkinnonosat) {
         if(osaamisalat.length === 0) {
-          return tutkinnonosat;
+          return [{tutkinnonosat: tutkinnonosat, osaamisalatunnus: undefined}];
         } else {
-          return _.flatten(_.map(osaamisalat, 'tutkinnonosat'));
+          return osaamisalat;
         }
       },
       valitseTutkinnonOsat: function(tutkinnonosat, valitutOsatunnukset) {
-        return _(tutkinnonosat).filter(function(osa) { return valitutOsatunnukset.indexOf(osa.osatunnus) >= 0; }).value();
+        return _(tutkinnonosat).filter(function(osa) { return valitutOsatunnukset.indexOf(osa.osatunnus) >= 0; }).uniq('osatunnus').value();
       },
       valitseOsaamisalat: function(osaamisalat, valitutOsaamisalat) {
         return _(osaamisalat).filter(function (ala) { return valitutOsaamisalat.indexOf(ala.osaamisalatunnus) >= 0; })
                              .map(function (ala) { return _.pick(ala, ['nimi_fi', 'nimi_sv']); })
                              .value();
+      },
+      valitseTutkinnonosatOsaamisaloittain: function(valitutOsat, osaamisalat, tutkinnonosat) {
+        var output = {};
+        _.forEach(osaamisalat, function(ala) {
+          var osat = [];
+          _.forEach(ala.tutkinnonosat, function(osa) {
+            if(valitutOsat[ala.osaamisalatunnus] && valitutOsat[ala.osaamisalatunnus][osa.osatunnus]) {
+              osat.push(tutkinnonosat[osa.osatunnus]);
+            }
+          });
+          output[ala.osaamisalatunnus] = osat;
+        });
+        return output;
       }
     };
   }])
@@ -66,9 +79,10 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
     var osaamisalaPromise = Osaamisala.hae(valittuPeruste);
 
     $q.all({tutkinto: tutkintoPromise, tutkinnonosat: tutkinnonosatPromise, kohdealueet: kohdealueetPromise, osaamisalat: osaamisalaPromise}).then(function(tulokset) {
-      $scope.kaikkiTutkinnonosat = RaporttiApurit.listaaTutkinnonosat(tulokset.osaamisalat, tulokset.tutkinnonosat);
-      $scope.valitutOsaamisalat = RaporttiApurit.valitseOsaamisalat(tulokset.osaamisalat, Arviointi.valitutOsaamisalat());
-      $scope.raportti = Raportti.luoRaportti(tulokset.tutkinto, RaporttiApurit.valitseTutkinnonOsat($scope.kaikkiTutkinnonosat, Arviointi.valitutOsatunnukset()), tulokset.kohdealueet);
+      $scope.osaamisalat = RaporttiApurit.listaaOsaamisalat(tulokset.osaamisalat, tulokset.tutkinnonosat);
+      $scope.raportti = Raportti.luoRaportti(tulokset.tutkinto, RaporttiApurit.valitseTutkinnonOsat(_.flatten(_.map($scope.osaamisalat, 'tutkinnonosat')), Arviointi.valitutOsatunnukset()), tulokset.kohdealueet);
+      var tutkinnonosat = _.zipObject(_.map($scope.raportti.tutkinnonosat, 'osatunnus'), $scope.raportti.tutkinnonosat);
+      $scope.valitutTutkinnonosat = RaporttiApurit.valitseTutkinnonosatOsaamisaloittain(Arviointi.valitutOsat(), $scope.osaamisalat, tutkinnonosat);
       $scope.tekstiRaportti = TekstiRaportti.luoRaportti($scope.raportti);
       $scope.jakauma = _.map($scope.raportti.tutkinnonosat, function(osa) {
         return {

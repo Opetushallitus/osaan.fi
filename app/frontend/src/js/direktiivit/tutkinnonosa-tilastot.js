@@ -27,15 +27,33 @@ angular.module('osaan.direktiivit.tutkinnonosa-tilastot', [])
       },
       templateUrl: 'template/direktiivit/tutkinnonosa-tilastot.html',
       controller: ['$filter', '$scope', function($filter, $scope) {
+        var korjaaTyypit = function(kaikkiTutkinnonosat, tutkinnonosat) {
+          var tyypit = {};
+          _.forEach(kaikkiTutkinnonosat, function(osa) {
+            tyypit[osa.osatunnus] = osa.tyyppi;
+          });
+          return _.map(tutkinnonosat, function(osa) {
+            osa.tyyppi = tyypit[osa.osatunnus];
+            return osa;
+          });
+        };
+
+        var suodataTutkinnonosat = function(kaikkiTutkinnonosat, tutkinnonosat) {
+          if(kaikkiTutkinnonosat !== undefined && tutkinnonosat !== undefined) {
+            $scope.suodatetutTutkinnonosat = $filter('filter')(korjaaTyypit(kaikkiTutkinnonosat, tutkinnonosat), {tyyppi: $scope.tyyppi});
+          }
+        };
+
         $scope.$watch('kaikkiTutkinnonosat', function(kaikkiTutkinnonosat) {
           if (kaikkiTutkinnonosat !== undefined) {
             $scope.tutkinnonosiaTyypilla = $filter('filter')(kaikkiTutkinnonosat, {tyyppi: $scope.tyyppi}).length;
+            suodataTutkinnonosat(kaikkiTutkinnonosat, $scope.tutkinnonosat);
           }
         });
 
         $scope.$watch('tutkinnonosat', function(tutkinnonosat) {
           if (tutkinnonosat !== undefined) {
-            $scope.suodatetutTutkinnonosat = $filter('filter')(tutkinnonosat, {tyyppi: $scope.tyyppi});
+            suodataTutkinnonosat($scope.kaikkiTutkinnonosat, tutkinnonosat);
           }
         });
       }]

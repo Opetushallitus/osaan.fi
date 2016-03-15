@@ -43,7 +43,6 @@
     <uib-tabset>
       <uib-tab select="valittuRaportti='raportti'" heading="{{ 'yleiset.raportti' | translate }}">
         <br />
-        <p>{{'raportti.osaamisalat' | translate}} <span ng-repeat="ala in valitutOsaamisalat">{{ala | lokalisoiKentta:'nimi'}}{{$last ? '' : ', '}}</span></p>
         <h3 translate="raportti.keskiarvot"></h3>
         <div class="kaavio-container">
           <kaavio jakauma="jakauma"></kaavio>
@@ -52,9 +51,12 @@
         <div class="pad-2-left">{{ 'raportti.tutkinnon_keskiarvo' | translate }}: <strong>{{ raportti.keskiarvo | number:2 }}</strong></div>
 
         <h3 translate="raportti.vastausprosentit"></h3>
-        <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.pakolliset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="pakollinen"></tutkinnonosa-tilastot>
-        <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.valinnaiset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="valinnainen"></tutkinnonosa-tilastot>
-        <tutkinnonosa-tilastot kaikki-tutkinnonosat="kaikkiTutkinnonosat" otsikko="{{ 'raportti.yhteiset' | translate }}" tutkinnonosat="raportti.tutkinnonosat" tyyppi="yhteinen"></tutkinnonosa-tilastot>
+        <div ng-repeat="osaamisala in osaamisalat">
+          <h4>{{osaamisala | lokalisoiKentta:'nimi'}}</h4>
+          <tutkinnonosa-tilastot kaikki-tutkinnonosat="osaamisala.tutkinnonosat" otsikko="{{ 'raportti.pakolliset' | translate }}" tutkinnonosat="valitutTutkinnonosat[osaamisala.osaamisalatunnus]" tyyppi="pakollinen"></tutkinnonosa-tilastot>
+          <tutkinnonosa-tilastot kaikki-tutkinnonosat="osaamisala.tutkinnonosat" otsikko="{{ 'raportti.valinnaiset' | translate }}" tutkinnonosat="valitutTutkinnonosat[osaamisala.osaamisalatunnus]" tyyppi="valinnainen"></tutkinnonosa-tilastot>
+          <tutkinnonosa-tilastot kaikki-tutkinnonosat="osaamisala.tutkinnonosat" otsikko="{{ 'raportti.yhteiset' | translate }}" tutkinnonosat="valitutTutkinnonosat[osaamisala.osaamisalatunnus]" tyyppi="yhteinen"></tutkinnonosa-tilastot>
+        </div>
 
         <div class="checkbox pull-right hidden-print">
           <label>
@@ -63,7 +65,7 @@
           </label>
         </div>
 
-        <section class="tutkinnonosa" ng-repeat="tutkinnonosa in raportti.tutkinnonosat">
+        <section class="tutkinnonosa" ng-repeat="tutkinnonosa in raportti.tutkinnonosat | unique:'osatunnus'">
           <h2>{{ tutkinnonosa | lokalisoiKentta:'nimi' }}</h2>
 
           <section class="kohdealue" ng-repeat="kohdealue in tutkinnonosa.kohdealueet">
