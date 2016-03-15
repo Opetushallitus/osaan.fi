@@ -45,13 +45,6 @@ angular.module('osaan.palvelut.arviointi', [])
       ladattu = true;
     };
 
-    var asetaOsatunnukset = function(osat) {
-      if (!_.isEqual(tila.osatunnukset, osat)) {
-        tila.osatunnukset = _.cloneDeep(osat);
-        _tallennaTila();
-      }
-    };
-
     var asetaOsat = function(osat) {
       if (!_.isEqual(tila.osat, osat)) {
         tila.osat = _.cloneDeep(osat);
@@ -97,7 +90,8 @@ angular.module('osaan.palvelut.arviointi', [])
 
     var lataa = function(uusiTila) {
       asetaTutkintoJaPeruste(uusiTila.tutkintotunnus, String(uusiTila.peruste));
-      asetaOsatunnukset(uusiTila.tutkinnonosat);
+      uusiTila.tutkinnonosat[undefined] = uusiTila.tutkinnonosat['']; // Korjataan null-osaamisala
+      asetaOsat(uusiTila.tutkinnonosat);
       _.forEach(uusiTila.kohdearviot, function(arviot, tutkinnonosatunnus) {
         asetaArviot(tutkinnonosatunnus, arviot);
       });

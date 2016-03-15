@@ -15,7 +15,9 @@
 (ns osaan.arkisto.arvio
   (:require [korma.core :as sql]
             [oph.korma.common :as sql-util]
-            [clj-time.coerce :refer [to-sql-time]]))
+            [clj-time.coerce :refer [to-sql-time]]
+            [osaan.arkisto.peruste :as peruste-arkisto]
+            [osaan.arkisto.tutkinnonosa :as tutkinnonosa-arkisto]))
 
 (defn ^:integration-api poista-vanhat-arviot!
   [paivamaara]
@@ -49,7 +51,7 @@
 (defn ^:private hae-tutkinnonosat
   [arviotunnus]
   (sql/select :arvio_tutkinnonosa
-    (sql/fields :osa)
+    (sql/fields :osa :osaamisala)
     (sql/where {:arviotunnus arviotunnus})))
 
 (defn ^:private luo-arviotunniste
@@ -58,26 +60,84 @@
         tunniste (take 16 (repeatedly #(rand-nth chars)))]
     (reduce str tunniste)))
 
+(defn ^:private tee-tutkinnonosa->osaamisalat [osaamisalat]
+  (apply merge-with concat (for [ala osaamisalat
+                                 osa (:tutkinnonosat ala)]
+                             {(:osatunnus osa) [(:osaamisalatunnus ala)]})))
+
+(defn ^:private muotoile-osaamisalat [osaamisalat tutkinnonosat]
+  (if (seq osaamisalat)
+    (into {} (for [ala osaamisalat]
+               [(:osaamisalatunnus ala) (into {} (for [osa (:tutkinnonosat ala)]
+                                                   [(:osatunnus osa) false]))]))
+    {nil (into {} (for [osa tutkinnonosat]
+                    [(:osatunnus osa) false]))}))
+
+(defn ^:private merkitse-kaikki-osat
+  "Merkitsee rakenteesta valituksi kaikki osat annetulla osatunnuksella"
+  [alat osatunnus]
+  (clojure.walk/postwalk (fn [x]
+                           (if (and (vector? x)
+                                    (= (first x) osatunnus))
+                             [osatunnus true]
+                             x))
+                         alat))
+
+(defn ^:private taydenna-osaamisalat
+  "Lisää arvioon kaikki perusteen osaamisalat ja tutkinnonosat"
+  [peruste-id tutkinnonosat]
+  (let [osaamisalat (muotoile-osaamisalat (peruste-arkisto/hae-osaamisalat peruste-id)
+                                          (tutkinnonosa-arkisto/hae-perusteen-tutkinnon-osat peruste-id))]
+    (reduce (fn [alat {:keys [osaamisala osa]}]
+              (if osaamisala
+                (assoc-in alat [osaamisala osa] true)
+                (merkitse-kaikki-osat alat osa)))
+            osaamisalat
+            tutkinnonosat)))
+
 (defn hae
   [arviotunnus]
   (when-let [arvio (hae-arvio arviotunnus)]
     (let [kohdearviot (hae-kohdearviot arviotunnus)
           tutkinnonosa->kohde->arviot (reduce #(assoc-in %1 [(:tutkinnonosa %2) (:ammattitaidon_kuvaus %2)] (dissoc %2 :tutkinnonosa :ammattitaidon_kuvaus)) {} kohdearviot)
-          tutkinnonosat (hae-tutkinnonosat arviotunnus)]
+          tutkinnonosat (->>
+                          (hae-tutkinnonosat arviotunnus)
+                          (taydenna-osaamisalat (:peruste arvio)))]
       (assoc arvio :kohdearviot tutkinnonosa->kohde->arviot
-                   :tutkinnonosat (map :osa tutkinnonosat)))))
+                   :tutkinnonosat tutkinnonosat))))
+
+(defn ^:private numero? [s]
+  (try
+    (Integer/parseInt s)
+    true
+    (catch NumberFormatException _
+      false)))
+
+(defn ^:private korjaa-numero-avaimet
+  "Muuttaa annetusta mapista stringeiksi kaikki keyword-avaimet, jotka koostuvat pelkistä numeroista"
+  [m]
+  (clojure.walk/postwalk (fn [x]
+                           (if (and (keyword? x) (numero? (name x)))
+                             (name x)
+                             x))
+                         m))
 
 (defn tallenna
   [tila]
-  (let [{:keys [peruste tutkinnonosat kohdearviot]} tila
+  (let [{:keys [peruste tutkinnonosat kohdearviot]} #spy/p (korjaa-numero-avaimet tila)
         tunniste (luo-arviotunniste)]
     (sql/insert :arvio
       (sql/values {:tunniste tunniste
                    :peruste peruste}))
     (sql/insert :arvio_tutkinnonosa
-      (sql/values (for [osa tutkinnonosat]
+      (sql/values (for [[osaamisalatunnus tutkinnonosat] tutkinnonosat
+                        :let [osaamisalatunnus (when-not (= :undefined osaamisalatunnus)
+                                                 osaamisalatunnus)]
+                        [osatunnus valittu] tutkinnonosat
+                        :when valittu]
                     {:arviotunnus tunniste
-                     :osa osa})))
+                     :osa osatunnus
+                     :osaamisala osaamisalatunnus})))
     (sql/insert :kohdearvio
       (sql/values (for [[ammattitaidon_kuvaus {:keys [arvio vapaateksti]}] (into {} (vals kohdearviot))]
                     {:arviotunnus tunniste

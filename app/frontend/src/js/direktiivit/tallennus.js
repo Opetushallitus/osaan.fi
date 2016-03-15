@@ -32,10 +32,14 @@ angular.module('osaan.direktiivit.tallennus', ['osaan.palvelut.tallennus'])
 
           tila.tutkintotunnus = Arviointi.valittuTutkintotunnus();
           tila.peruste = parseInt(Arviointi.valittuPeruste());
-          tila.tutkinnonosat = Arviointi.valitutOsatunnukset();
+          tila.tutkinnonosat = Arviointi.valitutOsat();
           tila.kohdearviot = {};
-          _.forEach(tila.tutkinnonosat, function(tutkinnonosatunnus) {
-            tila.kohdearviot[tutkinnonosatunnus] = Arviointi.haeArviot(tutkinnonosatunnus);
+          _.forEach(tila.tutkinnonosat, function(tutkinnonosat) {
+            _.forEach(tutkinnonosat, function(valittu, tutkinnonosatunnus) {
+              if(valittu) {
+                tila.kohdearviot[tutkinnonosatunnus] = Arviointi.haeArviot(tutkinnonosatunnus);
+              }
+            });
           });
 
           Tallennus.tallenna(tila).then(function(tunnus) {

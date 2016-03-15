@@ -28,6 +28,6 @@
     (response-or-404 (arkisto/hae tunniste)))
   (POST "/" request
     :kayttooikeus :julkinen
-    :body [tila skeema/Arvio]
+    :body [tila s/Any]
     :return s/Str
     (response-or-404 (arkisto/tallenna tila))))
