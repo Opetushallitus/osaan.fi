@@ -124,7 +124,7 @@
 
 (defn tallenna
   [tila]
-  (let [{:keys [peruste tutkinnonosat kohdearviot]} #spy/p (korjaa-numero-avaimet tila)
+  (let [{:keys [peruste tutkinnonosat kohdearviot]} (korjaa-numero-avaimet tila)
         tunniste (luo-arviotunniste)]
     (sql/insert :arvio
       (sql/values {:tunniste tunniste
