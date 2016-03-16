@@ -21,7 +21,7 @@
 (use-fixtures :each tietokanta-fixture)
 
 (def arvio {:kohdearviot {"100001" {"-1" {:arvio 3, :vapaateksti "testivastaus"}}},
-            :tutkinnonosat ["100001" "100002" "100003"],
+            :tutkinnonosat {"undefined" {"100001" true, "100002" true, "100003" true}},
             :peruste -1,
             :tutkintotunnus "324601"})
 
@@ -32,4 +32,5 @@
     (let [tunnus (-> state-tallennus :response :body slurp cheshire/parse-string)
           state-lataus (mock-request! crout (str "/api/arvio/" tunnus) :get {})
           ladattu-arvio (-> state-lataus :response :body slurp cheshire/parse-string (dissoc "luotuaika"))]
-      (is (= (cheshire/parse-string (cheshire/generate-string arvio)) ladattu-arvio)))))
+      (is (= (cheshire/parse-string (cheshire/generate-string (assoc arvio :tutkinnonosat {"" {"100001" true, "100002" true, "100003" true}})))
+             ladattu-arvio)))))
