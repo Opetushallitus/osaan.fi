@@ -65,7 +65,7 @@
           </label>
         </div>
 
-        <section class="tutkinnonosa" ng-repeat="tutkinnonosa in raportti.tutkinnonosat | unique:'osatunnus'">
+        <section class="tutkinnonosa" ng-repeat="tutkinnonosa in raportti.tutkinnonosat">
           <h2>{{ tutkinnonosa | lokalisoiKentta:'nimi' }}</h2>
 
           <section class="kohdealue" ng-repeat="kohdealue in tutkinnonosa.kohdealueet">
