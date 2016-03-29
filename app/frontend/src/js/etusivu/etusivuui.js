@@ -35,7 +35,7 @@ angular.module('osaan.etusivu.etusivuui', ['ngRoute'])
 
     $scope.$watch('haku', function() {
       delete $scope.tutkinnot;
-      Tutkinto.haeEhdoilla($scope.haku.opintoala, $scope.haku.tutkinto, $scope.haku.tutkintotyyppi, $scope.haku.voimaantulevat).then(function(tutkinnot) {
+      Tutkinto.haeEhdoilla(localStorage.getItem('kieli'), $scope.haku.opintoala, $scope.haku.tutkinto, $scope.haku.tutkintotyyppi, $scope.haku.voimaantulevat).then(function(tutkinnot) {
         var perusteTyyppiJarjestysSamannimisille = ['naytto', 'ops'];
         $scope.tutkinnot = _.sortBy(tutkinnot, function(tutkinto) {
           var jarjestys = perusteTyyppiJarjestysSamannimisille.indexOf(tutkinto.peruste_tyyppi);

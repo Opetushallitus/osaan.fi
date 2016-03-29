@@ -67,8 +67,14 @@
       (assoc peruste :tutkintonimikkeet nimikkeet))))
 
 (defn hae-ehdoilla
-  [nimi opintoala tutkintotaso voimaantulevat]
+  [nimi kieli opintoala tutkintotaso voimaantulevat]
   (let [nimi (str "%" nimi "%")
+        nimi_kentta (get {"fi" :nimi_fi
+                          "sv" :nimi_sv} kieli)
+        tutkintonimike_nimikentta (get {"fi" :tutkintonimike.nimi_fi
+                                        "sv" :tutkintonimike.nimi_sv} kieli)
+        osaamisala_nimikentta (get {"fi" :osaamisala.nimi_fi
+                                    "sv" :osaamisala.nimi_sv} kieli)
         tutkinnot (->
                     (sql/select* :tutkinto)
                     (sql/join :inner :opintoala (= :opintoala.opintoalatunnus :opintoala))
@@ -80,18 +86,15 @@
                                 [:peruste.diaarinumero :peruste_diaarinumero]
                                 [:peruste.eperustetunnus :peruste_eperustetunnus]
                                 [:peruste.tyyppi :peruste_tyyppi])
-                    (sql/where (or {:nimi_fi [sql-util/ilike nimi]}
-                                   {:nimi_sv [sql-util/ilike nimi]}
+                    (sql/where (or {nimi_kentta [sql-util/ilike nimi]}
                                    (sql/sqlfn "exists" (sql/subselect :peruste_ja_tutkintonimike
                                                          (sql/join :inner :tutkintonimike {:peruste_ja_tutkintonimike.tutkintonimike :tutkintonimike.nimiketunnus})
                                                          (sql/where {:peruste_ja_tutkintonimike.peruste :peruste.peruste_id})
-                                                         (sql/where (or {:tutkintonimike.nimi_fi [sql-util/ilike nimi]}
-                                                                        {:tutkintonimike.nimi_sv [sql-util/ilike nimi]}))))
+                                                         (sql/where {tutkintonimike_nimikentta [sql-util/ilike nimi]})))
                                    (sql/sqlfn "exists" (sql/subselect :osaamisala_ja_peruste
                                                          (sql/join :inner :osaamisala {:osaamisala_ja_peruste.osaamisala :osaamisala.osaamisalatunnus})
                                                          (sql/where {:osaamisala_ja_peruste.peruste :peruste.peruste_id})
-                                                         (sql/where (or {:osaamisala.nimi_fi [sql-util/ilike nimi]}
-                                                                        {:osaamisala.nimi_sv [sql-util/ilike nimi]}))))))
+                                                         (sql/where {osaamisala_nimikentta [sql-util/ilike nimi]})))))
                     (cond->
                       opintoala (sql/where {:opintoala opintoala}))
                     (cond->

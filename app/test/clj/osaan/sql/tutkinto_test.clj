@@ -19,19 +19,25 @@
 
 (use-fixtures :each tietokanta-fixture)
 
+; Audiovisuaalisen viestinnän perustutkinto (sv)
 (deftest ^:integraatio testaahaku
-  (let [ei-tulosta (tutkinto-db/hae-ehdoilla "huliviliveli" nil nil false)
-        kaksi-perustetta (tutkinto-db/hae-ehdoilla "Aud" nil nil false)
-        tutkintotason-suodatus (tutkinto-db/hae-ehdoilla "Käs" nil "erikoisammattitutkinto" false)
-        tutkintotaso-eitulosta (tutkinto-db/hae-ehdoilla "Käs" nil "perustutkinto" false)
-        ei-voimaantulevia (tutkinto-db/hae-ehdoilla nil nil nil nil)
-        voimaantulevat (tutkinto-db/hae-ehdoilla nil nil nil true)]
+  (let [ei-tulosta (tutkinto-db/hae-ehdoilla "huliviliveli" "fi" nil nil false)
+        kaksi-perustetta (tutkinto-db/hae-ehdoilla "Aud" "fi" nil nil false)
+        tutkintotason-suodatus (tutkinto-db/hae-ehdoilla "Käs" "fi" nil "erikoisammattitutkinto" false)
+        tutkintotaso-eitulosta (tutkinto-db/hae-ehdoilla "Käs" "fi" nil "perustutkinto" false)
+        ei-voimaantulevia (tutkinto-db/hae-ehdoilla nil "fi" nil nil nil)
+        voimaantulevat (tutkinto-db/hae-ehdoilla nil "fi" nil nil true)
+        ei-suomeksi (tutkinto-db/hae-ehdoilla "(sv)" "fi" nil nil nil)
+        ruotsiksi (tutkinto-db/hae-ehdoilla "(sv)" "sv" nil nil nil)]
     (is (= 0 (count ei-tulosta)))
     (is (= 2 (count kaksi-perustetta)))
     (is (= 1 (count tutkintotason-suodatus)))
     (is (= 0 (count tutkintotaso-eitulosta)))
     (is (= 4 (count voimaantulevat)))
-    (is (= 3 (count ei-voimaantulevia)))))
+    (is (= 3 (count ei-voimaantulevia)))
+    (is (= 0 (count ei-suomeksi)))
+    (is (= 3 (count ruotsiksi)))
+    ))
 
 (deftest ^:integraatio testaa-perustehaku
   (let [yksi (tutkinto-db/hae-perusteella -1)

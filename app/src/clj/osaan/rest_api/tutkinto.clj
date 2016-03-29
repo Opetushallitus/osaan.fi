@@ -28,11 +28,12 @@
     (response-or-404 (arkisto/hae-perusteella perusteid)))
   (GET "/" []
     :kayttooikeus :julkinen
-    :query-params [{nimi :- s/Str nil}
+    :query-params [{kieli :- s/Str "fi"}
+                   {nimi :- s/Str nil}
                    {opintoala :- s/Str nil}
                    {tutkintotyyppi :- s/Str nil}
                    {voimaantulevat :- Boolean false}]
     :return [skeema/TutkintoHakutulos]
     (let [tutkintotaso (if (= "kaikki" tutkintotyyppi) nil tutkintotyyppi)
           oala (if (.equals "" opintoala) nil opintoala)]
-      (response-or-404 (arkisto/hae-ehdoilla nimi oala tutkintotaso voimaantulevat)))))
+      (response-or-404 (arkisto/hae-ehdoilla nimi kieli oala tutkintotaso voimaantulevat)))))

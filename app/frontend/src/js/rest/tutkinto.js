@@ -23,8 +23,8 @@ angular.module('osaan.rest.tutkinto', [])
           return response.data;
         });
       },
-      haeEhdoilla: function(opintoala, nimi, tutkintotyyppi, voimaantulevat) {
-        return $http.get('api/tutkinto', {params: {opintoala: opintoala, nimi: nimi, tutkintotyyppi: tutkintotyyppi, voimaantulevat: voimaantulevat}}).then(function(response) {
+      haeEhdoilla: function(kieli, opintoala, nimi, tutkintotyyppi, voimaantulevat) {
+        return $http.get('api/tutkinto', {params: {kieli: kieli, opintoala: opintoala, nimi: nimi, tutkintotyyppi: tutkintotyyppi, voimaantulevat: voimaantulevat}}).then(function(response) {
           return response.data;
         });
       }
