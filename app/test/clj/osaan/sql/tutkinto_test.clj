@@ -29,15 +29,15 @@
         voimaantulevat (tutkinto-db/hae-ehdoilla nil "fi" nil nil true)
         ei-suomeksi (tutkinto-db/hae-ehdoilla "(sv)" "fi" nil nil nil)
         ruotsiksi (tutkinto-db/hae-ehdoilla "(sv)" "sv" nil nil nil)]
-    (is (= 0 (count ei-tulosta)))
-    (is (= 2 (count kaksi-perustetta)))
-    (is (= 1 (count tutkintotason-suodatus)))
-    (is (= 0 (count tutkintotaso-eitulosta)))
-    (is (= 4 (count voimaantulevat)))
-    (is (= 3 (count ei-voimaantulevia)))
-    (is (= 0 (count ei-suomeksi)))
-    (is (= 3 (count ruotsiksi)))
-    ))
+    (are [x y] (= x (count y))
+      0 ei-tulosta
+      2 kaksi-perustetta
+      1 tutkintotason-suodatus
+      0 tutkintotaso-eitulosta
+      4 voimaantulevat
+      3 ei-voimaantulevia
+      0 ei-suomeksi
+      3 ruotsiksi)))
 
 (deftest ^:integraatio testaa-perustehaku
   (let [yksi (tutkinto-db/hae-perusteella -1)
