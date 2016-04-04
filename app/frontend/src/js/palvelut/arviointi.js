@@ -90,7 +90,11 @@ angular.module('osaan.palvelut.arviointi', [])
 
     var lataa = function(uusiTila) {
       asetaTutkintoJaPeruste(uusiTila.tutkintotunnus, String(uusiTila.peruste));
-      uusiTila.tutkinnonosat[undefined] = uusiTila.tutkinnonosat['']; // Korjataan null-osaamisala
+
+      // Korjataan null-osaamisala
+      uusiTila.tutkinnonosat[undefined] = uusiTila.tutkinnonosat['']; 
+      delete uusiTila.tutkinnonosat[''];
+      
       asetaOsat(uusiTila.tutkinnonosat);
       _.forEach(uusiTila.kohdearviot, function(arviot, tutkinnonosatunnus) {
         asetaArviot(tutkinnonosatunnus, arviot);
