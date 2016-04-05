@@ -19,14 +19,26 @@
             [osaan.arkisto.peruste :as peruste-arkisto]
             osaan.compojure-util))
 
+; testicaseja: 
+; parametreja puuttuu: http://localhost:8084/linkki/osien-valinta?tutkinto=324601&peruste=-2&tyyppi=naytto&diaarinumero=12
+; persuste on vanha: http://localhost:8084/linkki/osien-valinta?tutkinto=324601&peruste=-1&tyyppi=naytto&diaarinumero=41/011/2005
+; toimiva: http://localhost:8084/linkki/osien-valinta?tutkinto=324601&peruste=-1&tyyppi=naytto&diaarinumero=38/011/2014
+; :localhost ja 127.0.0.1 voidaan kokeilla erikseen. http://127.0.0.1:8084/#/osien-valinta?tutkinto=324601&peruste=-2
 (defn reitit [asetukset]
   (routes
-    (GET "/osien-valinta" []
+    (GET "/osien-valinta" request
       :kayttooikeus :julkinen
       :query-params [tutkinto :- s/Str
                      diaarinumero :- s/Str
                      tyyppi :- s/Str]
       (let [perusteid (peruste-arkisto/hae-perusteid diaarinumero tyyppi)
-            url (str (-> asetukset :server :base-url) "/#/osien-valinta?tutkinto=" tutkinto "&peruste=" perusteid)]
-        {:status  302
-         :headers {"Location" url}}))))
+            ;"/" (-> asetukset :server :base-url)
+            url (str (name (:scheme request)) "://" (:server-name request) ":" (:server-port request) "/#/osien-valinta?tutkinto=" tutkinto "&peruste=" perusteid)]
+        (if (nil? perusteid)
+          ; ei löydy -> 400 (BAD REQUEST) ja virheilmoitus. Tätä ei pitäisi tapahtua käytännössä.
+          {:status 400
+           :headers {"Content-Type" "text/plain; charset=utf-8"}
+           :body "Tutkintoa tai sen perusteita ei löydy."}
+          ; jos löytyy, HTTP redirect
+          {:status  302
+           :headers {"Location" url}})))))
