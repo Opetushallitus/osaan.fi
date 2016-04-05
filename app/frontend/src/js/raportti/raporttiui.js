@@ -94,6 +94,7 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
       });
     });
 
+    $scope.vapaatekstiprint = '';
     $scope.jakauma = [];
     $scope.paivays = new Date();
 
