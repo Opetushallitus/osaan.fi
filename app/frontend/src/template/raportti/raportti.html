@@ -31,7 +31,7 @@
     <p ng-bind-html="'raportti.otsikko_ohje' | translate | linky"></p>
 
 
-    <div class="pull-right" id="vapaateksti_tulostus_div" style="display: none;">
+    <div class="pull-right" id="vapaateksti_tulostus_div" ng-show="showVapaateksti">
         <div class="hidden-print">{{ 'raportti.vapaateksti_otsikko' | translate }}</div>
         <div><textarea class="hidden-print" ng-model="vapaatekstiprint" rows="5" cols="60" id="vapaateksti_tulostus"></textarea>
         </div>
@@ -42,7 +42,7 @@
            <form action="api/kaiku" method="post">
             <button type="button" class="btn btn-default" 
                 uib-popover="{{ 'raportti.vapaateksti_ohje' | translate }}" popover-trigger="mouseenter"
-                onClick="document.getElementById('vapaateksti_tulostus_div').style='display: visible;'; return false;">
+                ng-click="showVapaateksti = !showVapaateksti">
                <span>{{ 'raportti.vapaateksti_nayta' | translate }}</span>
             </button>
            
