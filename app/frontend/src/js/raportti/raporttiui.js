@@ -102,6 +102,10 @@ angular.module('osaan.raportti.raporttiui', ['ngRoute'])
       Poistumisvaroitus.estaPoistumisvaroitus();
     };
 
+    $scope.onkoOsaamisalallaValittujaTutkinnonosia = function(osaamisala) {
+      return _.size($scope.valitutTutkinnonosat[osaamisala.osaamisalatunnus]) > 0;
+    };
+
     $scope.palaaArviointiin = function() {
       $location.url('/arviointi?osa=' + Arviointi.seuraavaOsatunnus());
     };
