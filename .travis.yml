@@ -23,8 +23,7 @@ script:
 - lein doc
 - mkdir eastwood
 - lein eastwood "{:out \"eastwood/osaan-warnings.txt\"}" || true
-- cd ../db-docs
-- generate-schemadocs.sh
+- cd ../db-docs && generate-schemadocs.sh
 - cd ..
 
 deploy:
