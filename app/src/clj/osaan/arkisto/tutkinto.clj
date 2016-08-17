@@ -81,6 +81,7 @@
                                         "sv" :tutkintonimike.nimi_sv} kieli)
         osaamisala_nimikentta (get {"fi" :osaamisala.nimi_fi
                                     "sv" :osaamisala.nimi_sv} kieli)
+        voimaantulevat (boolean voimaantulevat)
         tutkinnot (->
                     (sql/select* :tutkinto)
                     (sql/join :inner :opintoala (= :opintoala.opintoalatunnus :opintoala))
@@ -92,6 +93,11 @@
                                 [:peruste.diaarinumero :peruste_diaarinumero]
                                 [:peruste.eperustetunnus :peruste_eperustetunnus]
                                 [:peruste.tyyppi :peruste_tyyppi])
+                    (sql/where (sql/sqlfn "not exists" (sql/subselect [:peruste :uusi_peruste]
+                                                         (sql/where {:peruste.tutkinto :uusi_peruste.tutkinto
+                                                                     :peruste.tyyppi :uusi_peruste.tyyppi})
+                                                         (sql/where (and (< :peruste.voimassa_alkupvm :uusi_peruste.voimassa_alkupvm)
+                                                                         (or voimaantulevat (< :uusi_peruste.voimassa_alkupvm (sql/raw "current_date"))))))))
                     (sql/where (or {nimi_kentta [sql-util/ilike nimi]}
                                    (sql/sqlfn "exists" (sql/subselect :peruste_ja_tutkintonimike
                                                          (sql/join :inner :tutkintonimike {:peruste_ja_tutkintonimike.tutkintonimike :tutkintonimike.nimiketunnus})
@@ -106,6 +112,6 @@
                     (cond->
                       tutkintotaso (sql/where {:tutkintotaso tutkintotaso}))
                     (cond->
-                      (false? (boolean voimaantulevat)) (sql/where (< :voimassa_alkupvm [(sql/raw "current_date")])))
+                      (not voimaantulevat) (sql/where (< :peruste.voimassa_alkupvm (sql/raw "current_date"))))
                     sql/exec)]
     (liita-tutkintonimikkeet tutkinnot)))
