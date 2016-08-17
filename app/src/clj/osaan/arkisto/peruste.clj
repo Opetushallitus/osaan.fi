@@ -52,7 +52,7 @@
       (log/warn "Puutteellinen tutkinnonosa:" tallennettava-osa)
       (do
         (sql-util/insert-or-update :tutkinnonosa :osatunnus
-                                   (select-keys osa [:osatunnus :nimi_fi :nimi_sv]))
+                                   (select-keys tallennettava-osa [:osatunnus :nimi_fi :nimi_sv]))
         (doseq [alue (:arvioinnin_kohdealueet osa)]
           (paivita-arvioinnin-kohdealue! (assoc alue :osa (:osatunnus osa))))))))
 
@@ -101,17 +101,19 @@
   (doseq [osa (:tutkinnonosat peruste)]
     (paivita-tutkinnonosa! osa))
   (doseq [tapa (:suoritustavat peruste)
-          tutkinto (:tutkinnot peruste)
-          :let [tallennettu-peruste (sql-util/insert-or-update taulut/peruste [:diaarinumero :tyyppi :tutkinto]
-                                      (assoc (select-keys peruste [:diaarinumero :eperustetunnus :nimi_fi :nimi_sv :voimassa_alkupvm])
-                                             :tutkinto tutkinto
-                                             :tyyppi (:suoritustapakoodi tapa)
-                                             :voimassa_loppupvm (or (:voimassa_loppupvm peruste) (time/local-date 2199 1 1))
-                                             :siirtymaajan_loppupvm (or (:siirtymaajan_loppupvm peruste) (time/local-date 2199 1 1))))]]
-    (if-let [osaamisalat (:osaamisalat tapa)]
-      (paivita-perusteen-osaamisalat! tallennettu-peruste osaamisalat)
-      (paivita-perusteen-tutkinnonosat! tallennettu-peruste (:osat tapa)))
-    (paivita-perusteen-tutkintonimikkeet! tallennettu-peruste (:tutkintonimikkeet peruste))))
+          tutkinto (:tutkinnot peruste)]
+    (if-not (tutkinto-arkisto/hae-tunnuksella tutkinto)
+      (log/warn "Ei tutkintoa tunnuksella" tutkinto)
+      (let [tallennettu-peruste (sql-util/insert-or-update taulut/peruste [:diaarinumero :tyyppi :tutkinto]
+                                  (assoc (select-keys peruste [:diaarinumero :eperustetunnus :nimi_fi :nimi_sv :voimassa_alkupvm])
+                                         :tutkinto tutkinto
+                                         :tyyppi (:suoritustapakoodi tapa)
+                                         :voimassa_loppupvm (or (:voimassa_loppupvm peruste) (time/local-date 2199 1 1))
+                                         :siirtymaajan_loppupvm (or (:siirtymaajan_loppupvm peruste) (time/local-date 2199 1 1))))]
+        (if-let [osaamisalat (seq (:osaamisalat tapa))]
+          (paivita-perusteen-osaamisalat! tallennettu-peruste osaamisalat)
+          (paivita-perusteen-tutkinnonosat! tallennettu-peruste (:osat tapa)))
+        (paivita-perusteen-tutkintonimikkeet! tallennettu-peruste (:tutkintonimikkeet peruste))))))
 
 (defn ^:integration-api tallenna-viimeisin-paivitys! [ajankohta]
   (sql/insert taulut/eperusteet-log

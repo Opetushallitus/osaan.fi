@@ -46,6 +46,12 @@
                 [:peruste.tyyppi :peruste_tyyppi])
     (sql/where where-ehto)))
 
+(defn hae-tunnuksella
+  "Hae tutkinto tutkintotunnuksella"
+  [tunnus]
+  (sql-util/select-unique-or-nil :tutkinto
+    (sql/where {:tutkintotunnus tunnus})))
+
 (defn hae-perusteella
   "Hae tutkinto tutkinnon perusteen id:llä."
   [id]
