@@ -77,9 +77,6 @@
     </div>
 
     <h3 ng-if="tutkinnot.length == 0">{{ 'tutkinto.ei_loytynyt' | translate }}</h3>
-    <div class="alert alert-warning" role="alert" ng-if="tutkinnot.length == 0">
-      <span translate="tutkinto.vanha_osaanfi"></span> <a href="{{ 'tutkinto.vanha_osaanfi_osoite' | translate}}" translate="tutkinto.vanha_osaanfi_osoite"></a>
-    </div>
 
     <div ng-if="tutkinnot.length > 0" class="list-group" style="margin-top: 10px;">
         <h3>{{tutkinnot.length}} {{ 'yleiset.hakutulosta' | translate }}</h3>
