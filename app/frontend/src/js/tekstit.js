@@ -172,7 +172,7 @@ angular.module('osaan.tekstit', ['pascalprecht.translate'])
       'osien-valinta.yhteiset_osat': 'Gemensamma delar',
       'raportti.vapaateksti_otsikko': 'Nedskriven text skrivs ut i rapporten som tilläggsinformation (t.ex ditt namn).',
       'raportti.vapaateksti_nayta': 'Lägg till text',
-      'raportti.vapaateksti_ohje': 'Skriver ut den text du skrivit som tilläggsinformation ( t.ex. dit namn).',      
+      'raportti.vapaateksti_ohje': 'Skriver ut den text du skrivit som tilläggsinformation ( t.ex. dit namn).',
       'raportti.ammattitaidon_kuvaus': 'Beskrivning av yrkesskickligheten',
       'raportti.arvio': 'Bedömning',
       'raportti.eos_vastauksia': 'var av vet ej -svar',
