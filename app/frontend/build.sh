@@ -22,6 +22,7 @@ done
 
 set -x
 
+npm --version
 npm install
 rm -rf src/bower_components
 bower install

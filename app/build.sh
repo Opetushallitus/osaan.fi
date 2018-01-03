@@ -25,7 +25,7 @@ repo_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 set -x
 
 cd "$repo_path/frontend"
-./build.sh "$@"
+npm run build "$@"
 
 cd "$repo_path"
 if [ "$run_tests" = yes ]; then
