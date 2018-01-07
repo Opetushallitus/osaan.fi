@@ -14,6 +14,21 @@
 
 'use strict';
 
+var proxies = {
+    local: {
+        context: '/api',
+        host: 'localhost',
+        port: 8084,
+        https: false
+    },
+    prod: {
+        context: '/api',
+        host: 'osaan.fi',
+        port: 443,
+        https: true
+    }
+};
+
 module.exports = function (grunt) {
 
   require('load-grunt-tasks')(grunt);
@@ -45,11 +60,9 @@ module.exports = function (grunt) {
             return middlewares;
           }
         },
-        proxies: [{
-          context: '/api',
-          host: 'localhost',
-          port: 8084
-        }]
+        proxies: [
+            proxies.local
+        ]
       }
     },
     watch: {
