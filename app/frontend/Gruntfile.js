@@ -21,6 +21,21 @@ module.exports = function (grunt) {
 
   var distDir = '../resources/public/app';
 
+  var proxies = {
+    local: {
+      context: '/api',
+      host: 'localhost',
+      port: 8084,
+      https: false
+    },
+    prod: {
+      context: '/api',
+      host: 'osaan.fi',
+      port: 443,
+      https: true
+    }
+  };
+
   grunt.initConfig({
     connect: {
       server: {
@@ -45,11 +60,9 @@ module.exports = function (grunt) {
             return middlewares;
           }
         },
-        proxies: [{
-          context: '/api',
-          host: 'localhost',
-          port: 8084
-        }]
+        proxies: [
+            proxies.local
+        ]
       }
     },
     watch: {
