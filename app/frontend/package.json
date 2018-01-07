@@ -33,5 +33,9 @@
     "load-grunt-tasks": "3.1.0",
     "node-sass": "4.7.2",
     "time-grunt": "1.1.1"
+  },
+  "engines": {
+    "node": "^8",
+    "npm": "^5"
   }
 }
