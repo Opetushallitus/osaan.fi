@@ -8,13 +8,14 @@
   },
   "author": "",
   "scripts": {
-    "build": "./build.sh"
+    "build": "./build.sh",
+    "dev": "grunt"
   },
   "devDependencies": {
     "grunt": "0.4.5",
     "grunt-bowercopy": "1.2.0",
     "grunt-cli": "1.2.0",
-    "grunt-connect-proxy": "0.2.0",
+    "grunt-connect-proxy": "0.1.10",
     "grunt-contrib-clean": "0.6.0",
     "grunt-contrib-concat": "0.5.1",
     "grunt-contrib-connect": "0.10.1",
