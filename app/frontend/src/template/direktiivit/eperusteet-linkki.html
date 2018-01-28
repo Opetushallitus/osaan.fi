@@ -6,13 +6,6 @@
       {{ 'tutkinto.eperusteet_linkki' | translate }}
     </a>
   </div>
-  <div ng-if="eperustetyyppi!='ops'">
-    <span class="glyphicon glyphicon-question-sign linkkipopover" uib-popover="{{ 'tutkinto.nayttotutkinnonjarjestajat_linkki_info' | translate }}" popover-trigger="mouseenter click" popover-placement="right"></span>
-    <a href="http://www.nayttotutkintohaku.fi/{{kieli}}/#/tutkinto/{{tutkintotunnus}}" target="blank">
-      <span class="glyphicon bitmap icon-nayttotutkintohaku" aria-hidden="true"></span>
-      {{ 'tutkinto.nayttotutkinnonjarjestajat_linkki' | translate }}
-    </a>
-  </div>
   <div ng-if="eperustetyyppi !== 'naytto'" >
     <span class="glyphicon glyphicon-question-sign linkkipopover" uib-popover="{{ 'tutkinto.koulutustarjonta_linkki_info' | translate }}" popover-trigger="mouseenter click" popover-placement="right"></span>
     <a ng-href="{{opintopolkuUrl}}" target="blank">
