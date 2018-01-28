@@ -47,8 +47,14 @@ module.exports = function (grunt) {
         },
         proxies: [{
           context: '/api',
-          host: 'localhost',
-          port: 8084
+          host: 'osaan.fi',
+          port: 443,
+          https: true,
+          changeOrigin: true
+        // }, {
+        //   context: '/api',
+        //   host: 'localhost',
+        //   port: 8084
         }]
       }
     },
