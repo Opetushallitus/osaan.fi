@@ -10,3 +10,6 @@ bin/
 checkouts/
 classes/
 target/
+app/osaan.jar
+db/osaan-db.jar
+*.log
