@@ -1,0 +1,5 @@
+db.host = {{ tietokantapalvelimen_yksityinen_nimi }}
+db.port = 5432
+db.name = {{ tietokanta }}
+db.user = {{ tietokannan_paakayttaja }}
+db.password = {{ tietokannan_paakayttajan_salasana|default(lookup('password', inventory_dir + '/salasanat/tietokannan_paakayttaja')) }}
