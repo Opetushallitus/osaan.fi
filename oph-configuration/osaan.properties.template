@@ -1,9 +1,9 @@
-server.port = 8084
-server.base-url = http://ausku.hard.ware.fi:8084
-db.host = {{ tietokantapalvelimen_yksityinen_nimi }}
-db.port = 5432
-db.name = {{ tietokanta }}
-db.user = {{ tietokannan_peruskayttaja }}
-db.password = {{ tietokannan_peruskayttajan_salasana|default(lookup('password', inventory_dir + '/salasanat/tietokannan_peruskayttaja')) }}
+server.port = {{ osaan_server_port }}
+server.base-url = {{ osaan_server_base-url }}
+db.host = {{ osaan_db_host }}
+db.port = {{ osaan_db_port }}
+db.name = {{ osaan_db_name }}
+db.user = {{ osaan_db_user }}
+db.password = {{ osaan_db_password }}
 development-mode = false
 eraajo = true
