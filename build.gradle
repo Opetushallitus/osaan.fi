@@ -13,19 +13,14 @@ String zipFileName = ""
 
 // Create release zip (wars and configs)
 task(zipIt, type: Zip) {
-    doFirst {
-        // Renames abc-x.y-SOMETHING.war to abc.war
-        fileTree(from: '.', include: '**/target/*.war').files.each { oneFile ->	
-            String replaced = oneFile.path.replaceFirst('-\\d+\\.\\d+.[^.]+','')
-            oneFile.renameTo(file(replaced))
-        }
-    }
-
     zipFileName = serviceName + "_" + branchName + "_" + new Date().format("yyyyMMddHHmmss") + ".zip"
-
     destinationDir new File(buildDir, "distributions")
     archiveName zipFileName
-    from 'buildi'
+    include("osaan.jar")
+    include("osaan-db.jar")
+    include("oph-configuration/*")
+    include("resources/*")
+    from '.'
 }
 
 // Task for copying the .zip file to
