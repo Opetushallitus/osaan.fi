@@ -1,5 +1,5 @@
 server.port = {{ osaan_server_port }}
-server.base-url = {{ osaan_server_base-url }}
+server.base-url = {{ osaan_server_base_url }}
 db.host = {{ osaan_db_host }}
 db.port = {{ osaan_db_port }}
 db.name = {{ osaan_db_name }}
