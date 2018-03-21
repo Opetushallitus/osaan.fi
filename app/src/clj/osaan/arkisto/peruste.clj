@@ -102,8 +102,7 @@
     (paivita-tutkinnonosa! osa))
   (doseq [tapa (:suoritustavat peruste)
           tutkinto (:tutkinnot peruste)]
-    (if-not (tutkinto-arkisto/hae-tunnuksella tutkinto)
-      (log/warn "Ei tutkintoa tunnuksella" tutkinto)
+    (if (tutkinto-arkisto/hae-tunnuksella tutkinto)
       (let [tallennettu-peruste (sql-util/insert-or-update taulut/peruste [:diaarinumero :tyyppi :tutkinto]
                                   (assoc (select-keys peruste [:diaarinumero :eperustetunnus :nimi_fi :nimi_sv :voimassa_alkupvm])
                                          :tutkinto tutkinto
