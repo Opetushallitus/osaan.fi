@@ -20,6 +20,8 @@
             [clojurewerkz.quartzite.schedule.daily-interval :as s]
             [clojurewerkz.quartzite.schedule.cron :as cron]
             [clojure.tools.logging :as log]
+            [osaan.infra.eraajo.tutkinnot :as etutkinto]
+            [osaan.infra.eraajo.eperusteet :as eperusteet]
             osaan.infra.eraajo.eperusteet
             osaan.infra.eraajo.tutkinnot
             osaan.infra.eraajo.vanhat-arviot)
@@ -41,6 +43,8 @@
   (qs/clear! @ajastin)
   (qs/start @ajastin)
   (log/info "Eräajomoottori käynnistetty")
+  (etutkinto/paivita-tutkinnot! {:url "https://virkailija.opintopolku.fi/koodisto-service/rest/json/"})
+  (eperusteet/paivita-tutkintojen-perusteet {:url "https://virkailija.opintopolku.fi/eperusteet-service/"})
   (let [eperusteet-job (j/build
                          (j/of-type PaivitaPerusteetJob)
                          (j/with-identity "paivita-perusteet")
