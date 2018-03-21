@@ -107,6 +107,7 @@
                                                          (sql/join :inner :osaamisala {:osaamisala_ja_peruste.osaamisala :osaamisala.osaamisalatunnus})
                                                          (sql/where {:osaamisala_ja_peruste.peruste :peruste.peruste_id})
                                                          (sql/where {osaamisala_nimikentta [sql-util/ilike nimi]})))))
+                    (sql/where (>= :peruste.voimassa_loppupvm (sql/raw "current_date")))
                     (cond->
                       opintoala (sql/where {:opintoala opintoala}))
                     (cond->
