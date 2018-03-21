@@ -57,8 +57,8 @@
    :vanhat-arviot {:paivat 1095} ;; 3 vuotta
    :development-mode false ; oletusarvoisesti ei olla kehitysmoodissa. Pitää erikseen kääntää päälle jos tarvitsee kehitysmoodia.
    :logback {:properties-file "resources/logback.xml"}
-   :ajastus {:eperusteet "0 15 4 * * ?"
-             :koodistopalvelu "0 10 12 * * ?"
+   :ajastus {:eperusteet "0 30 4 * * ?"
+             :koodistopalvelu "0 0 3 * * ?"
              :vanhat-arviot "0 0 0 * * ?"}})
 
 (defn hae-asetukset
