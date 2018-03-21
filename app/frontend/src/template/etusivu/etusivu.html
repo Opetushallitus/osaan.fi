@@ -81,9 +81,11 @@
     <div ng-if="tutkinnot.length > 0" class="list-group" style="margin-top: 10px;">
         <h3>{{tutkinnot.length}} {{ 'yleiset.hakutulosta' | translate }}</h3>
         <div ng-repeat="tutkinto in tutkinnot" class="list-group-item e2e-haettu-tutkinto" href="#/osien-valinta?tutkinto={{tutkinto.tutkintotunnus}}&peruste={{tutkinto.peruste_id}}">
-<div class="row">
+          <div class="row">
           <div class="col-md-6">
-            <h4 class="list-group-item-heading">{{ tutkinto | lokalisoiKentta:'nimi' }} ({{ 'tutkinto.peruste_tyyppi_'+tutkinto.peruste_tyyppi | translate }})</h4>
+            <h4 class="list-group-item-heading">{{ tutkinto | lokalisoiKentta:'nimi' }}
+              <span ng-show="tutkinto.peruste_tyyppi !== 'reformi'">({{ 'tutkinto.peruste_tyyppi_'+tutkinto.peruste_tyyppi | translate }})</span>
+            </h4>
 
             <p class="list-group-item-text">
               <eperusteet-linkki kieli="{{kieli}}" eperustesivu="tiedot" eperustetunnus="{{tutkinto.peruste_eperustetunnus}}" eperustetyyppi="{{tutkinto.peruste_tyyppi}}" tutkintotunnus="{{tutkinto.tutkintotunnus}}" tutkintonimi="{{ tutkinto | lokalisoiKentta:'nimi' }}"></eperusteet-linkki>
