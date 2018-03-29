@@ -62,7 +62,7 @@
              :vanhat-arviot "0 0 0 * * ?"}})
 
 (defn hae-asetukset
-  ([alkuasetukset] (lue-asetukset alkuasetukset Asetukset "osaan.properties"))
+  ([alkuasetukset] (lue-asetukset alkuasetukset Asetukset "oph-configuration/osaan.properties"))
   ([] (hae-asetukset oletusasetukset)))
 
 (defn service-path [base-url]
