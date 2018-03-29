@@ -158,7 +158,7 @@
       (:help options) (exit 0 (ohje summary))
       (> (count arguments) 1) (exit 1 (ohje summary))
       errors (exit 1 (error-msg errors)))
-    (let [jdbc-url (or (first arguments) (file->jdbc-url "osaan-db.properties"))
+    (let [jdbc-url (or (first arguments) (file->jdbc-url "oph-configuration/osaan-db.properties"))
           datasource (create-datasource! jdbc-url)
           db-spec {:datasource datasource}
           migraatiopoikkeus (try
