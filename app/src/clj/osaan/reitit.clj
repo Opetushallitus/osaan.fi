@@ -47,12 +47,12 @@
         (resp/resource-response "index.html" {:root "public/app"})
         (assoc :headers {"Content-type" "text/html; charset=utf-8"})))
     (if (:development-mode asetukset)
-      (GET "/status" [] (s/render-file "status" (assoc (status)
+      (GET "/osaan/status" [] (s/render-file "status" (assoc (status)
                                                        :asetukset (with-out-str
                                                                     (-> asetukset
                                                                       piilota-salasanat
                                                                       pprint)))))
-     (GET "/status" [] (s/render-string "OK" {})))
+     (GET "/osaan/status" [] (s/render-string "OK" {})))
     (context "/api/ammattitaidonkuvaus" [] osaan.rest-api.ammattitaidon-kuvaus/reitit)
     (context "/api/arvio" [] osaan.rest-api.arvio/reitit)
     (context "/api/kaiku" [] osaan.rest-api.kaiku/reitit)

@@ -21,6 +21,6 @@
 
 (deftest ^:integraatio status-responds
   (let [crout (init-peridot!)]
-    (let [response (mock-request! crout "/status" :get {})]
+    (let [response (mock-request! crout "/osaan/status" :get {})]
       (is (= (:status (:response response)) 200))
       (is (not= (:body (:response response)) "OK")))))
