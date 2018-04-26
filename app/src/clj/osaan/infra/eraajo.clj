@@ -43,8 +43,8 @@
   (qs/clear! @ajastin)
   (qs/start @ajastin)
   (log/info "Eräajomoottori käynnistetty")
-  ;; (etutkinto/paivita-tutkinnot! {:url "https://virkailija.opintopolku.fi/koodisto-service/rest/json/"})
-  ;; (eperusteet/paivita-tutkintojen-perusteet {:url "https://virkailija.opintopolku.fi/eperusteet-service/"})
+  (etutkinto/paivita-tutkinnot! {:url "https://virkailija.opintopolku.fi/koodisto-service/rest/json/"})
+  (eperusteet/paivita-tutkintojen-perusteet {:url "https://virkailija.opintopolku.fi/eperusteet-service/"})
   (let [eperusteet-job (j/build
                          (j/of-type PaivitaPerusteetJob)
                          (j/with-identity "paivita-perusteet")
