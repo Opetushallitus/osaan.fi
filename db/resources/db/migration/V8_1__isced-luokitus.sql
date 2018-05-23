@@ -12,6 +12,6 @@ insert into opintoala(opintoalatunnus, koulutusala, nimi_fi, voimassa_alkupvm, v
 update tutkinto set opintoala = '007' where tutkintotunnus not in
 ('321603','377111','371113','354116','351108','354204','010001','324503');
 
-delete from opintoala o where opintoalatunnus not in ('505','502','706','703','007');
+delete from opintoala o where opintoalatunnus not in ('505','502','706','703','007', '021', '071');
 
 delete from koulutusala k where not exists (select null from opintoala o where o.koulutusala = k.koulutusalatunnus);
