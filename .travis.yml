@@ -1,64 +1,50 @@
 sudo: required
+
 language: clojure
 
-addons:
-  postgresql: '9.3'
+jdk:
+  - oraclejdk8
 
 services:
-- postgresql
+  - docker
+
+cache:
+  directories:
+  - $HOME/.m2
+
+env:
+  global:
+    # AWS_ACCESS_KEY_ID
+    - secure: "SlN01tXsLYzorjfiGqRhmn1IMKCJjGDFnzsizJy/JV4OoXE2BDUoo8TyjgXgjcZJYozJbdeE+UPs9xYummGpUwtKeDlN81wKSOk2NsHnAOtesSUxMoJSjqbZCYph2HofN8zzq5Wedof1NJtPqklh5lsT+um7ipRFxIhZ1YN8kAE="
+    # AWS_SECRET_ACCESS_KEY
+    - secure: "uomqrG3zytYEinGRzYuF3lNpfzLdnuXHUdbtP+KidejHrFvwKMu4TCTmTBUVet6Nb3xakPupP793O53Q/UW+ZhuOQ63FrOh9RLBEb7AMl0D7u+lSDay32Udlnwdu2U/J4Yn2u6VLSsiAG2JAf88H9vWXveOTVldKqH3jEe4BdzU="
 
 before_install:
-- sudo apt-get install graphviz
-- cd db
+  - nvm install 8.9.4
 
-before_script:
-- psql --file=../env/local/db-server/dev.sql
+install:
+  - git clone https://github.com/Opetushallitus/ci-tools.git
+  - source ci-tools/common/setup-tools.sh
+  - export ARTIFACT_NAME="osaan"
 
 script:
-- lein run 'postgresql://osaan_adm:osaan-adm@127.0.0.1:5432/osaan' -u osaan_user --clear -t
-- cd ../app
-- lein test
-- echo 'db.port = 5432' > osaan.properties
-- lein test :integraatio
-- lein doc
-- mkdir eastwood
-- lein eastwood "{:out \"eastwood/osaan-warnings.txt\"}" || true
-- cd ../db-docs && ./generate-schemadocs.sh
-- cd ..
+  # clojure-utils
+  - git submodule init
+  - git submodule update
+
+  - ./dev-scripts/build.sh
+
+  - mv app/target/${ARTIFACT_NAME}-standalone.jar $DOCKER_BUILD_DIR/artifact/${ARTIFACT_NAME}.jar
+  - mv db/target/${ARTIFACT_NAME}-db-standalone.jar $DOCKER_BUILD_DIR/artifact/${ARTIFACT_NAME}-db.jar
+  - cp -vr oph-configuration $DOCKER_BUILD_DIR/config/
+  - cp -vr app/resources ${DOCKER_BUILD_DIR}/config/
+
+  - export BASE_IMAGE="baseimage-fatjar:master"
+  - ./ci-tools/common/pull-image.sh
+  - ./ci-tools/build/build-fatjar.sh ${ARTIFACT_NAME}
 
 deploy:
-- provider: s3
-  access_key_id: $ARTIFACTS_ID
-  secret_access_key:
-    secure: Nt6qZv1rAxrWCbkkP79LCTclvQJ5v2M+Ltr+FTaEK/ex7wySZZ9akoiHKQxFK3mVHN1ea+pZGOe2qraNNUAFsmJVC4azKWGd9HMGeTgIJKqMpjaRMVHRknKI5qlTYVxG50gpq8Li9l3/G3T5atvtf1lybGGCpNyIIfFF/1E0zvI=
-  bucket: opetushallitus-docs
-  local-dir: db-docs/schemadocs
-  upload-dir: osaan
-  acl: public_read
-  skip_cleanup: true
-  region: eu-west-1
-- provider: s3
-  access_key_id: $ARTIFACTS_ID
-  secret_access_key:
-    secure: Nt6qZv1rAxrWCbkkP79LCTclvQJ5v2M+Ltr+FTaEK/ex7wySZZ9akoiHKQxFK3mVHN1ea+pZGOe2qraNNUAFsmJVC4azKWGd9HMGeTgIJKqMpjaRMVHRknKI5qlTYVxG50gpq8Li9l3/G3T5atvtf1lybGGCpNyIIfFF/1E0zvI=
-  bucket: opetushallitus-docs
-  local-dir: app/doc
-  upload-dir: osaan-doc
-  acl: public_read
-  skip_cleanup: true
-  region: eu-west-1
-- provider: s3
-  access_key_id: $ARTIFACTS_ID
-  secret_access_key:
-    secure: Nt6qZv1rAxrWCbkkP79LCTclvQJ5v2M+Ltr+FTaEK/ex7wySZZ9akoiHKQxFK3mVHN1ea+pZGOe2qraNNUAFsmJVC4azKWGd9HMGeTgIJKqMpjaRMVHRknKI5qlTYVxG50gpq8Li9l3/G3T5atvtf1lybGGCpNyIIfFF/1E0zvI=
-  bucket: opetushallitus-docs
-  local-dir: app/eastwood
-  upload-dir: osaan-lint
-  acl: public_read
-  skip_cleanup: true
-  region: eu-west-1
-
-notifications:
-  hipchat:
-    rooms:
-      secure: tfGGpfVEGwl941KDFVTaM35X7CEqC0Zm/jHCHUnF+Yw1QDplIBSPh5AQIsBRHBru8zEkZ55mMtr5Vd2gDdlh1HoHRdsfhFro5XO6E/KX/iXrusLTSND5cWcmB+pey+7vfS+LlSw8+0oGJCELlagT/uF1MXoUfAMoVu/hFxWWwYQ=
+  provider: script
+  script: ./ci-tools/build/upload-image.sh ${ARTIFACT_NAME}
+  on:
+    all_branches: true
