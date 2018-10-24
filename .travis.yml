@@ -32,15 +32,10 @@ script:
   - git submodule init
   - git submodule update
 
-  - node --version
-  - npm --version
-
   - ./dev-scripts/build.sh
 
-  - ls -l app/target
-  - ls -l db/target
-
-  - mv target/uberjar/${ARTIFACT_NAME}-*-standalone.jar $DOCKER_BUILD_DIR/artifact/${ARTIFACT_NAME}.jar
+  - mv app/target/${ARTIFACT_NAME}-standalone.jar $DOCKER_BUILD_DIR/artifact/${ARTIFACT_NAME}.jar
+  - mv db/target/${ARTIFACT_NAME}-db-standalone.jar $DOCKER_BUILD_DIR/artifact/${ARTIFACT_NAME}-db.jar
   - cp -vr oph-configuration $DOCKER_BUILD_DIR/config/
 
   - export BASE_IMAGE="baseimage-fatjar:master"
