@@ -32,7 +32,7 @@
                    {nimi :- s/Str nil}
                    {opintoala :- s/Str nil}
                    {tutkintotyyppi :- s/Str nil}
-                   {voimaantulevat :- Boolean false}]
+                   {voimaantulevat :- Boolean true}]
     :return [skeema/TutkintoHakutulos]
     (let [tutkintotaso (if (= "kaikki" tutkintotyyppi) nil tutkintotyyppi)
           oala (if (.equals "" opintoala) nil opintoala)]
