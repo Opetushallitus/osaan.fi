@@ -148,5 +148,8 @@
     (muotoile-peruste peruste-data nimike-data)))
 
 (defn hae-perusteet [viimeisin-haku asetukset]
-  (for [peruste (lataa-kaikki-sivut (str (:url asetukset) "api/perusteet") {:query-params {:muokattu (c/to-long viimeisin-haku)}})]
-    (hae-peruste (:id peruste) asetukset)))
+  (let [perusteet (lataa-kaikki-sivut (str (:url asetukset) "api/perusteet") {:query-params {:muokattu (c/to-long viimeisin-haku)}})]
+    (for [peruste perusteet]
+      (do
+        (log/info "Haetaan perustetta" (:diaarinumero peruste))
+        (hae-peruste (:id peruste) asetukset)))))
