@@ -40,7 +40,7 @@ script:
   - cp -vr oph-configuration $DOCKER_BUILD_DIR/config/
   - cp -vr app/resources ${DOCKER_BUILD_DIR}/config/
 
-  - export BASE_IMAGE="baseimage-fatjar:ci-120"
+  - export BASE_IMAGE="baseimage-fatjar:ci-121"
   - ./ci-tools/common/pull-image.sh
   - ./ci-tools/build/build-fatjar.sh ${ARTIFACT_NAME}
 
