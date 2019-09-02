@@ -1,5 +1,5 @@
 db.host = {{ osaan_db_host }}
 db.port = {{ osaan_db_port }}
 db.name = {{ osaan_db_name }}
-db.user = {{ osaan_db_admin_user }}
-db.password = {{ osaan_db_admin_password }}
+db.user = {{ postgres_app_user }}
+db.password = {{ osaan_db_app_password }}
