@@ -57,7 +57,7 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
 
 (defn ^:private hae-koodit
   "Hakee kaikki koodit annetusta koodistosta ja asettaa koodin koodiarvon avaimeksi arvokentta"
-  ([asetukset koodisto] (get-json-from-url (str (:url asetukset) koodisto "/koodi"))))
+  ([asetukset koodisto] (get-json-from-url (str (:url asetukset) koodisto "/koodi") {:headers (:headers asetukset)})))
 
 (defn kuuluu-koodistoon
   "Filtteröi koodilistasta annetun koodiston koodit"
@@ -94,12 +94,12 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
 
 (defn ^:private lisaa-opintoalaan-koulutusala
   [asetukset opintoala]
-  (let [ylakoodit (get-json-from-url (str (:url asetukset) "relaatio/sisaltyy-ylakoodit/" (:koodiUri opintoala)))
+  (let [ylakoodit (get-json-from-url (str (:url asetukset) "relaatio/sisaltyy-ylakoodit/" (:koodiUri opintoala)) {:headers (:headers asetukset)})
         koulutusala (some-value koulutusala-koodi? ylakoodit)]
     (assoc opintoala :koulutusala (:koodiArvo koulutusala))))
 
 (defn ^:private hae-alakoodit
-  [asetukset koodi] (get-json-from-url (str (:url asetukset) "relaatio/sisaltyy-alakoodit/" (:koodiUri koodi))))
+  [asetukset koodi] (get-json-from-url (str (:url asetukset) "relaatio/sisaltyy-alakoodit/" (:koodiUri koodi)) {:headers (:headers asetukset)}))
 
 (defn lisaa-opintoala-ja-tutkintotyyppi
   [asetukset tutkinto]
@@ -114,7 +114,7 @@ Koodin arvo laitetaan arvokentta-avaimen alle."
 
 (defn hae-koodisto
   [asetukset koodisto]
-  (koodi->kasite (get-json-from-url (str (:url asetukset) koodisto)) :koodisto))
+  (koodi->kasite (get-json-from-url (str (:url asetukset) koodisto) {:headers (:headers asetukset)}) :koodisto))
 
 (defn hae-tutkinnot
   [asetukset]
