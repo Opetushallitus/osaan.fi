@@ -143,12 +143,13 @@
      :suoritustavat (map (muotoile-suoritustapa osa-id->osatunnus osaamisalat) (:suoritustavat peruste))}))
 
 (defn hae-peruste [id asetukset]
-  (let [peruste-data (get-json-from-url (str (:url asetukset) "api/perusteet/" id "/kaikki"))
-        nimike-data (get-json-from-url (str (:url asetukset) "api/perusteet/" id "/tutkintonimikekoodit"))]
+  (let [peruste-data (get-json-from-url (str (:url asetukset) "api/perusteet/" id "/kaikki") {:headers (:headers asetukset)})
+        nimike-data (get-json-from-url (str (:url asetukset) "api/perusteet/" id "/tutkintonimikekoodit") {:headers (:headers asetukset)})]
     (muotoile-peruste peruste-data nimike-data)))
 
 (defn hae-perusteet [viimeisin-haku asetukset]
-  (let [perusteet (lataa-kaikki-sivut (str (:url asetukset) "api/perusteet") {:query-params {:muokattu (c/to-long viimeisin-haku)}})]
+  (let [perusteet (lataa-kaikki-sivut (str (:url asetukset) "api/perusteet") {:query-params {:muokattu (c/to-long viimeisin-haku)}
+                                                                              :headers (:headers asetukset)})]
     (for [peruste perusteet]
       (do
         (log/info "Haetaan perustetta" (:diaarinumero peruste))

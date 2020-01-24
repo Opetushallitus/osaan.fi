@@ -54,6 +54,7 @@
    :eperusteet-palvelu {:url "https://virkailija.opintopolku.fi/eperusteet-service/"}
    :eraajo false
    :koodistopalvelu {:url "https://virkailija.opintopolku.fi/koodisto-service/rest/json/"}
+   :headers { "Caller-Id" "1.2.246.562.10.00000000001.osaan" }
    :vanhat-arviot {:paivat 1095} ;; 3 vuotta
    :development-mode false ; oletusarvoisesti ei olla kehitysmoodissa. Pitää erikseen kääntää päälle jos tarvitsee kehitysmoodia.
    :logback {:properties-file "resources/logback.xml"}
