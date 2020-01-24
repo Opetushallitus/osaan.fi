@@ -62,5 +62,9 @@ angular.module('osaan.palvelut.httpvirhe', [])
 
   .config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('httpResponseErrorInterceptor');
+    $httpProvider.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+    $httpProvider.defaults.headers.common["Caller-Id"] = "1.2.246.562.10.00000000001.osaan";
+    $httpProvider.defaults.xsrfHeaderName = "CSRF";
+    $httpProvider.defaults.xsrfCookieName = "CSRF";
   }])
 ;
