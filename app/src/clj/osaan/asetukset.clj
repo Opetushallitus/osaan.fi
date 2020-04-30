@@ -35,6 +35,7 @@
    :koodistopalvelu {:url s/Str}
    :vanhat-arviot {:paivat s/Int}
    :eraajo Boolean
+   :caller-id s/Str
    :development-mode Boolean
    :logback {:properties-file s/Str}
    :ajastus {:eperusteet s/Str
@@ -53,9 +54,9 @@
         :minimum-pool-size 3}
    :eperusteet-palvelu {:url "https://virkailija.opintopolku.fi/eperusteet-service/"}
    :eraajo false
+   :caller-id "1.2.246.562.10.00000000001.osaan"
    :koodistopalvelu {:url "https://virkailija.opintopolku.fi/koodisto-service/rest/json/"}
-   :headers { "Caller-Id" "1.2.246.562.10.00000000001.osaan" }
-   :vanhat-arviot {:paivat 1095} ;; 3 vuotta
+   :vanhat-arviot {:paivat 1095} ; 3 vuotta
    :development-mode false ; oletusarvoisesti ei olla kehitysmoodissa. Pitää erikseen kääntää päälle jos tarvitsee kehitysmoodia.
    :logback {:properties-file "resources/logback.xml"}
    :ajastus {:eperusteet "0 30 4 * * ?"
