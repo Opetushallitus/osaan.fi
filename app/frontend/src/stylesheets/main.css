@@ -1249,7 +1249,7 @@ footer .copyright {
 }
 /* line 29, ../sass/partials/_footer.scss */
 footer .copyright .vertical-wrapper {
-  height: 80px;
+  height: 100px;
   display: table-cell;
   vertical-align: middle;
 }
