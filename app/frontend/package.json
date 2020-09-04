@@ -36,7 +36,7 @@
     "karma-script-launcher": "0.1.0",
     "load-grunt-tasks": "3.1.0",
     "node-gyp": "^3.6.2",
-    "node-sass": "4.7.2",
+    "node-sass": "4.13.1",
     "time-grunt": "1.1.1"
   },
   "engines": {
