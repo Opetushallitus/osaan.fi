@@ -12,7 +12,7 @@
     "dev": "grunt"
   },
   "devDependencies": {
-    "grunt": "0.4.5",
+    "grunt": "1.5.2",
     "grunt-bowercopy": "1.2.0",
     "grunt-cli": "1.2.0",
     "grunt-connect-proxy": "0.1.10",
